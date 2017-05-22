@@ -1,0 +1,100 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2017
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > models4print : compte-rendu échographie gynécologique
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+
+{% set tag = page.courrier %}
+
+<h2 style="text-align : center">Madame {{ tag.3 }}  {{ tag.2 }} ({{ tag.8 }})</h2>
+
+<h2>Echographie gynécologique</h2>
+Réalisée sur échographe SAMSUNG HS70 mis en circulation le 14/12/2015
+<br>
+<p>
+<span style="font-weight : bold">Date d’examen :</span> {{ tag.date|date("d/m/Y") }}
+{% if tag.401 %} &nbsp;&nbsp;-&nbsp;&nbsp; <span style="font-weight : bold">Prescripteur :</span> {{ tag.401 }}{% endif %}<br>
+<span style="font-weight : bold">Voie d’examen :</span> {{ tag.403 }}
+{% if tag.402 %} &nbsp;&nbsp;-&nbsp;&nbsp; <span style="font-weight : bold">Conditions d’examen :</span> {{ tag.402 }} {% if tag.43 > 0 %}<span class="t6">(IMC : {{ tag.43 }})</span>{% endif %}{% endif %}<br>
+{% if tag.432 %}<span style="font-weight : bold">Date des dernières règles :</span> {{ tag.432 }}{% endif %}
+{% if tag.432 or tag.400 %} &nbsp;&nbsp;-&nbsp;&nbsp; {% endif %}
+{% if tag.400 %}<span style="font-weight : bold">Contexte gynécologique :</span> {{ tag.400 }}{% endif %}<br>
+<span style="font-weight : bold">Indication :</span><br>
+{% if tag.408 %}- {{ tag.408 }}<br>{% endif %}
+{% if tag.407 %}- {{ tag.407 }}<br>{% endif %}
+{% if tag.411 %}- {{ tag.411 }}<br>{% endif %}
+{% if tag.404 %}- {{ tag.404|nl2br }}<br>{% endif %}
+</p>
+
+
+{% if tag.val412 != 'absent' %}
+  <h3>Utérus</h3>
+  <ul>
+    <li>Dimensions : {{ tag.414 }} mm x {{ tag.413 }} mm x {{ tag.415 }} mm</li>
+    <li>Position utérine : {{ tag.412 }}</li>
+    <li>Contours : {{ tag.416 }}</li>
+    <li>Structure du myomètre : {{ tag.417 }}</li>
+    {% if tag.422 %}<li>Aspect de l'endomètre  : {{ tag.422 }}</li>{% endif %}
+    {% if tag.423 %}<li>Épaisseur de l'endomètre  : {{ tag.423 }} mm</li>{% endif %}
+    {% if tag.424 %}<li>Cavité  : {{ tag.424 }}</li>{% endif %}
+    {% if tag.425 %}<li>Contenu de la cavité  : {{ tag.425 }}</li>{% endif %}
+  </ul>
+{% endif %}
+
+{% if tag.418 or tag.421 or tag.419 or tag.420 %}
+  <h3>Dopplers</h3>
+  <ul>
+    {% if tag.418 %}<li>Artère utérine droite :{% if tag.418 %} IR {{ tag.418 }}{% endif %}{% if tag.419 %} IP {{ tag.419 }}{% endif %}</li>{% endif %}
+    {% if tag.421 %}<li>Artère utérine gauche :{% if tag.421 %} IR {{ tag.421 }}{% endif %}{% if tag.420 %} IP {{ tag.420 }}{% endif %}</li>{% endif %}
+  </ul>
+{% endif %}
+
+{% if tag.427 or tag.452 or tag.428 or tag.453 %}
+  <h3>Ovaires</h3>
+  <ul>
+    {% if tag.427 %}<li>Aspect de l'ovaire droit : {{ tag.427|nl2br }}</li>{% endif %}
+    {% if tag.452 %}<li>Grand axe ovaire droit : {{ tag.452 }} mm</li>{% endif %}
+    {% if tag.428 %}<li>Aspect de l'ovaire gauche : {{ tag.428|nl2br }}</li>{% endif %}
+    {% if tag.453 %}<li>Grand axe ovaire gauche : {{ tag.453 }} mm</li>{% endif %}
+  </ul>
+{% endif %}
+
+{% if tag.430 or tag.429 %}
+  <h3>Culs de sac</h3>
+  <ul>
+    {% if tag.430 %}<li>Douglas : {{ tag.430|nl2br }}</li>{% endif %}
+    {% if tag.429 %}<li>Culs de sac latéraux : {{ tag.429|nl2br }}</li>{% endif %}
+  </ul>
+{% endif %}
+
+{% if tag.426 %}
+  <h3>Trompes</h3>
+  <ul>
+    <li>Aspect des trompes : {{ tag.426|nl2br }}</li>
+  </ul>
+{% endif %}
+
+<h3>Conclusion</h3>
+<p>{{ tag.431|nl2br }}
+</p>

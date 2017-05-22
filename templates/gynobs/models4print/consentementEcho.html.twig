@@ -1,0 +1,85 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2017
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > consentement échographie de dépistage (d'après modèle du Journal Officiel)
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+
+{% set tag = page.courrier %}
+<!-- stop head -->
+<h2>CONSENTEMENT À UNE ECHOGRAPHIE FŒTALE</h2>
+<div class="tailleFont">
+<p>
+Je soussignée <strong>Mme {{ tag.2 }} {{ tag.3 }}</strong>, résidant <strong>{{ tag.9 }} {{ tag.11 }} {{ tag.13 }} {{ tag.12 }}</strong>, atteste avoir reçu du Dr Stephen STRANGE au cours d'une consultation médicale en date du {{ "now"|date("d/m/Y") }} des informations sur l'examen échographique dont je souhaite bénéficier :
+</p>
+
+<ul>
+  <li>l'échographie est un examen d'imagerie médicale qui ne présente pas de risque en l'état des connaissances ni pour le fœtus ni pour la femme enceinte lorsqu'il est réalisé dans un cadre médical ;</li>
+  <li>l'image du fœtus et de ses annexes (placenta, liquide amniotique...) peut être obtenue à travers la paroi abdominale maternelle ou à travers la paroi vaginale maternelle ;</li>
+  <li>cet examen et, de manière plus générale, les échographies de surveillance de la grossesse sont réalisées à des périodes précises de la grossesse ;</li>
+
+  <li>cet examen permet notamment :</li>
+
+    <ul>
+      <li>de déterminer le plus précisément possible la date de début de la grossesse ;</li>
+      <li>d'identifier une grossesse multiple ;</li>
+      <li>d'évaluer et de surveiller le développement du fœtus ;</li>
+      <li>de dépister des éventuelles malformations du fœtus ;</li>
+      <li>de localiser le placenta et d'évaluer la quantité de liquide amniotique ;</li>
+    </ul>
+
+  <li>la performance de l'examen peut être limitée par certaines circonstances (épaisseur de la paroi abdominale, position du fœtus...) ;</li>
+
+  <li>les mesures effectuées au cours de l'échographie ainsi que les estimations du poids du fœtus sont soumises à des marges d'erreurs liées notamment aux conditions de l'examen ;</li>
+
+  <li>l'absence d'anomalie décelée à l'échographie ne permet pas d'affirmer que le fœtus est indemne de toute affection ;</li>
+
+  <li>une suspicion d'anomalie peut ne pas être confirmée ultérieurement ;</li>
+
+  <li>un nouvel examen échographique pourra m'être proposé dans certaines situations pour contrôler la croissance du fœtus ou pour vérifier un aspect inhabituel à l'échographie, ce qui ne signifie pas que le fœtus soit atteint d'une affection ; ce
+    nouvel examen pourra être réalisé par le même échographiste ou par un autre auquel je serai, avec mon accord, adressée ;</li>
+
+  <li>dans certains cas, l'affection suspectée ne pourra être confirmée ou précisée que par la réalisation de nouveaux examens qui me seront proposés ; ces nouveaux examens nécessiteront parfois un prélèvement (de liquide amniotique, de villosités choriales ou de sang fœtal) ; les risques, les contraintes et les éventuelles conséquences de chaque technique de prélèvement me seront expliqués.</li>
+</ul>
+
+<p>Je consens à la réalisation de l'examen échographique permettant d'évaluer le risque que l'embryon ou le fœtus présente une affection susceptible de modifier le déroulement ou le suivi de la grossesse.<br>
+  L'original du présent document est conservé dans mon dossier médical par le médecin ou la sage-femme qui a effectué la première échographie obstétricale et fœtale.<br>
+  Une copie de ce document m'est remise. Je devrai la présenter aux médecins et aux sages-femmes qui effectueront, le cas échéant, d'autres échographies permettant d'évaluer le risque que l'embryon ou le fœtus présente une affection susceptible de modifier le déroulement ou le suivi de ma grossesse. Ce document est conservé dans les mêmes conditions que le compte rendu de l'examen.
+</p>
+
+Fait le {{ "now"|date("d/m/Y") }}
+<br><br>
+<br>
+<table border="0" style="border: 0; width : 100%">
+  <tr style="border: 0;">
+    <td style="border: 0; width : 50%; vertical-align : top;">
+      Dr Stephen STRANGE
+    </td>
+    <td style="border: 0; width : 50%; vertical-align : top;">
+      Mme {{ tag.2 }} {{ tag.3 }}
+      <!-- signatureIMG -->
+    </td>
+  </tr>
+</table>
+</div>
+<!-- stop body -->

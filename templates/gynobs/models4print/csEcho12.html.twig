@@ -1,0 +1,164 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2017
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > models4print : compte-rendu échographie 12 SA
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+
+{% set tag = page.courrier %}
+
+
+
+
+<h2 style="text-align : center">Madame {{ tag.3 }}  {{ tag.2 }} ({{ tag.8 }})</h2>
+
+<h2 style="margin-bottom : 0">Echographie obstétricale du 1er trimestre</h2>
+<span class="t8">Réalisée sur échographe SAMSUNG HS70 mis en circulation le 14/12/2015</span>
+<br>
+<p>
+<span class="gras">Date d’examen :</span> {{ tag.date|date("d/m/Y") }} &nbsp;-&nbsp;
+<span class="gras">Voie d’examen :</span> {{ tag.68 }} &nbsp;-&nbsp;
+<span class="gras">Conditions d’examen :</span> {{ tag.69 }} {% if tag.43 > 0 %}<span class="t6">(IMC : {{ tag.43 }})</span>{% endif %}<br>
+<span class="gras">Indication :</span> {{ tag.67 }}<br>
+</p>
+
+<span class="gras">DDR :</span> {{ tag.45 }} -	<span class="gras">DDG théorique : </span>{{ tag.48 }}	- <span class="gras">Terme théorique : </span>{{ tag.50 }}
+
+
+<p><span class="gras">Nombre de fœtus : {{ tag.70 }}</span>
+{% if tag.70 > 1 %}
+<br><span class="gras">Type de grossesse :</span> {{ tag.209 }}
+<br><span class="gras">Membrane :</span> {{ tag.210 }}
+{% endif %}
+</p>
+
+<h3>{% if tag.70 == 1 %}Fœtus unique{% else %}Fœtus A{% endif %}</h3>
+  <h4>Vitalité</h4>
+  <ul>
+  <li>Activité cardiaque : {{ tag.71 }}</li>
+  {% if tag.72 %}<li>Fréquence cardiaque : {{ tag.72 }} bpm</li>{% endif %}
+  <li>Mouvements actifs foetaux : {{ tag.73 }}</li>
+  </ul>
+
+  <h4>Biométries <small>(Robinson / Chitty)</small></h4>
+  <ul>
+  <li>Longueur cranio-caudale : {{ tag.31 }} mm {% if tag.70 == 1 %}correspondant à un début de grossesse au {{ tag.49 }}{% endif %}</li>
+  {% if tag.74 %}<li>BIP : {{ tag.74 }} mm</li>{% endif %}
+  {% if tag.75 %}<li>Périmètre abdominal : {{ tag.75 }} mm</li>{% endif %}
+  {% if tag.206 %}<li>Fémur : {{ tag.206 }} mm</li>{% endif %}
+  {% if tag.76 %}<li>Clarté nucale : {{ tag.76 }} mm</li>{% endif %}
+  </ul>
+
+  <h4>Morphologie</h4>
+  <ul>
+  <li>Pôle céphalique : {{ tag.77|nl2br }}</li>
+  <li>Abdomen : {{ tag.78|nl2br }}</li>
+  <li>Membres : {{ tag.79|nl2br }}</li>
+  </ul>
+
+  <div style="page-break-inside: avoid;">
+  <h4>Annexes</h4>
+  <ul>
+  <li>Liquide amniotique : {{ tag.211 }}</li>
+  {% if tag.215 %}<li>Localisation du trophoblaste : {{ tag.215 }}</li>{% endif %}
+  <li>Aspect du trophoblaste : {{ tag.214 }}</li>
+  <li>{{ tag.220|capitalize }}</li>
+  </ul>
+  </div>
+
+{% if tag.70 > 1 %}
+<h3>Fœtus B</h3>
+  <h4>Vitalité</h4>
+  <ul>
+  <li>Activité cardiaque : {{ tag.80 }}</li>
+  {% if tag.81 %}<li>Fréquence cardiaque : {{ tag.81 }} bpm</li>{% endif %}
+  <li>Mouvements actifs foetaux : {{ tag.82 }}</li>
+  </ul>
+
+  <h4>Biométries <small>(Robinson / Chitty)</small></h4>
+  <ul>
+  <li>Longueur cranio-caudale : {{ tag.89 }}</li>
+  {% if tag.83 %}<li>BIP : {{ tag.83 }} mm</li>{% endif %}
+  {% if tag.84 %}<li>Périmètre abdominal : {{ tag.84 }} mm</li>{% endif %}
+  {% if tag.207 %}<li>Fémur : {{ tag.207 }} mm</li>{% endif %}
+  {% if tag.85 %}<li>Clarté nucale : {{ tag.85 }} mm</li>{% endif %}
+  </ul>
+
+  <h4>Morphologie</h4>
+  <ul>
+  <li>Pôle céphalique : {{ tag.86|nl2br }}</li>
+  <li>Abdomen : {{ tag.87|nl2br }}</li>
+  <li>Membres : {{ tag.88|nl2br }}</li>
+  </ul>
+
+  <h4>Annexes</h4>
+  <ul>
+  <li>Liquide amniotique : {{ tag.212 }}</li>
+  {% if tag.216 %}<li>Localisation du trophoblaste : {{ tag.216 }}</li>{% endif %}
+  <li>Aspect du trophoblaste : {{ tag.218 }}</li>
+  <li>{{ tag.221|capitalize }}</li> {# décollement #}
+  </ul>
+
+{% endif %}{% if tag.70 > 2 %}
+<h3>Fœtus C</h3>
+  <h4>Vitalité</h4>
+  <ul>
+  <li>Activité cardiaque : {{ tag.90 }}</li>
+  {% if tag.91 %}<li>Fréquence cardiaque : {{ tag.91 }} bpm</li>{% endif %}
+  <li>Mouvements actifs foetaux : {{ tag.92 }}</li>
+  </ul>
+
+  <h4>Biométries <small>(Robinson / Chitty)</small></h4>
+  <ul>
+  <li>Longueur cranio-caudale :  {{ tag.99 }}</li>
+  {% if tag.93 %}<li>BIP : {{ tag.93 }} mm</li>{% endif %}
+  {% if tag.94 %}<li>Périmètre abdominal : {{ tag.94 }} mm</li>{% endif %}
+  {% if tag.208 %}<li>Fémur : {{ tag.208 }} mm</li>{% endif %}
+  {% if tag.95 %}<li>Clarté nucale :  {{ tag.95 }} mm</li>{% endif %}
+  </ul>
+
+  <h4>Morphologie</h4>
+  <ul>
+  <li>Pôle céphalique : {{ tag.96|nl2br }}</li>
+  <li>Abdomen : {{ tag.97|nl2br }}</li>
+  <li>Membres : {{ tag.98|nl2br }}</li>
+  </ul>
+
+  <h4>Annexes</h4>
+  <ul>
+  <li>Liquide amniotique : {{ tag.213 }}</li>
+  {% if tag.217 %}<li>Localisation du trophoblaste : {{ tag.217 }}</li>{% endif %}
+  <li>Aspect du trophoblaste : {{ tag.219 }}</li>
+  <li>{{ tag.222|capitalize }}</li> {# décollement #}
+  </ul>
+
+
+{% endif %}
+<h3>Conclusion</h3>
+<p>{{ tag.100|nl2br }}
+<br>
+Date de début de grossesse estimée au {{ tag.49 }} (à 5 jours près) soit un terme ce jour à {{ tag.termeReelJourExamen }}.
+</p>
+
+
+<p class="t6" style="margin-top : 20pt">Par le mot “aspect” on entend que l’opérateur a examiné une structure ou un organe. Dans le compte rendu, une mention de type “structure d’aspect habituel” signifie que cette structure a été vue et a paru normale à l’examinateur. Dans la majorité des cas, il y a concordance entre le résultat du dépistage échographique et l’état de santé de l’enfant. Cependant, comme pour tout dépistage, des faux négatifs sont possibles : une structure considérée comme vue et normale à l’échographie peut s’avérer en réalité absente ou anormale. Des faux positifs sont également possibles : une structure considérée comme non vue ou anormale à l’échographie peut s’avérer en réalité présente ou normale</p>

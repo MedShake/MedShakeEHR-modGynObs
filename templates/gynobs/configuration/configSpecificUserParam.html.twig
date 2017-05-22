@@ -1,0 +1,99 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2017
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > Config : paramètres de configuration spécifiques aux utilisteurs
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+
+{% extends "page.html.twig" %}
+{% import "macroForm.html.twig" as f %}
+{% block title %}MedShakeEHR : configuration{% endblock %}
+
+{% block head %}
+  {{ parent() }}
+  <script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+{% endblock %}
+
+{% block body %}
+  <h1>Paramètres spécifiques à l'utilisateur {{ page.userData.3 }} {{ page.userData.2 }} <small>#{{ page.userID }}</small></h1>
+
+  <form method="post" action="/configuration/actions/configSpecificUserParam/">
+
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>Paramètre</th>
+        <th>Valeur défaut</th>
+        <th>Valeur utilisateur</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+{% for v in page.userParams %}
+  <tr>
+    <td>{{ v.name }}</td>
+    <td>{{ page['configDefaut'][v.name] }}</td>
+    <td>
+
+      {{ f.input ({
+        'input' : {
+          'type' : 'text',
+          'name' : 'p_' ~ v.id,
+          'id' : v.name ~ 'ID',
+          'placeholder' : el.value.placeholder,
+          'class' : 'form-control',
+          'value' : v.userVal,
+          'autocomplete' : 'off'
+        }
+      }) }}
+
+
+    </td>
+    <td>{{ v.description }}</td>
+  </tr>
+
+{% endfor %}
+</tbody>
+</table>
+
+
+
+{{ f.input ({
+  'input' : {
+    'type' : 'hidden',
+    'name' : 'userID',
+    'value' : page.userID
+  }
+}) }}
+
+{{ f.input ({
+  'input' : {
+    'type' : 'submit',
+    'value' : 'Enregistrer',
+    'class' : 'btn btn-primary'
+  }
+}) }}
+
+</form>
+
+{% endblock %}

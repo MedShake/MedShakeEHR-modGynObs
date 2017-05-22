@@ -1,0 +1,71 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2017
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > logs : historique d'envoi d'un document
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+
+{% extends "page.html.twig" %}
+{% import "macroForm.html.twig" as f %}
+{% block title %}MedShakeEHR : historique des envois par mail{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<h1>Historique d'envoi par mail</h1>
+<p>
+<a class="btn btn-default btn-primary" href="/patient/{{ page.patientID }}/" role="button">Retour dossier patient</a>
+</p>
+    <div class="container-fluid">
+        <div class="row">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">Date</th>
+                        <th class="col-md-2">De</th>
+                        <th class="col-md-2">A</th>
+                        <th class="col-md-3">Sujet</th>
+                        <th class="col-md-4">Message</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for v in page.mailListe %}
+                        <tr>
+                            <td>{{ v.creationDate }}</td>
+                            <td>{{ v.109|e }}</td>
+                            <td><strong>{{ v.110 }}{{ v.179|e }}</strong></td>
+                            <td>{{ v.112|e }}</td>
+                            <td class="small">{{ v.111|e|nl2br }}</td>
+                        </tr>
+
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,223 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2017
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > models4print : compte-rendu échographie 32 SA
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+
+{% set tag = page.courrier %}
+
+
+
+
+<h2 style="text-align : center">Madame {{ tag.3 }}  {{ tag.2 }} ({{ tag.8 }})</h2>
+
+<h2 style="margin-bottom : 0">Echographie obstétricale du 3e trimestre</h2>
+<span class="t8">Réalisée sur échographe SAMSUNG HS70 mis en circulation le 14/12/2015</span>
+<br>
+
+<p>
+  <span style="font-weight : bold;">Date d'examen :</span> {{ tag.date|date("d/m/Y") }}<br>
+  <span style="font-weight : bold;">DDG retenue : {{ tag.49 }}</span> soit un terme de {{ tag.termeReelJourExamen }}.
+</p>
+
+<p>
+  <span class="gras">Voie d’examen :</span> {{ tag.331 }} &nbsp;-&nbsp;
+  <span class="gras">Conditions d’examen :</span> {{ tag.330 }} {% if tag.43 > 0 %}<span class="t6">(IMC : {{ tag.43 }})</span>{% endif %}<br>
+  <span class="gras">Indication :</span> {{ tag.326 }}<br>
+</p>
+
+
+<p><span class="gras">Nombre de fœtus : {{ tag.327 }}</span>
+{% if tag.327 > 1 %}
+<br><span class="gras">Type de grossesse :</span> {{ tag.328 }}
+{% endif %}
+</p>
+
+<h3>{% if tag.327 == 1 %}Fœtus unique{% else %}Fœtus A{% endif %}</h3>
+  <h4>Présentation et vitalité</h4>
+  <ul>
+  <li>Présentation : {{ tag.332 }}</li>
+  <li>Activité cardiaque : {{ tag.333 }}</li>
+  {% if tag.334 %}<li>Fréquence cardiaque : {{ tag.334 }} bpm</li>{% endif %}
+  <li>Mouvements foetaux : {{ tag.335 }}</li>
+  </ul>
+
+  <h4>Biométries <small>(CFEF)</small></h4>
+  <ul>
+  <li>BIP : {{ tag.336 }} mm soit {{ tag.pct336 }}e percentiles</li>
+  <li>Périmètre crânien : {{ tag.337 }} mm soit {{ tag.pct337 }}e percentiles</li>
+  <li>Périmètre abdominal : {{ tag.338 }} mm soit {{ tag.pct338 }}e percentiles</li>
+  <li>Fémur : {{ tag.339 }} mm soit {{ tag.pct339 }}e percentiles</li>
+  <li>Poids estimé <span class="t6">(+/- 20% maximum  - Hadlock)</span> : {{ tag.340 }} g soit {{ tag.pct340 }}e percentiles</li>
+  </ul>
+
+  <h4>Morphologie</h4>
+
+  {{ tag.341|nl2br }}<br>
+  {% if tag.val342 == 'XX' %}Les organes génitaux externes sont de type féminin.
+  {% elseif tag.val342 == 'XY' %}Les organes génitaux externes sont de type masculin.
+  {% elseif tag.val342 == 'XXnr' or tag.val342 == 'XYnr' %}Les organes génitaux externes sont normaux.
+  {% elseif tag.val342 == 'NV' %}Les organes génitaux externes n'ont pas été visualisés ce jour.
+  {% endif %}
+
+
+  <h4>Annexes</h4>
+  <ul>
+  <li>{{ tag.343 }}</li> {# liquide et cordon #}
+  <li>Placenta : {{ tag.344 }}</li>
+  </ul>
+
+  {% if tag.345 or tag.347 or tag.350 %}
+    <h4>Doppler</h4>
+    <ul>
+      {% if tag.345 %}<li>Doppler ombilical - IR : {{ tag.345 }} / Flux en diastole : {{ tag.346 }}</li>{% endif %}
+      {% if tag.347 %}<li>Doppler ACM - IR : {{ tag.347 }} {% if tag.348 %}/ Vitesse : {{ tag.348 }}{% endif %} {% if tag.349 %}/ MoM : {{ tag.349 }}{% endif %}</li>{% endif %}
+      {% if tag.350 %}<li>Doppler Arantius - IR : {{ tag.350 }} / Onde A : {{ tag.351 }}</li>{% endif %}
+    </ul>
+  {% endif %}
+
+  {% if tag.327 >= 2 %}
+      <h3>Fœtus B</h3>
+      <h4>Présentation et vitalité</h4>
+      <ul>
+      <li>Présentation : {{ tag.395 }}</li>
+      <li>Activité cardiaque : {{ tag.359 }}</li>
+      {% if tag.397 %}<li>Fréquence cardiaque : {{ tag.397 }} bpm</li>{% endif %}
+      <li>Mouvements foetaux : {{ tag.381 }}</li>
+      </ul>
+
+      <h4>Biométries <small>(CFEF)</small></h4>
+      <ul>
+      <li>BIP : {{ tag.360 }} mm soit {{ tag.pct360 }}e percentiles</li>
+      <li>Périmètre crânien : {{ tag.389 }} mm soit {{ tag.pct389 }}e percentiles</li>
+      <li>Périmètre abdominal : {{ tag.387 }} mm soit {{ tag.pct387 }}e percentiles</li>
+      <li>Fémur : {{ tag.377 }} mm soit {{ tag.pct377 }}e percentiles</li>
+      <li>Poids estimé <span style="font-size : 6pt">(+/- 20% maximum  - Hadlock)</span> : {{ tag.393 }} g soit {{ tag.pct393 }}e percentiles</li>
+      </ul>
+
+      <h4>Morphologie</h4>
+
+      {{ tag.383|nl2br }}<br>
+      {% if tag.val385 == 'XX' %}Les organes génitaux externes sont de type féminin.
+      {% elseif tag.val385 == 'XY' %}Les organes génitaux externes sont de type masculin.
+      {% elseif tag.val385 == 'XXnr' or tag.val385 == 'XYnr' %}Les organes génitaux externes sont normaux.
+      {% elseif tag.val385 == 'NV' %}Les organes génitaux externes n'ont pas été visualisés ce jour.
+      {% endif %}
+
+
+      <h4>Annexes</h4>
+      <ul>
+      <li>{{ tag.379 }}</li> {# liquide et cordon #}
+      <li>Placenta : {{ tag.391 }}</li>
+      </ul>
+
+      {% if tag.375 or tag.363 or tag.369 %}
+        <h4>Dopplers</h4>
+        <ul>
+          {% if tag.375 %}<li>Doppler ombilical - IR : {{ tag.375 }} / Flux en diastole : {{ tag.373 }}</li>{% endif %}
+          {% if tag.363 %}<li>Doppler ACM - IR : {{ tag.363 }} {% if tag.367 %}/ Vitesse : {{ tag.367 }}{% endif %} {% if tag.365 %}/ MoM : {{ tag.365 }}{% endif %}</li>{% endif %}
+          {% if tag.369 %}<li>Doppler Arantius - IR : {{ tag.369 }} / Onde A : {{ tag.371 }}</li>{% endif %}
+        </ul>
+      {% endif %}
+
+
+  {% endif %}
+
+
+{% if tag.327 >= 3 %}
+  <h3>Fœtus C</h3>
+  <h4>Présentation et vitalité</h4>
+  <ul>
+  <li>Présentation : {{ tag.396 }}</li>
+  <li>Activité cardiaque : {{ tag.361 }}</li>
+  {% if tag.398 %}<li>Fréquence cardiaque : {{ tag.398 }} bpm</li>{% endif %}
+  <li>Mouvements foetaux : {{ tag.382 }}</li>
+  </ul>
+
+  <h4>Biométries <small>(CFEF)</small></h4>
+  <ul>
+  <li>BIP : {{ tag.362 }} mm soit {{ tag.pct362 }}e percentiles</li>
+  <li>Périmètre crânien : {{ tag.390 }} mm soit {{ tag.pct390 }}e percentiles</li>
+  <li>Périmètre abdominal : {{ tag.388 }} mm soit {{ tag.pct388 }}e percentiles</li>
+  <li>Fémur : {{ tag.378 }} mm soit {{ tag.pct378 }}e perentiles</li>
+  <li>Poids estimé <span style="font-size : 6pt">(+/- 20% maximum  - Hadlock)</span> : {{ tag.394 }} g soit {{ tag.pct394 }}e percentiles</li>
+  </ul>
+
+  <h4>Morphologie</h4>
+
+  {{ tag.384|nl2br }}<br>
+  {% if tag.val386 == 'XX' %}Les organes génitaux externes sont de type féminin.
+  {% elseif tag.val386 == 'XY' %}Les organes génitaux externes sont de type masculin.
+  {% elseif tag.val386 == 'XXnr' or tag.val386 == 'XYnr' %}Les organes génitaux externes sont normaux.
+  {% elseif tag.val386 == 'NV' %}Les organes génitaux externes n'ont pas été visualisés ce jour.
+  {% endif %}
+
+
+  <h4>Annexes</h4>
+  <ul>
+  <li>{{ tag.380 }}</li> {# liquide et cordon #}
+  <li>Placenta : {{ tag.392 }}</li>
+  </ul>
+
+  {% if tag.376 or tag.364 or tag.370 %}
+    <h4>Doppler</h4>
+    <ul>
+      {% if tag.376 %}<li>Doppler ombilical - IR : {{ tag.376 }} / Flux en diastole : {{ tag.374 }}</li>{% endif %}
+      {% if tag.364 %}<li>Doppler ACM - IR : {{ tag.364 }} {% if tag.368 %}/ Vitesse : {{ tag.368 }}{% endif %} {% if tag.366 %}/ MoM : {{ tag.366 }}{% endif %}</li>{% endif %}
+      {% if tag.370 %}<li>Doppler Arantius - IR : {{ tag.370 }} / Onde A : {{ tag.372 }}</li>{% endif %}
+    </ul>
+  {% endif %}
+
+
+  {% endif %}
+
+
+  {% if tag.352 or tag.353 or tag.356 %}
+    <h3>Utérus</h3>
+
+    {% if tag.352 or tag.353 %}
+      <h4>Dopplers</h4>
+      <ul>
+        {% if tag.352 %}<li>Artère utérine droite - IR : {{ tag.352 }} / Notch : {{ tag.354 }}</li>{% else %}Artère utérine droite : non mesurable{% endif %}
+        {% if tag.353 %}<li>Artère utérine gauche - IR : {{ tag.353 }}/ Notch : {{ tag.355 }}</li>{% else %}Artère utérine gauche : non mesurable{% endif %}
+      </ul>
+    {% endif %}
+
+    {% if tag.356 %}
+      <h4>Col</h4>
+      <ul>
+        <li>Longueur du col : {{ tag.356 }}</li>
+        <li>Entonnoir : {{ tag.357 }}</li>
+      </ul>
+    {% endif %}
+
+  {% endif %}
+
+  <h3>Conclusion</h3>
+  {{ tag.358|nl2br }}
+  <br>{{ tag.445|nl2br }}
+
+
+
+<p class="t6" style="margin-top : 20pt">Par le mot “aspect” on entend que l’opérateur a examiné une structure ou un organe. Dans le compte rendu, une mention de type “structure d’aspect habituel” signifie que cette structure a été vue et a paru normale à l’examinateur. Dans la majorité des cas, il y a concordance entre le résultat du dépistage échographique et l’état de santé de l’enfant. Cependant, comme pour tout dépistage, des faux négatifs sont possibles : une structure considérée comme vue et normale à l’échographie peut s’avérer en réalité absente ou anormale. Des faux positifs sont également possibles : une structure considérée comme non vue ou anormale à l’échographie peut s’avérer en réalité présente ou normale</p>
