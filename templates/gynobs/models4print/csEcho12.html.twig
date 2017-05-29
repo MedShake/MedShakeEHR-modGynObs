@@ -42,7 +42,8 @@
 <span class="gras">Indication :</span> {{ tag.67 }}<br>
 </p>
 
-<span class="gras">DDR :</span> {{ tag.45 }} -	<span class="gras">DDG théorique : </span>{{ tag.48 }}	- <span class="gras">Terme théorique : </span>{{ tag.50 }}
+{% if tag.45 %}
+<span class="gras">DDR :</span> {{ tag.45 }} -	<span class="gras">DDG théorique : </span>{{ tag.48 }}	- <span class="gras">Terme théorique : </span>{{ tag.50 }}{% else %}<span style="font-weight : bold">DDR :</span> non précisée{% endif %}
 
 
 <p><span class="gras">Nombre de fœtus : {{ tag.70 }}</span>

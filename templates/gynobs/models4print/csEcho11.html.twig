@@ -20,7 +20,7 @@
  #/
 
 /##
- # Template > models4print : compte-rendu echographie avant 11 SA    
+ # Template > models4print : compte-rendu echographie avant 11 SA
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
  #}
@@ -41,7 +41,8 @@ Réalisée sur échographe SAMSUNG HS70 mis en circulation le 14/12/2015
 <span style="font-weight : bold">Indication :</span> {{ tag.130 }}<br>
 </p>
 
-<span style="font-weight : bold">DDR :</span> {{ tag.45 }} -	<span style="font-weight : bold">DDG théorique : </span>{{ tag.48 }}	- <span style="font-weight : bold">Terme théorique : </span>{{ tag.50 }}
+{% if tag.45 %}
+<span style="font-weight : bold">DDR :</span> {{ tag.45 }} -	<span style="font-weight : bold">DDG théorique : </span>{{ tag.48 }}	- <span style="font-weight : bold">Terme théorique : </span>{{ tag.50 }}{% else %}<span style="font-weight : bold">DDR :</span> non précisée{% endif %}
 
 
 <p><span style="font-weight : bold">Nombre d'embryons : {{ tag.131 }}</span>
