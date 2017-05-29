@@ -302,7 +302,7 @@ function tdjCalc(ddr, ddg) {
   var data = new Array();
   data["status"] = 'ko';
 
-  if (ddr.length) {
+  if (ddr.length || ddg.length) {
 
     //terme du jour
     var tdjm = moment().startOf('day');
@@ -341,7 +341,7 @@ function tdjCalc(ddr, ddg) {
 // function calcul terme jour accouchement
 function termeAccCalc(tdj, ddr, ddg) {
 
-  if (ddr.length) {
+  if (ddr.length || ddg.length) {
 
     //terme du jour
     var tdjm = moment(tdj, "DD-MM-YYYY");
