@@ -67,10 +67,10 @@
 
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="">Agenda</a>
+                        <a href="{{ config.agendaDistantLink }}" target="agenda">Agenda</a>
                     </li>
                     <li class="dropdown">
-                        <a href="/patients/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Patients
+                        <a href="/patients/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Patientes
                             <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu">
@@ -80,6 +80,17 @@
                             <li>
                                 <a href="/patient/create/">Nouveau patient</a>
                             </li>
+
+                            {% if page.patientsOfTheDay %}
+                              <li role="separator" class="divider"></li>
+                              <li class="dropdown-header">Patientes du jour</li>
+                              {% for v in page.patientsOfTheDay %}
+                              <li>
+                                  <a href="/patient/{{ v.id }}/">{{ v.heure }} <small>{{ v.type }}</small> {{ v.identite }}</a>
+                              </li>
+                              {% endfor %}
+
+                            {% endif %}
                         </ul>
                     </li>
                     <li class="dropdown">
