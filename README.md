@@ -1,6 +1,8 @@
 # MedShakeEHR-modGynObs
 Module Gynécologie Obstétrique pour MedShakeEHR
 
+**Pour connaitre les fonctions de ce module, reportez-vous à [son wiki](https://github.com/MedShake/MedShakeEHR-modGynObs/wiki) !**
+
 ## Utilisation
 Ce module doit être utilisé conjointement avec MedShakeERH-base.
 
