@@ -40,12 +40,22 @@ $(document).ready(function() {
   $("#p_45Id").on("dp.change", function(e) {
     calcAndDisplayTdj();
     calcAndDisplayDdgt();
+    if (typeof(dicomAutoSendPatient2Echo) != "undefined") {
+      if (dicomAutoSendPatient2Echo == true) {
+        prepareEcho();
+      }
+    }
   });
 
 
   // Si on change la DDG retenue
   $("#p_49Id").on("dp.change", function(e) {
     calcAndDisplayTdj();
+    if (typeof(dicomAutoSendPatient2Echo) != "undefined") {
+      if (dicomAutoSendPatient2Echo == true) {
+        prepareEcho();
+      }
+    }
   });
 
   //close grossesseEnCours
