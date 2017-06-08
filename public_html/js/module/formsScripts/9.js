@@ -39,7 +39,9 @@ $(document).ready(function() {
     if ($('#p_89ID').val() > 0) majLCC2Terme($('#p_89ID').val(), 114);
     if ($('#p_99ID').val() > 0) majLCC2Terme($('#p_99ID').val(), 115);
   });
-
+  if ($('#p_31ID').val() > 0) majLCC2Terme($('#p_31ID').val(), 113);
+  if ($('#p_89ID').val() > 0) majLCC2Terme($('#p_89ID').val(), 114);
+  if ($('#p_99ID').val() > 0) majLCC2Terme($('#p_99ID').val(), 115);
 
   //définir comme DGE
   $('body').on("dblclick", "#p_113ID, #p_114ID, #p_115ID", function(event) {
