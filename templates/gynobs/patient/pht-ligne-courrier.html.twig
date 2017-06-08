@@ -55,6 +55,16 @@
           <li>
             <a class="newMail" href="#" data-formtocall="14" data-objetID="{{ cs.id }}" data-mailtype="apicrypt">Envoyer en apicrypt</a>
           </li>
+          <li role="separator" class="divider"></li>
+          <li>
+            <a class="newMail" href="#" data-formtocall="29" data-objetID="{{ cs.id }}" data-mailtype="ecofax">Envoyer par fax</a>
+          </li>
+          {% if cs.sendMail > 0 %}
+            <li role="separator" class="divider"></li>
+            <li>
+              <a href="/logs/historiquePrint/{{ cs.id }}/">Historique des envois</a>
+            </li>
+          {% endif %}
         </ul>
       </div>
       {% if cs.sendMail > 0 %}
