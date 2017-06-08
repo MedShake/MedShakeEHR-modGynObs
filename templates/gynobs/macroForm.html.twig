@@ -61,8 +61,8 @@
 		title="{{ v.input.name }}"
 		{% if v.input.id %} id="{{ v.input.id }}" {% endif %}
 		{% if v.input.name %} name="{{ v.input.name }}" {% endif %}
-    {% if v.input.value != '' %} value="{{ v.input.value|e('html_attr') }}"
-		{% elseif v.input.value == '' and  v.input.defaut != '' %} value="{{ v.input.defaut|e('html_attr') }}"
+    {% if v.input.value != 'noPreValue' %} value="{{ v.input.value|e('html_attr') }}"
+		{% elseif v.input.value == 'noPreValue' and  v.input.defaut != '' %} value="{{ v.input.defaut|e('html_attr') }}"
 		{% endif %}
     {% if v.input.placeholder %} placeholder="{{ v.input.placeholder|e('html_attr') }}" {% endif %}
 		{% if v.input.class %} class="{{ v.input.class }}{% if v.input.error %} inputErreur"{% endif %}" {% endif %}
@@ -225,7 +225,7 @@
 	{% if v.textarea.rows %} rows="{{ v.textarea.rows }}" {% endif %}
 	{{ v.textarea.add }}
 
-	>{% if v.textarea.value != '' %}{{ v.textarea.value|e }}{% elseif v.textarea.value == '' and  v.textarea.defaut != '' %}{{ v.textarea.defaut|e }}{% endif %}</textarea>
+	>{% if v.textarea.value != 'noPreValue' %}{{ v.textarea.value|e }}{% elseif v.textarea.value == 'noPreValue' and  v.textarea.defaut != '' %}{{ v.textarea.defaut|e }}{% endif %}</textarea>
 
 	{% if v.label.position == 'after' %}
 		<label
