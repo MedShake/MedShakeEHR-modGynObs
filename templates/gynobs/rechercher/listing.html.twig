@@ -40,7 +40,7 @@
     <tbody>
 
       {% for patientID, tab in page.outputTableRow %}
-        <tr class="openPatient" data-url="/{{ page.porp }}/{{ patientID }}/">
+        <tr class="openPatient{% if page['outputType'][patientID]['type'] == 'pro' and page.porp == 'patient' %} info{% endif %}" data-url="/{{ page.porp }}/{{ patientID }}/">
           <td>
             <a class="btn btn-default btn-xs" role="button" href="/{{ page.porp }}/{{ patientID }}/">
               <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
@@ -58,6 +58,11 @@
               </button>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li><a href="/{{ page.porp }}/edit/{{ patientID }}/">Éditer</a></li>
+                {% if page['outputType'][patientID]['type'] == 'patient' %}
+                  <li><a class="switchPraticienListe" data-patientID="{{ patientID }}" href="#">Ajouter à la liste Praticiens</a></li>
+                {% else %}
+                  <li><a class="switchPraticienListe" data-patientID="{{ patientID }}" href="#">Retirer de la liste Praticiens</a></li>
+                {% endif %}
                 <li role="separator" class="divider"></li>
                 <li><a class="sendSign" data-patientID="{{ patientID }}" href="#">Faire signer consentement</a></li>
               </ul>

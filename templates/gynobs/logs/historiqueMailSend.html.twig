@@ -55,10 +55,14 @@
                     {% for v in page.mailListe %}
                         <tr>
                             <td>{{ v.creationDate }}</td>
-                            <td>{{ v.109|e }}</td>
-                            <td><strong>{{ v.110 }}{{ v.179|e }}</strong></td>
-                            <td>{{ v.112|e }}</td>
-                            <td class="small">{{ v.111|e|nl2br }}</td>
+                            <td>{{ v.mailFrom|e }}</td>
+                            <td><strong>
+                              {% if v.mailToEcofaxName %}{{ v.mailToEcofaxName }}<br>{% endif %}
+                              {{ v.mailTo|e }}
+                              {{ v.mailToApicrypt|e }}
+                            </strong></td>
+                            <td>{{ v.mailSujet|e }}</td>
+                            <td class="small">{{ v.mailBody|e|nl2br }}</td>
                         </tr>
 
                     {% endfor %}

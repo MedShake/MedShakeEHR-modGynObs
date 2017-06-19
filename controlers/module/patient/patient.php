@@ -43,7 +43,7 @@ $p['page']['formSynthese']=$formSynthese->getForm();
 
 //types de consultation liées à la gynéco classique.
 $typeCsCla=new msData;
-$p['page']['typeCsCla']=$typeCsCla->getDataTypesFromCatID('33', array('id','label', 'formValues'));
+$p['page']['typeCsCla']=$typeCsCla->getDataTypesFromCatName('csGyneco', array('id','label', 'formValues'));
 
 //chercher une grossesse en cours (cad si pas de type 245 associé)
 if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
@@ -64,6 +64,6 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
 
         //types de consultation liées à la grossesse.
         $typeCsGro=new msData;
-        $p['page']['typeCsGro']=$typeCsGro->getDataTypesFromCatID('30', array('id','label','formValues'));
+        $p['page']['typeCsGro']=$typeCsGro->getDataTypesFromCatName('csObs', array('id','label','formValues'));
     }
 }

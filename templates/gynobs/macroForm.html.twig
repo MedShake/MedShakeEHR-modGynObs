@@ -305,7 +305,7 @@
 									'input' : {
 										'type' : el.value.formType,
 										'name' : el.value.name,
-										'id' : el.value.name~'ID',
+										'id' : 'p_' ~ el.value.id ~ 'ID',
 										'placeholder' : el.value.placeholder,
 										'class' : 'form-control' ~ el.value.autocompleteclass,
 										'value' : el.value.preValue,
@@ -336,7 +336,7 @@
 									'input' : {
 										'type' : 'text',
 										'name' : el.value.name,
-										'id' : el.value.name~'ID',
+										'id' : 'p_' ~ el.value.id ~ 'ID',
 										'placeholder' : el.value.placeholder,
 										'class' : 'form-control' ~ el.value.autocompleteclass,
 										'value' : el.value.preValue,
@@ -367,7 +367,7 @@
 								{{ f.textarea ({
 									'textarea' : {
 										'name' : el.value.name,
-										'id' : el.value.name~'ID',
+										'id' : 'p_' ~ el.value.id ~ 'ID',
 										'class' : 'form-control',
 										'value' : el.value.preValue,
 										'defaut' : el.value.formValues,
@@ -391,7 +391,7 @@
 								{{ f.select ({
 									'select' : {
 										'name' : el.value.name,
-										'id' : el.value.name~'ID',
+										'id' : 'p_' ~ el.value.id ~ 'ID',
 										'class' : 'form-control',
 										'values' : el.value.formValues,
 										'valueDefaut' : el.value.preValue,
@@ -414,7 +414,7 @@
 									'input' : {
 										'type' : 'text',
 										'name' : el.value.name,
-										'id' : el.value.name~'ID',
+										'id' : 'p_' ~ el.value.id ~ 'ID',
 										'placeholder' : el.value.placeholder,
 										'datatypeid' : el.value.id,
 										'autocomplete' : 'off',

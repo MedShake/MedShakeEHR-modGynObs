@@ -20,7 +20,7 @@
  #/
 
 /##
- # Template > patient : details sur un mail pour l'historique     
+ # Template > patient : details sur un mail pour l'historique
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
  #}
@@ -33,18 +33,18 @@
             <tbody>
                 <tr>
                     <td>De</td>
-                    <td>{{ page.dataMail.109.value }}</td>
+                    <td>{{ page.dataMail.mailFrom.value }}</td>
                 </tr>
                 <tr>
                     <td>A</td>
-                    <td><strong>{{ page.dataMail.110.value }}</strong></td>
+                    <td><strong>{{ page.dataMail.mailTo.value }}</strong></td>
                 </tr>
                 <tr>
                     <td>Sujet</td>
-                    <td><strong>{{ page.dataMail.112.value }}</strong></td>
+                    <td><strong>{{ page.dataMail.mailSujet.value }}</strong></td>
                 </tr>
                 <tr>
-                    <td colspan="2">{{ page.dataMail.111.value|nl2br }}</td>
+                    <td colspan="2">{{ page.dataMail.mailBody.value|nl2br }}</td>
 
                 </tr>
 

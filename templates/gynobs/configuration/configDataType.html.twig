@@ -81,19 +81,21 @@
 				<thead>
 				<tr>
 					<th>#</th>
+					<th class="col-md-1">Nom</th>
 					<th class="col-md-2">Label</th>
 					<th class="col-md-1">Utilisé</th>
 					<th class="col-md-1">Validation</th>
 					<th class="col-md-1">Type&nbsp;formulaire</th>
 					<th class="col-md-1">Vie</th>
-					<th class="col-md-5">Description</th>
-					<th class="col-md-3">Actions</th>
+					<th class="col-md-3">Description</th>
+					<th class="col-md-2">Actions</th>
 				</tr>
 				</thead>
 				<tbody>
 				{% for w in v %}
 					<tr>
 					<td>{{ w.id }}</td>
+					<td>{{ w.name }}</td>
 					<td>{{ w.label }}</td>
 					<td>{{ w.enfants }}</td>
 					<td>{{ w.validationRules }}</td>

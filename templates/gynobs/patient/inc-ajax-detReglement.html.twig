@@ -20,7 +20,7 @@
  #/
 
 /##
- # Template > patient : details sur un règlement pour l'historique     
+ # Template > patient : details sur un règlement pour l'historique
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
  #}
@@ -40,42 +40,42 @@
             <tbody>
                 <tr>
                     <td>Tarif SS</td>
-                    <td>{{ page.datareg.198.value }}€</td>
+                    <td>{{ page.datareg.regleTarifCejour.value }}€</td>
                 </tr>
                 <tr>
                     <td>Dépassement</td>
-                    <td>{{ page.datareg.199.value }}€</td>
+                    <td>{{ page.datareg.regleDepaCejour.value }}€</td>
                 </tr>
                 <tr>
                     <td>Facturé ce jour</td>
-                    <td>{{ page.datareg.196.value }}€</td>
+                    <td>{{ page.datareg.regleFacture.value }}€</td>
                 </tr>
 
-                {% if page.datareg.193. value > 0 %}
+                {% if page.datareg.regleCheque. value > 0 %}
                     <tr>
                         <td>Chèque</td>
-                        <td>{{ page.datareg.193.value }}€</td>
+                        <td>{{ page.datareg.regleCheque.value }}€</td>
                     </tr>
                 {% endif %}
 
-                {% if page.datareg.194. value > 0 %}
+                {% if page.datareg.regleCB. value > 0 %}
                     <tr>
                         <td>CB</td>
-                        <td>{{ page.datareg.194.value }}€</td>
+                        <td>{{ page.datareg.regleCB.value }}€</td>
                     </tr>
                 {% endif %}
 
-                {% if page.datareg.195. value > 0 %}
+                {% if page.datareg.regleEspeces. value > 0 %}
                     <tr>
                         <td>Espèces</td>
-                        <td>{{ page.datareg.195.value }}€</td>
+                        <td>{{ page.datareg.regleEspeces.value }}€</td>
                     </tr>
                 {% endif %}
 
-                {% if page.datareg.200. value > 0 %}
+                {% if page.datareg.regleTiersPayeur. value > 0 %}
                     <tr>
                         <td>Tiers (CMU ou TP)</td>
-                        <td>{{ page.datareg.200.value }}€</td>
+                        <td>{{ page.datareg.regleTiersPayeur.value }}€</td>
                     </tr>
                 {% endif %}
 

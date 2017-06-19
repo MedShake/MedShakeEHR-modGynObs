@@ -20,7 +20,7 @@
  #/
 
 /##
- # Template > patient : formulaire d'ordonnance      
+ # Template > patient : formulaire d'ordonnance
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
  #}
@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label class="control-label" for="p_189ID">Modèle impression
                     </label>
-                    <select class="form-control" name="p_189" data-typeid="189" autocomplete="off">
+                    <select class="form-control" name="ordoTypeImpression" data-typeid="189" autocomplete="off">
 
                         <option value="standard">standard</option>
                         <option value="ald"{% if page.courrier.modeprint == 'ald' %} selected="selected"{% endif %}>ALD</option>
