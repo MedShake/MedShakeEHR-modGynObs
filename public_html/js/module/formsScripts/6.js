@@ -40,6 +40,7 @@ $(document).ready(function() {
   $("#p_45Id").on("dp.change", function(e) {
     calcAndDisplayTdj();
     calcAndDisplayDdgt();
+    calcAndDisplayT9m();
     if (typeof(dicomAutoSendPatient2Echo) != "undefined") {
       if (dicomAutoSendPatient2Echo == true) {
         prepareEcho();
@@ -51,6 +52,7 @@ $(document).ready(function() {
   // Si on change la DDG retenue
   $("#p_49Id").on("dp.change", function(e) {
     calcAndDisplayTdj();
+    calcAndDisplayT9m();
     if (typeof(dicomAutoSendPatient2Echo) != "undefined") {
       if (dicomAutoSendPatient2Echo == true) {
         prepareEcho();
@@ -71,8 +73,9 @@ $(document).ready(function() {
     }
   });
 
-  calcAndDisplayDdgt()
+  calcAndDisplayDdgt();
   calcAndDisplayTdj();
+  calcAndDisplayT9m()
 });
 
 // calculer et afficher terme du jour
@@ -86,6 +89,17 @@ function calcAndDisplayTdj() {
     $('#p_50ID').attr('data-tdj4math', '');
   }
 }
+
+// calculer et afficher terme 9 mois
+function calcAndDisplayT9m() {
+  t9 = terme9mCalc($('#p_45ID').val(), $('#p_49ID').val());
+  if (t9['status'] == 'ok') {
+    $('#p_485ID').val(t9['human']);
+  } else {
+    $('#p_485ID').val('');
+  }
+}
+
 
 //calculer et afficher DDG théo
 function calcAndDisplayDdgt() {

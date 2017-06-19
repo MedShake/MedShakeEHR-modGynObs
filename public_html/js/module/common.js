@@ -338,6 +338,36 @@ function tdjCalc(ddr, ddg) {
   return data;
 }
 
+// calcul terme (9 mois)
+function terme9mCalc(ddr, ddg) {
+  var data = new Array();
+  data["status"] = 'ko';
+
+  if (ddr.length || ddg.length) {
+
+    //terme du jour
+    var tdjm = moment().startOf('day');
+    var ddrm = moment(ddr, "DD-MM-YYYY");
+    var ddgcm = moment(ddg, "DD-MM-YYYY");
+
+    if (ddgcm.isValid()) {
+      debut = ddgcm;
+    } else if (ddrm.isValid()) {
+      debut = ddrm.add(14, 'days');
+    }
+
+    if (debut.isValid()) {
+      t9 = debut.add(9, 'months').format('DD/MM/YYYY');
+      data["status"] = 'ok';
+      data["human"] = t9;
+    } else {
+      data["status"] = 'ko';
+    }
+  }
+
+  return data;
+}
+
 // function calcul terme jour accouchement
 function termeAccCalc(tdj, ddr, ddg) {
 
