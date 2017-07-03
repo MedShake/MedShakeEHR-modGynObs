@@ -37,6 +37,23 @@ class msModuleDataSave
    * l'ID variable dans le nom de la method correspond au typeID
    */
 
+      // dates clefs pour éviter les mauvaises suprises d'un javascript défaillant
+      public function correctionDateBeforeSave($value) {
+        $value=trim($value);
+        if(is_numeric($value) and strlen($value)==8) {
+          $value=$value{0}.$value{1}.'/'.$value{2}.$value{3}.'/'.$value{4}.$value{5}.$value{6}.$value{7};
+        }
+        return $value;
+      }
+      public function type45TreatBeforeSave($value)
+      {
+          return $this->correctionDateBeforeSave($value);
+      }
+      public function type49TreatBeforeSave($value)
+      {
+          return $this->correctionDateBeforeSave($value);
+      }
+
       // identité : nom en majuscule, prenom 1er lettre maj
       public function type2TreatBeforeSave($value)
       {
