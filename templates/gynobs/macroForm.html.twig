@@ -258,13 +258,15 @@
 {% macro formbuilder(t , formNumber, prevalue ) %}
 	{% import _self as f %}
 
-	<form
-	{% if t.global.formAction %}action="{{ t.config.protocol }}{{ t.config.host }}{{ t.global.formAction }}" {% endif %}
-	{% if t.global.formMethod %}method="{{ t.global.formMethod }}" {% endif %}
-	id="formNumber{{ formNumber }}"
-	class="{{ t.global.formClass }}"
-	data-dataset="{{ t.global.dataset }}"
-	data-instance="{{ t.global.instance }}" >
+	{% if t.global.noFormTags is not defined %}
+		<form
+		{% if t.global.formAction %}action="{{ t.config.protocol }}{{ t.config.host }}{{ t.global.formAction }}" {% endif %}
+		{% if t.global.formMethod %}method="{{ t.global.formMethod }}" {% endif %}
+		id="formNumber{{ formNumber }}"
+		class="{{ t.global.formClass }}"
+		data-dataset="{{ t.global.dataset }}"
+		data-instance="{{ t.global.instance }}" >
+	{% endif %}
 
 	{# form number #}
 	{{ f.input ({
@@ -458,6 +460,6 @@
 	</div>
 	{% endfor %}
 
-	</form>
+	{% if t.global.noFormTags is not defined %}</form>{% endif %}
 
 {% endmacro %}

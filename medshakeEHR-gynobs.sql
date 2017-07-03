@@ -140,8 +140,8 @@ INSERT INTO `data_cat` (`id`, `groupe`, `name`, `label`, `description`, `type`, 
 (57, 'typecs', 'declencheur', 'Déclencheur', '', 'user', 1, '2017-05-14 21:50:26'),
 (58, 'courrier', 'modelesMailPatient', 'Mails aux patients', 'modèles de mail', 'user', 1, '2017-05-15 09:03:46'),
 (59, 'courrier', 'modeleMailsPros', 'Mails aux praticiens', 'modèles de mails pour les praticien (apicrypt)', 'user', 1, '2017-05-15 09:04:40'),
-(60, 'medical', 'dataMarqueursT21', 'Données formulaire marqueurs sériques maternels', 'donnée pour formulaire dépistage T21', 'user', 1, '2017-05-16 09:49:29');
-
+(60, 'medical', 'dataMarqueursT21', 'Données formulaire marqueurs sériques maternels', 'donnée pour formulaire dépistage T21', 'user', 1, '2017-05-16 09:49:29'),
+(63, 'relation', 'relationRelations', 'Relations', 'types permettant de définir une relation', 'user', 1, '2017-06-29 09:22:33');
 -- --------------------------------------------------------
 
 --
@@ -636,7 +636,13 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (476, 'medical', 'fmT21Did', '', 'Diabète insulino-dépendant', 'DID', '', '', 'select', '\' \' : \' \' \n\'o\' : \'oui\'\n\'n\' : \'non\'', 'user', 60, 1, '2017-05-16 15:15:20', 3600, 1),
 (477, 'admin', 'nReseau', '', 'Numéro de réseau', 'numéro de réseau (dépistage)', '', '', 'text', '', 'user', 36, 1, '2017-05-16 22:21:00', 3600, 1),
 (478, 'courrier', 'modeleCourrierResumeDossier', '', 'Résumé dossier', 'modèle de courrier pour un résumé du dossier', '', '', '', 'courrier-resumeDossier', 'user', 38, 1, '2017-05-19 09:20:43', 3600, 1),
-(481, 'mail', 'ecofaxTo', '', 'Numéro du destinataire', 'Numéro du destinataire du fax (ecofax OVH)', '', '', 'text', '', 'user', 39, 1, '2017-06-08 13:28:08', 1576800000, 1);
+(479, 'courrier', 'mmDefautApi', '', 'Défaut', 'modèle mail par défaut', '', '', '', 'Cher confrère,\n\nVeuillez trouver en pièce jointe un document concernant notre patient commun.\nVous souhaitant bonne réception.\n\nBien confraternellement', 'base', 59, 1, '2017-05-29 10:41:14', 3600, 0),
+(481, 'mail', 'mailToEcofaxNumber', '', 'Numéro de fax du destinataire', 'Numéro du destinataire du fax (ecofax OVH)', '', '', 'text', '', 'base', 39, 1, '2017-06-09 21:48:01', 1576800000, 1),
+(484, 'mail', 'mailToEcofaxName', '', 'Destinataire du fax', 'Destinataire du fax (ecofax OVH)', '', '', 'text', '', 'base', 39, 1, '2017-06-09 21:49:09', 1576800000, 1),
+(488, 'relation', 'relationID', '', 'Porteur de relation', 'porteur de relation entre patients ou entre patients et praticiens', '', '', 'number', '', 'base', 63, 1, '2017-06-29 15:28:56', 1576800000, 1),
+(489, 'relation', 'relationPatientPatient', '', 'Relation patient patient', 'relation patient patient', '', '', 'select', '\'conjoint\': \'conjoint\'\n\'enfant\': \'parent\'\n\'parent\': \'enfant\'\n\'grand parent\': \'petit enfant\'\n\'petit enfant\': \'grand parent\'\n\'sœur / frère\': \'sœur / frère\' \n\'tante / oncle\': \'nièce / neveu\' \n\'cousin\': \'cousin\'', 'base', 63, 1, '2017-06-30 10:36:59', 1576800000, 1),
+(490, 'relation', 'relationPatientPraticien', '', 'Relation patient praticien', 'relation patient  praticien', '', '', 'select', '\'MT\': \'Médecin traitant\'\n\'MS\': \'Médecin spécialiste\'\n\'Autre\': \'Autre correspondant\'', 'base', 63, 1, '2017-06-29 15:29:16', 1576800000, 1);
+
 -- --------------------------------------------------------
 
 --
