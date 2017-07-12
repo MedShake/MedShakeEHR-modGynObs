@@ -30,10 +30,12 @@ CREATE TABLE `actes` (
   `id` smallint(4) UNSIGNED NOT NULL,
   `cat` tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
   `label` varchar(250) NOT NULL,
-  `tarif` float NOT NULL DEFAULT '0',
-  `depassement` float NOT NULL DEFAULT '0',
-  `code` varchar(250) NOT NULL DEFAULT '',
+  `shortLabel` varchar(255) DEFAULT NULL,
+  `details` text NOT NULL,
+  `flagImportant` tinyint(1) NOT NULL DEFAULT '0',
+  `flagCmu` tinyint(1) NOT NULL DEFAULT '0',
   `fromID` smallint(5) UNSIGNED NOT NULL,
+  `toID` mediumint(6) NOT NULL DEFAULT '0',
   `creationDate` datetime NOT NULL DEFAULT '1000-01-01 00:00:00'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -41,15 +43,15 @@ CREATE TABLE `actes` (
 -- Contenu de la table `actes`
 --
 
-INSERT INTO `actes` (`id`, `cat`, `label`, `tarif`, `depassement`, `code`, `fromID`, `creationDate`) VALUES
-(1, 4, 'Consultation gynécologique ', 23, 22, 'CS', 0, '1000-01-01 00:00:00'),
-(4, 4, 'Consultation gynécologique CMU', 28, 0, 'CS + MCS + MPC', 0, '1000-01-01 00:00:00'),
-(5, 4, 'Consultation gynécologique et FCV', 27.82, 17.18, 'CS + JKHD001', 0, '1000-01-01 00:00:00'),
-(6, 4, 'Consultation gynécologique et FCV - CMU', 32.82, 0, 'CS + MCS + MPC + JKHD001', 0, '1000-01-01 00:00:00'),
-(7, 4, 'Consultation suivi de grossesse ', 23, 17, 'CS', 0, '1000-01-01 00:00:00'),
-(8, 4, 'Consultation suivi de grossesse + FCV', 27.82, 12.18, 'CS + JKHD001', 0, '1000-01-01 00:00:00'),
-(9, 4, 'Consultation suivi de grossesse CMU', 28, 0, 'CS + MCS + MPC', 0, '1000-01-01 00:00:00'),
-(10, 4, 'Consultation suivi de grossesse + FCV - CMU', 32.82, 0, 'CS + MCS + MPC + JKHD001', 0, '1000-01-01 00:00:00');
+INSERT INTO `actes` (`id`, `cat`, `label`, `shortLabel`, `details`, `flagImportant`, `flagCmu`, `fromID`, `toID`, `creationDate`) VALUES
+(1, 4, 'Consultation gynécologique', 'Cs gynéco', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0', 1, 0, 1, 0, '2017-07-09 20:13:53'),
+(4, 4, 'Consultation gynécologique CMU', 'Cs gynéco CMU', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0', 0, 1, 1, 0, '2017-07-06 09:24:41'),
+(5, 4, 'Consultation gynécologique et FCV', 'Cs gynéco et FCV', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0\nJKHD001:\n  pourcents: 100\n  depassement: 0', 1, 0, 1, 0, '2017-07-09 20:16:22'),
+(6, 4, 'Consultation gynécologique et FCV - CMU', 'Cs gynéco et FCV - CMU', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0\nJKHD001:\n  pourcents: 100\n  depassement: 0', 0, 1, 1, 0, '2017-07-06 09:21:23'),
+(7, 4, 'Consultation suivi de grossesse', 'Cs grossesse', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0', 1, 0, 1, 0, '2017-07-09 20:17:36'),
+(8, 4, 'Consultation suivi de grossesse + FCV', 'Cs grossesse + FCV', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0\nJKHD001:\n  pourcents: 100\n  depassement: 0', 0, 0, 1, 0, '2017-07-09 20:18:13'),
+(9, 4, 'Consultation suivi de grossesse CMU', 'Cs grossesse CMU', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0', 0, 1, 1, 0, '2017-07-06 09:11:44');
+
 
 -- --------------------------------------------------------
 
@@ -79,6 +81,59 @@ INSERT INTO `actes_cat` (`id`, `name`, `label`, `description`, `type`, `fromID`,
 (4, 'catConsult', 'Consultations', '', 'user', 1, '2017-03-26 15:42:59', 1),
 (5, 'catActesTechGyn', 'Actes techniques gynéco', '', 'user', 1, '2017-03-26 15:44:03', 8),
 (6, 'catInsémination', 'Insémination', '', 'user', 1, '2017-03-26 15:43:54', 10);
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `actes_base`
+--
+
+CREATE TABLE `actes_base` (
+  `id` mediumint(6) UNSIGNED NOT NULL,
+  `code` varchar(7) NOT NULL,
+  `label` varchar(255) DEFAULT NULL,
+  `type` enum('NGAP','CCAM') NOT NULL DEFAULT 'CCAM',
+  `tarifs1` float NOT NULL,
+  `tarifs2` float NOT NULL,
+  `fromID` mediumint(7) UNSIGNED NOT NULL DEFAULT '1',
+  `creationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `actes_base`
+--
+
+INSERT INTO `actes_base` (`id`, `code`, `label`, `type`, `tarifs1`, `tarifs2`, `fromID`, `creationDate`) VALUES
+(1, 'JKFD001', 'Exérèse de lésion pédiculée de l\'utérus accouchée par le col, par voie vaginale', 'CCAM', 62.7, 62.7, 1, '2017-07-07 10:52:32'),
+(2, 'JKHA001', 'Biopsie ou frottis de l\'endomètre, sans hystéroscopie', 'CCAM', 42.24, 42.24, 1, '2017-07-07 10:53:13'),
+(3, 'JKGD001', 'Ablation d\'un dispositif intra-utérin par un matériel intra-utérin de préhension, par voie vaginale', 'CCAM', 62.7, 62.7, 1, '2017-07-07 10:52:50'),
+(4, 'ZCQJ006', 'Échographie transcutanée avec échographie par voie rectale et/ou vaginale [par voie cavitaire] du petit bassin [pelvis] féminin', 'CCAM', 56.7, 56.7, 1, '2017-07-07 11:01:20'),
+(5, 'QZGA002', 'Ablation ou changement d\'implant pharmacologique souscutané', 'CCAM', 41.8, 71.8, 1, '2017-07-07 10:59:26'),
+(6, 'JSLD001', 'Insémination artificielle intra-utérine', 'CCAM', 38.4, 38.4, 1, '2017-07-07 10:59:05'),
+(7, 'JQQM016', 'Échographie biométrique et morphologique d\'une grossesse unifoetale au 3ème trimestre', 'CCAM', 100.2, 73.99, 1, '2017-07-07 10:57:09'),
+(8, 'JQQM017', 'Échographie biométrique et morphologique d\'une grossesse multifoetale au 3ème trimestre', 'CCAM', 154.09, 121.12, 1, '2017-07-07 10:57:51'),
+(9, 'JLQE002', 'Colposcopie', 'CCAM', 49.82, 36.97, 1, '2017-07-07 10:54:40'),
+(10, 'JKLD001', 'Pose d\'un dispositif intra-utérin', 'CCAM', 38.4, 38.4, 1, '2017-07-07 10:54:14'),
+(11, 'ZCQJ002', 'Échographie-doppler du petit bassin [pelvis] féminin, par voie rectale et/ou vaginale [par voie cavitaire]', 'CCAM', 69.93, 69.93, 1, '2017-07-07 11:00:42'),
+(12, 'ZCQM007', 'Échographie du petit bassin [pelvis] féminin pour surveillance de l\'ovulation', 'CCAM', 37.8, 37.8, 1, '2017-07-07 11:01:34'),
+(13, 'ZCQM009', 'Échographie-doppler du petit bassin [pelvis] féminin pour surveillance de l\'ovulation', 'CCAM', 42.25, 42.25, 1, '2017-07-07 11:02:00'),
+(14, 'JNQM001', 'Échographie non morphologique de la grossesse avant 11 semaines d\'aménorrhée', 'CCAM', 35.65, 35.65, 1, '2017-07-07 10:55:10'),
+(15, 'JQQM010', 'Échographie biométrique et morphologique d\'une grossesse uniembryonnaire au 1er trimestre', 'CCAM', 61.47, 48.35, 1, '2017-07-07 10:56:16'),
+(16, 'JQQM015', 'Échographie biométrique et morphologique d\'une grossesse multiembryonnaire au 1er trimestre', 'CCAM', 71.57, 54.21, 1, '2017-07-07 10:56:49'),
+(17, 'JQQJ037', 'Mesure de la longueur du canal cervical du col de l\'utérus, par échographie par voie vaginale', 'CCAM', 33.44, 33.44, 1, '2017-07-07 10:55:24'),
+(18, 'JKHD001', 'Prélèvement cervicovaginal', 'CCAM', 12.46, 9.64, 1, '2017-07-07 10:53:53'),
+(19, 'CS', 'Consultation', 'NGAP', 23, 23, 1, '2017-07-07 10:50:01'),
+(20, 'MPC', 'Majoration forfaitaire transitoire', 'NGAP', 2, 2, 1, '2017-07-07 10:52:06'),
+(21, 'MCS', 'Majoration de Coordination Spécialiste', 'NGAP', 5, 5, 1, '2017-07-07 10:50:36'),
+(22, 'C2', 'Consultation expert', 'NGAP', 46, 46, 1, '2017-07-07 10:49:44'),
+(23, 'AG', 'Acte gratuit', 'NGAP', 0, 0, 1, '2017-07-07 10:49:30'),
+(24, 'JQQM018', 'Échographie biométrique et morphologique d\'une grossesse unifoetale au 2ème trimestre', 'CCAM', 100.2, 81.82, 1, '2017-07-07 10:58:15'),
+(25, 'JQQM003', 'Échographie de surveillance de la croissance foetale avec échographie-doppler des artères utérines de la mère et des vaisseaux du foetus', 'CCAM', 75.6, 75.6, 1, '2017-07-07 10:55:42'),
+(26, 'YYYY088', 'Échographie de contrôle ou surveillance de pathologie gravidique foetale ou maternelle au cours d\'une grossesse unifoetale', 'CCAM', 30.24, 30.24, 1, '2017-07-07 11:00:00'),
+(27, 'JQQM019', 'Échographie biométrique et morphologique d\'une grossesse multifoetale au 2ème trimestre', 'CCAM', 154.09, 137, 1, '2017-07-07 10:58:44'),
+(28, 'JKHA002', 'Biopsie du col de l\'utérus', 'CCAM', 21.45, 21.45, 1, '2017-07-07 10:53:36');
+
 
 -- --------------------------------------------------------
 
@@ -630,6 +685,11 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (488, 'relation', 'relationID', '', 'Porteur de relation', 'porteur de relation entre patients ou entre patients et praticiens', '', '', 'number', '', 'base', 63, 1, '2017-06-29 15:28:56', 1576800000, 1),
 (489, 'relation', 'relationPatientPatient', '', 'Relation patient patient', 'relation patient patient', '', '', 'select', '\'conjoint\': \'conjoint\'\n\'enfant\': \'parent\'\n\'parent\': \'enfant\'\n\'grand parent\': \'petit enfant\'\n\'petit enfant\': \'grand parent\'\n\'sœur / frère\': \'sœur / frère\' \n\'tante / oncle\': \'nièce / neveu\' \n\'cousin\': \'cousin\'', 'base', 63, 1, '2017-06-30 10:36:59', 1576800000, 1),
 (490, 'relation', 'relationPatientPraticien', '', 'Relation patient praticien', 'relation patient  praticien', '', '', 'select', '\'MT\': \'Médecin traitant\'\n\'MS\': \'Médecin spécialiste\'\n\'Autre\': \'Autre correspondant\'', 'base', 63, 1, '2017-06-29 15:29:16', 1576800000, 1);
+INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `type`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
+(492, 'user', 'administratifPeutAvoirPrescriptionsTypes', '', 'administratifPeutAvoirPrescriptionsTypes', 'permet à l\'utilisateur sélectionné d\'avoir des prescriptions types', '', '', 'text', 'false', 'base', 64, 1, '2017-07-10 20:06:36', 3600, 1),
+(493, 'user', 'administratifPeutAvoirFacturesTypes', '', 'administratifPeutAvoirFacturesTypes', 'permet à l\'utilisateur sélectionné d\'avoir des factures types', '', '', 'text', 'false', 'base', 64, 1, '2017-07-10 20:06:59', 3600, 1),
+(494, 'admin', 'administratifMarqueurSuppression', 'Dr, Pr ...', 'Dossier supprimé', 'marqueur pour la suppression d\'un dossier', '', '', 'text', '', 'user', 65, 1, '2017-07-11 09:24:16', 3600, 1);
+
 
 -- --------------------------------------------------------
 
@@ -842,6 +902,7 @@ CREATE TABLE `hprim` (
 
 CREATE TABLE `inbox` (
   `id` int(7) UNSIGNED NOT NULL,
+  `mailForUserID` smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   `txtFileName` varchar(30) NOT NULL,
   `txtDatetime` datetime NOT NULL,
   `txtNumOrdre` smallint(4) UNSIGNED NOT NULL,
@@ -886,7 +947,7 @@ CREATE TABLE `objets_data` (
 
 CREATE TABLE `people` (
   `id` int(11) UNSIGNED NOT NULL,
-  `type` enum('patient','pro') NOT NULL DEFAULT 'patient',
+  `type` enum('patient','pro','deleted') NOT NULL DEFAULT 'patient',
   `rank` enum('','admin') DEFAULT NULL,
   `pass` varbinary(60) DEFAULT NULL,
   `registerDate` datetime DEFAULT NULL,
@@ -915,6 +976,7 @@ CREATE TABLE `prescriptions` (
   `label` varchar(250) NOT NULL,
   `description` text NOT NULL,
   `fromID` smallint(5) UNSIGNED NOT NULL,
+  `toID` mediumint(7) UNSIGNED NOT NULL DEFAULT '0',
   `creationDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -922,9 +984,9 @@ CREATE TABLE `prescriptions` (
 -- Contenu de la table `prescriptions`
 --
 
-INSERT INTO `prescriptions` (`id`, `cat`, `label`, `description`, `fromID`, `creationDate`) VALUES
-(1, 2, 'Ligne vierge', '', 1, '2017-03-22 15:26:08'),
-(2, 4, 'Ligne vierge', '', 1, '2017-03-22 15:27:26');
+INSERT INTO `prescriptions` (`id`, `cat`, `label`, `description`, `fromID`, `toID`, `creationDate`) VALUES
+(1, 2, 'Ligne vierge', '', 1, 0, '2017-03-22 15:26:08'),
+(2, 4, 'Ligne vierge', '', 1, 0, '2017-03-22 15:27:26');
 
 -- --------------------------------------------------------
 
@@ -978,7 +1040,16 @@ CREATE TABLE `printed` (
 -- Index pour la table `actes`
 --
 ALTER TABLE `actes`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `toID` (`toID`),
+  ADD KEY `cat` (`cat`);
+
+--
+-- Index pour la table `actes_base`
+--
+ALTER TABLE `actes_base`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `code` (`code`);
 
 --
 -- Index pour la table `actes_cat`
@@ -1040,7 +1111,7 @@ ALTER TABLE `hprim`
 -- Index pour la table `inbox`
 --
 ALTER TABLE `inbox`
-  ADD PRIMARY KEY (`txtFileName`),
+  ADD PRIMARY KEY (`txtFileName`,`mailForUserID`) USING BTREE,
   ADD UNIQUE KEY `id` (`id`),
   ADD KEY `archived` (`archived`);
 
@@ -1091,7 +1162,12 @@ ALTER TABLE `printed`
 -- AUTO_INCREMENT pour la table `actes`
 --
 ALTER TABLE `actes`
-  MODIFY `id` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` smallint(4) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT pour la table `actes_base`
+--
+ALTER TABLE `actes_base`
+  MODIFY `id` mediumint(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 --
 -- AUTO_INCREMENT pour la table `actes_cat`
 --
@@ -1132,11 +1208,6 @@ ALTER TABLE `form_basic_types`
 --
 ALTER TABLE `hprim`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT pour la table `inbox`
---
-ALTER TABLE `inbox`
-  MODIFY `id` int(7) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `objets_data`
 --
