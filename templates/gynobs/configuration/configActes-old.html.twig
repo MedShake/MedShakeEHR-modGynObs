@@ -44,7 +44,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Gestion des factures types</h1>
+    <h1>Gestion des actes</h1>
     <div>
         <div>
 
@@ -53,14 +53,9 @@
                 <li role="presentation">
                     <a href="/configuration/actes-cat/" aria-controls="categories" role="tab">Catégories</a>
                 </li>
-                <li role="presentation">
-                  <a href="/configuration/actes-base/" aria-controls="prescriptions" role="tab">Actes NGAP / CCAM</a>
+                <li role="presentation" class="active">
+                    <a href="/configuration/actes/" aria-controls="prescriptions" role="tab">Actes</a>
                 </li>
-                {% for id, user in page.users %}
-                  <li role="presentation" {% if page.selectUser == id %}class="active"{% endif %}>
-                      <a href="/configuration/actes/{{ id }}/{% if page.groupe > 0 %}{{ page.groupe }}/{% endif %}" aria-controls="prescriptions" role="tab">{% if id == 0 %}Factures types communes{% else %}Factures types : {{ user }}{% endif %}</a>
-                  </li>
-                {% endfor %}
 
             </ul>
 
@@ -76,35 +71,29 @@
                     </button>
 
                     {% for k, v in page.tabTypes %}
-                        <h2 id="cat{{ v.0.cat }}">{{ v.0.catLabel }} <small><a class="btn btn-default btn-sm" href="/configuration/actes/{{ page.selectUser }}/{{ v.0.cat }}/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></small></h2>
+                        <h2 id="cat{{ v.0.cat }}">{{ v.0.catLabel }} <small><a class="btn btn-default btn-sm" href="/configuration/actes/{{ v.0.cat }}/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></small></h2>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col-md-1">#</th>
-                                    <th class="col-md-2">Code</th>
-                                    <th class="col-md-3">Label</th>
-                                    <th class="col-md-2">Label court</th>
-                                    <th class="col-md-1">Utilisation</th>
-                                    <th class="texteadroite">Tarif&nbsp;SS</th>
+                                    <th>#</th>
+                                    <th>Label</th>
+                                    <th>Code</th>
+                                    <th class="texteadroite">Tarif SS</th>
                                     <th class="texteadroite">Dépassement</th>
                                     <th class="texteadroite">Total</th>
-                                    <th class="col-md-2"></th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {% for w in v %}
                                     <tr>
                                         <td>{{ w.id }}</td>
+                                        <td>{{ w.label }}</td>
+                                        <td>{{ w.code }}</td>
+                                        <td class="texteadroite">{{ w.tarif|number_format(2, '.', ' ') }} / {{ w.tarifc|number_format(2, '.', ' ') }}</td>
+                                        <td class="texteadroite">{{ w.depassement|number_format(2, '.', ' ') }} / {{ w.depassementc|number_format(2, '.', ' ') }}</td>
+                                        <td class="texteadroite">{{ (w.tarif + w.depassement)|number_format(2, '.', ' ') }} / {{ w.totalc|number_format(2, '.', ' ') }}</td>
                                         <td>
-                                          {{ (w.details|keys)|join(' + ') }}
-                                        </td>
-                                        <td{% if w.flagImportant == 1 %} class="gras"{% endif %}>{{ w.label }}</td>
-                                        <td>{{ w.shortLabel }}</td>
-                                        <td>{{ page['utilisationParFacture'][w.id] }}</td>
-                                        <td class="texteadroite">{{ w.tarif|number_format(2, '.', ' ') }}</td>
-                                        <td class="texteadroite">{{ w.depassement|number_format(2, '.', ' ') }}</td>
-                                        <td class="texteadroite">{{ w.total|number_format(2, '.', ' ') }}</td>
-                                        <td class="texteadroite">
                                             <button type="button" class="btn btn-default btn-xs typeToggleVisibility" aria-label="Editer" id="details{{ w.id }}">
                                                 <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
                                             </button>
@@ -113,29 +102,19 @@
                                                 <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             </button>
 
-                                            <button type="button" {% if page['utilisationParFacture'][w.id] > 0 %} disabled="disabled" {% endif %}class="btn btn-default btn-xs delete-by-prim-key" aria-label="Supprimer" {% if w.enfants > 0 or w.type=="base" %} disabled="disabled" {% endif %} data-id="{{ w.id }}" data-table="actes">
+                                            <button type="button" class="btn btn-default btn-xs delete-by-prim-key" aria-label="Supprimer" {% if w.enfants > 0 or w.type=="base" %} disabled="disabled" {% endif %} data-id="{{ w.id }}" data-table="actes">
                                                 <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             </button>
-
-                                            <div class="btn-group">
-                                              <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> <span class="caret"></span>
-                                              </button>
-                                              <ul class="dropdown-menu dropdown-menu-right">
-                                                <li><a target="_blank" href="/configuration/actes-fsepyx/{{ w.id }}/">Générer facture type Pyxvital</a></li>
-                                              </ul>
-                                            </div>
-
                                         </td>
                                     </tr>
                                     {% for key,det in w.details %}
                                       <tr class="active small details details{{ w.id }}" >
                                         <td colspan="2"></td>
                                         <td>{{ key }}  ({{ det.pourcents }}%)</td>
-                                        <td></td>
                                         <td class="texteadroite">{{ det.tarif|number_format(2, '.', '')  }}</td>
                                         <td class="texteadroite">{{ det.depassement|number_format(2, '.', '')  }}</td>
                                         <td class="texteadroite">{{ (det.tarif + det.depassement)|number_format(2, '.', '')  }}</td>
-                                        <td colspan="2"></td>
+                                        <td></td>
                                       </tr>
                                     {% endfor %}
 
@@ -173,7 +152,15 @@
                             </div>
 
                             <div class="form-group">
-                                {{ f.input ({ 'input' : { 'type' : 'text', 'name' : 'shortLabel', 'placeholder' : 'intitulé court', 'class' : 'form-control', 'autocomplete' : 'off' }, 'label' : { 'position' : 'before', 'label' : 'Label court', } }) }}
+                                {{ f.input ({ 'input' : { 'type' : 'text', 'name' : 'code', 'placeholder' : 'code', 'class' : 'form-control', 'autocomplete' : 'off' }, 'label' : { 'position' : 'before', 'label' : 'Code', } }) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ f.input ({ 'input' : { 'type' : 'text', 'name' : 'tarif', 'placeholder' : 'tarif ss', 'class' : 'form-control', 'autocomplete' : 'off' }, 'label' : { 'position' : 'before', 'label' : 'Tarif ss', } }) }}
+                            </div>
+
+                            <div class="form-group">
+                                {{ f.input ({ 'input' : { 'type' : 'text', 'name' : 'depassement', 'placeholder' : 'dépassement', 'class' : 'form-control', 'autocomplete' : 'off' }, 'label' : { 'position' : 'before', 'label' : 'Dépassement', } }) }}
                             </div>
 
                             <div class="form-group">
@@ -181,19 +168,7 @@
                             </div>
 
                             <div class="form-group">
-                                {{ f.select ({ 'select' : { 'name' : 'toID', 'class' : 'form-control', 'autocomplete' : 'off', 'values' : page.users, 'valueDefaut': '' }, 'label' : { 'position' : 'before', 'label' : 'Utilisateur', } }) }}
-                            </div>
-
-                            <div class="form-group">
                                 {{ f.textarea ({ 'textarea' : {'name' : 'details', 'placeholder' : 'détails', 'class' : 'form-control', 'autocomplete' : 'off', 'rows': '8' }, 'label' : { 'position' : 'before', 'label' : 'Détails', } }) }}
-                            </div>
-
-                            <div class="form-group">
-                                {{ f.select ({ 'select' : { 'name' : 'flagCmu', 'class' : 'form-control', 'autocomplete' : 'off', 'values' : {'0' : 'Non', '1' : 'Oui'}, 'valueDefaut': '' }, 'label' : { 'position' : 'before', 'label' : 'Acte pour patient CMU', } }) }}
-                            </div>
-
-                            <div class="form-group">
-                                {{ f.select ({ 'select' : { 'name' : 'flagImportant', 'class' : 'form-control', 'autocomplete' : 'off', 'values' : {'0' : 'Non', '1' : 'Oui'}, 'valueDefaut': '' }, 'label' : { 'position' : 'before', 'label' : 'Acte important', } }) }}
                             </div>
 
                           </form>

@@ -64,7 +64,9 @@
 {% block body %}
 
     <div class="container-fluid">
-
+        {% if page.patient.dossierType =="deleted" %}
+        <div class="row alert alert-danger" role="alert">Ce dossier est marqué comme supprimé !</div>
+        {% endif %}
         <div class="row" id="identitePatient" data-patientID="{{ page.patient.id }}">
 
             <h1>{{ page['patient']['administrativeDatas']['3']['value']|e }}
