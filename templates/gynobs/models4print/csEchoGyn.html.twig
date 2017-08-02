@@ -30,7 +30,7 @@
 <h2 style="text-align : center">Madame {{ tag.3 }}  {{ tag.2 }} ({{ tag.8 }})</h2>
 
 <h2>Echographie gynécologique</h2>
-Réalisée sur échographe SAMSUNG HS70 mis en circulation le 14/12/2015
+Réalisée sur échographe  mis en circulation le
 <br>
 <p>
 <span style="font-weight : bold">Date d’examen :</span> {{ tag.date|date("d/m/Y") }}
@@ -51,7 +51,7 @@ Réalisée sur échographe SAMSUNG HS70 mis en circulation le 14/12/2015
 {% if tag.val412 != 'absent' %}
   <h3>Utérus</h3>
   <ul>
-    <li>Dimensions : {{ tag.414 }} mm x {{ tag.413 }} mm x {{ tag.415 }} mm</li>
+    {% if tag.414 or tag.413 or tag.415  %}<li>Dimensions : {{ tag.414 }} mm x {{ tag.413 }} mm x {{ tag.415 }} mm</li>{% endif %}
     <li>Position utérine : {{ tag.412 }}</li>
     <li>Contours : {{ tag.416 }}</li>
     <li>Structure du myomètre : {{ tag.417 }}</li>

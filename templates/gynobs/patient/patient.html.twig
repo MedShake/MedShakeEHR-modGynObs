@@ -94,15 +94,32 @@
                 </small>
             </h1>
             <p>
+                {# email #}
+                {% if page['patient']['administrativeDatas']['4']['value'] %}
+                  <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      {{ page['patient']['administrativeDatas']['4']['value']|e }} <span class="caret"></span>
+                    </button>
+
+                    <ul class="dropdown-menu">
+                      <li><a class="newMail" href="#" data-formtocall="11" data-mailtype="ns">Envoyer un mail</a></li>
+                      {% if config.smtpTracking %}
+                        <li><a href="/logs/historiqueMailSendToPatient/{{ page.patient.id }}/" >Historique des mails envoyés</a></li>
+                      {% endif %}
+                    </ul>
+                  </div>
+
+                   -
+
+                {% endif %}
+
+
                 {# tel #}
                 {{ page['patient']['administrativeDatas']['10']['value']|e }}
                 {% if page['patient']['administrativeDatas']['10']['value'] and page['patient']['administrativeDatas']['7']['value'] %} / {% endif %}
                 {{ page['patient']['administrativeDatas']['7']['value']|e }}
-                {% if (page['patient']['administrativeDatas']['10']['value'] or page['patient']['administrativeDatas']['7']['value']) and page['patient']['administrativeDatas']['4']['value'] %} - {% endif %}
-
-                {# email #}
-                <a class="newMail" href="#" data-formtocall="11" data-mailtype="ns">{{ page['patient']['administrativeDatas']['4']['value']|e }}</a>
-                -
+                 -
+                {# adresse #}
                 {{ page['patient']['administrativeDatas']['9']['value']|e }}
                 {{ page['patient']['administrativeDatas']['11']['value']|e }}
                 {{ page['patient']['administrativeDatas']['13']['value']|e }}
@@ -114,7 +131,7 @@
                     <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                 </a>
                 {% for v in page.correspondants %}
-                  <a class="btn btn-default btn-xs" role="button" href="/pro/{{ v.pratID }}/" title="">{{ v.prenom }} {{ v.nom }}</a>
+                  <a class="btn btn-default btn-xs" role="button" href="/pro/{{ v.pratID }}/" title="">{% if v.titre %}{{ v.titre }} {% endif %}{{ v.prenom }} {{ v.nom }}</a>
                 {% endfor %}
                 {% endif %}
             </p>
@@ -191,8 +208,12 @@
                 </button>
                 <ul class="dropdown-menu">
                   <li>
-                      <a href="#" class="catchLastDicomSrData">Récupérer mesures</a>
+                      <a href="#" class="catchLastDicomSrData">Récupérer dernières mesures</a>
                   </li>
+                  <li>
+                      <a href="#" class="catchOthersDicomSrData">Récupérer mesures antérieures</a>
+                  </li>
+                  <li role="separator" class="divider"></li>
                   <li>
                       <a href="/dicom/{{ page.patient.id }}/" target="_blank">Voir tous les examens du patient</a>
                   </li>
@@ -310,5 +331,31 @@
        </div>
      </div>
 
+     {# modal rapatrier mesures examen particulier #}
+     <div class="modal fade" id="listeDicomStudiesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+       <div class="modal-dialog" role="document">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+       aria-hidden="true">&times;</span></button>
+
+             <h4 class="modal-title">Choisir un examen</h4>
+           </div>
+           <div class="modal-body">
+             <form>
+               <div class="form-group">
+                 <label for="titreActu" class="control-label">Liste des études DICOM trouvées :</label>
+                 <select class="form-control" id="listeDicomStudies"></select>
+
+               </div>
+             </form>
+           </div>
+           <div class="modal-footer">
+             <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+             <button type="button" class="btn btn-primary" id="listeDicomStudiesSubmit">Rapatrier</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 {% endblock %}

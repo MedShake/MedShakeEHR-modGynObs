@@ -117,6 +117,10 @@
                             <li>
                                 <a href="/compta/">Recettes</a>
                             </li>
+                            <li role="separator" class="divider"></li>
+                            <li>
+                                <a href="/compta/memo-tarifs/">Mémo tarifaire</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -132,24 +136,33 @@
                       <a href="/configuration/" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Outils {% if page.creditsSMS < config.smsSeuilCreditsAlerte and config.smsProvider %}<span class="badge">!!!</span>{% endif %} <span class="caret"></span></a>
 
                       <ul class="dropdown-menu">
-                          {% if config.smsProvider %}
-                            <li class="dropdown-header">SMS</li>
-                            <li>
-                                <a href="/logs/historiqueRappelsSMS/">Historique rappels RDV</a>
-                            </li>
-                            <li class="disabled"><a {% if page.creditsSMS < config.smsSeuilCreditsAlerte %}style="color : red"{% endif %} href="#">Crédits : {{ page.creditsSMS }} SMS</a></li>
-                          {% endif %}
-                          {% if config.smsProvider and config.mailRappelDaysBeforeRDV %}
+                          <li class="dropdown-header">Outils</li>
+                          <li>
+                              <a href="/outils/roulette-obstetricale/" target="rouletteObs">Roulette obstétricale</a>
+                              <li role="separator" class="divider"></li>
+                          </li>
+
+                          {% if config.smsProvider or config.mailRappelDaysBeforeRDV %}
+                            <li class="dropdown-header">Historique rappels RDV</li>
+
+                            {% if config.mailRappelDaysBeforeRDV %}
+                              <li>
+                                  <a href="/logs/historiqueRappelsMail/">Rappels email</a>
+                              </li>
+                            {% endif %}
+                            {% if config.smsProvider %}
+                              <li>
+                                  <a href="/logs/historiqueRappelsSMS/">Rappels SMS</a>
+                              </li>
+                              <li class="disabled"><a {% if page.creditsSMS < config.smsSeuilCreditsAlerte %}style="color : red"{% endif %} href="#">Crédits : {{ page.creditsSMS }} SMS</a></li>
+
+                            {% endif %}
                             <li role="separator" class="divider"></li>
                           {% endif %}
-                          {% if config.mailRappelDaysBeforeRDV %}
-                            <li class="dropdown-header">Emails</li>
-                            <li>
-                                <a href="/logs/historiqueRappelsMail/">Historique rappels RDV</a>
-                            </li>
-                          {% endif %}
-                          <li role="separator" class="divider"></li>
-                          <li class="dropdown-header">Dossiers</li>
+                          <li class="dropdown-header">Patients</li>
+                          <li>
+                              <a href="/logs/historiqueGeneralMailSend/">Mails envoyés</a>
+                          </li>
                           <li>
                               <a href="/people/deleted/">Dossiers supprimés</a>
                           </li>

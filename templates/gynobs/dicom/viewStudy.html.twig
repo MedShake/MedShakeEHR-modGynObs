@@ -119,6 +119,7 @@
             </div>
         </div>
 
+        {# DEPRECATED #}
         {% if page.studyDcDataSR %}
             <div class="panel panel-default">
 
@@ -151,5 +152,56 @@
                 </table>
             </div>
         {% endif %}
+
+        {# Data SR via XML #}
+        {% if page.studyDcDataSRFull %}
+            <div class="panel panel-default">
+
+                <div class="panel-heading">Tags DICOM SR (XML)</div>
+                <div class="panel-body">
+                    <p>Mesures remontées dans cette études</p>
+                </div>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <th>Tag</th>
+                        <th>Foetus</th>
+                        <th>Nom</th>
+                        <th>Valeur</th>
+                        <th>Précision</th>
+                        <th>Unité</th>
+                    </thead>
+                    <tbody>
+                        {% for k, v in page.studyDcDataSRFull %}
+                            {% for l, w in v.NumericValue %}
+                                <tr>
+                                    {% if loop.index0 == 0 %}
+                                      <td>{{ k }}</td>
+                                      <td>{{ v.FoetusID }}</td>
+                                      <td>{{ v.CodeMeaning }}{% if v.structure %} <small>({{ v.structure|join(' > ') }})</small>{% endif %}</td>
+                                      <td>{{ w }}</td>
+                                      <td>{% if v['PrecisionValue'][l] !='std' %}{{ v['PrecisionValue'][l] }}<small> ({{ l }})</small>{% endif %}</td>
+                                      <td>{{ v.MeasurementUnits }}</td>
+                                    {% else %}
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td>{{ w }}</td>
+                                      <td>{% if v['PrecisionValue'][l] !='std' %}{{ v['PrecisionValue'][l] }}<small> ({{ l }})</small>{% endif %}</td>
+                                      <td>{{ v.MeasurementUnits }}</td>
+                                    {% endif %}
+
+                                </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+
+
+
+
+
+
     </div>
 {% endblock %}

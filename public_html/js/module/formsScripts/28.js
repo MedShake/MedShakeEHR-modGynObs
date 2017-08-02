@@ -28,6 +28,21 @@
 $(document).ready(function() {
 
   poids = $("#p_34ID").val();
-  if(poids < 1) alert("ATTENTION !\nLe poids de la patiente n'est pas précisé actuellement dans le dossier !\nIl est nécessaire de l'indiquer avant validation du formulaire.");
+  if (poids < 1) alert("ATTENTION !\nLe poids de la patiente n'est pas précisé actuellement dans le dossier !\nIl est nécessaire de l'indiquer avant validation du formulaire.");
+
+  $('#formNumber28 input[type="submit"]').attr('disabled', 'disabled');
+
+  $('body').on('change', '#formNumber28 select', function() {
+    aucunblanc = true;
+    $('#formNumber28 select').each(function(index) {
+      if($(this).prop('selectedIndex') == 0) aucunblanc = false;
+    });
+
+    if(aucunblanc) {
+      $('#formNumber28 input[type="submit"]').removeAttr('disabled');
+    } else {
+      $('#formNumber28 input[type="submit"]').attr('disabled', 'disabled');
+    }
+  });
 
 });

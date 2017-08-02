@@ -74,6 +74,10 @@
                 {% endif %}
                 <li role="separator" class="divider"></li>
                 <li><a class="sendSign" data-patientID="{{ patientID }}" href="#">Faire signer consentement</a></li>
+                {% if config.smtpTracking %}
+                  <li role="separator" class="divider"></li>
+                  <li><a href="/logs/historiqueMailSendToPatient/{{ patientID }}/" >Historique des mails envoyés</a></li>
+                {% endif %}  
                 <li role="separator" class="divider"></li>
                 <li><a class="markDeleted" data-patientID="{{ patientID }}" href="#">Supprimer ce dossier</a></li>
               </ul>

@@ -38,9 +38,6 @@
    <h1>Tags DICOM</h1>
 
    <p></p>
-   <button type="button" class="btn btn-primary pull-right reset-modal bottom-space" data-toggle="modal" data-target="#modalNewType">
-   Nouveau
-   </button>
 
    <table class="table">
      <tr>
@@ -52,14 +49,17 @@
        <th></th>
      </tr>
      {% for k,v in page.tags %}
-     <tr class="{% if v.0.typeID > 0 %}success{% else %}warning{% endif %}">
-       <td colspan="7" class="gras">
-         {{ k }} {{ v.0.dicomCodeMeaning }}
+      <tr class="{% if v.0.typeID > 0 or v.1.typeID > 0 %}success{% else %}warning{% endif %}">
+       <td colspan="6" class="gras">
+         {{ k }}&nbsp;&nbsp;&nbsp;&nbsp;{{ v.0.dicomCodeMeaning }}
        </td>
-     </tr>
+       <td> <button type="button" data-dicomtag="{{ k }}" data-dicomcodemeaning="{{ v.0.dicomCodeMeaning }}" class="btn btn-default btn-xs pull-right reset-modal bottom-space addtomodaldicom" data-toggle="modal" data-target="#modalNewType">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        </button></td>
+      </tr>
      {% for t in v %}
       {% if t.typeID > 0 %}
-      <tr>
+      <tr id="typeID  {{ t.typeID }}">
         <td>&nbsp;
         </td>
         <td class="gras">
@@ -130,6 +130,22 @@
    				}) }}
    				</div>
 
+          <div class="form-group">
+   				{{ f.input ({
+   					'input' : {
+   						'type' : 'text',
+   						'name' : 'dicomCodeMeaning',
+   						'placeholder' : 'tag dicom',
+   						'class' : 'form-control',
+   						'autocomplete' : 'off'
+   					},
+   					'label' : {
+   						'position' : 'before',
+   						'label' : 'Tag DICOM',
+   					}
+   				}) }}
+   				</div>
+
    				<div class="form-group">
    				{{ f.input ({
    					'input' : {
@@ -152,7 +168,7 @@
    						'name' : 'returnValue',
    						'class' : 'form-control',
    						'autocomplete' : 'off',
-   						'values' : {'min' : 'min', 'max' : 'max', 'avg' : 'avg'},
+   						'values' : {'min' : 'min', 'max' : 'max', 'avg' : 'avg', 'bv' : 'bv', 'defaut' : 'defaut'},
    						'valueDefaut': ''
    					},
    					'label' : {
@@ -168,7 +184,7 @@
    					'input' : {
    						'type' : 'number',
    						'name' : 'roundDecimal',
-   						'placeholder' : 'ordre d\'affichage',
+   						'placeholder' : 'nombre de décimales',
    						'class' : 'form-control',
    						'autocomplete' : 'off',
    						'min' : '0',
