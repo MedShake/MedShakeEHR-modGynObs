@@ -115,7 +115,7 @@
 
                     <div class="centrer t10" style=" display : inline-block; float : right; width : 45%; vertical-align : top; border : 1px solid #000; height : 110pt">
                         <br><br><br>
-                        <span class="gras t10">Madame
+                        <span class="gras t10">{% if tag.14 == 'Femme' %}Madame{% elseif tag.14 == 'Homme' %}Monsieur{% endif %} {{ tag.3 }}
                             {{ tag.3 }}
                             {{ tag.2 }}</span><br>({{ tag.8 }})
                     </div>
