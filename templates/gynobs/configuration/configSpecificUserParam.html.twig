@@ -37,44 +37,62 @@
 {% block body %}
   <h1>Paramètres spécifiques à l'utilisateur {{ page.userData.3 }} {{ page.userData.2 }} <small>#{{ page.userID }}</small></h1>
 
+
+  <ol class="breadcrumb">
+    <li>
+        <a href="/configuration/">Configuration</a>
+    </li>
+  		<li>
+  				<a href="/configuration/users/">Liste des utilisateurs</a>
+  		</li>
+  		<li class="active">Paramètres spécifiques à {{ page.userData.3 }} {{ page.userData.2 }}
+  		</li>
+  </ol>
+
+
   <form method="post" action="/configuration/actions/configSpecificUserParam/">
 
+
+{% for k,v in page.userParams %}
+
+  <h2 id="cat{{ k }}">{{ page['catList'][k] }}</h2>
   <table class="table table-hover table-striped">
     <thead>
       <tr>
-        <th>Paramètre</th>
-        <th>Valeur défaut</th>
-        <th>Valeur utilisateur</th>
-        <th>Description</th>
+        <th class="col-md-3">Paramètre</th>
+        <th class="col-md-2">Valeur défaut</th>
+        <th class="col-md-2">Valeur utilisateur</th>
+        <th class="col-md-5">Description</th>
       </tr>
     </thead>
     <tbody>
-{% for v in page.userParams %}
+  {% for w in v %}
   <tr>
-    <td>{{ v.name }}</td>
-    <td>{{ page['configDefaut'][v.name] }}</td>
+    <td>{{ w.name }}</td>
+    <td>{{ page['configDefaut'][w.name] }}</td>
     <td>
 
       {{ f.input ({
         'input' : {
-          'type' : 'text',
-          'name' : 'p_' ~ v.id,
-          'id' : v.name ~ 'ID',
-          'placeholder' : el.value.placeholder,
+          'type' : w.formType,
+          'name' : 'p_' ~ w.id,
+          'id' : w.name ~ 'ID',
+          'placeholder' : w.placeholder,
           'class' : 'form-control',
-          'value' : v.userVal,
+          'value' : w.userVal,
           'autocomplete' : 'off'
         }
       }) }}
 
 
     </td>
-    <td>{{ v.description }}</td>
+    <td>{{ w.description }}</td>
   </tr>
-
-{% endfor %}
+  {% endfor %}
 </tbody>
 </table>
+{% endfor %}
+
 
 
 
