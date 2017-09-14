@@ -1,5 +1,10 @@
 -- Modifications de structure de la bdd d'une version à la suivante
 
+-- 1.1.2 to 1.1.3
+
+INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `type`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
+(468, 'medical', 'fmT21NbFoetus', '', 'Nombre de foetus', 'nombre de foetus', '', '', 'number', '1', 'user', 60, 1, '2017-05-16 09:54:32', 3600, 1);
+
 -- 1.1.0 to 1.1.1
 
 INSERT INTO `forms` (`id`, `name`, `description`, `dataset`, `groupe`, `formMethod`, `formAction`, `cat`, `type`, `yamlStructure`, `yamlStructureDefaut`, `printModel`) VALUES

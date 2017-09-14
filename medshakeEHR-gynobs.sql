@@ -526,6 +526,7 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (446, 'mail', 'mailModeles', '', 'Modèle', 'liste des modèles', '', '', 'select', '', 'base', 39, 1, '2017-06-09 10:23:17', 1576800000, 1),
 (452, 'medical', 'eGynOvaireDtGdAxe', '', 'Ovaire droit : grand axe', '', '', '', 'text', '', 'user', 54, 1, '2017-05-15 15:40:25', 3600, 1),
 (453, 'medical', 'eGynOvaireGGdAxe', '', 'Ovaire gauche : grand axe', '', '', '', 'text', '', 'user', 54, 1, '2017-05-15 15:42:36', 3600, 1),
+(468, 'medical', 'fmT21NbFoetus', '', 'Nombre de foetus', 'nombre de foetus', '', '', 'number', '1', 'user', 60, 1, '2017-05-16 09:54:32', 3600, 1),
 (469, 'medical', 'fmT21AtcdT21', '', 'Antécédent de trisomie 21', 'atcd de T21 lors d\'une grossesse précédente', '', '', 'select', '\' \' : \' \' \n\'o\' : \'oui\'\n\'n\' : \'non\'', 'user', 60, 1, '2017-05-16 09:53:15', 3600, 1),
 (470, 'medical', 'fmT21AtcdTubeNeural', '', 'Antécédent de non fermeture du tube neural', 'atcd de non fermeture du tube neural lors d\'une grossesse précédente', '', '', 'select', '\' \' : \' \' \n\'o\' : \'oui\'\n\'n\' : \'non\'', 'user', 60, 1, '2017-05-16 09:54:39', 3600, 1),
 (471, 'medical', 'fmT21Fumeuse', '', 'Fumeuse', 'fumeuse', '', '', 'select', '\' \' : \' \' \n\'o\' : \'oui\'\n\'n\' : \'non\'', 'user', 60, 1, '2017-05-16 09:54:49', 3600, 1),
