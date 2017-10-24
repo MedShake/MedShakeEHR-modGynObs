@@ -33,18 +33,21 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Vérifications techniques</h1>
+    <h1>Accessibilité en écriture des répertoires généraux</h1>
 
-    <h2>Accessibilité en écriture des répertoires</h2>
+    <p>Les répertoires testés sont ceux de la configuration générale (fichier config.yml).</p>
 
     <div class="row">
 
-        <div class="col-md-5">
+        <div class="col-md-12">
 
             <table class="table table-bordered">
                 <tr>
                     <th class="col-md-2">
                         Répertoire
+                    </th>
+                    <th class="col-md-6">
+                        Chemin
                     </th>
                     <th class="col-md-2">
                         Existe
@@ -56,6 +59,9 @@
                 {% for k, v in page.check %}
                     <tr>
                         <td>{{ k }}</td>
+                        <td>{{ config[k] }}
+                          {% if k == 'agendasConfigurations' %}{{ config.webDirectory }}agendasConfigurations/{% endif %}
+                        </td>
                         <td class="{% if v.is_dir == 1 %}success{% else %}danger{% endif %}">&nbsp;</td>
                         <td class="{% if v.is_writable == 1 %}success{% else %}danger{% endif %}">&nbsp;</td>
                     </tr>
