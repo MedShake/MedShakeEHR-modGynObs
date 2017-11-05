@@ -23,6 +23,7 @@
  # Template > écran post signature
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 {% import "macroForm.html.twig" as f %}
 <!DOCTYPE html>
@@ -36,15 +37,15 @@
       Votre consentement est bien enregistré, merci !
     </title>
     <meta name="Description" content="{% block metaDescription %}{% endblock %}"/>
-    <base href="{{ config.protocol }}{{ config.host }}"/>
+    <base href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}"/>
 
     {# css #}
-    <link type="text/css" href="{{ config.protocol }}{{ config.host }}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
-    <link type="text/css" href="{{ config.protocol }}{{ config.host }}/css/general.css" rel="stylesheet"/>
+    <link type="text/css" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link type="text/css" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/css/general.css" rel="stylesheet"/>
 
     {# js #}
-    <script defer src="{{ config.protocol }}{{ config.host }}/bower_components/jquery/dist/jquery.min.js"></script>
-    <script defer src="{{ config.protocol }}{{ config.host }}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/jquery/dist/jquery.min.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <style>
       body {

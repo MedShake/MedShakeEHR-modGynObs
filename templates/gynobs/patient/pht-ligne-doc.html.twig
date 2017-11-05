@@ -23,6 +23,7 @@
  # Template > patient > historique : ligne pour un document
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 <tr class="tr{{ cs.id }} trLigneExamen" data-objetID="{{ cs.id }}" data-alternatTitre="{{ cs.titre|e('html_attr') }}" data-groupe="{{ cs.groupe|e('html_attr') }}{{ cs.docOrigine|e('html_attr') }}">
@@ -53,13 +54,13 @@
         {% if cs.sendMail > 0 %}
           <li role="separator" class="divider"></li>
           <li>
-            <a href="/logs/historiquePrint/{{ cs.id }}/">Historique des envois</a>
+            <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiquePrint/{{ cs.id }}/">Historique des envois</a>
           </li>
         {% endif %}
       </ul>
     </div>
     {% if cs.sendMail > 0 %}
-      <a class="btn btn-default btn-xs" href="/logs/historiqueMailSend/{{ cs.id }}/">
+      <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueMailSend/{{ cs.id }}/">
         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
       </a>
     {% endif %}
@@ -104,7 +105,7 @@
         {% if cs.sendMail > 0 %}
           <li role="separator" class="divider"></li>
           <li>
-            <a href="/logs/historiqueMailSend/{{ cs.id }}/">Historique des envois par mail</a>
+            <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueMailSend/{{ cs.id }}/">Historique des envois par mail</a>
           </li>
         {% endif %}
         <li role="separator" class="divider"></li>

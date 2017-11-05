@@ -23,6 +23,7 @@
  # Template > inbox : inbox
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
     {{ parent() }}
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/inbox.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/inbox.js"></script>
     <style>
         tr.mailClicView:hover, tr.patietSelect:hover {
             cursor: pointer;

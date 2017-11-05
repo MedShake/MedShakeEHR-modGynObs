@@ -23,6 +23,7 @@
  # Template > Compta : compta du jour
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
   {{ parent() }}
-  <script defer src="{{ config.protocol }}{{ config.host }}/js/compta.js"></script>
+  <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/compta.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -58,7 +59,7 @@
             {% for obj, reg in page.tabRegNC %}
               <tr id="ligne{{ obj }}" data-montant="{{ reg.resteAPaye }}">
                 <td>
-                  <a class="btn btn-default btn-xs" href="/patient/{{ reg.toID }}/" role="button">
+                  <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/{{ reg.toID }}/" role="button">
                     <span class="glyphicon glyphicon-folder-open" aria-hidden="true" title="Voir dossier"></span>
                   </a>
                   {{ reg.prenom|e }}
@@ -111,7 +112,7 @@
             {% for reg in page.tabRegC %}
               <tr>
                 <td>
-                  <a class="btn btn-default btn-xs" href="/patient/{{ reg.toID }}/" role="button" target="_blank">
+                  <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/{{ reg.toID }}/" role="button" target="_blank">
                     <span class="glyphicon glyphicon-folder-open" aria-hidden="true" title="Voir dossier"></span>
                   </a>
                   {{ reg.prenom|e }}

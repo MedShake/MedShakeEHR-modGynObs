@@ -23,6 +23,7 @@
  # Template > Config : prescriptions types
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
     {{ parent() }}
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -42,11 +43,11 @@
             {# Nav tabs #}
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation">
-                    <a href="/configuration/prescriptions-cat/" aria-controls="categories" role="tab">Catégories</a>
+                    <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/prescriptions-cat/" aria-controls="categories" role="tab">Catégories</a>
                 </li>
                 {% for id, user in page.users %}
                   <li role="presentation" {% if page.selectUser == id %}class="active"{% endif %}>
-                      <a href="/configuration/prescriptions/{{ id }}/{% if page.groupe > 0 %}{{ page.groupe }}/{% endif %}" aria-controls="prescriptions" role="tab">{% if id == 0 %}Prescriptions communes{% else %}Prescriptions : {{ user }}{% endif %}</a>
+                      <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/prescriptions/{{ id }}/{% if page.groupe > 0 %}{{ page.groupe }}/{% endif %}" aria-controls="prescriptions" role="tab">{% if id == 0 %}Prescriptions communes{% else %}Prescriptions : {{ user }}{% endif %}</a>
                   </li>
                 {% endfor %}
 
@@ -64,7 +65,7 @@
                     </button>
 
                     {% for k, v in page.tabTypes %}
-                        <h2 id="cat{{ v.0.cat }}">{{ v.0.catLabel }} <small><a class="btn btn-default btn-sm" href="/configuration/prescriptions/{{ page.selectUser }}/{{ v.0.cat }}/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></small></h2>
+                        <h2 id="cat{{ v.0.cat }}">{{ v.0.catLabel }} <small><a class="btn btn-default btn-sm" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/prescriptions/{{ page.selectUser }}/{{ v.0.cat }}/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></small></h2>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -117,7 +118,7 @@
                             <ul></ul>
                         </div>
 
-                        <form id="formModalNewCat" action="/configuration/ajax/configPrescriptionCreate/">
+                        <form id="formModalNewCat" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/ajax/configPrescriptionCreate/">
 
                             <div class="form-group">
                                 {{ f.input ({ 'input' : { 'type' : 'text', 'name' : 'label', 'placeholder' : 'label', 'class' : 'form-control', 'autocomplete' : 'off' }, 'label' : { 'position' : 'before', 'label' : 'Label', } }) }} </div>

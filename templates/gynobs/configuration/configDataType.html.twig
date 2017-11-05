@@ -23,6 +23,7 @@
  # Template > Config : données du modèle de données
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
 {{ parent() }}
-<script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+<script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -70,8 +71,8 @@
 
 	{# Nav tabs #}
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" ><a href="/configuration/data-cat/{{ page.groupe }}/" aria-controls="categories" role="tab">Catégories</a></li>
-		<li role="presentation" class="active"><a href="/configuration/data-type/{{ page.groupe }}/" aria-controls="types" role="tab">Types</a></li>
+		<li role="presentation" ><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/data-cat/{{ page.groupe }}/" aria-controls="categories" role="tab">Catégories</a></li>
+		<li role="presentation" class="active"><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/data-type/{{ page.groupe }}/" aria-controls="types" role="tab">Types</a></li>
 	</ul>
 
   {# Tab panes #}
@@ -86,7 +87,7 @@
 			</button>
 
 			{% for k,v in page.tabTypes %}
-				<h2 id="cat{{ v.0.cat }}">{{ v.0.catLabel }} <small><a class="btn btn-default btn-sm" href="/configuration/data-type/{{ page.groupe }}/{{ v.0.cat }}/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></small></h2>
+				<h2 id="cat{{ v.0.cat }}">{{ v.0.catLabel }} <small><a class="btn btn-default btn-sm" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/data-type/{{ page.groupe }}/{{ v.0.cat }}/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></small></h2>
 				<table class="table table-hover">
 				<thead>
 				<tr>
@@ -150,7 +151,7 @@
 				</ul>
 			</div>
 
-			<form id="formModalNewType" action="/configuration/ajax/configDataTypeCreate/" data-groupe="{{ page.groupe }}">
+			<form id="formModalNewType" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/ajax/configDataTypeCreate/" data-groupe="{{ page.groupe }}">
 				<div class="form-group">
 				{{ f.input ({
 					'input' : {

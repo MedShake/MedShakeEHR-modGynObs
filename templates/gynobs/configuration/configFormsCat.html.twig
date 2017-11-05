@@ -23,6 +23,7 @@
  # Template > Config : catégories des formulaires
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
 {{ parent() }}
-<script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+<script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -41,8 +42,8 @@
 
 	{# Nav tabs #}
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation"><a href="/configuration/forms/" aria-controls="types" role="tab" >Formulaires</a></li>
-		<li role="presentation" class="active"><a href="/configuration/forms/cat/" aria-controls="categories" role="tab">Catégories</a></li>
+		<li role="presentation"><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/forms/" aria-controls="types" role="tab" >Formulaires</a></li>
+		<li role="presentation" class="active"><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/forms/cat/" aria-controls="categories" role="tab">Catégories</a></li>
 	</ul>
 
   {# Tab panes #}
@@ -110,7 +111,7 @@
 				</ul>
 			</div>
 
-			<form id="formModalNewCat" action="/configuration/ajax/configFormsCatCreate/">
+			<form id="formModalNewCat" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/ajax/configFormsCatCreate/">
 				<div class="form-group">
 				{{ f.input ({
 					'input' : {

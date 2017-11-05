@@ -23,6 +23,7 @@
  # Template > Outils > Roulette obstétricale
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
     {{ parent() }}
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/outils/outilsRouletteObs.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/outils/outilsRouletteObs.js"></script>
     <style>
       .trHide, .trMensuHide, #tdjPanel, #calculSpeRes, #TDDRes {
         display: none;

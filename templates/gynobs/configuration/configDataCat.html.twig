@@ -23,6 +23,7 @@
  # Template > Config : catégories des modèles de données
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
 {{ parent() }}
-<script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+<script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -63,8 +64,8 @@
 
 	{# Nav tabs #}
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="/configuration/data-cat/{{ page.groupe }}/" aria-controls="categories" role="tab">Catégories</a></li>
-		<li role="presentation"><a href="/configuration/data-type/{{ page.groupe }}/" aria-controls="types" role="tab" >Types</a></li>
+		<li role="presentation" class="active"><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/data-cat/{{ page.groupe }}/" aria-controls="categories" role="tab">Catégories</a></li>
+		<li role="presentation"><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/data-type/{{ page.groupe }}/" aria-controls="types" role="tab" >Types</a></li>
 	</ul>
 
   {# Tab panes #}
@@ -93,7 +94,7 @@
 			<tr>
 				<td>{{ k }}</td>
 				<td>{{ v.label }}</td>
-				<td>{% if v.enfants > 0 %}<a class="btn btn-default btn-xs" href="/configuration/data-type/{{ v.groupe }}/{{ k }}/"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a> {{ v.enfants }}{% endif %}</td>
+				<td>{% if v.enfants > 0 %}<a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/data-type/{{ v.groupe }}/{{ k }}/"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a> {{ v.enfants }}{% endif %}</td>
 				<td>{{ v.description }}</td>
 				<td>
 					<button type="button" class="btn btn-default btn-xs edit-by-prim-key" aria-label="Editer" data-id="{{ k }}" data-table="data_cat" data-form="formModalNewCat" data-modal="modalNewCat">
@@ -132,7 +133,7 @@
 				</ul>
 			</div>
 
-			<form id="formModalNewCat" action="/configuration/ajax/configDataCatCreate/" data-groupe="{{ page.groupe }}">
+			<form id="formModalNewCat" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/ajax/configDataCatCreate/" data-groupe="{{ page.groupe }}">
 				<div class="form-group">
 				{{ f.input ({
 					'input' : {

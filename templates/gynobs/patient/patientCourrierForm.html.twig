@@ -23,6 +23,7 @@
  # Template > patient : formulaire de courrier / certificat
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% import "macroForm.html.twig" as f %}
@@ -30,7 +31,7 @@
 <div class="jumbotron">
 <button id="cleanNewCourrier" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-<form id="invisible_form" action="{{ config.protocol }}{{ config.host }}{{ page.courrier.actionForm }}" method="post" target="_blank" data-patientID="{{ page.patient.id }}">
+<form id="invisible_form" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}{{ page.courrier.actionForm }}" method="post" target="_blank" data-patientID="{{ page.patient.id }}">
   <input id="courrierBodyID" name="courrierBody" type="hidden" value="" />
 </form>
 

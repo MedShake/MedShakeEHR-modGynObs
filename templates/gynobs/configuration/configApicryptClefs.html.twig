@@ -23,6 +23,7 @@
  # Template > Config : gestion des clefs apicrypt
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
 {{ parent() }}
-<script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+<script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -39,7 +40,7 @@
 
 <ol class="breadcrumb">
   <li>
-    <a href="/configuration/">Configuration</a>
+    <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/">Configuration</a>
   </li>
   <li class="active">
     Gestion des clefs Apicrypt
@@ -49,12 +50,12 @@
 {# Nav tabs #}
 <ul class="nav nav-tabs bottom-space" role="tablist">
     <li role="presentation" {% if page.selectUser < 1 %}class="active"{% endif %}>
-        <a href="/configuration/apicrypt-clefs/" aria-controls="categories" role="tab">Configuration générale</a>
+        <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/apicrypt-clefs/" aria-controls="categories" role="tab">Configuration générale</a>
     </li>
     {% for id, user in page.apicryptClefsUsers %}
       {% if user.paramValue is not empty %}
       <li role="presentation" {% if page.selectUser == id %}class="active"{% endif %}>
-          <a href="/configuration/apicrypt-clefs/{{ id }}/" aria-controls="prescriptions" role="tab">{{ user.identite }}</a>
+          <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/apicrypt-clefs/{{ id }}/" aria-controls="prescriptions" role="tab">{{ user.identite }}</a>
       </li>
       {% endif %}
     {% endfor %}

@@ -23,6 +23,7 @@
  # Template > patient : tableau de gestion grossesse en cours
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% import "macroForm.html.twig" as f %}
@@ -30,7 +31,7 @@
     <div class="jumbotron">
 
         <div class="row">
-            <a id="closeGro" class="close" aria-label="Close" title="Fermer définitivement cette grossesse" href="/module/actions/closeGro/{{ page.patient.id }}/{{ page.grossesseEnCours.id }}/">
+            <a id="closeGro" class="close" aria-label="Close" title="Fermer définitivement cette grossesse" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/module/actions/closeGro/{{ page.patient.id }}/{{ page.grossesseEnCours.id }}/">
                 <span aria-hidden="true">&times;</span>
             </a>
         </div>

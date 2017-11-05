@@ -23,6 +23,7 @@
  # Template > people : voir les infos sur un pro
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -56,7 +57,7 @@
               <div class="panel-heading gras">Informations professionnelles</div>
               <div class="panel-body">
                 <p>Informations professionnelles sur ce praticien
-                  <a class="btn btn-default pull-right" href="/pro/edit/{{ page.proDataID }}/" role="button">Editer infos pros</a>
+                  <a class="btn btn-default pull-right" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/pro/edit/{{ page.proDataID }}/" role="button">Editer infos pros</a>
                 </p>
               </div>
 
@@ -95,7 +96,7 @@
               <div class="panel-heading gras">Informations personnelles</div>
               <div class="panel-body">
                 <p>Informations personnelles sur ce praticien
-                <a class="btn btn-default pull-right" href="/patient/edit/{{ page.proDataID }}/" role="button">Editer infos persos</a></p>
+                <a class="btn btn-default pull-right" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/edit/{{ page.proDataID }}/" role="button">Editer infos persos</a></p>
               </div>
 
               <table class="table table-hover">
@@ -140,8 +141,8 @@
                 {% for v in page.patientsConnus %}
                 <tr>
                   <td>
-                    <a title="Accès au dossier" class="btn btn-default btn-xs" role="button" href="/patient/{{ v.patientID }}/"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
-                    <a title="Éditer les relations du patient" class="btn btn-default btn-xs" role="button" href="/patient/relations/{{ v.patientID }}/"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
+                    <a title="Accès au dossier" class="btn btn-default btn-xs" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/{{ v.patientID }}/"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
+                    <a title="Éditer les relations du patient" class="btn btn-default btn-xs" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/relations/{{ v.patientID }}/"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
                   </td>
                   <td>{{ v.nom }} {{ v.prenom }}</td>
 

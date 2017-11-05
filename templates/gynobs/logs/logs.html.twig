@@ -23,6 +23,7 @@
  # Template > logs : log général
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -61,10 +62,10 @@
                                 {% if v.creationDate != v.updateDate %}<br>{{ v.updateDate }}{% endif %}
                             </td>
                             <td>{{ v.prescripteur }}</td>
-                            {% if page.patientID =='' %}<td>  <a href="/logs/{{ v.toID }}/">#{{ v.toID }}</a></td>{% endif %}
+                            {% if page.patientID =='' %}<td>  <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/{{ v.toID }}/">#{{ v.toID }}</a></td>{% endif %}
                             <td>#{{ v.instance }}</td>
                             <td>
-                                <a href="/logs/{{ v.toID }}/{{ v.typeID }}/{{ v.instance }}/">#{{ v.typeID }}</a>
+                                <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/{{ v.toID }}/{{ v.typeID }}/{{ v.instance }}/">#{{ v.typeID }}</a>
                                 {{ v.label|e }}</td>
                             <td>{{ v.titre|e }}</td>
                             <td>{{ v.value|e }}</td>

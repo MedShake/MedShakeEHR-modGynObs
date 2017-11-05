@@ -23,6 +23,7 @@
  # Template > Config : catégories des prescriptions types
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
     {{ parent() }}
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -42,10 +43,10 @@
             {# Nav tabs #}
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active">
-                    <a href="/configuration/prescriptions-cat/" aria-controls="categories" role="tab">Catégories</a>
+                    <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/prescriptions-cat/" aria-controls="categories" role="tab">Catégories</a>
                 </li>
                 <li role="presentation">
-                    <a href="/configuration/prescriptions/" aria-controls="types" role="tab">Prescriptions types</a>
+                    <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/prescriptions/" aria-controls="types" role="tab">Prescriptions types</a>
                 </li>
             </ul>
 
@@ -77,7 +78,7 @@
                                     <td>{{ v.label }}</td>
                                     <td>
                                         {% if v.enfants > 0 %}
-                                             <a class="btn btn-default btn-xs" href="/configuration/prescriptions/0/{{ k }}/"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a> {{ v.enfants }}
+                                             <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/prescriptions/0/{{ k }}/"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a> {{ v.enfants }}
                                         {% endif %}
                                     </td>
                                     <td>{{ v.description }}</td>
@@ -118,7 +119,7 @@
                             <ul></ul>
                         </div>
 
-                        <form id="formModalNewCat" action="/configuration/ajax/configPrescriptionsCatCreate/" data-groupe="SERTaRIENici">
+                        <form id="formModalNewCat" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/ajax/configPrescriptionsCatCreate/" data-groupe="SERTaRIENici">
                             <div class="form-group">
                                 {{ f.input ({ 'input' : { 'type' : 'text', 'name' : 'name', 'placeholder' : 'nom à usage interne, pas d\'espace, pas d\'accent', 'class' : 'form-control', 'autocomplete' : 'off' }, 'label' : { 'position' : 'before', 'label' : 'Nom à usage interne', }
                                 }) }}

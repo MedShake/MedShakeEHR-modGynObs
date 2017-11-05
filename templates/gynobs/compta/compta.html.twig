@@ -23,6 +23,7 @@
  # Template > Compta : compta
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
     {{ parent() }}
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/compta.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/compta.js"></script>
 
     <style>
         #recettes {
@@ -62,7 +63,7 @@
     <h1>Recettes</h1>
 
 
-    <form id="periodeForm" action="/compta/" method="post" class="form-inline" style="margin-bottom : 30px;">
+    <form id="periodeForm" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/compta/" method="post" class="form-inline" style="margin-bottom : 30px;">
 
                 <div class="form-group">
 
@@ -173,7 +174,7 @@
                                     </button>
                                     <ul class="dropdown-menu dropdown-menu-right">
                                         <li>
-                                            <a href="/patient/{{ reg.toID }}/">Dossier patiente</a>
+                                            <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/{{ reg.toID }}/">Dossier patiente</a>
                                         </li>
                                         <li role="separator" class="divider"></li>
                                         <li class="disabled">

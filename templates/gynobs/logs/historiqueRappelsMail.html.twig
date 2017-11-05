@@ -23,6 +23,7 @@
  # Template > logs : historique des rappels Mail
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -32,7 +33,7 @@
 
 {% block head %}
   {{ parent() }}
-  {% if config.smtpTracking %}<script defer src="{{ config.protocol }}{{ config.host }}/js/mailtracking.js"></script>{% endif %}
+  {% if config.smtpTracking %}<script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/mailtracking.js"></script>{% endif %}
 {% endblock %}
 
 {% block body %}
@@ -41,16 +42,16 @@
 
   <div class="container-fluid">
 
-    <form id="dateForm" action="/logs/historiqueRappelsMail/" method="post" class="form-inline bottom-space">
+    <form id="dateForm" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsMail/" method="post" class="form-inline bottom-space">
 
-      <a class="btn btn-default btn-default" href="/logs/historiqueRappelsMail/{{ page.dates.precedent|date("Y-m-d") }}/" role="button">
+      <a class="btn btn-default btn-default" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsMail/{{ page.dates.precedent|date("Y-m-d") }}/" role="button">
         <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
         Jour précédent</a>
-      <a class="btn btn-default btn-default{% if "now"|date("Y-m-d") == page.dates.emission|date("Y-m-d") %} active{% endif %}" href="/logs/historiqueRappelsMail/{{ "now"|date("Y-m-d") }}/" role="button">Envoyés ce jour (consultations du {{ page.dates.smsEnvoyeAujour|date("d/m") }})</a>
-      <a class="btn btn-default btn-default{% if page.dates.suivant > "now"|date("U") %} disabled{% endif %}" href="/logs/historiqueRappelsMail/{{ page.dates.suivant|date("Y-m-d") }}/" role="button">Jour suivant <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+      <a class="btn btn-default btn-default{% if "now"|date("Y-m-d") == page.dates.emission|date("Y-m-d") %} active{% endif %}" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsMail/{{ "now"|date("Y-m-d") }}/" role="button">Envoyés ce jour (consultations du {{ page.dates.smsEnvoyeAujour|date("d/m") }})</a>
+      <a class="btn btn-default btn-default{% if page.dates.suivant > "now"|date("U") %} disabled{% endif %}" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsMail/{{ page.dates.suivant|date("Y-m-d") }}/" role="button">Jour suivant <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
       </a>
 
-      <a class="btn btn-default btn-default{% if page.dates.smsPourAujour|date("Y-m-d") == page.dates.emission|date("Y-m-d") %} active{% endif %}" href="/logs/historiqueRappelsMail/{{ page.dates.smsPourAujour|date("Y-m-d") }}/" role="button" style="margin-right: 20px">Envoyés le {{ page.dates.smsPourAujour|date("d/m") }} (consultations du jour)</a>
+      <a class="btn btn-default btn-default{% if page.dates.smsPourAujour|date("Y-m-d") == page.dates.emission|date("Y-m-d") %} active{% endif %}" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsMail/{{ page.dates.smsPourAujour|date("Y-m-d") }}/" role="button" style="margin-right: 20px">Envoyés le {{ page.dates.smsPourAujour|date("d/m") }} (consultations du jour)</a>
 
       <div id="dateSel" class="input-group date datepick" >
         <input type="text" name="dateSel" class="form-control" placeholder="date d'envoi" autocomplete="off" value="{{ page.periode.end }}"/>
@@ -70,7 +71,7 @@
         <div class="panel panel-default">
 
           <div class="panel-heading gras">Mails envoyés le {{ page.dates.emission|date("d/m/Y") }}
-            <a href="/logs/historiqueRappelsSMS/{{ page.dates.emission|date("Y-m-d") }}/" class="btn btn-default btn-xs pull-right">Voir rappels SMS</a>
+            <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsSMS/{{ page.dates.emission|date("Y-m-d") }}/" class="btn btn-default btn-xs pull-right">Voir rappels SMS</a>
           </div>
 
           <table class="table table-hover table-striped">
@@ -89,7 +90,7 @@
               {% for k, v in page.data.mails %}
                 <tr {% if v.mailTrackingID %}id="mt{{ v.mailTrackingID }}" data-mailtrackingid="{{ v.mailTrackingID }}" class="trackMyMail"{% endif %}>
                   <td>
-                    <a class="btn btn-default btn-xs" href="/patient/{{ v.id }}/" role="button">
+                    <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/{{ v.id }}/" role="button">
                       <span class="glyphicon glyphicon-folder-open" aria-hidden="true" title="Voir dossier"></span>
                     </a>
                   </td>

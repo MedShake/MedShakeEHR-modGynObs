@@ -23,6 +23,7 @@
  # Template > Config : édition des paramètres agenda
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
 {{ parent() }}
-<script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+<script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -39,7 +40,7 @@
 
 <ol class="breadcrumb">
   <li>
-    <a href="/configuration/">Configuration</a>
+    <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/">Configuration</a>
   </li>
   <li class="active">
     Agenda
@@ -49,11 +50,11 @@
 {# Nav tabs #}
 <ul class="nav nav-tabs bottom-space" role="tablist">
     <li role="presentation" {% if page.selectUser < 1 %}class="active"{% endif %}>
-        <a href="/configuration/agenda/" aria-controls="categories" role="tab">Configuration générale</a>
+        <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/agenda/" aria-controls="categories" role="tab">Configuration générale</a>
     </li>
     {% for id, user in page.agendaUsers %}
       <li role="presentation" {% if page.selectUser == id %}class="active"{% endif %}>
-          <a href="/configuration/agenda/{{ id }}/" aria-controls="prescriptions" role="tab">Agenda : {{ user }}</a>
+          <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/agenda/{{ id }}/" aria-controls="prescriptions" role="tab">Agenda : {{ user }}</a>
       </li>
     {% endfor %}
 
@@ -61,7 +62,7 @@
 
 {% if page.selectUser > 0 %}
 <div class="row">
-	<form class="col-md-6"  method="post" action="/configuration/actions/configAgendaSave/">
+	<form class="col-md-6"  method="post" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actions/configAgendaSave/">
 
 		{{ f.input ({
 			'input' : {

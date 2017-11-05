@@ -23,6 +23,7 @@
  # Template > patient : dossier patient
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -32,10 +33,10 @@
 
 {% block head %}
     {{ parent() }}
-    <script defer src="{{ config.protocol }}{{ config.host }}/bower_components/tinymce/tinymce.min.js"></script>
-    <script defer src="{{ config.protocol }}{{ config.host }}/bower_components/tinymce/jquery.tinymce.min.js"></script>
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/patient.js"></script>
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/module/common.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/tinymce/tinymce.min.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/tinymce/jquery.tinymce.min.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/patient.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/module/common.js"></script>
 
     <style>
         .foetusB,
@@ -89,11 +90,11 @@
                       </button>
                     {% endif %}
 
-                    <a class="btn btn-default btn-xs" role="button" href="/patient/edit/{{ page.patient.id }}/" title="Édition des données administratives">
+                    <a class="btn btn-default btn-xs" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/edit/{{ page.patient.id }}/" title="Édition des données administratives">
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </a>
                     {% if page.correspondants is empty %}
-                    <a class="btn btn-default btn-xs" role="button" href="/patient/relations/{{ page.patient.id }}/" title="Édition des relations">
+                    <a class="btn btn-default btn-xs" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/relations/{{ page.patient.id }}/" title="Édition des relations">
                         <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                     </a>
                     {% endif %}
@@ -110,7 +111,7 @@
                     <ul class="dropdown-menu">
                       <li><a class="newMail" href="#" data-formtocall="11" data-mailtype="ns">Envoyer un mail</a></li>
                       {% if config.smtpTracking %}
-                        <li><a href="/logs/historiqueMailSendToPatient/{{ page.patient.id }}/" >Historique des mails envoyés</a></li>
+                        <li><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueMailSendToPatient/{{ page.patient.id }}/" >Historique des mails envoyés</a></li>
                       {% endif %}
                     </ul>
                   </div>
@@ -133,11 +134,11 @@
 
                 {% if page.correspondants %}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-default btn-xs" role="button" href="/patient/relations/{{ page.patient.id }}/" title="Édition des relations">
+                <a class="btn btn-default btn-xs" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/relations/{{ page.patient.id }}/" title="Édition des relations">
                     <span class="glyphicon glyphicon-link" aria-hidden="true"></span>
                 </a>
                 {% for v in page.correspondants %}
-                  <a class="btn btn-default btn-xs" role="button" href="/pro/{{ v.pratID }}/" title="">{% if v.titre %}{{ v.titre }} {% endif %}{{ v.prenom }} {{ v.nom }}</a>
+                  <a class="btn btn-default btn-xs" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/pro/{{ v.pratID }}/" title="">{% if v.titre %}{{ v.titre }} {% endif %}{{ v.prenom }} {{ v.nom }}</a>
                 {% endfor %}
                 {% endif %}
             </p>
@@ -225,7 +226,7 @@
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>
-                      <a href="/dicom/{{ page.patient.id }}/" target="_blank">Voir tous les examens du patient</a>
+                      <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/dicom/{{ page.patient.id }}/" target="_blank">Voir tous les examens du patient</a>
                   </li>
                   <li role="separator" class="divider"></li>
                   <li>
@@ -247,7 +248,7 @@
               {% if page.liensFamiliaux %}
 
               <div class="panel panel-default">
-          			<div class="panel-heading gras">Liens familiaux <a class="btn btn-default btn-xs pull-right" role="button" href="/patient/relations/{{ page.patient.id }}/" title="Édition des relations"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
+          			<div class="panel-heading gras">Liens familiaux <a class="btn btn-default btn-xs pull-right" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/relations/{{ page.patient.id }}/" title="Édition des relations"><span class="glyphicon glyphicon-link" aria-hidden="true"></span></a>
                 </div>
 
                 <table class="table table-striped table-condensed table-hover small">
@@ -263,7 +264,7 @@
                     {% for v in page.liensFamiliaux %}
                     <tr>
                       <td>
-                        <a target="_blank" class="btn btn-default btn-xs" role="button" href="/patient/{{ v.patientID }}/"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
+                        <a target="_blank" class="btn btn-default btn-xs" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/{{ v.patientID }}/"><span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span></a>
                       </td>
                       <td class="gras">{{ v.nom }} {{v.prenom }}</td>
                       <td>{{ v.ddn }}</td>

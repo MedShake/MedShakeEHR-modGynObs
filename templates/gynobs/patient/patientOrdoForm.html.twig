@@ -23,6 +23,7 @@
  # Template > patient : formulaire d'ordonnance
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% import "macroForm.html.twig" as f %}
@@ -52,7 +53,7 @@
         {% endfor %}
     </div>
 
-    <form id="ordoComposer" action="/patient/actions/saveOrdoForm/" target="_blank" method="post" class="">
+    <form id="ordoComposer" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/actions/saveOrdoForm/" target="_blank" method="post" class="">
 
         <div class="row">
             <div class="col-md-2">
