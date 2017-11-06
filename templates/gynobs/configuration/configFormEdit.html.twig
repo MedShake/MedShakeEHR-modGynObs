@@ -115,6 +115,23 @@
 			},
 		}) }}
 
+    <div class="form-group">
+		{{ f.input ({
+			'input' : {
+				'type' : 'text',
+				'name' : 'internalName',
+				'placeholder' : 'nom à usage interne, pas d\'espace, pas d\'accent',
+				'class' : 'form-control',
+				'autocomplete' : 'off',
+				'value' : page.form.internalName
+			},
+			'label' : {
+				'position' : 'before',
+				'label' : 'Nom à usage interne',
+			}
+		}) }}
+		</div>
+
 		<div class="form-group">
 		{{ f.input ({
 			'input' : {

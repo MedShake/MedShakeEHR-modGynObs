@@ -41,7 +41,7 @@
 
          // générer le formulaire grossesse tête de page.
          $formSyntheseGrossesse = new msForm();
-         $formSyntheseGrossesse->setFormID(6);
+         $formSyntheseGrossesse->setFormIDbyName('gynObsSyntheseObs');
          $formSyntheseGrossesse->setInstance($p['page']['grossesseEnCours']['id']);
          $p['page']['dataGrossesse']=$formSyntheseGrossesse->getPrevaluesForPatient($_POST['patientID']);
 

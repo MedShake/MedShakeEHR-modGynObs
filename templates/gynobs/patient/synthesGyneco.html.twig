@@ -30,7 +30,7 @@
 <div class="row changeObserv" id="synthesePatiente" style="">
 
     <div class="jumbotron">
-        {{ f.formbuilder(page.formSynthese , 5 ) }}
+        {{ f.formbuilder(page.formSynthese , page.formNumberGynObsSyntheseGyn ) }}
         {% for v in page.typeCsCla %}
             <button type="button" class="btn btn-success btn-sm newCS" style="margin-bottom : 3px;" data-parentID='0' data-instanceMere="0" data-formtocall="{{ v.formValues }}" data-csID="{{ v.id }}" data-mode="create">{{ v.label|e }}</button>
         {% endfor %}

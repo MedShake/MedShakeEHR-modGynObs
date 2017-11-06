@@ -29,15 +29,13 @@
 
  // le formulaire latéral ATCD
  $formLat = new msForm();
- $formLat->setFormID(4);
- $p['page']['listeForms'][]=4;
+ $p['page']['formNumberGynObsATCD']=$p['page']['listeForms'][]=$formLat->setFormIDbyName('gynObsATCD');
  $formLat->getPrevaluesForPatient($match['params']['patient']);
  $p['page']['formLat']=$formLat->getForm();
 
 //formulaire synthèse de gynéco
 $formSynthese = new msForm();
-$formSynthese->setFormID(5);
-$p['page']['listeForms'][]=5;
+$p['page']['formNumberGynObsSyntheseGyn']=$p['page']['listeForms'][]=$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
 $formSynthese->getPrevaluesForPatient($match['params']['patient']);
 $p['page']['formSynthese']=$formSynthese->getForm();
 
@@ -56,8 +54,7 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
 
         // générer le formulaire grossesse tête de page.
         $formSyntheseGrossesse = new msForm();
-        $formSyntheseGrossesse->setFormID(6);
-        $p['page']['listeForms'][]=6;
+        $p['page']['formNumberGynObsSyntheseObs']=$p['page']['listeForms'][]=$formSyntheseGrossesse->setFormIDbyName('gynObsSyntheseObs');
         $formSyntheseGrossesse->setInstance($p['page']['grossesseEnCours']['id']);
         $formSyntheseGrossesse->getPrevaluesForPatient($match['params']['patient']);
         $p['page']['formSyntheseGrossesse']=$formSyntheseGrossesse->getForm();
