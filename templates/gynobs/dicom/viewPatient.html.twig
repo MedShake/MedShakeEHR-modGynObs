@@ -23,6 +23,7 @@
  # Template > dicom : voir tous les examens d'un patient   
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,10 +32,10 @@
 
 {% block head %}
     {{ parent() }}
-    <link type="text/css" href="{{ config.protocol }}{{ config.host }}/bower_components/magnific-popup/dist/magnific-popup.css" rel="stylesheet"/>
+    <link type="text/css" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/magnific-popup/dist/magnific-popup.css" rel="stylesheet"/>
 
-    <script defer src="{{ config.protocol }}{{ config.host }}/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/dicom.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/dicom.js"></script>
 
     <style>
         .imageDc img {
@@ -99,7 +100,7 @@
                                 {% for v in page.studiesDcData %}
                                   <tr>
                                     <td>
-                                        <a class="btn btn-default btn-xs" href="/dicom/{{ page.patient.id }}/study/{{ v.ID }}/" role="button">
+                                        <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/dicom/{{ page.patient.id }}/study/{{ v.ID }}/" role="button">
                                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                                         </a>
                                     </td>

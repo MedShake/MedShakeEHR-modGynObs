@@ -23,6 +23,7 @@
  # Template > logs: historique d'impression d'un document
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -36,7 +37,7 @@
 {% block body %}
 <h1>Historique des versions PDF générées</h1>
 <p>
-<a class="btn btn-default btn-primary" href="/patient/{{ page.patient.toID }}/" role="button">Retour dossier patient</a>
+<a class="btn btn-default btn-primary" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/{{ page.patient.toID }}/" role="button">Retour dossier patient</a>
 </p>
 <div>
 <ul class="nav nav-tabs" role="tablist">

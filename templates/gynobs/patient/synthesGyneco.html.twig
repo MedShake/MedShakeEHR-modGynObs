@@ -23,6 +23,7 @@
  # Template > patient : tableau de gestion synthèse gynéco
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% import "macroForm.html.twig" as f %}
@@ -35,7 +36,7 @@
         {% endfor %}
 
         {% if page.grossesseEnCours.id == '' and page.patient.administrativeDatas.8.age < 60 %}
-            <a href="/module/actions/installNewGro/{{ page.patient.id }}/" role="button" class="btn btn-info btn-sm pull-right newGro">Nouvelle grossesse</a>
+            <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/module/actions/installNewGro/{{ page.patient.id }}/" role="button" class="btn btn-info btn-sm pull-right newGro">Nouvelle grossesse</a>
         {% endif %}
     </div>
 

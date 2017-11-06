@@ -23,6 +23,7 @@
  # Template > patient > historique : ligne pour un courrier
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 <tr class="tr{{ cs.id }} trLigneExamen" data-objetID="{{ cs.id }}" data-alternatTitre="{{ cs.titre|e('html_attr') }}" data-groupe="{{ cs.groupe|e('html_attr') }}">
@@ -38,7 +39,7 @@
       </a>
 
       {# print #}
-      <a class="btn btn-default btn-xs" href="/showpdf/{{ cs.id }}/" role="button" target="_blank">
+      <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/showpdf/{{ cs.id }}/" role="button" target="_blank">
         <span class="glyphicon glyphicon-print" aria-hidden="true" title="Imprimer"></span>
       </a>
 
@@ -62,13 +63,13 @@
           {% if cs.sendMail > 0 %}
             <li role="separator" class="divider"></li>
             <li>
-              <a href="/logs/historiquePrint/{{ cs.id }}/">Historique des envois</a>
+              <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiquePrint/{{ cs.id }}/">Historique des envois</a>
             </li>
           {% endif %}
         </ul>
       </div>
       {% if cs.sendMail > 0 %}
-        <a class="btn btn-default btn-xs" href="/logs/historiqueMailSend/{{ cs.id }}/">
+        <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueMailSend/{{ cs.id }}/">
           <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
         </a>
       {% endif %}
@@ -113,14 +114,14 @@
           <li role="separator" class="divider"></li>
           {% if cs.sendMail > 0 %}
             <li>
-              <a href="/logs/historiqueMailSend/{{ cs.id }}/">Historique des envois par mail</a>
+              <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueMailSend/{{ cs.id }}/">Historique des envois par mail</a>
             </li>
           {% endif %}
           <li>
-            <a href="/logs/historiquePrint/{{ cs.id }}/">Historique versions PDF générées</a>
+            <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiquePrint/{{ cs.id }}/">Historique versions PDF générées</a>
           </li>
           <li>
-            <a target="_blank" href="/configuration/configShowTagsForCr/{{ cs.id }}/">Tags utilisables dans templates</a>
+            <a target="_blank" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/configShowTagsForCr/{{ cs.id }}/">Tags utilisables dans templates</a>
           </li>
           <li role="separator" class="divider"></li>
           <li>

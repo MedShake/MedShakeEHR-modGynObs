@@ -23,6 +23,7 @@
  # Template > logs : historique général d'envoi de mails
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
     {{ parent() }}
-        {% if config.smtpTracking %}<script defer src="{{ config.protocol }}{{ config.host }}/js/mailtracking.js"></script>{% endif %}
+        {% if config.smtpTracking %}<script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/mailtracking.js"></script>{% endif %}
 {% endblock %}
 
 {% block body %}
@@ -41,17 +42,17 @@
 
       <div class="row bottom-space">
         <ul class="nav nav-tabs">
-          <li role="presentation" {% if page.expediteurID ==  0 %}class="active"{% endif %}><a href="/logs/historiqueGeneralMailSend/0/">Expéditeurs : tous</a></li>
+          <li role="presentation" {% if page.expediteurID ==  0 %}class="active"{% endif %}><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueGeneralMailSend/0/">Expéditeurs : tous</a></li>
           {% for k,v in page.expediteurs %}
-          <li role="presentation" {% if k == page.expediteurID %}class="active"{% endif %}><a href="/logs/historiqueGeneralMailSend/{{ k }}/">{{ v }}</a></li>
+          <li role="presentation" {% if k == page.expediteurID %}class="active"{% endif %}><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueGeneralMailSend/{{ k }}/">{{ v }}</a></li>
           {% endfor %}
         </ul>
       </div>
 
       <div class="row">
             <div class="btn-group  pull-right" role="group" aria-label="...">
-              <a type="button" {% if page.nextStart < 0 %}disabled="disabled"{% endif %} class="btn btn-default" href="/logs/historiqueGeneralMailSend/{{ page.expediteurID }}/{{ page.nextStart }}/"> <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Suivants</a>
-              <a type="button" class="btn btn-default" href="/logs/historiqueGeneralMailSend/{{ page.expediteurID }}/{{ page.previousStart }}/">Précédents  <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></a>
+              <a type="button" {% if page.nextStart < 0 %}disabled="disabled"{% endif %} class="btn btn-default" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueGeneralMailSend/{{ page.expediteurID }}/{{ page.nextStart }}/"> <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span> Suivants</a>
+              <a type="button" class="btn btn-default" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueGeneralMailSend/{{ page.expediteurID }}/{{ page.previousStart }}/">Précédents  <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span></a>
             </div>
       </div>
 
@@ -75,7 +76,7 @@
                             <td>{{ page['expediteurs'][v.fromID] }}<br>
                             <small>{{ v.from }}</small></td>
                             <td>{{ v.to }}<div class="{% if v.mailTrackingID %}infos{{ v.mailTrackingID }}{% endif %} small"></div></td>
-                            <td> <a class="btn btn-default btn-xs" role="button" href="/patient/{{ v.toID }}/">
+                            <td> <a class="btn btn-default btn-xs" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/{{ v.toID }}/">
                               <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                             </a>
                               {{ v.patient.3 }} {{ v.patient.2 }}

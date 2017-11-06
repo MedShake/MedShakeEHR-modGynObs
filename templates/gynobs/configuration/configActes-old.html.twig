@@ -23,6 +23,7 @@
  # Template > Config : actes
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
     {{ parent() }}
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
     <style>
       .texteadroite {
         text-align: right;
@@ -51,10 +52,10 @@
             {# Nav tabs #}
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation">
-                    <a href="/configuration/actes-cat/" aria-controls="categories" role="tab">Catégories</a>
+                    <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actes-cat/" aria-controls="categories" role="tab">Catégories</a>
                 </li>
                 <li role="presentation" class="active">
-                    <a href="/configuration/actes/" aria-controls="prescriptions" role="tab">Actes</a>
+                    <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actes/" aria-controls="prescriptions" role="tab">Actes</a>
                 </li>
 
             </ul>
@@ -71,7 +72,7 @@
                     </button>
 
                     {% for k, v in page.tabTypes %}
-                        <h2 id="cat{{ v.0.cat }}">{{ v.0.catLabel }} <small><a class="btn btn-default btn-sm" href="/configuration/actes/{{ v.0.cat }}/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></small></h2>
+                        <h2 id="cat{{ v.0.cat }}">{{ v.0.catLabel }} <small><a class="btn btn-default btn-sm" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actes/{{ v.0.cat }}/"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></small></h2>
                         <table class="table table-hover">
                             <thead>
                                 <tr>
@@ -145,7 +146,7 @@
                             <ul></ul>
                         </div>
 
-                        <form id="formModalNewCat" action="/configuration/ajax/configActesCreate/">
+                        <form id="formModalNewCat" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/ajax/configActesCreate/">
 
                             <div class="form-group">
                                 {{ f.input ({ 'input' : { 'type' : 'text', 'name' : 'label', 'placeholder' : 'intitulé', 'class' : 'form-control', 'autocomplete' : 'off' }, 'label' : { 'position' : 'before', 'label' : 'Label', } }) }}

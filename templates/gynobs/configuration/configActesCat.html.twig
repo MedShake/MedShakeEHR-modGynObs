@@ -23,6 +23,7 @@
  # Template > Config : catégories d'actes
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
 {{ parent() }}
-<script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+<script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -41,11 +42,11 @@
 
 	{# Nav tabs #}
 	<ul class="nav nav-tabs" role="tablist">
-		<li role="presentation" class="active"><a href="/configuration/actes-cat/" aria-controls="categories" role="tab">Catégories</a></li>
+		<li role="presentation" class="active"><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actes-cat/" aria-controls="categories" role="tab">Catégories</a></li>
 		<li role="presentation">
-			<a href="/configuration/actes-base/" aria-controls="prescriptions" role="tab">Actes NGAP / CCAM</a>
+			<a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actes-base/" aria-controls="prescriptions" role="tab">Actes NGAP / CCAM</a>
 		</li>
-		<li role="presentation"><a href="/configuration/actes/0/" aria-controls="types" role="tab" >Factures types communes</a></li>
+		<li role="presentation"><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actes/0/" aria-controls="types" role="tab" >Factures types communes</a></li>
 	</ul>
 
   {# Tab panes #}
@@ -76,7 +77,7 @@
 				<td>{{ k }}</td>
 				<td>{{ v.displayOrder }}</td>
 				<td>{{ v.label }}</td>
-				<td>{% if v.enfants > 0 %}<a class="btn btn-default btn-xs" href="/configuration/actes/0/{{ k }}/"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a> {{ v.enfants }}{% endif %}</td>
+				<td>{% if v.enfants > 0 %}<a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actes/0/{{ k }}/"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a> {{ v.enfants }}{% endif %}</td>
 				<td>{{ v.description }}</td>
 				<td>
 					<button type="button" class="btn btn-default btn-xs edit-by-prim-key" aria-label="Editer" data-id="{{ k }}" data-table="actes_cat" data-form="formModalNewCat" data-modal="modalNewCat">
@@ -115,7 +116,7 @@
 				</ul>
 			</div>
 
-			<form id="formModalNewCat" action="/configuration/ajax/configActesCatCreate/" data-groupe="SERTaRIENici">
+			<form id="formModalNewCat" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/ajax/configActesCatCreate/" data-groupe="SERTaRIENici">
 				<div class="form-group">
 				{{ f.input ({
 					'input' : {

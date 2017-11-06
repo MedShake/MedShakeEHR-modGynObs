@@ -23,6 +23,7 @@
  # Template > inbox : message
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% if page.mail.mailHeaderInfos.from %}
@@ -101,7 +102,7 @@
                             <small>{{ v.180|e }}</small>
                         </td>
                         <td>
-                            <a class="btn btn-default btn-xs" href="/patient/{{ v.id }}/" role="button" target="_blank">
+                            <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/{{ v.id }}/" role="button" target="_blank">
                                 <span class="glyphicon glyphicon-folder-open" aria-hidden="true" title="Voir dossier"></span>
                             </a>
                         </td>
@@ -116,7 +117,7 @@
 </div>
 
 {% if page.mail.archived == 'n' %}
-  <form id="classerDansDossier" action="/inbox/actions/classerDansDossier/" target="_blank" method="post" class="form-horizontal" style="margin-bottom : 20px;">
+  <form id="classerDansDossier" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/inbox/actions/classerDansDossier/" target="_blank" method="post" class="form-horizontal" style="margin-bottom : 20px;">
       <input type="hidden" name="mailID" value="{{ page.mail.id }}"/>
 
       <div class="form-group">
@@ -145,7 +146,7 @@
               </li>
               <li role="separator" class="divider"></li>
               <li>
-                  <a class="confirmBefore" href="/inbox/actions/suppSansClasser/{{ page.mail.id }}/">Supprimer sans archiver</a>
+                  <a class="confirmBefore" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/inbox/actions/suppSansClasser/{{ page.mail.id }}/">Supprimer sans archiver</a>
               </li>
           </ul>
       </div>
@@ -154,7 +155,7 @@
   </form>
 {% elseif page.mail.archived == 'c' %}
 
-  <form action="/inbox/actions/suppInbox/" method="post" class="form-horizontal" style="margin-bottom : 20px;">
+  <form action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/inbox/actions/suppInbox/" method="post" class="form-horizontal" style="margin-bottom : 20px;">
       <input type="hidden" name="mailID" value="{{ page.mail.id }}"/>
       <button type="submit" id="submitBoutonSupp" class="btn btn-danger pull-right">Déjà classé : supprimer
       </button>

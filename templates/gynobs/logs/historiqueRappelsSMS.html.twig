@@ -23,6 +23,7 @@
  # Template > logs : historique des rappels SMS
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -40,16 +41,16 @@
 
   <div class="container-fluid">
 
-    <form id="dateForm" action="/logs/historiqueRappelsSMS/" method="post" class="form-inline bottom-space">
+    <form id="dateForm" action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsSMS/" method="post" class="form-inline bottom-space">
 
-      <a class="btn btn-default btn-default" href="/logs/historiqueRappelsSMS/{{ page.dates.precedent|date("Y-m-d") }}/" role="button">
+      <a class="btn btn-default btn-default" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsSMS/{{ page.dates.precedent|date("Y-m-d") }}/" role="button">
         <span class="glyphicon glyphicon-step-backward" aria-hidden="true"></span>
         Jour précédent</a>
-      <a class="btn btn-default btn-default{% if "now"|date("Y-m-d") == page.dates.emission|date("Y-m-d") %} active{% endif %}" href="/logs/historiqueRappelsSMS/{{ "now"|date("Y-m-d") }}/" role="button">Envoyés ce jour (consultations du {{ page.dates.smsEnvoyeAujour|date("d/m") }})</a>
-      <a class="btn btn-default btn-default{% if page.dates.suivant > "now"|date("U") %} disabled{% endif %}" href="/logs/historiqueRappelsSMS/{{ page.dates.suivant|date("Y-m-d") }}/" role="button">Jour suivant <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
+      <a class="btn btn-default btn-default{% if "now"|date("Y-m-d") == page.dates.emission|date("Y-m-d") %} active{% endif %}" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsSMS/{{ "now"|date("Y-m-d") }}/" role="button">Envoyés ce jour (consultations du {{ page.dates.smsEnvoyeAujour|date("d/m") }})</a>
+      <a class="btn btn-default btn-default{% if page.dates.suivant > "now"|date("U") %} disabled{% endif %}" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsSMS/{{ page.dates.suivant|date("Y-m-d") }}/" role="button">Jour suivant <span class="glyphicon glyphicon-step-forward" aria-hidden="true"></span>
       </a>
 
-      <a class="btn btn-default btn-default{% if page.dates.smsPourAujour|date("Y-m-d") == page.dates.emission|date("Y-m-d") %} active{% endif %}" href="/logs/historiqueRappelsSMS/{{ page.dates.smsPourAujour|date("Y-m-d") }}/" role="button" style="margin-right: 20px">Envoyés le {{ page.dates.smsPourAujour|date("d/m") }} (consultations du jour)</a>
+      <a class="btn btn-default btn-default{% if page.dates.smsPourAujour|date("Y-m-d") == page.dates.emission|date("Y-m-d") %} active{% endif %}" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsSMS/{{ page.dates.smsPourAujour|date("Y-m-d") }}/" role="button" style="margin-right: 20px">Envoyés le {{ page.dates.smsPourAujour|date("d/m") }} (consultations du jour)</a>
 
       <div id="dateSel" class="input-group date datepick" >
         <input type="text" name="dateSel" class="form-control" placeholder="date d'envoi" autocomplete="off" value="{{ page.periode.end }}"/>
@@ -68,7 +69,7 @@
 
           <div class="panel-heading gras">
             Campagne du {{ page.dates.emission|date("d/m/Y") }}
-            <a href="/logs/historiqueRappelsMail/{{ page.dates.emission|date("Y-m-d") }}/" class="btn btn-default btn-xs pull-right">Voir rappels mail</a>
+            <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueRappelsMail/{{ page.dates.emission|date("Y-m-d") }}/" class="btn btn-default btn-xs pull-right">Voir rappels mail</a>
           </div>
 
           <ul class="list-group">
@@ -104,7 +105,7 @@
                 <th class="col-md-2">Identité</th>
                 <th class="col-md-2">N°</th>
                 <th class="col-md-3">
-                  <form action="/logs/actions/majAcks/" method="post" class="form-inline">
+                  <form action="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/actions/majAcks/" method="post" class="form-inline">
                     Statut
                     <input type="hidden" name="date" value="{{ page.dates.emission|date('Y-m-d') }}" />
                     <input type="hidden" name="logFile" value="{{ config.smsLogCampaignDirectory }}{{ page.dates.emission|date('Y/m/d/') }}RappelsRDV.json" />

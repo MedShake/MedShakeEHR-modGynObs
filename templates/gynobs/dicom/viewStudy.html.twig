@@ -23,6 +23,7 @@
  # Template > dicom : voir toutes les datas (images + SR) d'une etude dicom
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,10 +32,10 @@
 
 {% block head %}
     {{ parent() }}
-    <link type="text/css" href="{{ config.protocol }}{{ config.host }}/bower_components/magnific-popup/dist/magnific-popup.css" rel="stylesheet"/>
+    <link type="text/css" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/magnific-popup/dist/magnific-popup.css" rel="stylesheet"/>
 
-    <script defer src="{{ config.protocol }}{{ config.host }}/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
-    <script defer src="{{ config.protocol }}{{ config.host }}/js/dicom.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
+    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/dicom.js"></script>
 
     <style>
         .imageDc {
@@ -82,7 +83,7 @@
 
         <ol class="breadcrumb">
             <li>
-                <a href="/dicom/{{ page.patient.id }}/">{{ page['patient']['administrativeDatas']['3']['value']|e }}
+                <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/dicom/{{ page.patient.id }}/">{{ page['patient']['administrativeDatas']['3']['value']|e }}
                     {{ page['patient']['administrativeDatas']['2']['value']|e }}</a>
             </li>
             <li class="active">Examen du

@@ -23,6 +23,7 @@
  # Template > Config : liste des utilisateurs
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,7 +32,7 @@
 
 {% block head %}
   {{ parent() }}
-  <script defer src="{{ config.protocol }}{{ config.host }}/js/configuration.js"></script>
+  <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/configuration.js"></script>
 {% endblock %}
 
 {% block body %}
@@ -39,7 +40,7 @@
 
   <ol class="breadcrumb">
     <li>
-        <a href="/configuration/">Configuration</a>
+        <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/">Configuration</a>
     </li>
   		<li class="active">
   				Liste des utilisateurs
@@ -62,11 +63,11 @@
           <td>{{ v.prenom }} {{ v.nom }}</td>
           <td>{% if v.rank =='admin' %}<span class="glyphicon glyphicon-star" aria-hidden="true"></span>{% endif %}</td>
           <td>
-            <a class="btn btn-default btn-xs" href="/configuration/user-param/{{ v.id }}/"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Paramètres spécifiques</a>
+            <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/user-param/{{ v.id }}/"><span class="glyphicon glyphicon-wrench" aria-hidden="true"></span> Paramètres spécifiques</a>
           {% if v.rank =='admin' and v.id > 1 %}
-            <a class="btn btn-default btn-xs" href="/configuration/actions/configGiveAdmin/?id={{ v.id }}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Retirer droits administration</a>
+            <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actions/configGiveAdmin/?id={{ v.id }}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Retirer droits administration</a>
           {% elseif v.id > 1   %}
-            <a class="btn btn-default btn-xs" href="/configuration/actions/configGiveAdmin/?id={{ v.id }}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Accorder droits administration</a>
+            <a class="btn btn-default btn-xs" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/configuration/actions/configGiveAdmin/?id={{ v.id }}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span> Accorder droits administration</a>
           {% endif %}
 
           </td>

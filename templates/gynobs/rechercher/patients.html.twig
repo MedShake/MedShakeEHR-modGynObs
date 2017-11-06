@@ -23,6 +23,7 @@
  # Template > patients : listing recherche patients / pro
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -35,7 +36,7 @@ recherche praticien
 
 {% block head %}
 {{ parent() }}
-<script defer src="{{ config.protocol }}{{ config.host }}/js/rechercher.js"></script>
+<script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/rechercher.js"></script>
 <style>
 .openPatient td:nth-child(-n+7) {
 	cursor: pointer;
@@ -133,9 +134,9 @@ recherche praticien
 <div class="col-md-2">
 
 {% if page.porp == 'patient'%}
-<a href="/patient/create/" class="btn btn-primary pull-right" role="button">Nouveau patient</a>
+<a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/create/" class="btn btn-primary pull-right" role="button">Nouveau patient</a>
 {% elseif page.porp == 'pro' %}
-<a href="/pro/create/" class="btn btn-primary pull-right" role="button">Nouveau praticien</a>
+<a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/pro/create/" class="btn btn-primary pull-right" role="button">Nouveau praticien</a>
 {% endif %}
 </div>
 

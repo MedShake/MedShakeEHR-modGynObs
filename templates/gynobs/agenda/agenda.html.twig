@@ -23,6 +23,7 @@
  # Template > Agenda
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {% extends "page.html.twig" %}
@@ -31,13 +32,13 @@
 
 {% block head %}
     {{ parent() }}
-    <link href='{{ config.protocol }}{{ config.host }}/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet' />
-    <link href='{{ config.protocol }}{{ config.host }}/bower_components/jQuery-contextMenu/dist/jquery.contextMenu.min.css' rel='stylesheet' />
+    <link href='{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet' />
+    <link href='{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/jQuery-contextMenu/dist/jquery.contextMenu.min.css' rel='stylesheet' />
 
-    <script defer src='{{ config.protocol }}{{ config.host }}/bower_components/fullcalendar/dist/fullcalendar.js'></script>
-    <script defer src='{{ config.protocol }}{{ config.host }}/bower_components/fullcalendar/dist/locale/fr.js'></script>
-    <script defer src='{{ config.protocol }}{{ config.host }}/bower_components/jQuery-contextMenu/dist/jquery.contextMenu.min.js'></script>
-    <script defer src='{{ config.protocol }}{{ config.host }}/js/agenda.js'></script>
+    <script defer src='{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/fullcalendar/dist/fullcalendar.js'></script>
+    <script defer src='{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/fullcalendar/dist/locale/fr.js'></script>
+    <script defer src='{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/jQuery-contextMenu/dist/jquery.contextMenu.min.js'></script>
+    <script defer src='{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/agenda.js'></script>
 
     <style>
       a.eventAbsent .fc-title {
@@ -74,7 +75,7 @@
 
     {% for k,v in page.agendaUsers %}
       <li role="presentation" {% if k == page.userID %}class="active"{% endif %}>
-          <a href="/agenda/{{ k }}/" target="agenda">{{ v }}</a>
+          <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/agenda/{{ k }}/" target="agenda">{{ v }}</a>
       </li>
     {% endfor %}
   </ul>

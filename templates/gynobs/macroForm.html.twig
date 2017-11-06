@@ -23,6 +23,7 @@
  # Template > macro de construction des formulaires
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ # @edited fr33z00 <https://github.com/fr33z00>
  #}
 
 {# input #}
@@ -260,7 +261,7 @@
 
 	{% if t.global.noFormTags is not defined %}
 		<form
-		{% if t.global.formAction %}action="{{ t.config.protocol }}{{ t.config.host }}{{ t.global.formAction }}" {% endif %}
+		{% if t.global.formAction %}action="{{ t.config.protocol }}{{ t.config.host }}{{ t.config.urlHostSuffixe }}{{ t.global.formAction }}" {% endif %}
 		{% if t.global.formMethod %}method="{{ t.global.formMethod }}" {% endif %}
 		id="formNumber{{ formNumber }}"
 		class="{{ t.global.formClass }}"
