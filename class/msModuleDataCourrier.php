@@ -99,7 +99,7 @@ class msModuleDataCourrier
  * @param  array $d array des types
  * @return void
  */
-      public static function getCourrierDataCompleteModuleForm28(&$d) {
+      public static function getCourrierDataCompleteModuleForm_gynObsMarqueursSeriques(&$d) {
 
         // echo 12 id + date
         $e12=msSQL::sqlUnique("select id, creationDate from objets_data where toID='".$d['patientID']."' and instance='".$d['instance']."' and typeID='33' and deleted='' and outdated='' limit 1 ");
