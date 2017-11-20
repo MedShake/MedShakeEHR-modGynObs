@@ -1,6 +1,29 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
+-- Suppression du contenu des bases avant insertion du contenu spécifique du Module
+
+DELETE from actes;
+DELETE from actes_base;
+DELETE from actes_cat;
+DELETE from agenda;
+DELETE from agenda_changelog;
+DELETE from data_cat;
+DELETE from data_types;
+DELETE from dicomTags;
+DELETE from forms;
+DELETE from forms_cat;
+DELETE from form_basic_types;
+DELETE from hprim;
+DELETE from inbox;
+DELETE from objets_data;
+DELETE from people;
+DELETE from prescriptions;
+DELETE from prescriptions_cat;
+DELETE from printed;
+
+-- Insertion contenu module
+
 INSERT INTO `actes` (`id`, `cat`, `label`, `shortLabel`, `details`, `flagImportant`, `flagCmu`, `fromID`, `toID`, `creationDate`) VALUES
 (1, 4, 'Consultation gynécologique', 'Cs gynéco', 'CS:\n  pourcents: 100\n  depassement: 15 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0', 1, 0, 1, 0, '2017-07-09 20:13:53'),
 (4, 4, 'Consultation gynécologique CMU', 'Cs gynéco CMU', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0', 0, 1, 1, 0, '2017-07-06 09:24:41'),
@@ -116,8 +139,8 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (21, 'admin', 'notes', 'notes', 'Notes', 'Zone de notes', '', '', 'textarea', '', 'base', 26, 1, '2016-12-16 13:36:46', 3600, 1),
 (22, 'admin', 'othersfirstname', 'liste des prénoms secondaires', 'Autres prénoms', 'Les autres prénoms d\'une personne', '', '', 'text', '', 'base', 1, 1, '2016-12-16 18:01:37', 3600, 1),
 (31, 'medical', 'lccA', '', 'LCC - A', 'lcc (mm) du foetus A', '', '', 'text', '', 'user', 27, 1, '2017-04-27 15:26:09', 3600, 1),
-(32, 'typecs', 'csGyn', '', 'Consultation gynécologique', 'support parent pour la consultation gynécologique', '', '', '', '10', 'user', 33, 1, '2017-05-04 20:36:31', 86400, 1),
-(33, 'typecs', 'echo12', '', 'Echographie 1er trimestre', 'support parent pour l\'échographie de 12 SA', '', '', '', '9', 'user', 30, 1, '2017-05-04 20:37:30', 86400, 1),
+(32, 'typecs', 'csGyn', '', 'Consultation gynécologique', 'support parent pour la consultation gynécologique', '', '', '', 'gynObsConsultGyn', 'user', 33, 1, '2017-05-04 20:36:31', 86400, 1),
+(33, 'typecs', 'echo12', '', 'Echographie 1er trimestre', 'support parent pour l\'échographie de 12 SA', '', '', '', 'gynObsEcho12', 'user', 30, 1, '2017-05-04 20:37:30', 86400, 1),
 (34, 'medical', 'poids', 'kg', 'Poids', 'poids du patient', '', '', 'text', '', 'user', 28, 1, '2017-03-10 09:59:48', 3600, 1),
 (35, 'medical', 'taillePatient', 'cm', 'Taille', 'taille du patient', '', '', 'text', '', 'user', 28, 1, '2017-04-04 11:08:28', 3600, 1),
 (36, 'medical', 'toxoStatut', '', 'Toxo.', 'statut toxoplasmose', '', '', 'select', '\'toxoIco\' : \'?\'\n\'toxo+\' : \'Toxo +\'\n\'toxo-\' : \'Toxo neg\'', 'user', 31, 1, '2017-04-04 17:57:44', 3600, 1),
@@ -130,7 +153,7 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (43, 'medical', 'imc', 'imc', 'IMC', 'IMC (autocalcule)', '', '', 'text', '', 'user', 28, 1, '2017-03-10 16:41:12', 3600, 1),
 (44, 'medical', 'synthese', 'synthèse sur la patiente', 'Synthèse gynécologique', 'Synthèse sur la patiente', '', '', 'textarea', '', 'user', 29, 1, '2017-03-10 23:49:02', 3600, 1),
 (45, 'medical', 'DDR', 'ddr', 'DDR', 'date des dernières règles', '', 'validedate,\'d/m/Y\'', 'date', '00/00/0000', 'user', 32, 1, '2017-03-11 22:30:41', 3600, 1),
-(46, 'typecs', 'nouvelleGrossesse', '', 'Nouvelle grossesse', 'support parent pour nouvelle grossesse', '', '', '', '6', 'user', 57, 1, '2017-05-14 21:50:38', 86400, 1),
+(46, 'typecs', 'nouvelleGrossesse', '', 'Nouvelle grossesse', 'support parent pour nouvelle grossesse', '', '', '', 'gynObsSyntheseObs', 'user', 57, 1, '2017-05-14 21:50:38', 86400, 1),
 (47, 'medical', 'syntheseGrossesse', 'synthèse grossesse', 'Synthèse grossesse', 'Synthèse sur la grossesse', '', '', 'textarea', '', 'user', 32, 1, '2017-03-10 23:29:54', 3600, 1),
 (48, 'medical', 'ddg', 'ddg', 'DDG (théorique)', 'date de début de grossesse', '', '', 'text', '', 'user', 32, 1, '2017-03-24 10:28:04', 3600, 1),
 (49, 'medical', 'ddgReel', '', 'DDG (retenue)', 'date de début de grossesse corrigé', '', '', 'date', '', 'user', 32, 1, '2017-03-11 22:31:16', 3600, 1),
@@ -143,12 +166,12 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (57, 'admin', 'telPro', 'téléphone professionnel', 'Téléphone professionnel', 'Téléphone pro.', 'phone', '', 'tel', '', 'base', 24, 1, '2017-03-12 21:33:56', 3600, 1),
 (58, 'admin', 'faxPro', 'fax professionel', 'Fax professionnel', 'FAx pro', 'phone', '', 'tel', '', 'base', 24, 1, '2017-03-12 21:34:44', 3600, 1),
 (59, 'admin', 'emailApicrypt', 'adresse mail apicript', 'Email apicrypt', 'Email apicrypt', 'valid_email', '', 'email', '', 'base', 24, 1, '2017-03-12 23:01:07', 3600, 1),
-(60, 'typecs', 'echo22sa', '', 'Echographie 2e trimestre', 'support parent pour l\'échographie de 22 SA', '', '', '', '23', 'user', 30, 1, '2017-05-04 20:37:43', 86400, 1),
-(61, 'typecs', 'echo32sa', '', 'Echographie 3e trimestre', 'support parent pour l\'échographie de 32 SA', '', '', '', '24', 'user', 30, 1, '2017-05-04 20:37:55', 86400, 1),
-(62, 'typecs', 'echoDatation', '', 'Echographie inf. 11 SA', 'support parent pour l\'échographie à moins de 11 SA', '', '', '', '12', 'user', 30, 1, '2017-05-04 20:38:21', 86400, 0),
-(63, 'typecs', 'colposcopieCs', '', 'Colposcopie', 'support parent pour la consultation de colposcopie', '', '', '', '20', 'user', 33, 1, '2017-07-28 20:17:20', 86400, 3),
-(64, 'typecs', 'csMensuelleGro', '', 'Consultation grossesse', 'support parent pour la consultation grossesse', '', '', '', '26', 'user', 30, 1, '2017-07-28 17:40:45', 86400, 0),
-(65, 'typecs', 'finDeGrossesse', '', 'Issue de grossesse', 'support parent pour l\'issue de grossesse', '', '', '', '21', 'user', 30, 1, '2017-05-04 20:38:48', 86400, 20),
+(60, 'typecs', 'echo22sa', '', 'Echographie 2e trimestre', 'support parent pour l\'échographie de 22 SA', '', '', '', 'gynObsEcho22', 'user', 30, 1, '2017-05-04 20:37:43', 86400, 1),
+(61, 'typecs', 'echo32sa', '', 'Echographie 3e trimestre', 'support parent pour l\'échographie de 32 SA', '', '', '', 'gynObsEcho32', 'user', 30, 1, '2017-05-04 20:37:55', 86400, 1),
+(62, 'typecs', 'echoDatation', '', 'Echographie inf. 11 SA', 'support parent pour l\'échographie à moins de 11 SA', '', '', '', 'gynObsEchoAvt11', 'user', 30, 1, '2017-05-04 20:38:21', 86400, 0),
+(63, 'typecs', 'colposcopieCs', '', 'Colposcopie', 'support parent pour la consultation de colposcopie', '', '', '', 'gynObsColposcopie', 'user', 33, 1, '2017-07-28 20:17:20', 86400, 3),
+(64, 'typecs', 'csMensuelleGro', '', 'Consultation grossesse', 'support parent pour la consultation grossesse', '', '', '', 'gynObsConsultObs', 'user', 30, 1, '2017-07-28 17:40:45', 86400, 0),
+(65, 'typecs', 'finDeGrossesse', '', 'Issue de grossesse', 'support parent pour l\'issue de grossesse', '', '', '', 'gynObsFinGrossesse', 'user', 30, 1, '2017-05-04 20:38:48', 86400, 20),
 (66, 'medical', 'allergies', 'allergies et intolérances', 'Allergies', 'Allergies et intolérances du patient', '', '', 'textarea', '', 'user', 29, 1, '2017-03-13 11:01:36', 3600, 1),
 (67, 'medical', 'indicEcho12', '', 'Indication', 'indication de l\'écho de 12', '', '', 'select', '\'A\' : \'dépistage du 1er trimestre\'\n\'B\' : \'contrôle d\\\'évolutivité\'\n\'C\' : \'complément à un premier examen difficile\'\n\'D\' : \'douleurs pelviennes\'\n\'E\' : \'échographie de seconde intention\'', 'user', 27, 1, '2017-04-25 22:14:50', 3600, 1),
 (68, 'medical', 'voieExamEcho12', '', 'Voie d\'examen', 'voie d\'examen pour l\'écho 12', '', '', 'select', '\'A\' : \'abdominale\'\n\'B\' : \'vaginale\'\n\'C\' : \'abdominale et vaginale\'', 'user', 27, 1, '2017-03-13 12:36:48', 3600, 1),
@@ -281,7 +304,7 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (198, 'reglement', 'regleTarifCejour', '', 'Tarif SS', 'tarif SS appliqué ce jour', '', '', 'text', '', 'base', 46, 1, '2017-04-27 13:39:12', 1576800000, 1),
 (199, 'reglement', 'regleDepaCejour', '', 'Dépassement', 'dépassement pratiqué ce jour', '', '', 'text', '', 'base', 46, 1, '2017-04-27 13:38:32', 1576800000, 1),
 (200, 'reglement', 'regleTiersPayeur', '', 'Tiers', 'part du tiers', '', '', 'text', '', 'base', 46, 1, '2017-04-27 13:39:23', 1576800000, 1),
-(201, 'typecs', 'echoGyneco', '', 'Echographie gynécologique', 'support parent pour l\'échographie gynécologique', '', '', '', '27', 'user', 33, 1, '2017-07-28 20:17:14', 86400, 2),
+(201, 'typecs', 'echoGyneco', '', 'Echographie gynécologique', 'support parent pour l\'échographie gynécologique', '', '', '', 'gynObsEchoGyneco', 'user', 33, 1, '2017-07-28 20:17:14', 86400, 2),
 (202, 'medical', 'E11termeLCCFA', '', 'Terme & DDG / LCC - A', 'terme estimé en fonction de la LCC - Foetus A', '', '', 'lcc', '', 'user', 40, 1, '2017-04-26 13:46:26', 3600, 1),
 (203, 'medical', 'E11termeLCCFB', '', 'Terme & DDG / LCC - B', 'terme estimé en fonction de la LCC - Foetus B', '', '', 'lcc', '', 'user', 40, 1, '2017-04-26 13:46:45', 3600, 1),
 (204, 'medical', 'E11termeLCCFC', '', 'Terme & DDG / LCC - C', 'terme estimé en fonction de la LCC - Foetus C', '', '', 'lcc', '', 'user', 40, 1, '2017-04-26 13:47:05', 3600, 1),
@@ -331,7 +354,7 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (248, 'admin', 'telPro2', 'téléphone professionnel 2', 'Téléphone professionnel 2', 'Téléphone pro. 2', 'phone', '', 'tel', '', 'base', 24, 1, '2017-04-04 09:16:41', 3600, 1),
 (249, 'admin', 'serviceAdressePro', 'service', 'Service', 'Adresse pro : service', '', '', 'text', '', 'base', 47, 1, '2017-04-04 09:35:37', 3600, 1),
 (250, 'admin', 'etablissementAdressePro', 'établissement', 'Établissement', 'Adresse pro : établissement', '', '', 'text', '', 'base', 47, 1, '2017-04-04 09:36:21', 3600, 1),
-(251, 'typecs', 'csImport', '', 'Import', 'support parent pour import', '', '', '', '22', 'user', 50, 1, '2017-05-04 20:39:37', 84600, 1),
+(251, 'typecs', 'csImport', '', 'Import', 'support parent pour import', '', '', '', 'baseImportExternal', 'user', 50, 1, '2017-05-04 20:39:37', 84600, 1),
 (252, 'medical', 'dataImport', '', 'Import', 'support pour consultations importées', '', '', 'textarea', '', 'user', 29, 1, '2017-04-04 10:15:55', 84600, 1),
 (253, 'medical', 'indicEcho22', '', 'Indication', 'indication de l\'écho de 22', '', '', 'select', '\'A\' : \'dépistage du 2e trimestre\'\n\'B\' : \'complément à un premier examen difficile\'\n\'C\' : \'douleurs pelviennes\'\n\'D\' : \'métrorragies\'\n\'E\' : \'diminution des mouvements actifs fœtaux\'\n\'F\' : \'échographie de seconde intention\'\n\'G\' : \'suivi de grossesse gémellaire\'\n\'H\' : \'surveillance\'\n\'I\' : \'échographie pré-morphologique\'', 'user', 51, 1, '2017-04-30 21:07:41', 3600, 1),
 (254, 'medical', 'nbFoetusEcho22', '', 'Nombre de foetus', 'nombre de foetus à l\'écho 22', '', '', 'number', '1', 'user', 51, 1, '2017-04-06 15:23:20', 3600, 1),
@@ -533,7 +556,7 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (472, 'medical', 'fmT21nbCig', '', 'Nombre de cigarettes par jour', 'nombre de cigarettes par jour', '', '', 'number', '0', 'user', 60, 1, '2017-05-16 22:32:23', 3600, 1),
 (473, 'medical', 'fmT21OrigineGeo', '', 'Origine géographique', 'origine géographique de la patiente', '', '', 'select', '\' \' : \' \' \n\'EA\' : \'Europe / Afrique du nord\'\n\'ASS\' : \'Afrique sub-saharienne\'\n\'As\' : \'Asie\'\n\'M\' : \'Mixte\'', 'user', 60, 1, '2017-05-16 09:57:38', 3600, 1),
 (474, 'medical', 'fmT21StrategieDepis', '', 'Stratégie de dépistage', 'stratégie de dépistage choisie', '', '', 'select', '\' \' : \' \' \n\'DC1\' : \'Dépistage combiné au 1er trimestre\'\n\'DS2\' : \'Dépistage séquentiel intégré au 2nd trimestre\'\n\'MS2\' : \'Marqueurs sériques maternels au 2nd trimestre\'', 'user', 60, 1, '2017-05-16 14:53:32', 3600, 1),
-(475, 'typecs', 'csMarqueursSerT21', '', 'Marqueurs sériques', 'support parent pour marqueurs sériques', '', '', '', '28', 'user', 50, 1, '2017-05-16 11:23:45', 84600, 1),
+(475, 'typecs', 'csMarqueursSerT21', '', 'Marqueurs sériques', 'support parent pour marqueurs sériques', '', '', '', 'gynObsMarqueursSeriques', 'user', 50, 1, '2017-05-16 11:23:45', 84600, 1),
 (476, 'medical', 'fmT21Did', '', 'Diabète insulino-dépendant', 'DID', '', '', 'select', '\' \' : \' \' \n\'o\' : \'oui\'\n\'n\' : \'non\'', 'user', 60, 1, '2017-05-16 15:15:20', 3600, 1),
 (477, 'admin', 'nReseau', '', 'Numéro de réseau', 'numéro de réseau (dépistage)', '', '', 'text', '', 'base', 36, 1, '2017-05-16 22:21:00', 3600, 1),
 (478, 'courrier', 'modeleCourrierResumeDossier', '', 'Résumé dossier', 'modèle de courrier pour un résumé du dossier', '', '', '', 'courrier-resumeDossier', 'user', 38, 1, '2017-05-19 09:20:43', 3600, 1),
@@ -549,32 +572,11 @@ INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `descr
 (490, 'relation', 'relationPatientPraticien', '', 'Relation patient praticien', 'relation patient  praticien', '', '', 'select', '\'MT\': \'Médecin traitant\'\n\'MS\': \'Médecin spécialiste\'\n\'Autre\': \'Autre correspondant\'', 'base', 63, 1, '2017-06-29 15:29:16', 1576800000, 1),
 (492, 'user', 'administratifPeutAvoirPrescriptionsTypes', '', 'administratifPeutAvoirPrescriptionsTypes', 'permet à l\'utilisateur sélectionné d\'avoir des prescriptions types', '', '', 'text', 'false', 'base', 64, 1, '2017-07-10 20:06:36', 3600, 1),
 (493, 'user', 'administratifPeutAvoirFacturesTypes', '', 'administratifPeutAvoirFacturesTypes', 'permet à l\'utilisateur sélectionné d\'avoir des factures types', '', '', 'text', 'false', 'base', 64, 1, '2017-07-10 20:06:59', 3600, 1),
-(494, 'admin', 'administratifMarqueurSuppression', 'Dr, Pr ...', 'Dossier supprimé', 'marqueur pour la suppression d\'un dossier', '', '', 'text', '', 'user', 65, 1, '2017-07-11 09:24:16', 3600, 1),
-(495, 'mail', 'mailTrackingID', '', 'TrackingID', 'num de tracking du mail dans le service externe', '', '', '', '', 'user', 39, 1, '2017-07-17 16:34:18', 1576800000, 1);
+(494, 'admin', 'administratifMarqueurSuppression', 'Dr, Pr ...', 'Dossier supprimé', 'marqueur pour la suppression d\'un dossier', '', '', 'text', '', 'user', 65, 1, '2017-07-11 09:24:16', 3600, 1);
 INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `type`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
+(495, 'mail', 'mailTrackingID', '', 'TrackingID', 'num de tracking du mail dans le service externe', '', '', '', '', 'user', 39, 1, '2017-07-17 16:34:18', 1576800000, 1),
 (496, 'user', 'administratifPeutAvoirAgenda', '', 'administratifPeutAvoirAgenda', 'permet à l\'utilisateur sélectionné d\'avoir son agenda', '', '', 'text', 'false', 'base', 64, 1, '2017-08-09 15:00:18', 3600, 1),
 (497, 'user', 'agendaNumberForPatientsOfTheDay', '', 'agendaNumberForPatientsOfTheDay', 'permet d\'indiquer le n° d\'agenda à utiliser pour la liste patients du jour pour cet utilisateur', '', '', 'number', '1', 'base', 64, 1, '2017-08-09 17:45:52', 3600, 1);
-
-
--- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
---
--- Client :  localhost
--- Généré le :  Lun 06 Novembre 2017 à 14:44
--- Version du serveur :  5.7.20-0ubuntu0.16.04.1
--- Version de PHP :  7.0.24-1+ubuntu16.04.1+deb.sury.org+1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Base de données :  `ehr`
---
-
---
--- Contenu de la table `forms`
---
 
 INSERT INTO `forms` (`id`, `internalName`, `name`, `description`, `dataset`, `groupe`, `formMethod`, `formAction`, `cat`, `type`, `yamlStructure`, `yamlStructureDefaut`, `printModel`) VALUES
 (1, 'baseNewPatient', 'Formulaire nouveau patient', 'formulaire d\'enregistrement d\'un nouveau patient', 'data_types', 'admin', 'post', '/patient/register/', 1, 'public', 'structure:\r\n  row1:                              \r\n    col1:                              \r\n      head: \'Etat civil\'             \r\n      size: 3\r\n      bloc:                          \r\n        - 14                                                 # Sexe\r\n        - 2,required,autocomplete,data-acTypeID=2:1          # Nom d\'usage (requis)\r\n        - 1,autocomplete,data-acTypeID=2:1                   # Nom de jeune fille \r\n        - 3,required,autocomplete,data-acTypeID=3:22:230:235:241    # Prénom (requis)\r\n        - 8	                     # Date de naissance\r\n    col2:\r\n      head: \'Contact\'\r\n      size: 3\r\n      bloc:\r\n        - 4\r\n        - 7\r\n        - 10\r\n    col3:\r\n      head: \'Adresse personnelle\'\r\n      size: 3\r\n      bloc: \r\n        - 9\r\n        - 11,autocomplete,data-acTypeID=11:55\r\n        - 13\r\n        - 12,autocomplete,data-acTypeID=12:56\r\n  row2:\r\n    col1:\r\n      size: 9\r\n      bloc:\r\n        - 21,rows=5', 'structure:\r\n  row1:                              # 1re rangée\r\n    col1:                            # 1re colonne  \r\n      head: \'Etat civil\'             # Titre colonne 1\r\n      size: 3\r\n      bloc:                          # Types utilisés\r\n        - 14                         # Sexe\r\n        - 2,required,autocomplete,data-acTypeID=2:1     # Nom d\'usage (requis)\r\n        - 1,autocomplete,data-acTypeID=2:1             # Nom de jeune fille \r\n        - 3,required,autocomplete,data-acTypeID=3:22:230:235:241    # Prénom (requis)\r\n        - 8	                     # Date de naissance\r\n    col2:\r\n      head: \'Contact\'\r\n      size: 3\r\n      bloc:\r\n        - 4\r\n        - 7\r\n        - 10\r\n    col3:\r\n      head: \'Adresse personnelle\'\r\n      size: 3\r\n      bloc: \r\n        - 9\r\n        - 11,autocomplete,data-acTypeID=11:55\r\n        - 13\r\n        - 12,autocomplete,data-acTypeID=12:56\r\n  row2:\r\n    col1:\r\n      size: 9\r\n      bloc:\r\n        - 21,rows=5', ''),

@@ -1,5 +1,7 @@
 -- Modifications de structure de la bdd d'une version à la suivante
 
+-- 1.1.3 to 2.0.0
+
 update forms set internalName='baseNewPatient' where id='1';
 update forms set internalName='baseListingPatients' where id='2';
 update forms set internalName='baseLogin' where id='3';
@@ -29,6 +31,20 @@ update forms set internalName='gynObsEchoGyneco' where id='27';
 update forms set internalName='gynObsMarqueursSeriques' where id='28';
 update forms set internalName='baseFax' where id='29';
 update forms set internalName='baseAgendaPriseRDV' where id='30';
+
+update data_types set formValues='gynObsConsultGyn' where groupe='typecs' and formValues='10';
+update data_types set formValues='gynObsEchoAvt11' where groupe='typecs' and formValues='12';
+update data_types set formValues='gynObsColposcopie' where groupe='typecs' and formValues='20';
+update data_types set formValues='gynObsFinGrossesse' where groupe='typecs' and formValues='21';
+update data_types set formValues='baseImportExternal' where groupe='typecs' and formValues='22';
+update data_types set formValues='gynObsEcho22' where groupe='typecs' and formValues='23';
+update data_types set formValues='gynObsEcho32' where groupe='typecs' and formValues='24';
+update data_types set formValues='gynObsConsultObs' where groupe='typecs' and formValues='26';
+update data_types set formValues='gynObsEchoGyneco' where groupe='typecs' and formValues='27';
+update data_types set formValues='gynObsMarqueursSeriques' where groupe='typecs' and formValues='28';
+update data_types set formValues='gynObsSyntheseObs' where groupe='typecs' and formValues='6';
+update data_types set formValues='gynObsEcho12' where groupe='typecs' and formValues='9';
+
 
 -- 1.1.2 to 1.1.3
 
