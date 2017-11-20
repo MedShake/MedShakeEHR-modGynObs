@@ -95,7 +95,7 @@ class msModuleDataCourrier
 
 
 /**
- * Calcule tout le nécessaire à l'établissement du form 28 marqueurs sériques T21
+ * Calcule tout le nécessaire à l'établissement du form gynObsMarqueursSeriques (28) marqueurs sériques T21
  * @param  array $d array des types
  * @return void
  */
