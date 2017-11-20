@@ -43,11 +43,13 @@ $p['page']['formSynthese']=$formSynthese->getForm();
 $typeCsCla=new msData;
 $p['page']['typeCsCla']=$typeCsCla->getDataTypesFromCatName('csGyneco', array('id','label', 'formValues'));
 
+
 //chercher une grossesse en cours (cad si pas de type 245 associé)
+$name2typeID = $typeCsCla->getTypeIDsFromName(['groFermetureSuivi', 'nouvelleGrossesse']);
 if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
   from objets_data as pd
-  left join objets_data as eg on pd.id=eg.instance and eg.typeID='245' and eg.outdated='' and eg.deleted=''
-  where pd.toID='".$p['page']['patient']['id']."' and pd.typeID=46 and pd.outdated='' and pd.deleted='' order by pd.creationDate desc
+  left join objets_data as eg on pd.id=eg.instance and eg.typeID='".$name2typeID['groFermetureSuivi']."' and eg.outdated='' and eg.deleted=''
+  where pd.toID='".$p['page']['patient']['id']."' and pd.typeID='".$name2typeID['nouvelleGrossesse']."' and pd.outdated='' and pd.deleted='' order by pd.creationDate desc
   limit 1")) {
     if (!$findGro['idFin']) {
         $p['page']['grossesseEnCours']['id']=$findGro['idGro'];
