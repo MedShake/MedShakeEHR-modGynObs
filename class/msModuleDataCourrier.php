@@ -47,7 +47,7 @@ class msModuleDataCourrier
 
     //atcd du patient (data du formulaire latéral)
     $atcd = new msCourrier();
-    $atcd = $atcd->getExamenData($d['patientID'], 4, 0);
+    $atcd = $atcd->getExamenData($d['patientID'], 'gynObsATCD', 0);
     if(is_array($atcd)) {
       $d=$d+$atcd;
     }
@@ -87,7 +87,7 @@ class msModuleDataCourrier
 
     // extraction des ATCD
     $atcd = new msCourrier();
-    $atcd = $atcd->getExamenData($d['patientID'], 4, 0);
+    $atcd = $atcd->getExamenData($d['patientID'], 'gynObsATCD', 0);
     if(is_array($atcd)) {
       $d=$d+$atcd;
     }
@@ -107,7 +107,7 @@ class msModuleDataCourrier
 
         // data echo 12 de la même grossesse
         $dataE12 = new msCourrier();
-        $d=$d+$dataE12->getExamenData($d['patientID'], 9, $e12['id']);
+        $d=$d+$dataE12->getExamenData($d['patientID'], 'gynObsEcho12', $e12['id']);
 
         //Définition du modèle de page d'impression
         $d['templateCrHeadAndFoot']='empty.html.twig';

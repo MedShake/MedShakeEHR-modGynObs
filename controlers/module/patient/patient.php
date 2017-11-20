@@ -27,15 +27,19 @@
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  */
 
- // le formulaire latéral ATCD
- $formLat = new msForm();
- $p['page']['formNumberGynObsATCD']=$p['page']['listeForms'][]=$formLat->setFormIDbyName('gynObsATCD');
- $formLat->getPrevaluesForPatient($match['params']['patient']);
- $p['page']['formLat']=$formLat->getForm();
+ // liste des formulaires fixes au 1er affichage dossier patient pour JS
+ $p['page']['listeForms']=array('gynObsATCD','gynObsSyntheseGyn','gynObsSyntheseObs');
+
+
+// le formulaire latéral ATCD
+$formLat = new msForm();
+$p['page']['formNameGynObsATCD']=$formLat->setFormIDbyName('gynObsATCD');
+$formLat->getPrevaluesForPatient($match['params']['patient']);
+$p['page']['formLat']=$formLat->getForm();
 
 //formulaire synthèse de gynéco
 $formSynthese = new msForm();
-$p['page']['formNumberGynObsSyntheseGyn']=$p['page']['listeForms'][]=$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
+$p['page']['formNameGynObsSyntheseGyn']=$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
 $formSynthese->getPrevaluesForPatient($match['params']['patient']);
 $p['page']['formSynthese']=$formSynthese->getForm();
 
@@ -56,7 +60,7 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
 
         // générer le formulaire grossesse tête de page.
         $formSyntheseGrossesse = new msForm();
-        $p['page']['formNumberGynObsSyntheseObs']=$p['page']['listeForms'][]=$formSyntheseGrossesse->setFormIDbyName('gynObsSyntheseObs');
+        $p['page']['formNameGynObsSyntheseObs']=$formSyntheseGrossesse->setFormIDbyName('gynObsSyntheseObs');
         $formSyntheseGrossesse->setInstance($p['page']['grossesseEnCours']['id']);
         $formSyntheseGrossesse->getPrevaluesForPatient($match['params']['patient']);
         $p['page']['formSyntheseGrossesse']=$formSyntheseGrossesse->getForm();

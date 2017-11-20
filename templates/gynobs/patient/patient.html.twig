@@ -59,6 +59,12 @@
         {% endfor %}
 
         <style>
+
+            .foetusB,
+            .foetusC {
+                display: none;
+            }
+
             #newDoc{
               display: none;
             }
@@ -166,7 +172,7 @@
                       <a id="linkAddNewOrdo" href="#">Nouvelle prescription</a>
                   </li>
                   <li>
-                    <a class="newCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="28" data-csID="475" data-mode="create">Marqueurs sériques</a>
+                    <a class="newCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="gynObsMarqueursSeriques" data-csID="475" data-mode="create">Marqueurs sériques</a>
                   </li>
                 </ul>
             </div>
@@ -247,7 +253,7 @@
             <div  class="col-md-3">
               {# Formulaire dlatéral des ATCD #}
               <div id="latForm" class=" changeObserv">
-                  {{ f.formbuilder(page.formLat , page.formNumberGynObsATCD , valFormLat ) }}
+                  {{ f.formbuilder(page.formLat , 'gynObsATCD' , valFormLat ) }}
               </div>
               {# Liens familiaux #}
               {% if page.liensFamiliaux %}

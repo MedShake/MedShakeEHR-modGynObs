@@ -47,12 +47,12 @@ $(document).ready(function() {
   }
 
   //ajutement auto des textarea en hauteur
-  $("#formNumber4 textarea").each(function(index) {
+  $("#formName_gynObsATCD textarea").each(function(index) {
     $(this).css("overflow", "hidden");
     auto_grow(this);
   });
 
-  $("#formNumber4 textarea").on("keyup", function() {
+  $("#formName_gynObsATCD textarea").on("keyup", function() {
     $(this).css("overflow", "auto");
   });
 
