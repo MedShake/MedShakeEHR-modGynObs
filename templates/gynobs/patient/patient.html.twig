@@ -165,9 +165,11 @@
                   <li>
                       <a id="linkAddNewOrdo" href="#">Nouvelle prescription</a>
                   </li>
+                  {% if page.grossesseEnCours > 0 %}
                   <li>
                     <a class="newCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="gynObsMarqueursSeriques" data-csID="475" data-mode="create">Marqueurs sériques</a>
                   </li>
+                  {% endif %}
                 </ul>
             </div>
 

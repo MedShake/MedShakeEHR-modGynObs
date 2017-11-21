@@ -27,8 +27,8 @@
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  */
 
- // liste des formulaires fixes au 1er affichage dossier patient pour JS
- $p['page']['listeForms']=array('gynObsATCD','gynObsSyntheseGyn','gynObsSyntheseObs');
+// liste des formulaires fixes au 1er affichage dossier patient pour JS
+$p['page']['listeForms']=array('gynObsATCD','gynObsSyntheseGyn');
 
 
 // le formulaire latéral ATCD
@@ -64,6 +64,9 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
         $formSyntheseGrossesse->setInstance($p['page']['grossesseEnCours']['id']);
         $formSyntheseGrossesse->getPrevaluesForPatient($match['params']['patient']);
         $p['page']['formSyntheseGrossesse']=$formSyntheseGrossesse->getForm();
+
+        // complément à la liste des formulaires fixes au 1er affichage dossier patient pour JS
+        $p['page']['listeForms'][]='gynObsSyntheseObs';
 
         //types de consultation liées à la grossesse.
         $typeCsGro=new msData;
