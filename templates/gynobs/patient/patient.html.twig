@@ -31,36 +31,41 @@
 {% block title %}{{ page['patient']['administrativeDatas']['3']['value']|e }}
     {{ page['patient']['administrativeDatas']['2']['value']|e }} : dossier patient - MedShakeEHR{% endblock %}
 
-{% block head %}
-    {{ parent() }}
-    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/tinymce/tinymce.min.js"></script>
-    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/tinymce/jquery.tinymce.min.js"></script>
-    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/patient.js"></script>
-    <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/module/common.js"></script>
+    {% block head %}
+        {# provoquer envoie asynchrone du patient dans le DICOM si config ok #}
+        <script>
+          var dicomAutoSendPatient2Echo = {{ config.dicomAutoSendPatient2Echo }};
+        </script>
 
-    <style>
-        .foetusB,
-        .foetusC {
-            display: none;
-        }
+        {{ parent() }}
+        <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/tinymce/tinymce.min.js"></script>
+        <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/bower_components/tinymce/jquery.tinymce.min.js"></script>
 
-        #newDoc{
-          display: none;
-        }
+        {# JS général du dossier patient #}
+        <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/patient.js"></script>
 
-    </style>
+        {# JS commun au formulaire de consultation du module #}
+        <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/module/common.js"></script>
 
-    {# provoquer l'envoie asynchrone du patient dans le DICOM si config ok #}
-    {# formulaire JS à charger #}
-    <script>
-      var dicomAutoSendPatient2Echo = {{ config.dicomAutoSendPatient2Echo }};
+        {# JS spécifiques des formulaires présents à l'affichage initial de la page #}
+        {% for i in page.listeForms %}
+          <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/module/formsScripts/{{ i }}.js"></script>
+        {% endfor %}
 
-    {% if page.listeForms|length > 0 %}
-      var formScripts = new Array({{ page.listeForms|join(',') }});
-    {% endif %}
-    </script>
+        <style>
 
-{% endblock %}
+            .foetusB,
+            .foetusC {
+                display: none;
+            }
+
+            #newDoc{
+              display: none;
+            }
+
+        </style>
+
+    {% endblock %}
 
 {% block body %}
 
@@ -109,7 +114,7 @@
                     </button>
 
                     <ul class="dropdown-menu">
-                      <li><a class="newMail" href="#" data-formtocall="11" data-mailtype="ns">Envoyer un mail</a></li>
+                      <li><a class="newMail" href="#" data-formtocall="baseSendMail" data-mailtype="ns">Envoyer un mail</a></li>
                       {% if config.smtpTracking %}
                         <li><a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/logs/historiqueMailSendToPatient/{{ page.patient.id }}/" >Historique des mails envoyés</a></li>
                       {% endif %}
@@ -160,9 +165,11 @@
                   <li>
                       <a id="linkAddNewOrdo" href="#">Nouvelle prescription</a>
                   </li>
+                  {% if page.grossesseEnCours > 0 %}
                   <li>
-                    <a class="newCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="28" data-csID="475" data-mode="create">Marqueurs sériques</a>
+                    <a class="newCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="gynObsMarqueursSeriques" data-csID="475" data-mode="create">Marqueurs sériques</a>
                   </li>
+                  {% endif %}
                 </ul>
             </div>
 
@@ -242,7 +249,7 @@
             <div  class="col-md-3">
               {# Formulaire dlatéral des ATCD #}
               <div id="latForm" class=" changeObserv">
-                  {{ f.formbuilder(page.formLat , page.formNumberGynObsATCD , valFormLat ) }}
+                  {{ f.formbuilder(page.formLat , 'gynObsATCD' , valFormLat ) }}
               </div>
               {# Liens familiaux #}
               {% if page.liensFamiliaux %}

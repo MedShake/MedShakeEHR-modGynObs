@@ -20,40 +20,29 @@
  */
 
 /**
- * Js pour le formulaire 4 (colonne latérale dossier patient)
+ * Js pour le formulaire 28 Marqueurs sériques
  *
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  */
 
 $(document).ready(function() {
 
-  //calcul IMC
-  if ($('#p_43ID').length > 0) {
+  poids = $("#p_34ID").val();
+  if (poids < 1) alert("ATTENTION !\nLe poids de la patiente n'est pas précisé actuellement dans le dossier !\nIl est nécessaire de l'indiquer avant validation du formulaire.");
 
-    imc = imcCalc($('#p_34ID').val(), $('#p_35ID').val());
-    if (imc > 0) {
-      $('#p_43ID').val(imc);
-    }
+  $('#formName_gynObsMarqueursSeriques input[type="submit"]').attr('disabled', 'disabled');
 
-    $("input[data-typeid='34'] , input[data-typeid='35']").on("keyup", function() {
-      poids = $('#p_34ID').val();
-      taille = $('#p_35ID').val();
-      imc = imcCalc(poids, taille);
-      $('#p_43ID').val(imc);
-      patientID = $('#identitePatient').attr("data-patientID");
-      setPeopleData(imc, patientID, '43', '#p_43ID', '0');
-
+  $('body').on('change', '#formName_gynObsMarqueursSeriques select', function() {
+    aucunblanc = true;
+    $('#formName_gynObsMarqueursSeriques select').each(function(index) {
+      if($(this).prop('selectedIndex') == 0) aucunblanc = false;
     });
-  }
 
-  //ajutement auto des textarea en hauteur
-  $("#formNumber4 textarea").each(function(index) {
-    $(this).css("overflow", "hidden");
-    auto_grow(this);
-  });
-
-  $("#formNumber4 textarea").on("keyup", function() {
-    $(this).css("overflow", "auto");
+    if(aucunblanc) {
+      $('#formName_gynObsMarqueursSeriques input[type="submit"]').removeAttr('disabled');
+    } else {
+      $('#formName_gynObsMarqueursSeriques input[type="submit"]').attr('disabled', 'disabled');
+    }
   });
 
 });

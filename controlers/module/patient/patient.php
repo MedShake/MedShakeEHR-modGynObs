@@ -27,15 +27,19 @@
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  */
 
- // le formulaire latéral ATCD
- $formLat = new msForm();
- $p['page']['formNumberGynObsATCD']=$p['page']['listeForms'][]=$formLat->setFormIDbyName('gynObsATCD');
- $formLat->getPrevaluesForPatient($match['params']['patient']);
- $p['page']['formLat']=$formLat->getForm();
+// liste des formulaires fixes au 1er affichage dossier patient pour JS
+$p['page']['listeForms']=array('gynObsATCD','gynObsSyntheseGyn');
+
+
+// le formulaire latéral ATCD
+$formLat = new msForm();
+$p['page']['formNameGynObsATCD']=$formLat->setFormIDbyName('gynObsATCD');
+$formLat->getPrevaluesForPatient($match['params']['patient']);
+$p['page']['formLat']=$formLat->getForm();
 
 //formulaire synthèse de gynéco
 $formSynthese = new msForm();
-$p['page']['formNumberGynObsSyntheseGyn']=$p['page']['listeForms'][]=$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
+$p['page']['formNameGynObsSyntheseGyn']=$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
 $formSynthese->getPrevaluesForPatient($match['params']['patient']);
 $p['page']['formSynthese']=$formSynthese->getForm();
 
@@ -43,21 +47,26 @@ $p['page']['formSynthese']=$formSynthese->getForm();
 $typeCsCla=new msData;
 $p['page']['typeCsCla']=$typeCsCla->getDataTypesFromCatName('csGyneco', array('id','label', 'formValues'));
 
+
 //chercher une grossesse en cours (cad si pas de type 245 associé)
+$name2typeID = $typeCsCla->getTypeIDsFromName(['groFermetureSuivi', 'nouvelleGrossesse']);
 if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
   from objets_data as pd
-  left join objets_data as eg on pd.id=eg.instance and eg.typeID='245' and eg.outdated='' and eg.deleted=''
-  where pd.toID='".$p['page']['patient']['id']."' and pd.typeID=46 and pd.outdated='' and pd.deleted='' order by pd.creationDate desc
+  left join objets_data as eg on pd.id=eg.instance and eg.typeID='".$name2typeID['groFermetureSuivi']."' and eg.outdated='' and eg.deleted=''
+  where pd.toID='".$p['page']['patient']['id']."' and pd.typeID='".$name2typeID['nouvelleGrossesse']."' and pd.outdated='' and pd.deleted='' order by pd.creationDate desc
   limit 1")) {
     if (!$findGro['idFin']) {
         $p['page']['grossesseEnCours']['id']=$findGro['idGro'];
 
         // générer le formulaire grossesse tête de page.
         $formSyntheseGrossesse = new msForm();
-        $p['page']['formNumberGynObsSyntheseObs']=$p['page']['listeForms'][]=$formSyntheseGrossesse->setFormIDbyName('gynObsSyntheseObs');
+        $p['page']['formNameGynObsSyntheseObs']=$formSyntheseGrossesse->setFormIDbyName('gynObsSyntheseObs');
         $formSyntheseGrossesse->setInstance($p['page']['grossesseEnCours']['id']);
         $formSyntheseGrossesse->getPrevaluesForPatient($match['params']['patient']);
         $p['page']['formSyntheseGrossesse']=$formSyntheseGrossesse->getForm();
+
+        // complément à la liste des formulaires fixes au 1er affichage dossier patient pour JS
+        $p['page']['listeForms'][]='gynObsSyntheseObs';
 
         //types de consultation liées à la grossesse.
         $typeCsGro=new msData;

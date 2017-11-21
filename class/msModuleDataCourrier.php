@@ -47,7 +47,7 @@ class msModuleDataCourrier
 
     //atcd du patient (data du formulaire latéral)
     $atcd = new msCourrier();
-    $atcd = $atcd->getExamenData($d['patientID'], 4, 0);
+    $atcd = $atcd->getExamenData($d['patientID'], 'gynObsATCD', 0);
     if(is_array($atcd)) {
       $d=$d+$atcd;
     }
@@ -87,7 +87,7 @@ class msModuleDataCourrier
 
     // extraction des ATCD
     $atcd = new msCourrier();
-    $atcd = $atcd->getExamenData($d['patientID'], 4, 0);
+    $atcd = $atcd->getExamenData($d['patientID'], 'gynObsATCD', 0);
     if(is_array($atcd)) {
       $d=$d+$atcd;
     }
@@ -95,11 +95,11 @@ class msModuleDataCourrier
 
 
 /**
- * Calcule tout le nécessaire à l'établissement du form 28 marqueurs sériques T21
+ * Calcule tout le nécessaire à l'établissement du form gynObsMarqueursSeriques (28) marqueurs sériques T21
  * @param  array $d array des types
  * @return void
  */
-      public static function getCourrierDataCompleteModuleForm28(&$d) {
+      public static function getCourrierDataCompleteModuleForm_gynObsMarqueursSeriques(&$d) {
 
         // echo 12 id + date
         $e12=msSQL::sqlUnique("select id, creationDate from objets_data where toID='".$d['patientID']."' and instance='".$d['instance']."' and typeID='33' and deleted='' and outdated='' limit 1 ");
@@ -107,7 +107,7 @@ class msModuleDataCourrier
 
         // data echo 12 de la même grossesse
         $dataE12 = new msCourrier();
-        $d=$d+$dataE12->getExamenData($d['patientID'], 9, $e12['id']);
+        $d=$d+$dataE12->getExamenData($d['patientID'], 'gynObsEcho12', $e12['id']);
 
         //Définition du modèle de page d'impression
         $d['templateCrHeadAndFoot']='empty.html.twig';

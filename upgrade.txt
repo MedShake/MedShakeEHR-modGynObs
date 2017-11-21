@@ -1,0 +1,10 @@
+Instructions pour l'upgrade
+
+==============================
+1.x.x --> 2.0.0
+==============================
+
+
+Préambule : faire une sauvegarde complète de l'installation : dossiers et base de données.
+
+Se reporter au fichier upgrade.txt de la base.

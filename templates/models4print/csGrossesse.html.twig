@@ -20,25 +20,19 @@
  #/
 
 /##
- # Template > login  
+ # Template > models4print : compte-rendu de consultation gynécologique
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
  #}
 
-{% extends "page.html.twig" %}
-{% import "macroForm.html.twig" as f %}
-{% block title %}MedShakeEHR : login{% endblock %}
+{% set tag = page.courrier %}
 
-{% block head %}
-{{ parent() }}
-{% endblock %}
 
-{% block body %}
 
-{# validation error display bloc #}
-{{ f.errorFormDiv( session['form'][page.formNumber]['validationErrorsMsg'] ) }}
+<p style="text-align : right;">New York, le {{ tag.date|date("d/m/Y") }}</p>
 
-{# form display #}
-{{ f.formbuilder(page.form , page.formNumber , session) }}
+<h2 style="text-align : center">Madame {{ tag.3 }}  {{ tag.2 }} ({{ tag.8 }})</h2>
 
-{% endblock %}
+<h3>Consultation obstétricale du jour</h3>
+
+{{ tag.399|nl2br }}

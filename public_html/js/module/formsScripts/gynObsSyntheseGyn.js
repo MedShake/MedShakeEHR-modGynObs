@@ -27,13 +27,13 @@
 
 $(document).ready(function() {
 
-  // ajustement automatique de la hauteur des textarea 
-  $("#formNumber5 textarea").each(function( index ) {
+  // ajustement automatique de la hauteur des textarea
+  $("#formName_gynObsSyntheseGyn textarea").each(function( index ) {
     $(this).css("overflow","hidden");
     auto_grow(this);
   });
 
-  $("#formNumber5 textarea").on("keyup", function() {
+  $("#formName_gynObsSyntheseGyn textarea").on("keyup", function() {
       $(this).css("overflow","auto");
   });
 
