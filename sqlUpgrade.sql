@@ -1,6 +1,7 @@
 -- Modifications de structure de la bdd d'une version à la suivante
 
 -- 1.1.3 to 2.0.0
+UPDATE data_types set formType='checkbox' where id in ('436','492','493','496');
 
 update forms set internalName='baseNewPatient' where id='1';
 update forms set internalName='baseListingPatients' where id='2';
