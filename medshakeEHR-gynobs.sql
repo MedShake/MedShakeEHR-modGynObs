@@ -62,7 +62,10 @@ INSERT INTO `actes_base` (`id`, `code`, `label`, `type`, `tarifs1`, `tarifs2`, `
 (25, 'JQQM003', 'Échographie de surveillance de la croissance foetale avec échographie-doppler des artères utérines de la mère et des vaisseaux du foetus', 'CCAM', 75.6, 75.6, 1, '2017-07-07 10:55:42'),
 (26, 'YYYY088', 'Échographie de contrôle ou surveillance de pathologie gravidique foetale ou maternelle au cours d\'une grossesse unifoetale', 'CCAM', 30.24, 30.24, 1, '2017-07-07 11:00:00'),
 (27, 'JQQM019', 'Échographie biométrique et morphologique d\'une grossesse multifoetale au 2ème trimestre', 'CCAM', 154.09, 137, 1, '2017-07-07 10:58:44'),
-(28, 'JKHA002', 'Biopsie du col de l\'utérus', 'CCAM', 21.45, 21.45, 1, '2017-07-07 10:53:36');
+(28, 'JKHA002', 'Biopsie du col de l\'utérus', 'CCAM', 21.45, 21.45, 1, '2017-07-07 10:53:36'),
+(30, 'CCP', 'Consultation de Contraception et de Prévention', 'NGAP', 46, 46, 1, '2017-11-01 10:52:29'),
+(31, 'MCX', 'MCX', 'NGAP', 16, 16, 1, '2017-11-01 11:39:17'),
+(32, 'APC', 'Avis Ponctuel de Consultant', 'NGAP', 48, 48, 1, '2017-11-01 11:11:50');
 
 INSERT INTO `actes_cat` (`id`, `name`, `label`, `description`, `type`, `fromID`, `creationDate`, `displayOrder`) VALUES
 (1, 'catActesContra', 'DIU & implant', '', 'user', 1, '2017-03-26 15:43:20', 3),
