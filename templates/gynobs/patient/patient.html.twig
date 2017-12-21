@@ -35,6 +35,16 @@
         {# provoquer envoie asynchrone du patient dans le DICOM si config ok #}
         <script>
           var dicomAutoSendPatient2Echo = {{ config.dicomAutoSendPatient2Echo }};
+
+          var scrollDestination = {
+            newDoc: 'body',
+            nouvelleCs: 'body',
+            newCourrier: 'body',
+            newOrdo: 'body',
+            newMail: 'body',
+            newReglement: 'body',
+            delai: 2
+          };
         </script>
 
         {{ parent() }}
