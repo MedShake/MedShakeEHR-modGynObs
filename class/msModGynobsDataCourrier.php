@@ -34,7 +34,7 @@
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  */
 
-class msModuleDataCourrier
+class msModGynobsDataCourrier
 {
 
 
