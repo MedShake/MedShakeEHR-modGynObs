@@ -1,5 +1,10 @@
 -- Modifications de structure de la bdd d'une version à la suivante
 
+-- next
+
+update forms set module='gynobs' where internalName like 'gynObs%';
+update `data_types` set validationRules='base' WHERE `groupe` = 'courrier' 
+
 -- 1.1.3 to 2.0.0
 UPDATE data_types set formType='checkbox' where id in ('436','492','493','496');
 
