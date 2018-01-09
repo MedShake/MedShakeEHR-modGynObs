@@ -75,6 +75,7 @@ class msModGynobsDataCourrier
         if ($grossesseData = $grossesseData->getObjetAndSons($findGro['idGro'])) {
             foreach ($grossesseData as $k=>$v) {
                 $d[$k]=$v['value'];
+                $d[$v['name']]=$v['value'];
             }
         }
     }
@@ -85,7 +86,7 @@ class msModGynobsDataCourrier
  * @param  array $d tableau des tags
  * @return void
  */
-  public static function getCourrierDataCompleteModuleModele478(&$d)
+  public static function getCourrierDataCompleteModuleModele_modeleCourrierResumeDossier(&$d)
   {
 
     // extraction des ATCD
@@ -102,7 +103,7 @@ class msModGynobsDataCourrier
  * @param  array $d array des types
  * @return void
  */
-      public static function getCourrierDataCompleteModuleForm_gynObsMarqueursSeriques(&$d)
+      public static function getCrDataCompleteModuleForm_gynObsMarqueursSeriques(&$d)
       {
 
         $name2typeID = new msData();
@@ -114,13 +115,13 @@ class msModGynobsDataCourrier
 
         // data echo 12 de la même grossesse
         $dataE12 = new msCourrier();
-          $d=$d+$dataE12->getExamenData($d['patientID'], 'gynObsEcho12', $e12['id']);
+        $d=$d+$dataE12->getExamenData($d['patientID'], 'gynObsEcho12', $e12['id']);
 
         //Définition du modèle de page d'impression
         $d['templateCrHeadAndFoot']='empty.html.twig';
 
         //calcul limite dépistage
-        $dates=msModGynobsCalcMed::ddg2datesMST21($d[49]);
+        $dates=msModGynobsCalcMed::ddg2datesMST21($d['ddgReel']);
           if (is_array($dates)) {
               $d=$d+$dates;
           }
@@ -133,10 +134,10 @@ class msModGynobsDataCourrier
    * @param  array $d array des types
    * @return void
    */
-      public static function type34CompleteData(&$d)
+      public static function type_poids_CompleteData(&$d)
       {
-          if (isset($d[35])) {
-              $d[43]=msModGynobsCalcMed::imc($d[34], $d[35]);
+          if (isset($d['taillePatient'])) {
+              $d['imc']=msModGynobsCalcMed::imc($d['poids'], $d['taillePatient']);
           }
       }
 
@@ -145,11 +146,11 @@ class msModGynobsDataCourrier
    * @param  array $d array des types
    * @return void
    */
-      public static function type45CompleteData(&$d)
+      public static function type_DDR_CompleteData(&$d)
       {
-          if (msTools::validateDate($d[45], 'd/m/Y')) {
-              $d[48]=msModGynobsCalcMed::ddr2ddg($d[45]);
-              $d[50]=msModGynobsCalcMed::ddr2terme($d[45], date('d/m/Y', strtotime($d['date'])));
+          if (msTools::validateDate($d['DDR'], 'd/m/Y')) {
+              $d['ddg']=msModGynobsCalcMed::ddr2ddg($d['DDR']);
+              $d['termeDuJour']=msModGynobsCalcMed::ddr2terme($d['DDR'], date('d/m/Y', strtotime($d['date'])));
           }
       }
 
@@ -158,11 +159,11 @@ class msModGynobsDataCourrier
    * @param  array $d array des types
    * @return void
    */
-      public static function type49CompleteData(&$d)
+      public static function type_ddgReel_CompleteData(&$d)
       {
-          if (msTools::validateDate($d[49], 'd/m/Y')) {
-              $d['termeReelJourExamen']=msModGynobsCalcMed::ddg2terme($d[49], date('d/m/Y', strtotime($d['date'])));
-              $d['termeReelJourExamenMath']=msModGynobsCalcMed::ddg2termeMath($d[49], date('d/m/Y', strtotime($d['date'])));
+          if (msTools::validateDate($d['ddgReel'], 'd/m/Y')) {
+              $d['termeReelJourExamen']=msModGynobsCalcMed::ddg2terme($d['ddgReel'], date('d/m/Y', strtotime($d['date'])));
+              $d['termeReelJourExamenMath']=msModGynobsCalcMed::ddg2termeMath($d['ddgReel'], date('d/m/Y', strtotime($d['date'])));
           }
       }
 
@@ -172,67 +173,67 @@ class msModGynobsDataCourrier
   * @return void
   */
     //foetus A
-      public static function type263CompleteData(&$d)
+      public static function type_e22bipFA_CompleteData(&$d)
       {
-          $d['pct263']=msModGynobsCalcMed::bip100($d[263], $d['termeReelJourExamenMath']);
+          $d['pct263']=$d['pct_e22bipFA']=msModGynobsCalcMed::bip100($d['e22bipFA'], $d['termeReelJourExamenMath']);
       }
-    public static function type264CompleteData(&$d)
+    public static function type_e22pcFA_CompleteData(&$d)
     {
-        $d['pct264']=msModGynobsCalcMed::pc100($d[264], $d['termeReelJourExamenMath']);
+        $d['pct264']=$d['pct_e22pcFA']=msModGynobsCalcMed::pc100($d['e22pcFA'], $d['termeReelJourExamenMath']);
     }
-    public static function type265CompleteData(&$d)
+    public static function type_e22paFA_CompleteData(&$d)
     {
-        $d['pct265']=msModGynobsCalcMed::pa100($d[265], $d['termeReelJourExamenMath']);
+        $d['pct265']=$d['pct_e22paFA']=msModGynobsCalcMed::pa100($d['e22paFA'], $d['termeReelJourExamenMath']);
     }
-    public static function type266CompleteData(&$d)
+    public static function type_e22femurA_CompleteData(&$d)
     {
-        $d['pct266']=msModGynobsCalcMed::lf100($d[266], $d['termeReelJourExamenMath']);
+        $d['pct266']=$d['pct_e22femurA']=msModGynobsCalcMed::lf100($d['e22femurA'], $d['termeReelJourExamenMath']);
     }
-    public static function type267CompleteData(&$d)
+    public static function type_e22poidsFA_CompleteData(&$d)
     {
-        $d['pct267']=msModGynobsCalcMed::poids100($d[267], $d['termeReelJourExamenMath']);
+        $d['pct267']=$d['pct_e22poidsFA']=msModGynobsCalcMed::poids100($d['e22poidsFA'], $d['termeReelJourExamenMath']);
     }
       //foetus B
-      public static function type287CompleteData(&$d)
+      public static function type_e22bipFB_CompleteData(&$d)
       {
-          $d['pct287']=msModGynobsCalcMed::bip100($d[287], $d['termeReelJourExamenMath']);
+          $d['pct287']=$d['pct_e22bipFB']=msModGynobsCalcMed::bip100($d['e22bipFB'], $d['termeReelJourExamenMath']);
       }
-    public static function type316CompleteData(&$d)
+    public static function type_e22pcFB_CompleteData(&$d)
     {
-        $d['pct316']=msModGynobsCalcMed::pc100($d[316], $d['termeReelJourExamenMath']);
+        $d['pct316']=$d['pct_e22pcFB']=msModGynobsCalcMed::pc100($d['e22pcFB'], $d['termeReelJourExamenMath']);
     }
-    public static function type314CompleteData(&$d)
+    public static function type_e22paFB_CompleteData(&$d)
     {
-        $d['pct314']=msModGynobsCalcMed::pa100($d[314], $d['termeReelJourExamenMath']);
+        $d['pct314']=$d['pct_e22paFB']=msModGynobsCalcMed::pa100($d['e22paFB'], $d['termeReelJourExamenMath']);
     }
-    public static function type304CompleteData(&$d)
+    public static function type_e22femurB_CompleteData(&$d)
     {
-        $d['pct304']=msModGynobsCalcMed::lf100($d[304], $d['termeReelJourExamenMath']);
+        $d['pct304']=$d['pct_e22femurB']=msModGynobsCalcMed::lf100($d['e22femurB'], $d['termeReelJourExamenMath']);
     }
-    public static function type320CompleteData(&$d)
+    public static function type_e22poidsFB_CompleteData(&$d)
     {
-        $d['pct320']=msModGynobsCalcMed::poids100($d[320], $d['termeReelJourExamenMath']);
+        $d['pct320']=$d['pct_e22poidsFB']=msModGynobsCalcMed::poids100($d['e22poidsFB'], $d['termeReelJourExamenMath']);
     }
       //foetus C
-      public static function type289CompleteData(&$d)
+      public static function type_e22bipFC_CompleteData(&$d)
       {
-          $d['pct289']=msModGynobsCalcMed::bip100($d[289], $d['termeReelJourExamenMath']);
+          $d['pct289']=$d['pct_e22bipFC']=msModGynobsCalcMed::bip100($d['e22bipFC'], $d['termeReelJourExamenMath']);
       }
-    public static function type317CompleteData(&$d)
+    public static function type_e22pcFC_CompleteData(&$d)
     {
-        $d['pct317']=msModGynobsCalcMed::pc100($d[317], $d['termeReelJourExamenMath']);
+        $d['pct317']=$d['pct_e22pcFC']=msModGynobsCalcMed::pc100($d['e22pcFC'], $d['termeReelJourExamenMath']);
     }
-    public static function type315CompleteData(&$d)
+    public static function type_e22paFC_CompleteData(&$d)
     {
-        $d['pct315']=msModGynobsCalcMed::pa100($d[315], $d['termeReelJourExamenMath']);
+        $d['pct315']=$d['pct_e22paFC']=msModGynobsCalcMed::pa100($d['e22paFC'], $d['termeReelJourExamenMath']);
     }
-    public static function type305CompleteData(&$d)
+    public static function type_e22femurC_CompleteData(&$d)
     {
-        $d['pct305']=msModGynobsCalcMed::lf100($d[305], $d['termeReelJourExamenMath']);
+        $d['pct305']=$d['pct_e22femurC']=msModGynobsCalcMed::lf100($d['e22femurC'], $d['termeReelJourExamenMath']);
     }
-    public static function type321CompleteData(&$d)
+    public static function type_e22poidsFC_CompleteData(&$d)
     {
-        $d['pct321']=msModGynobsCalcMed::poids100($d[321], $d['termeReelJourExamenMath']);
+        $d['pct321']=$d['pct_e22poidsFC']=msModGynobsCalcMed::poids100($d['e22poidsFC'], $d['termeReelJourExamenMath']);
     }
 
 
@@ -241,68 +242,68 @@ class msModGynobsDataCourrier
     * @param  array $d array avec data examen
     * @return void
     */
-      public static function type336CompleteData(&$d)
+      public static function type_e32bipFA_CompleteData(&$d)
       {
-          $d['pct336']=msModGynobsCalcMed::bip100($d[336], $d['termeReelJourExamenMath']);
+          $d['pct336']=$d['pct_e32bipFA']=msModGynobsCalcMed::bip100($d['e32bipFA'], $d['termeReelJourExamenMath']);
       }
-    public static function type337CompleteData(&$d)
+    public static function type_e32pcFA_CompleteData(&$d)
     {
-        $d['pct337']=msModGynobsCalcMed::pc100($d[337], $d['termeReelJourExamenMath']);
+        $d['pct337']=$d['pct_e32pcFA']=msModGynobsCalcMed::pc100($d['e32pcFA'], $d['termeReelJourExamenMath']);
     }
-    public static function type338CompleteData(&$d)
+    public static function type_e32paFA_CompleteData(&$d)
     {
-        $d['pct338']=msModGynobsCalcMed::pa100($d[338], $d['termeReelJourExamenMath']);
+        $d['pct338']=$d['pct_e32paFA']=msModGynobsCalcMed::pa100($d['e32paFA'], $d['termeReelJourExamenMath']);
     }
-    public static function type339CompleteData(&$d)
+    public static function type_e32femurA_CompleteData(&$d)
     {
-        $d['pct339']=msModGynobsCalcMed::lf100($d[339], $d['termeReelJourExamenMath']);
+        $d['pct339']=$d['pct_e32femurA']=msModGynobsCalcMed::lf100($d['e32femurA'], $d['termeReelJourExamenMath']);
     }
-    public static function type340CompleteData(&$d)
+    public static function type_e32poidsFA_CompleteData(&$d)
     {
-        $d['pct340']=msModGynobsCalcMed::poids100($d[340], $d['termeReelJourExamenMath']);
+        $d['pct340']=$d['pct_e32poidsFA']=msModGynobsCalcMed::poids100($d['e32poidsFA'], $d['termeReelJourExamenMath']);
     }
 
       //foetus B
-      public static function type360CompleteData(&$d)
+      public static function type_e32bipFB_CompleteData(&$d)
       {
-          $d['pct360']=msModGynobsCalcMed::bip100($d[360], $d['termeReelJourExamenMath']);
+          $d['pct360']=$d['pct_e32bipFB']=msModGynobsCalcMed::bip100($d['e32bipFB'], $d['termeReelJourExamenMath']);
       }
-    public static function type389CompleteData(&$d)
+    public static function type_e32pcFB_CompleteData(&$d)
     {
-        $d['pct389']=msModGynobsCalcMed::pc100($d[389], $d['termeReelJourExamenMath']);
+        $d['pct389']=$d['pct_e32pcFB']=msModGynobsCalcMed::pc100($d['e32pcFB'], $d['termeReelJourExamenMath']);
     }
-    public static function type387CompleteData(&$d)
+    public static function type_e32paFB_CompleteData(&$d)
     {
-        $d['pct387']=msModGynobsCalcMed::pa100($d[387], $d['termeReelJourExamenMath']);
+        $d['pct387']=$d['pct_e32paFB']=msModGynobsCalcMed::pa100($d['e32paFB'], $d['termeReelJourExamenMath']);
     }
-    public static function type377CompleteData(&$d)
+    public static function type_e32femurB_CompleteData(&$d)
     {
-        $d['pct377']=msModGynobsCalcMed::lf100($d[377], $d['termeReelJourExamenMath']);
+        $d['pct377']=$d['pct_e32femurB']=msModGynobsCalcMed::lf100($d['e32femurB'], $d['termeReelJourExamenMath']);
     }
-    public static function type393CompleteData(&$d)
+    public static function type_e32poidsFB_CompleteData(&$d)
     {
-        $d['pct393']=msModGynobsCalcMed::poids100($d[393], $d['termeReelJourExamenMath']);
+        $d['pct393']=$d['pct_e32poidsFB']=msModGynobsCalcMed::poids100($d['e32poidsFB'], $d['termeReelJourExamenMath']);
     }
 
       //foetus C
-      public static function type362CompleteData(&$d)
+      public static function type_e32bipFC_CompleteData(&$d)
       {
-          $d['pct362']=msModGynobsCalcMed::bip100($d[362], $d['termeReelJourExamenMath']);
+          $d['pct362']=$d['pct_e32bipFC']=msModGynobsCalcMed::bip100($d['e32bipFC'], $d['termeReelJourExamenMath']);
       }
-    public static function type390CompleteData(&$d)
+    public static function type_e32pcFC_CompleteData(&$d)
     {
-        $d['pct390']=msModGynobsCalcMed::pc100($d[390], $d['termeReelJourExamenMath']);
+        $d['pct390']=$d['pct_e32pcFC']=msModGynobsCalcMed::pc100($d['e32pcFC'], $d['termeReelJourExamenMath']);
     }
-    public static function type388CompleteData(&$d)
+    public static function type_e32paFC_CompleteData(&$d)
     {
-        $d['pct388']=msModGynobsCalcMed::pa100($d[388], $d['termeReelJourExamenMath']);
+        $d['pct388']=$d['pct_e32paFC']=msModGynobsCalcMed::pa100($d['e32paFC'], $d['termeReelJourExamenMath']);
     }
-    public static function type378CompleteData(&$d)
+    public static function type_e32femurC_CompleteData(&$d)
     {
-        $d['pct378']=msModGynobsCalcMed::lf100($d[378], $d['termeReelJourExamenMath']);
+        $d['pct378']=$d['pct_e32femurC']=msModGynobsCalcMed::lf100($d['e32femurC'], $d['termeReelJourExamenMath']);
     }
-    public static function type394CompleteData(&$d)
+    public static function type_e32poidsFC_CompleteData(&$d)
     {
-        $d['pct394']=msModGynobsCalcMed::poids100($d[394], $d['termeReelJourExamenMath']);
+        $d['pct394']=$d['pct_e32poidsFC']=msModGynobsCalcMed::poids100($d['e32poidsFC'], $d['termeReelJourExamenMath']);
     }
 }
