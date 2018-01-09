@@ -62,11 +62,14 @@ class msModGynobsDataCourrier
   public static function getCourrierDataCompleteModule(&$d)
   {
 
+    $name2typeID = new msData();
+    $name2typeID = $name2typeID->getTypeIDsFromName(['groFermetureSuivi', 'nouvelleGrossesse']);
+
     //Ajouter les data de grossesse pour la rédaction de courrier / certificat
     if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
       from objets_data as pd
-      left join objets_data as eg on pd.id=eg.instance and eg.typeID='245' and eg.outdated='' and eg.deleted=''
-      where pd.toID='".$d['patientID']."' and pd.typeID=46 and pd.outdated='' and pd.deleted='' order by pd.creationDate desc
+      left join objets_data as eg on pd.id=eg.instance and eg.typeID='".$name2typeID['groFermetureSuivi']."' and eg.outdated='' and eg.deleted=''
+      where pd.toID='".$d['patientID']."' and pd.typeID='".$name2typeID['nouvelleGrossesse']."' and pd.outdated='' and pd.deleted='' order by pd.creationDate desc
       limit 1")) {
         $grossesseData = new msObjet();
         if ($grossesseData = $grossesseData->getObjetAndSons($findGro['idGro'])) {
@@ -102,8 +105,11 @@ class msModGynobsDataCourrier
       public static function getCourrierDataCompleteModuleForm_gynObsMarqueursSeriques(&$d)
       {
 
+        $name2typeID = new msData();
+        $name2typeID = $name2typeID->getTypeIDsFromName(['echo12']);
+
         // echo 12 id + date
-        $e12=msSQL::sqlUnique("select id, creationDate from objets_data where toID='".$d['patientID']."' and instance='".$d['instance']."' and typeID='33' and deleted='' and outdated='' limit 1 ");
+        $e12=msSQL::sqlUnique("select id, creationDate from objets_data where toID='".$d['patientID']."' and instance='".$d['instance']."' and typeID='".$name2typeID['echo12']."' and deleted='' and outdated='' limit 1 ");
           $d['dateEcho12'] = $e12['creationDate'];
 
         // data echo 12 de la même grossesse
