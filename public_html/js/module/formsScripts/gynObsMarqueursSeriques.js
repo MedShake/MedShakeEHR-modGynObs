@@ -27,7 +27,7 @@
 
 $(document).ready(function() {
 
-  poids = $("#p_34ID").val();
+  poids = $("#id_poids_id").val();
   if (poids < 1) alert("ATTENTION !\nLe poids de la patiente n'est pas précisé actuellement dans le dossier !\nIl est nécessaire de l'indiquer avant validation du formulaire.");
 
   $('#formName_gynObsMarqueursSeriques input[type="submit"]').attr('disabled', 'disabled');

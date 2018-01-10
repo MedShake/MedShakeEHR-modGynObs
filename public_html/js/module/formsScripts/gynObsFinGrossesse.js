@@ -28,15 +28,15 @@
 $(document).ready(function() {
 
   //echos IG : observation nombre foetus
-  $('body').on("keyup, change", '#p_244ID', function() {
+  $('body').on("keyup, change", '#id_igNbFoetus_id', function() {
     afficherFxNbFoetus();
   });
 
   //issue grossesse : calcul terme à l'acc
-  $('body').on("focusout", '#p_225ID', function() {
-    terme = termeAccCalc($('#p_225ID').val(), $('#p_45ID').val(), $('#p_49ID').val());
+  $('body').on("focusout", '#id_igDate_id', function() {
+    terme = termeAccCalc($('#id_igDate_id').val(), $('#id_DDR_id').val(), $('#id_ddgReel_id').val());
     if (terme != null) {
-      $('#p_226ID, #p_232ID, #p_238ID').val(terme);
+      $('#id_igTermeFA_id, #id_igTermeFB_id, #id_igTermeFC_id').val(terme);
     }
   });
 

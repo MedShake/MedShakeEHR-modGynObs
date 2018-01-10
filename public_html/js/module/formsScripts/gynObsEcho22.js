@@ -29,46 +29,47 @@
 $(document).ready(function() {
 
   // observation nombre foetus
-  $('body').on("keyup, change", '#p_254ID', function() {
+  $('body').on("keyup, change", '#id_nbFoetusEcho22_id', function() {
     afficherFxNbFoetus();
   });
 
   // calcul du poids et percentils
-  $('body').on("change, keyup", "#p_263ID, #p_287ID, #p_289ID, #p_264ID, #p_265ID, #p_266ID, #p_316ID, #p_314ID, #p_304ID, #p_390ID, #p_315ID, #p_305ID", function() {
-    poidsFoetal('#p_264ID', '#p_265ID', '#p_266ID', '#p_267ID');
-    poidsFoetal('#p_316ID', '#p_314ID', '#p_304ID', '#p_320ID');
-    poidsFoetal('#p_317ID', '#p_315ID', '#p_305ID', '#p_321ID');
+  $('body').on("change, keyup", "#id_e22bipFA_id, #id_e22bipFB_id, #id_e22bipFC_id, #id_e22pcFA_id, #id_e22paFA_id, #id_e22femurA_id, #id_e22pcFB_id, #id_e22paFB_id, #id_e22femurB_id, #id_e32pcFC_id, #id_e22paFC_id, #id_e22femurC_id", function() {
+
+    poidsFoetal('#id_e22pcFA_id', '#id_e22paFA_id', '#id_e22femurA_id', '#id_e22poidsFA_id');
+    poidsFoetal('#id_e22pcFB_id', '#id_e22paFB_id', '#id_e22femurB_id', '#id_e22poidsFB_id');
+    poidsFoetal('#id_e22pcFC_id', '#id_e22paFC_id', '#id_e22femurC_id', '#id_e22poidsFC_id');
 
     //foetus A
-    displayPercentiles('#p_263ID', 'bip');
-    displayPercentiles('#p_264ID', 'pc');
-    displayPercentiles('#p_265ID', 'pa');
-    displayPercentiles('#p_266ID', 'lf');
+    displayPercentiles('#id_e22bipFA_id', 'bip');
+    displayPercentiles('#id_e22pcFA_id', 'pc');
+    displayPercentiles('#id_e22paFA_id', 'pa');
+    displayPercentiles('#id_e22femurA_id', 'lf');
 
     //foetus B
     if ($('.foetusB').is(':visible')) {
-      displayPercentiles('#p_287ID', 'bip');
-      displayPercentiles('#p_316ID', 'pc');
-      displayPercentiles('#p_314ID', 'pa');
-      displayPercentiles('#p_304ID', 'lf');
+      displayPercentiles('#id_e22bipFB_id', 'bip');
+      displayPercentiles('#id_e22pcFB_id', 'pc');
+      displayPercentiles('#id_e22paFB_id', 'pa');
+      displayPercentiles('#id_e22femurB_id', 'lf');
     }
 
     //foetus C
     if ($('.foetusC').is(':visible')) {
-      displayPercentiles('#p_289ID', 'bip');
-      displayPercentiles('#p_317ID', 'pc');
-      displayPercentiles('#p_315ID', 'pa');
-      displayPercentiles('#p_305ID', 'lf');
+      displayPercentiles('#id_e22bipFC_id', 'bip');
+      displayPercentiles('#id_e22pcFC_id', 'pc');
+      displayPercentiles('#id_e22paFC_id', 'pa');
+      displayPercentiles('#id_e22femurC_id', 'lf');
     }
   });
 
   // MoM
-  $('body').on("change, keyup", "#p_275ID, #p_294ID, #p_295ID", function() {
-    mom = momCalc($(this).val(), $('#p_50ID').attr('data-tdj4math'));
-    idsource=$(this).attr('data-typeid');
-    if(idsource == '275') $('#p_276ID').val(mom);
-    if(idsource == '294') $('#p_292ID').val(mom);
-    if(idsource == '295') $('#p_293ID').val(mom);
+  $('body').on("change, keyup", "#id_e22dopACMVFA_id, #id_e22dopACMVFB_id, #id_e22dopACMVFC_id", function() {
+    mom = momCalc($(this).val(), $('#id_termeDuJour_id').attr('data-tdj4math'));
+    idsource=$(this).attr('id');
+    if(idsource == 'id_e22dopACMVFA_id') $('#id_e22dopACMMoMFA_id').val(mom);
+    if(idsource == 'id_e22dopACMVFB_id') $('#id_e22dopACMMoMFB_id').val(mom);
+    if(idsource == 'id_e22dopACMVFC_id') $('#id_e22dopACMMoMFC_id').val(mom);
   });
 
 

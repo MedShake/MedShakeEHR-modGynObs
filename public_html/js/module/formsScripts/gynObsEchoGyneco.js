@@ -28,15 +28,15 @@
 $(document).ready(function() {
 
   //calculer nb jour du cycle
-  $('body').on("focusout", '#p_432ID', function() {
+  $('body').on("focusout", '#id_eGynDDR_id', function() {
 
-    ddr = $('#p_432ID').val();
+    ddr = $('#id_eGynDDR_id').val();
     var today = moment().startOf('day');
     var ddrm = moment(ddr, "DD-MM-YYYY");
 
     if (ddrm.isValid()) {
       jours = today.diff(ddrm, 'days')+1;
-      $('#p_432IDAddOnG').text('J'+jours);
+      $('#id_eGynDDR_idAddOnG').text('J'+jours);
     }
 
 

@@ -37,7 +37,7 @@ $(document).ready(function() {
   });
 
   // Si on change la DDR
-  $("#p_45Id").on("dp.change", function(e) {
+  $("#before_DDR").on("dp.change", function(e) {
     calcAndDisplayTdj();
     calcAndDisplayDdgt();
     calcAndDisplayT9m();
@@ -50,7 +50,7 @@ $(document).ready(function() {
 
 
   // Si on change la DDG retenue
-  $("#p_49Id").on("dp.change", function(e) {
+  $("#before_ddgReel").on("dp.change", function(e) {
     calcAndDisplayTdj();
     calcAndDisplayT9m();
     if (typeof(dicomAutoSendPatient2Echo) != "undefined") {
@@ -80,29 +80,29 @@ $(document).ready(function() {
 
 // calculer et afficher terme du jour
 function calcAndDisplayTdj() {
-  tdj = tdjCalc($('#p_45ID').val(), $('#p_49ID').val());
+  tdj = tdjCalc($('#id_DDR_id').val(), $('#id_ddgReel_id').val());
   if (tdj['status'] == 'ok') {
-    $('#p_50ID').val(tdj['human']);
-    $('#p_50ID').attr('data-tdj4math', tdj['math']);
+    $('#id_termeDuJour_id').val(tdj['human']);
+    $('#id_termeDuJour_id').attr('data-tdj4math', tdj['math']);
   } else {
-    $('#p_50ID').val('');
-    $('#p_50ID').attr('data-tdj4math', '');
+    $('#id_termeDuJour_id').val('');
+    $('#id_termeDuJour_id').attr('data-tdj4math', '');
   }
 }
 
 // calculer et afficher terme 9 mois
 function calcAndDisplayT9m() {
-  t9 = terme9mCalc($('#p_45ID').val(), $('#p_49ID').val());
+  t9 = terme9mCalc($('#id_DDR_id').val(), $('#id_ddgReel_id').val());
   if (t9['status'] == 'ok') {
-    $('#p_485ID').val(t9['human']);
+    $('#id_terme9mois_id').val(t9['human']);
   } else {
-    $('#p_485ID').val('');
+    $('#id_terme9mois_id').val('');
   }
 }
 
 
 //calculer et afficher DDG théo
 function calcAndDisplayDdgt() {
-  ddgt = ddgtCalc($('#p_45ID').val());
-  $('#p_48ID').val(ddgt);
+  ddgt = ddgtCalc($('#id_DDR_id').val());
+  $('#id_ddg_id').val(ddgt);
 }

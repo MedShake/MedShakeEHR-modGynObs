@@ -28,27 +28,27 @@
 $(document).ready(function() {
 
   // observation nombre foetus
-  $('body').on("keyup, change", '#p_131ID', function() {
+  $('body').on("keyup, change", '#id_e11nbembryons_id', function() {
     afficherFxNbFoetus();
   });
 
 
   //calcul du terme en fonction lcc
-  $('body').on("change, keyup", "#p_125ID, #p_151ID, #p_165ID", function() {
+  $('body').on("change, keyup", "#id_e11embryLCCFA_id, #id_e11embryLCCFB_id, #id_e11embryLCCFC_id", function() {
     //E11
-    if ($('#p_125ID').val() > 0) majLCC2Terme($('#p_125ID').val(), 202);
-    if ($('#p_151ID').val() > 0) majLCC2Terme($('#p_151ID').val(), 203);
-    if ($('#p_165ID').val() > 0) majLCC2Terme($('#p_165ID').val(), 204);
+    if ($('#id_e11embryLCCFA_id').val() > 0) majLCC2Terme($('#id_e11embryLCCFA_id').val(), '#id_E11termeLCCFA_id');
+    if ($('#id_e11embryLCCFB_id').val() > 0) majLCC2Terme($('#id_e11embryLCCFB_id').val(), '#id_E11termeLCCFB_id');
+    if ($('#id_e11embryLCCFC_id').val() > 0) majLCC2Terme($('#id_e11embryLCCFC_id').val(), '#id_E11termeLCCFC_id');
   });
-  if ($('#p_125ID').val() > 0) majLCC2Terme($('#p_125ID').val(), 202);
-  if ($('#p_151ID').val() > 0) majLCC2Terme($('#p_151ID').val(), 203);
-  if ($('#p_165ID').val() > 0) majLCC2Terme($('#p_165ID').val(), 204);
+  if ($('#id_e11embryLCCFA_id').val() > 0) majLCC2Terme($('#id_e11embryLCCFA_id').val(), '#id_E11termeLCCFA_id');
+  if ($('#id_e11embryLCCFB_id').val() > 0) majLCC2Terme($('#id_e11embryLCCFB_id').val(), '#id_E11termeLCCFB_id');
+  if ($('#id_e11embryLCCFC_id').val() > 0) majLCC2Terme($('#id_e11embryLCCFC_id').val(), '#id_E11termeLCCFC_id');
 
   //définir comme DGE
-  $('body').on("dblclick", " #p_202ID, #p_203ID, #p_204ID", function(event) {
+  $('body').on("dblclick", " #id_E11termeLCCFA_id, #id_E11termeLCCFB_id, #id_E11termeLCCFC_id", function(event) {
     setDGE(event);
   });
-  $('body').on("click", " #p_202Button, #p_203Button, #p_204Button", function(event) {
+  $('body').on("click", " #id_E11termeLCCFA_idButton, #id_E11termeLCCFB_idButton, #id_E11termeLCCFC_idButton", function(event) {
     event.preventDefault();
     setDGE(event);
   });
