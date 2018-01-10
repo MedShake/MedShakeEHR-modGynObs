@@ -33,11 +33,11 @@
 
 //function afficher masque en fonction nombre foetus
 function afficherFxNbFoetus() {
-  if ($('#p_70ID').val()) nombreFoetus = $('#p_70ID').val();
-  else if ($('#p_131ID').val()) nombreFoetus = $('#p_131ID').val();
-  else if ($('#p_244ID').val()) nombreFoetus = $('#p_244ID').val();
-  else if ($('#p_254ID').val()) nombreFoetus = $('#p_254ID').val();
-  else if ($('#p_327ID').val()) nombreFoetus = $('#p_327ID').val();
+  if ($('#id_nbFoetusEcho12_id').val()) nombreFoetus = $('#id_nbFoetusEcho12_id').val();
+  else if ($('#id_e11nbembryons_id').val()) nombreFoetus = $('#id_e11nbembryons_id').val();
+  else if ($('#id_igNbFoetus_id').val()) nombreFoetus = $('#id_igNbFoetus_id').val();
+  else if ($('#id_nbFoetusEcho22_id').val()) nombreFoetus = $('#id_nbFoetusEcho22_id').val();
+  else if ($('#id_nbFoetusEcho32_id').val()) nombreFoetus = $('#id_nbFoetusEcho32_id').val();
   else return true;
 
   if (nombreFoetus == 1) {
@@ -62,34 +62,34 @@ function afficherFxNbFoetus() {
 
   //activations des autres champs
   //E11
-  if ($('#p_131ID').val() > 1) {
-    $('#p_171ID').removeAttr('disabled');
-    $('#p_172ID').removeAttr('disabled');
+  if ($('#id_e11nbembryons_id').val() > 1) {
+    $('#id_e11typeGro_id').removeAttr('disabled');
+    $('#id_e11membrane_id').removeAttr('disabled');
   } else {
-    $('#p_171ID').attr('disabled', 'disabled');
-    $('#p_172ID').attr('disabled', 'disabled');
+    $('#id_e11typeGro_id').attr('disabled', 'disabled');
+    $('#id_e11membrane_id').attr('disabled', 'disabled');
   }
   //E12
-  if ($('#p_70ID').val() > 1) {
-    $('#p_209ID').removeAttr('disabled');
-    $('#p_210ID').removeAttr('disabled');
+  if ($('#id_nbFoetusEcho12_id').val() > 1) {
+    $('#id_e12typeGro_id').removeAttr('disabled');
+    $('#id_e12membrane_id').removeAttr('disabled');
   } else {
-    $('#p_209ID').attr('disabled', 'disabled');
-    $('#p_210ID').attr('disabled', 'disabled');
+    $('#id_e12typeGro_id').attr('disabled', 'disabled');
+    $('#id_e12membrane_id').attr('disabled', 'disabled');
   }
   //E22
-  if ($('#p_254ID').val() > 1) {
-    $('#p_255ID').removeAttr('disabled');
-    $('#p_256ID').removeAttr('disabled');
+  if ($('#id_nbFoetusEcho22_id').val() > 1) {
+    $('#id_e22typeGro_id').removeAttr('disabled');
+    $('#id_e22membrane_id').removeAttr('disabled');
   } else {
-    $('#p_255ID').attr('disabled', 'disabled');
-    $('#p_256ID').attr('disabled', 'disabled');
+    $('#id_e22typeGro_id').attr('disabled', 'disabled');
+    $('#id_e22membrane_id').attr('disabled', 'disabled');
   }
   //E32
-  if ($('#p_327ID').val() > 1) {
-    $('#p_328ID').removeAttr('disabled');
+  if ($('#id_nbFoetusEcho32_id').val() > 1) {
+    $('#id_e32typeGro_id').removeAttr('disabled');
   } else {
-    $('#p_328ID').attr('disabled', 'disabled');
+    $('#id_e32typeGro_id').attr('disabled', 'disabled');
   }
 }
 
@@ -121,13 +121,13 @@ function setDGE(event) {
   // on agit
   if (dgevalid != null) {
 
-    $('#p_49ID').val(dgevalid);
+    $('#id_ddgReel_id').val(dgevalid);
 
     //on sauvegarde
     patientID = $('#identitePatient').attr("data-patientID");
     typeID = 49;
-    source = $('#p_49ID');
-    instance = $('#p_49ID').closest("form").attr("data-instance");
+    source = $('#id_ddgReel_id');
+    instance = $('#id_ddgReel_id').closest("form").attr("data-instance");
     setPeopleData(dgevalid, patientID, typeID, source, instance);
 
     //on met à jour le terme du jour
@@ -138,6 +138,7 @@ function setDGE(event) {
 
 // Calculer et afficher le terme à partir de la LCC (echo < 11 et echo 12)
 function majLCC2Terme(lcc, cible) {
+
   JA = lcc2terme(lcc);
 
   //terme
@@ -152,15 +153,15 @@ function majLCC2Terme(lcc, cible) {
 
   string = string + ' - ' + dge;
 
-  $('input[data-typeid="' + cible + '"]').val(string);
-  $('input[data-typeid="' + cible + '"]').attr('data-joursa', JA);
-  $('#p_' + cible + 'Button').attr('data-joursa', JA);
+  $(cible).val(string);
+  $(cible).attr('data-joursa', JA);
+  $(cible + 'Button').attr('data-joursa', JA);
 }
 
 //affichage percentiles
 function displayPercentiles(inputSource, type) {
 
-  SA = arrondir10(parseFloat($('#p_50ID').attr('data-tdj4math')));
+  SA = arrondir10(parseFloat($('#id_termeDuJour_id').attr('data-tdj4math')));
   mesure = $(inputSource).val();
 
   if (type == 'bip') {
