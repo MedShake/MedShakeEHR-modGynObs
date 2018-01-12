@@ -30,6 +30,6 @@
 $patient = new msObjet();
 $patient->setFromID($p['user']['id']);
 $patient->setToID($match['params']['patientID']);
-$patient->createNewObjet('46', '');
+$patient->createNewObjetByTypeName('nouvelleGrossesse', '');
 
 msTools::redirection('/patient/'.$match['params']['patientID'].'/');

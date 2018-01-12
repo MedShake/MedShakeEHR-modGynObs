@@ -30,7 +30,7 @@
 $patient = new msObjet();
 $patient->setFromID($p['user']['id']);
 $patient->setToID($match['params']['patientID']);
-$patient->createNewObjet('245', '', $match['params']['objetID']);
+$patient->createNewObjetByTypeName('groFermetureSuivi', '', $match['params']['objetID']);
 
 
 msTools::redirection('/patient/'.$match['params']['patientID'].'/');
