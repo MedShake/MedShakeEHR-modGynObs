@@ -184,14 +184,18 @@ INSERT INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='catModelesCertificats');
 INSERT INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('courrier', 'consentementEcho', '', 'Consentement échographie foetale', 'Consentement échographie foetale', 'base', '', '', 'consentementEcho', 'gynobs', @catID, 1, '2017-05-09 17:47:38', 3600, 1);
+('courrier', 'consentementEcho', '', 'Consentement échographie foetale', 'Consentement échographie foetale', '', '', '', 'consentementEcho', 'gynobs', @catID, 1, '2017-05-09 17:47:38', 3600, 1),
+('courrier', 'pratiqueSportive', '', 'Certificat de pratique sportive', 'autorisation pratique sportive', '', '', '', 'certif-pratiqueSportive', 'gynobs', @catID, 1, '2017-04-10 16:14:31', 3600, 1),
+('courrier', 'certifPresenceConsultation', '', 'Certificat présence à la consultation', 'certificat présence à la consultation', '', '', '', 'certif-presence', 'gynobs', @catID, 1, '2017-05-15 09:15:17', 3600, 1),
+('courrier', 'certifDemandeIVG', '', 'Certificat de demande d\'IVG', 'certificat demande IVG', '', '', '', 'certif-demandeIVG', 'gynobs', @catID, 1, '2017-05-15 09:15:17', 3600, 1),
+('courrier', 'certifGrossesse', '', 'Certificat de grossesse', 'certificat grossesse', '', '', '', 'certif-grossesse', 'gynobs', @catID, 1, '2017-05-15 09:15:17', 3600, 1),
+('courrier', 'certifProlongationActivite', '', 'Certificat de prolongation d\'activité', 'certificat de prolongation d\'activité', '', '', '', 'certif-prolongationActivite', 'gynobs', @catID, 1, '2017-05-15 09:15:17', 3600, 1);
 
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='catModelesCourriers');
 INSERT INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('courrier', 'modeleCourrierResumeDossier', '', 'Résumé dossier', 'modèle de courrier pour un résumé du dossier', 'gynobs', '', '', 'courrier-resumeDossier', 'gynobs', @catID, 1, '2018-01-08 15:27:58', 3600, 1),
-('courrier', 'modeleCourrierDemandeRdv', '', 'Demande de rendez-vous', 'modèle de courrier vierge', 'base', '', '', 'courrier-demandeDeRdv', 'gynobs', @catID, 1, '2017-06-08 15:10:43', 3600, 0);
-
+('courrier', 'modeleCourrierResumeDossier', '', 'Résumé dossier', 'modèle de courrier pour un résumé du dossier', '', '', '', 'courrier-resumeDossier', 'gynobs', @catID, 1, '2018-01-08 15:27:58', 3600, 1),
+('courrier', 'modeleCourrierBUD', '', 'Demande de BUD', 'modèle de courrier pour demande de BUD', '', '', '', 'courrier-bud', 'gynobs', @catID, 1, '2018-01-08 15:27:58', 3600, 1);
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='echoInf11');
 INSERT INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
