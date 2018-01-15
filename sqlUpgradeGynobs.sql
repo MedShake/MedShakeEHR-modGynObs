@@ -6,7 +6,7 @@ INSERT INTO `system` (`module`,`version`) VALUES ('gynobs', 'v3.0.0');
 update `actes_cat` set module='gynobs';
 
 update forms set module='gynobs' where internalName like 'gynObs%';
-update `data_types` set validationRules='base' WHERE `groupe` = 'courrier'
+update `data_types` set module='gynobs' WHERE `groupe` = 'courrier'
 
 -- 1.1.3 to 2.0.0
 UPDATE data_types set formType='checkbox' where id in ('436','492','493','496');
