@@ -115,16 +115,16 @@
 
                     <div class="centrer t10" style=" display : inline-block; float : right; width : 45%; vertical-align : top; border : 1px solid #000; height : 110pt">
                         <br><br><br>
-                        <span class="gras t10">{% if tag.14 == 'Femme' %}Madame{% elseif tag.14 == 'Homme' %}Monsieur{% endif %} {{ tag.3 }}
+                        <span class="gras t10">{% if tag.14 == 'Femme' %}Mme{% elseif tag.14 == 'Homme' %}M.{% endif %}
                             {{ tag.3 }}
-                            {{ tag.2 }}</span><br>({{ tag.8 }})
+                            {{ tag.nomsUsageNaissance }}</span><br>({{ tag.8 }})
                     </div>
                 </div>
 
                 <!-- footer standard -->
                 <div id="footer">
-                    <p>RPPS<br><img src="/home/bertrand/Sites/EHR/public_html/img/rpps.jpg" style="width : 130px; height : 40px"></p>
-                    <p>ADELI<br><img src="/home/bertrand/Sites/EHR/public_html/img/adeli.jpg" style="width : 130px; height : 40px"></p>
+                    <p>RPPS<br><img src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/img/rpps.jpg" style="width : 130px; height : 40px"></p>
+                    <p>ADELI<br><img src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/img/adeli.jpg" style="width : 130px; height : 40px"></p>
                     <p><br>Membre d’une AGA, règlement par chèque accepté.</p>
                 </div>
                 <!-- stop head -->
