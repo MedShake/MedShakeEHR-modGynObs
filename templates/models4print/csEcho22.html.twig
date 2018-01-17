@@ -38,106 +38,106 @@
 
 <p>
   <span class="gras">Date d'examen :</span> {{ tag.date|date("d/m/Y") }}<br>
-  <span class="gras">DDG retenue : {{ tag.49 }}</span> soit un terme de {{ tag.termeReelJourExamen }}.
+  <span class="gras">DDG retenue : {{ tag.ddgReel }}</span> soit un terme de {{ tag.termeReelJourExamen }}.
 </p>
 
 <p>
-  <span class="gras">Voie d’examen :</span> {{ tag.258 }} &nbsp;-&nbsp;
-  <span class="gras">Conditions d’examen :</span> {{ tag.257 }} {% if tag.43 %}<span class="t6">(IMC : {{ tag.43 }})</span>{% endif %}<br>
-  <span class="gras">Indication :</span> {{ tag.253 }}<br>
+  <span class="gras">Voie d’examen :</span> {{ tag.voieExamEcho22 }} &nbsp;-&nbsp;
+  <span class="gras">Conditions d’examen :</span> {{ tag.conditionsEcho22 }} {% if tag.imc %}<span class="t6">(IMC : {{ tag.imc }})</span>{% endif %}<br>
+  <span class="gras">Indication :</span> {{ tag.indicEcho22 }}<br>
 </p>
 
 
-<p><span class="gras">Nombre de fœtus : {{ tag.254 }}</span>
-{% if tag.254 > 1 %}
-  <br><span class="gras">Type de grossesse :</span> {{ tag.255 }}
-  <br><span class="gras">Membrane :</span> {{ tag.256 }}
+<p><span class="gras">Nombre de fœtus : {{ tag.nbFoetusEcho22 }}</span>
+{% if tag.nbFoetusEcho22 > 1 %}
+  <br><span class="gras">Type de grossesse :</span> {{ tag.e22typeGro }}
+  <br><span class="gras">Membrane :</span> {{ tag.e22membrane }}
 {% endif %}
 </p>
 
-<h3>{% if tag.254 == 1 %}Fœtus unique{% else %}Fœtus A{% endif %}</h3>
+<h3>{% if tag.nbFoetusEcho22 == 1 %}Fœtus unique{% else %}Fœtus A{% endif %}</h3>
   <h4>Présentation et vitalité</h4>
   <ul>
-  <li>Présentation : {{ tag.259 }}</li>
-  <li>Activité cardiaque : {{ tag.260 }}</li>
-  {% if tag.261 %}<li>Fréquence cardiaque : {{ tag.261 }} bpm</li>{% endif %}
-  <li>Mouvements foetaux : {{ tag.262 }}</li>
+  <li>Présentation : {{ tag.e22presentationFA }}</li>
+  <li>Activité cardiaque : {{ tag.e22actiCardioFA }}</li>
+  {% if tag.e22rcfFA %}<li>Fréquence cardiaque : {{ tag.e22rcfFA }} bpm</li>{% endif %}
+  <li>Mouvements foetaux : {{ tag.e22mafFA }}</li>
   </ul>
 
   <h4>Biométries <small>(CFEF)</small></h4>
   <ul>
-  <li>BIP : {{ tag.263 }} mm soit {{ tag.pct263 }}e percentiles</li>
-  <li>Périmètre crânien : {{ tag.264 }} mm soit {{ tag.pct264 }}e percentiles</li>
-  <li>Périmètre abdominal : {{ tag.265 }} mm soit {{ tag.pct265 }}e percentiles</li>
-  <li>Fémur : {{ tag.266 }} mm soit {{ tag.pct266 }}e percentiles</li>
-  <li>Poids estimé <span class="t6">(+/- 20% maximum - Hadlock)</span> : {{ tag.267 }} g soit {{ tag.pct267 }}e percentiles</li>
+  <li>BIP : {{ tag.e22bipFA }} mm soit {{ tag.pct_e22bipFA }}e percentiles</li>
+  <li>Périmètre crânien : {{ tag.e22pcFA }} mm soit {{ tag.pct_e22pcFA }}e percentiles</li>
+  <li>Périmètre abdominal : {{ tag.e22paFA }} mm soit {{ tag.pct_e22paFA }}e percentiles</li>
+  <li>Fémur : {{ tag.e22femurA }} mm soit {{ tag.pct_e22femurA }}e percentiles</li>
+  <li>Poids estimé <span class="t6">(+/- 20% maximum - Hadlock)</span> : {{ tag.e22poidsFA }} g soit {{ tag.pct_e22poidsFA }}e percentiles</li>
   </ul>
 
   <h4>Morphologie</h4>
 
-  {{ tag.268|nl2br }}<br>
-  {% if tag.val269 == 'XX' %}Les organes génitaux externes sont de type féminin.
-  {% elseif tag.val269 == 'XY' %}Les organes génitaux externes sont de type masculin.
-  {% elseif tag.val269 == 'XXnr' or tag.val269 == 'XYnr' %}Les organes génitaux externes sont normaux.
-  {% elseif tag.val269 == 'NV' %}Les organes génitaux externes n'ont pas été visualisés ce jour.
+  {{ tag.e22morphologieGeneralesFA|nl2br }}<br>
+  {% if tag.val_e22morphoOGEFA == 'XX' %}Les organes génitaux externes sont de type féminin.
+  {% elseif tag.val_e22morphoOGEFA == 'XY' %}Les organes génitaux externes sont de type masculin.
+  {% elseif tag.val_e22morphoOGEFA == 'XXnr' or tag.val_e22morphoOGEFA == 'XYnr' %}Les organes génitaux externes sont normaux.
+  {% elseif tag.val_e22morphoOGEFA == 'NV' %}Les organes génitaux externes n'ont pas été visualisés ce jour.
   {% endif %}
 
 
   <h4>Annexes</h4>
   <ul>
-  <li>{{ tag.270 }}</li> {# liquide et cordon #}
-  <li>Placenta : {{ tag.271 }}</li>
+  <li>{{ tag.e22liquideEtcordonFA }}</li> {# liquide et cordon #}
+  <li>Placenta : {{ tag.e22placentaFA }}</li>
   </ul>
 
-  {% if tag.272 or tag.274 or tag.277 %}
+  {% if tag.e22dopOmbiIRFA or tag.e22dopACMIRFA or tag.e22dopArantiusIRFA %}
     <h4>Doppler</h4>
     <ul>
-      {% if tag.272 %}<li>Doppler ombilical - IR : {{ tag.272 }} / Flux en diastole : {{ tag.273 }}</li>{% endif %}
-      {% if tag.274 %}<li>Doppler ACM - IR : {{ tag.274 }} {% if tag.275 %}/ Vitesse : {{ tag.275 }}{% endif %} {% if tag.276 %}/ MoM : {{ tag.276 }}{% endif %}</li>{% endif %}
-      {% if tag.277 %}<li>Doppler Arantius - IR : {{ tag.277 }} / Onde A : {{ tag.278 }}</li>{% endif %}
+      {% if tag.e22dopOmbiIRFA %}<li>Doppler ombilical - IR : {{ tag.e22dopOmbiIRFA }} / Flux en diastole : {{ tag.e22dopOmbiFEDiaFA }}</li>{% endif %}
+      {% if tag.e22dopACMIRFA %}<li>Doppler ACM - IR : {{ tag.e22dopACMIRFA }} {% if tag.e22dopACMVFA %}/ Vitesse : {{ tag.e22dopACMVFA }}{% endif %} {% if tag.e22dopACMMoMFA %}/ MoM : {{ tag.e22dopACMMoMFA }}{% endif %}</li>{% endif %}
+      {% if tag.e22dopArantiusIRFA %}<li>Doppler Arantius - IR : {{ tag.e22dopArantiusIRFA }} / Onde A : {{ tag.e22dopArantiusOAFA }}</li>{% endif %}
     </ul>
   {% endif %}
 
-  {% if tag.254 >= 2 %}
+  {% if tag.nbFoetusEcho22 >= 2 %}
       <h3>Fœtus B</h3>
       <h4>Présentation et vitalité</h4>
       <ul>
-      <li>Présentation : {{ tag.322 }}</li>
-      <li>Activité cardiaque : {{ tag.286 }}</li>
-      {% if tag.324 %}<li>Fréquence cardiaque : {{ tag.324 }} bpm</li>{% endif %}
-      <li>Mouvements foetaux : {{ tag.308 }}</li>
+      <li>Présentation : {{ tag.e22presentationFB }}</li>
+      <li>Activité cardiaque : {{ tag.e22actiCardioFB }}</li>
+      {% if tag.e22rcfFB %}<li>Fréquence cardiaque : {{ tag.e22rcfFB }} bpm</li>{% endif %}
+      <li>Mouvements foetaux : {{ tag.e22mafFB }}</li>
       </ul>
 
       <h4>Biométries <small>(CFEF)</small></h4>
       <ul>
-      <li>BIP : {{ tag.287 }} mm soit {{ tag.pct287 }}e percentiles</li>
-      <li>Périmètre crânien : {{ tag.316 }} mm soit {{ tag.pct316 }}e percentiles</li>
-      <li>Périmètre abdominal : {{ tag.314 }} mm soit {{ tag.pct314 }}e percentiles</li>
-      <li>Fémur : {{ tag.304 }} mm soit {{ tag.pct304 }}e percentiles</li>
-      <li>Poids estimé <span style="font-size : 6pt">(+/- 20% maximum - Hadlock)</span> : {{ tag.320 }} g soit {{ tag.pct320 }}e percentiles</li>
+      <li>BIP : {{ tag.e22bipFB }} mm soit {{ tag.pct_e22bipFB }}e percentiles</li>
+      <li>Périmètre crânien : {{ tag.e22pcFB }} mm soit {{ tag.pct_e22pcFB }}e percentiles</li>
+      <li>Périmètre abdominal : {{ tag.e22paFB }} mm soit {{ tag.pct_e22paFB }}e percentiles</li>
+      <li>Fémur : {{ tag.e22femurB }} mm soit {{ tag.pct_e22femurB }}e percentiles</li>
+      <li>Poids estimé <span style="font-size : 6pt">(+/- 20% maximum - Hadlock)</span> : {{ tag.e22poidsFB }} g soit {{ tag.pct_e22poidsFB }}e percentiles</li>
       </ul>
 
       <h4>Morphologie</h4>
-      {{ tag.310|nl2br }}<br>
-      {% if tag.val312 == 'XX' %}Les organes génitaux externes sont de type féminin.
-      {% elseif tag.val312 == 'XY' %}Les organes génitaux externes sont de type masculin.
-      {% elseif tag.val312 == 'XXnr' or tag.val312 == 'XYnr' %}Les organes génitaux externes sont normaux.
-      {% elseif tag.val312 == 'NV' %}Les organes génitaux externes n'ont pas été visualisés ce jour.
+      {{ tag.e22morphologieGeneralesFB|nl2br }}<br>
+      {% if tag.val_e22morphoOGEFB == 'XX' %}Les organes génitaux externes sont de type féminin.
+      {% elseif tag.val_e22morphoOGEFB == 'XY' %}Les organes génitaux externes sont de type masculin.
+      {% elseif tag.val_e22morphoOGEFB == 'XXnr' or tag.val_e22morphoOGEFB == 'XYnr' %}Les organes génitaux externes sont normaux.
+      {% elseif tag.val_e22morphoOGEFB == 'NV' %}Les organes génitaux externes n'ont pas été visualisés ce jour.
       {% endif %}
 
 
       <h4>Annexes</h4>
       <ul>
-      <li>{{ tag.306 }}</li> {# liquide et cordon #}
-      <li>Placenta : {{ tag.318 }}</li>
+      <li>{{ tag.e22liquideEtcordonFB }}</li> {# liquide et cordon #}
+      <li>Placenta : {{ tag.e22placentaFB }}</li>
       </ul>
 
-      {% if tag.302 or tag.290 or tag.296 %}
+      {% if tag.e22dopOmbiIRFB or tag.e22dopACMIRFB or tag.e22dopArantiusIRFB %}
         <h4>Dopplers</h4>
         <ul>
-          {% if tag.302 %}<li>Doppler ombilical - IR : {{ tag.302 }} / Flux en diastole : {{ tag.300 }}</li>{% endif %}
-          {% if tag.290 %}<li>Doppler ACM - IR : {{ tag.290 }} {% if tag.294 %}/ Vitesse : {{ tag.294 }}{% endif %} {% if tag.292 %}/ MoM : {{ tag.292 }}{% endif %}</li>{% endif %}
-          {% if tag.296 %}<li>Doppler Arantius - IR : {{ tag.296 }} / Onde A : {{ tag.298 }}</li>{% endif %}
+          {% if tag.e22dopOmbiIRFB %}<li>Doppler ombilical - IR : {{ tag.e22dopOmbiIRFB }} / Flux en diastole : {{ tag.e22dopOmbiFEDiaFB }}</li>{% endif %}
+          {% if tag.e22dopACMIRFB %}<li>Doppler ACM - IR : {{ tag.e22dopACMIRFB }} {% if tag.e22dopACMVFB %}/ Vitesse : {{ tag.e22dopACMVFB }}{% endif %} {% if tag.e22dopACMMoMFB %}/ MoM : {{ tag.e22dopACMMoMFB }}{% endif %}</li>{% endif %}
+          {% if tag.e22dopArantiusIRFB %}<li>Doppler Arantius - IR : {{ tag.e22dopArantiusIRFB }} / Onde A : {{ tag.e22dopArantiusOAFB }}</li>{% endif %}
         </ul>
       {% endif %}
 
@@ -145,46 +145,46 @@
   {% endif %}
 
 
-{% if tag.254 >= 3 %}
+{% if tag.nbFoetusEcho22 >= 3 %}
   <h3>Fœtus C</h3>
   <h4>Présentation et vitalité</h4>
   <ul>
-  <li>Présentation : {{ tag.323 }}</li>
-  <li>Activité cardiaque : {{ tag.288 }}</li>
-  {% if tag.325 %}<li>Fréquence cardiaque : {{ tag.325 }} bpm</li>{% endif %}
-  <li>Mouvements foetaux : {{ tag.309 }}</li>
+  <li>Présentation : {{ tag.e22presentationFC }}</li>
+  <li>Activité cardiaque : {{ tag.e22actiCardioFC }}</li>
+  {% if tag.e22rcfFC %}<li>Fréquence cardiaque : {{ tag.e22rcfFC }} bpm</li>{% endif %}
+  <li>Mouvements foetaux : {{ tag.e22mafFC }}</li>
   </ul>
 
   <h4>Biométries <small>(CFEF)</small></h4>
   <ul>
-  <li>BIP : {{ tag.289 }} mm soit {{ tag.pct289 }}e percentiles</li>
-  <li>Périmètre crânien : {{ tag.317 }} mm soit {{ tag.pct317 }}e percentiles</li>
-  <li>Périmètre abdominal : {{ tag.315 }} mm soit {{ tag.pct315 }}e percentiles</li>
-  <li>Fémur : {{ tag.305 }} mm soit {{ tag.pct305 }}e perentiles</li>
-  <li>Poids estimé <span style="font-size : 6pt">(+/- 20% maximum  - Hadlock)</span> : {{ tag.321 }} g soit {{ tag.pct321 }}e percentiles</li>
+  <li>BIP : {{ tag.e22bipFC }} mm soit {{ tag.pct_e22bipFC }}e percentiles</li>
+  <li>Périmètre crânien : {{ tag.e22pcFC }} mm soit {{ tag.pct_e22pcFC }}e percentiles</li>
+  <li>Périmètre abdominal : {{ tag.e22paFC }} mm soit {{ tag.pct_e22paFC }}e percentiles</li>
+  <li>Fémur : {{ tag.e22femurC }} mm soit {{ tag.pct_e22femurC }}e perentiles</li>
+  <li>Poids estimé <span style="font-size : 6pt">(+/- 20% maximum  - Hadlock)</span> : {{ tag.e22poidsFC }} g soit {{ tag.pct_e22poidsFC }}e percentiles</li>
   </ul>
 
   <h4>Morphologie</h4>
 
-  {{ tag.311|nl2br }}<br>
-  {% if tag.val313 == 'XX' %}Les organes génitaux externes sont de type féminin.
-  {% elseif tag.val313 == 'XY' %}Les organes génitaux externes sont de type masculin.
-  {% elseif tag.val313 == 'XXnr' or tag.val313 == 'XYnr' %}Les organes génitaux externes sont normaux.
-  {% elseif tag.val313 == 'NV' %}Les organes génitaux externes n'ont pas été visualisés ce jour.
+  {{ tag.e22morphologieGeneralesFC|nl2br }}<br>
+  {% if tag.val_e22morphoOGEFC == 'XX' %}Les organes génitaux externes sont de type féminin.
+  {% elseif tag.val_e22morphoOGEFC == 'XY' %}Les organes génitaux externes sont de type masculin.
+  {% elseif tag.val_e22morphoOGEFC == 'XXnr' or tag.val_e22morphoOGEFC == 'XYnr' %}Les organes génitaux externes sont normaux.
+  {% elseif tag.val_e22morphoOGEFC == 'NV' %}Les organes génitaux externes n'ont pas été visualisés ce jour.
   {% endif %}
 
   <h4>Annexes</h4>
   <ul>
-  <li>{{ tag.307 }}</li> {# liquide et cordon #}
-  <li>Placenta : {{ tag.319 }}</li>
+  <li>{{ tag.e22liquideEtcordonFC }}</li> {# liquide et cordon #}
+  <li>Placenta : {{ tag.e22placentaFC }}</li>
   </ul>
 
-  {% if tag.303 or tag.291 or tag.297 %}
+  {% if tag.e22dopOmbiIRFC or tag.e22dopACMIRFC or tag.e22dopArantiusIRFC %}
     <h4>Doppler</h4>
     <ul>
-      {% if tag.303 %}<li>Doppler ombilical - IR : {{ tag.303 }} / Flux en diastole : {{ tag.301 }}</li>{% endif %}
-      {% if tag.291 %}<li>Doppler ACM - IR : {{ tag.291 }} {% if tag.295 %}/ Vitesse : {{ tag.295 }}{% endif %} {% if tag.293 %}/ MoM : {{ tag.293 }}{% endif %}</li>{% endif %}
-      {% if tag.297 %}<li>Doppler Arantius - IR : {{ tag.297 }} / Onde A : {{ tag.299 }}</li>{% endif %}
+      {% if tag.e22dopOmbiIRFC %}<li>Doppler ombilical - IR : {{ tag.e22dopOmbiIRFC }} / Flux en diastole : {{ tag.e22dopOmbiFEDiaFC }}</li>{% endif %}
+      {% if tag.e22dopACMIRFC %}<li>Doppler ACM - IR : {{ tag.e22dopACMIRFC }} {% if tag.e22dopACMVFC %}/ Vitesse : {{ tag.e22dopACMVFC }}{% endif %} {% if tag.e22dopACMMoMFC %}/ MoM : {{ tag.e22dopACMMoMFC }}{% endif %}</li>{% endif %}
+      {% if tag.e22dopArantiusIRFC %}<li>Doppler Arantius - IR : {{ tag.e22dopArantiusIRFC }} / Onde A : {{ tag.e22dopArantiusOAFC }}</li>{% endif %}
     </ul>
   {% endif %}
 
@@ -192,29 +192,29 @@
   {% endif %}
 
 
-  {% if tag.279 or tag.280 or tag.283 %}
+  {% if tag.e22dopUterDtIR or tag.e22dopUterGIR or tag.e22colLg %}
     <h3>Utérus</h3>
 
-    {% if tag.279 or tag.280 %}
+    {% if tag.e22dopUterDtIR or tag.e22dopUterGIR %}
       <h4>Dopplers</h4>
       <ul>
-        {% if tag.279 %}<li>Artère utérine droite - IR : {{ tag.279 }} / Notch : {{ tag.281 }}</li>{% else %}Artère utérine droite : non mesurable{% endif %}
-        {% if tag.280 %}<li>Artère utérine gauche - IR : {{ tag.280 }}/ Notch : {{ tag.282 }}</li>{% else %}Artère utérine gauche : non mesurable{% endif %}
+        {% if tag.e22dopUterDtIR %}<li>Artère utérine droite - IR : {{ tag.e22dopUterDtIR }} / Notch : {{ tag.e22dopUterDtNotch }}</li>{% else %}Artère utérine droite : non mesurable{% endif %}
+        {% if tag.e22dopUterGIR %}<li>Artère utérine gauche - IR : {{ tag.e22dopUterGIR }}/ Notch : {{ tag.e22dopUterGNotch }}</li>{% else %}Artère utérine gauche : non mesurable{% endif %}
       </ul>
     {% endif %}
 
-    {% if tag.283 %}
+    {% if tag.e22colLg %}
       <h4>Col</h4>
       <ul>
-        <li>Longueur du col : {{ tag.283 }} mm</li>
-        <li>Entonnoir : {{ tag.284 }}</li>
+        <li>Longueur du col : {{ tag.e22colLg }} mm</li>
+        <li>Entonnoir : {{ tag.e22colEntonnoir }}</li>
       </ul>
     {% endif %}
 
   {% endif %}
 
   <h3>Conclusion</h3>
-  <p>{{ tag.285|nl2br }}</p>
+  <p>{{ tag.conclusionE22|nl2br }}</p>
 
 
 

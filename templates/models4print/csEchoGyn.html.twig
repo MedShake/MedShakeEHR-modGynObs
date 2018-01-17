@@ -34,67 +34,67 @@ Réalisée sur échographe  mis en circulation le
 <br>
 <p>
 <span style="font-weight : bold">Date d’examen :</span> {{ tag.date|date("d/m/Y") }}
-{% if tag.401 %} &nbsp;&nbsp;-&nbsp;&nbsp; <span style="font-weight : bold">Prescripteur :</span> {{ tag.401 }}{% endif %}<br>
-<span style="font-weight : bold">Voie d’examen :</span> {{ tag.403 }}
-{% if tag.402 %} &nbsp;&nbsp;-&nbsp;&nbsp; <span style="font-weight : bold">Conditions d’examen :</span> {{ tag.402 }} {% if tag.43 > 0 %}<span class="t6">(IMC : {{ tag.43 }})</span>{% endif %}{% endif %}<br>
-{% if tag.432 %}<span style="font-weight : bold">Date des dernières règles :</span> {{ tag.432 }}{% endif %}
-{% if tag.432 or tag.400 %} &nbsp;&nbsp;-&nbsp;&nbsp; {% endif %}
-{% if tag.400 %}<span style="font-weight : bold">Contexte gynécologique :</span> {{ tag.400 }}{% endif %}<br>
+{% if tag.eGynPrescripteur %} &nbsp;&nbsp;-&nbsp;&nbsp; <span style="font-weight : bold">Prescripteur :</span> {{ tag.eGynPrescripteur }}{% endif %}<br>
+<span style="font-weight : bold">Voie d’examen :</span> {{ tag.eGynVoieExam }}
+{% if tag.eGynConditions %} &nbsp;&nbsp;-&nbsp;&nbsp; <span style="font-weight : bold">Conditions d’examen :</span> {{ tag.eGynConditions }} {% if tag.imc > 0 %}<span class="t6">(IMC : {{ tag.imc }})</span>{% endif %}{% endif %}<br>
+{% if tag.eGynDDR %}<span style="font-weight : bold">Date des dernières règles :</span> {{ tag.eGynDDR }}{% endif %}
+{% if tag.eGynDDR or tag.eGynContexteGyn %} &nbsp;&nbsp;-&nbsp;&nbsp; {% endif %}
+{% if tag.eGynContexteGyn %}<span style="font-weight : bold">Contexte gynécologique :</span> {{ tag.eGynContexteGyn }}{% endif %}<br>
 <span style="font-weight : bold">Indication :</span><br>
-{% if tag.408 %}- {{ tag.408 }}<br>{% endif %}
-{% if tag.407 %}- {{ tag.407 }}<br>{% endif %}
-{% if tag.411 %}- {{ tag.411 }}<br>{% endif %}
-{% if tag.404 %}- {{ tag.404|nl2br }}<br>{% endif %}
+{% if tag.eGynIndicUterus %}- {{ tag.eGynIndicUterus }}<br>{% endif %}
+{% if tag.eGynIndicAnnexes %}- {{ tag.eGynIndicAnnexes }}<br>{% endif %}
+{% if tag.eGynIndicAutres %}- {{ tag.eGynIndicAutres }}<br>{% endif %}
+{% if tag.eGyn %}- {{ tag.eGyn|nl2br }}<br>{% endif %}
 </p>
 
 
-{% if tag.val412 != 'absent' %}
+{% if tag.val_eGynPosiUterus != 'absent' %}
   <h3>Utérus</h3>
   <ul>
-    {% if tag.414 or tag.413 or tag.415  %}<li>Dimensions : {{ tag.414 }} mm x {{ tag.413 }} mm x {{ tag.415 }} mm</li>{% endif %}
-    <li>Position utérine : {{ tag.412 }}</li>
-    <li>Contours : {{ tag.416 }}</li>
-    <li>Structure du myomètre : {{ tag.417 }}</li>
-    {% if tag.422 %}<li>Aspect de l'endomètre  : {{ tag.422 }}</li>{% endif %}
-    {% if tag.423 %}<li>Épaisseur de l'endomètre  : {{ tag.423 }} mm</li>{% endif %}
-    {% if tag.424 %}<li>Cavité  : {{ tag.424 }}</li>{% endif %}
-    {% if tag.425 %}<li>Contenu de la cavité  : {{ tag.425 }}</li>{% endif %}
+    {% if tag.eGynUterusLong or tag.eGynUterusLarg or tag.eGynUterusHauteur  %}<li>Dimensions : {{ tag.eGynUterusLong }} mm x {{ tag.eGynUterusLarg }} mm x {{ tag.eGynUterusHauteur }} mm</li>{% endif %}
+    <li>Position utérine : {{ tag.eGynPosiUterus }}</li>
+    <li>Contours : {{ tag.eGynUterusContours }}</li>
+    <li>Structure du myomètre : {{ tag.eGynUterusStuctureMyo }}</li>
+    {% if tag.eGynEndom %}<li>Aspect de l'endomètre  : {{ tag.eGynEndom }}</li>{% endif %}
+    {% if tag.eGynEndomEpai %}<li>Épaisseur de l'endomètre  : {{ tag.eGynEndomEpai }} mm</li>{% endif %}
+    {% if tag.eGynCavité %}<li>Cavité  : {{ tag.eGynCavité }}</li>{% endif %}
+    {% if tag.eGynCaviteDIU %}<li>Contenu de la cavité  : {{ tag.eGynCaviteDIU }}</li>{% endif %}
   </ul>
 {% endif %}
 
-{% if tag.418 or tag.421 or tag.419 or tag.420 %}
+{% if tag.eGynDopAUDIR or tag.eGynDopAUGIR or tag.eGynDopAUDIP or tag.eGynDopAUGIP %}
   <h3>Dopplers</h3>
   <ul>
-    {% if tag.418 %}<li>Artère utérine droite :{% if tag.418 %} IR {{ tag.418 }}{% endif %}{% if tag.419 %} IP {{ tag.419 }}{% endif %}</li>{% endif %}
-    {% if tag.421 %}<li>Artère utérine gauche :{% if tag.421 %} IR {{ tag.421 }}{% endif %}{% if tag.420 %} IP {{ tag.420 }}{% endif %}</li>{% endif %}
+    {% if tag.eGynDopAUDIR %}<li>Artère utérine droite :{% if tag.eGynDopAUDIR %} IR {{ tag.eGynDopAUDIR }}{% endif %}{% if tag.eGynDopAUDIP %} IP {{ tag.eGynDopAUDIP }}{% endif %}</li>{% endif %}
+    {% if tag.eGynDopAUGIR %}<li>Artère utérine gauche :{% if tag.eGynDopAUGIR %} IR {{ tag.eGynDopAUGIR }}{% endif %}{% if tag.eGynDopAUGIP %} IP {{ tag.eGynDopAUGIP }}{% endif %}</li>{% endif %}
   </ul>
 {% endif %}
 
-{% if tag.427 or tag.452 or tag.428 or tag.453 %}
+{% if tag.eGynOvaireDroit or tag.eGynOvaireDtGdAxe or tag.eGynOvaireGauche or tag.eGynOvaireGGdAxe %}
   <h3>Ovaires</h3>
   <ul>
-    {% if tag.427 %}<li>Aspect de l'ovaire droit : {{ tag.427|nl2br }}</li>{% endif %}
-    {% if tag.452 %}<li>Grand axe ovaire droit : {{ tag.452 }} mm</li>{% endif %}
-    {% if tag.428 %}<li>Aspect de l'ovaire gauche : {{ tag.428|nl2br }}</li>{% endif %}
-    {% if tag.453 %}<li>Grand axe ovaire gauche : {{ tag.453 }} mm</li>{% endif %}
+    {% if tag.eGynOvaireDroit %}<li>Aspect de l'ovaire droit : {{ tag.eGynOvaireDroit|nl2br }}</li>{% endif %}
+    {% if tag.eGynOvaireDtGdAxe %}<li>Grand axe ovaire droit : {{ tag.eGynOvaireDtGdAxe }} mm</li>{% endif %}
+    {% if tag.eGynOvaireGauche %}<li>Aspect de l'ovaire gauche : {{ tag.eGynOvaireGauche|nl2br }}</li>{% endif %}
+    {% if tag.eGynOvaireGGdAxe %}<li>Grand axe ovaire gauche : {{ tag.eGynOvaireGGdAxe }} mm</li>{% endif %}
   </ul>
 {% endif %}
 
-{% if tag.430 or tag.429 %}
+{% if tag.eGynDouglas or tag.eGynCulsDeSacLat %}
   <h3>Culs de sac</h3>
   <ul>
-    {% if tag.430 %}<li>Douglas : {{ tag.430|nl2br }}</li>{% endif %}
-    {% if tag.429 %}<li>Culs de sac latéraux : {{ tag.429|nl2br }}</li>{% endif %}
+    {% if tag.eGynDouglas %}<li>Douglas : {{ tag.eGynDouglas|nl2br }}</li>{% endif %}
+    {% if tag.eGynCulsDeSacLat %}<li>Culs de sac latéraux : {{ tag.eGynCulsDeSacLat|nl2br }}</li>{% endif %}
   </ul>
 {% endif %}
 
-{% if tag.426 %}
+{% if tag.eGynDescriptionTrompes %}
   <h3>Trompes</h3>
   <ul>
-    <li>Aspect des trompes : {{ tag.426|nl2br }}</li>
+    <li>Aspect des trompes : {{ tag.eGynDescriptionTrompes|nl2br }}</li>
   </ul>
 {% endif %}
 
 <h3>Conclusion</h3>
-<p>{{ tag.431|nl2br }}
+<p>{{ tag.eGynConclusion|nl2br }}
 </p>

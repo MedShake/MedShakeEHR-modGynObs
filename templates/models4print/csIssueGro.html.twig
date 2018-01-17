@@ -32,50 +32,50 @@
 
 <p>Issue de grossesse de {{ tag.identiteUsuelleTitreCourtDdn }}</p>
 
-<span style="font-weight : bold">DDR :</span> {{ tag.45 }} -	<span style="font-weight : bold">DDG théorique : </span>{{ tag.48 }}
+<span style="font-weight : bold">DDR :</span> {{ tag.DDR }} -	<span style="font-weight : bold">DDG théorique : </span>{{ tag.ddg }}
 
-<p><span style="font-weight : bold;">DDG retenue : {{ tag.49 }}</span></p>
+<p><span style="font-weight : bold;">DDG retenue : {{ tag.ddgReel }}</span></p>
 
-<p><span style="font-weight : bold; text-decoration: underline">Date de fin de grossesse : {{ tag.225 }}</span></p>
+<p><span style="font-weight : bold; text-decoration: underline">Date de fin de grossesse : {{ tag.igDate }}</span></p>
 
-<p><span style="font-weight : bold">Nombre de fœtus : {{ tag.244 }}</span>
+<p><span style="font-weight : bold">Nombre de fœtus : {{ tag.igNbFoetus }}</span>
 </p>
 
-{% if tag.224 %}
-Lieu {{ tag.224 }}
+{% if tag.igLieu %}
+Lieu {{ tag.igLieu }}
 {% endif %}
 
 <table class="table">
-  {% if tag.244 > 0 %}
+  {% if tag.igNbFoetus > 0 %}
   <tr>
-    <td>{{ tag.230 }}</td>
-    <td>{{ tag.227 }}</td>
-    <td>{{ tag.228 }}</td>
-    <td>{{ tag.229 }}</td>
-    <td>{{ tag.231 }}</td>
-    <td>{{ tag.226 }}</td>
+    <td>{{ tag.igPrenomFA }}</td>
+    <td>{{ tag.SigSexeFA }}</td>
+    <td>{{ tag.igPoidsFA }}</td>
+    <td>{{ tag.igModaliteFA }}</td>
+    <td>{{ tag.igEtatSanteFA }}</td>
+    <td>{{ tag.igTermeFA }}</td>
   </tr>
   {% endif %}
 
-  {% if tag.244 > 1 %}
+  {% if tag.igNbFoetus > 1 %}
   <tr>
-    <td>{{ tag.235 }}</td>
-    <td>{{ tag.233 }}</td>
-    <td>{{ tag.237 }}</td>
-    <td>{{ tag.234 }}</td>
-    <td>{{ tag.236 }}</td>
-    <td>{{ tag.232 }}</td>
+    <td>{{ tag.igPrenomFB }}</td>
+    <td>{{ tag.SigSexeFB }}</td>
+    <td>{{ tag.igPoidsFB }}</td>
+    <td>{{ tag.igModaliteFB }}</td>
+    <td>{{ tag.igEtatSanteFB }}</td>
+    <td>{{ tag.igTermeFB }}</td>
   </tr>
   {% endif %}
 
-  {% if tag.244 > 2 %}
+  {% if tag.igNbFoetus > 2 %}
   <tr>
-    <td>{{ tag.241 }}</td>
-    <td>{{ tag.239 }}</td>
-    <td>{{ tag.243 }}</td>
-    <td>{{ tag.240 }}</td>
-    <td>{{ tag.242 }}</td>
-    <td>{{ tag.238 }}</td>
+    <td>{{ tag.igPrenomFC }}</td>
+    <td>{{ tag.SigSexeFC }}</td>
+    <td>{{ tag.igPoidsFC }}</td>
+    <td>{{ tag.igModaliteFC }}</td>
+    <td>{{ tag.igEtatSanteFC }}</td>
+    <td>{{ tag.igTermeFC }}</td>
   </tr>
   {% endif %}
 </table>
