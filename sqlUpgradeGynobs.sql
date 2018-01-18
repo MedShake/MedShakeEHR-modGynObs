@@ -61,7 +61,7 @@ update data_types set formValues='gynObsEcho12' where groupe='typecs' and formVa
 -- 1.1.2 to 1.1.3
 
 INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `type`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-(468, 'medical', 'fmT21NbFoetus', '', 'Nombre de foetus', 'nombre de foetus', '', '', 'number', '1', 'user', 60, 1, '2017-05-16 09:54:32', 3600, 1);
+(468, 'medical', 'fmT21NbFoetus', '', 'Nombre de foetus', 'nombre de foetus', '', '', 'number', '1', 'user', 60, 1, '2018-01-01 00:00:00', 3600, 1);
 
 -- 1.1.0 to 1.1.1
 
@@ -71,5 +71,5 @@ INSERT INTO `forms` (`id`, `name`, `description`, `dataset`, `groupe`, `formMeth
 
 -- 1.0.2 to 1.1.0
 INSERT INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `type`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('user', 'administratifPeutAvoirAgenda', '', 'administratifPeutAvoirAgenda', 'permet à l\'utilisateur sélectionné d\'avoir son agenda', '', '', 'text', 'false', 'base', 64, 1, '2017-08-09 15:00:18', 3600, 1),
-('user', 'agendaNumberForPatientsOfTheDay', '', 'agendaNumberForPatientsOfTheDay', 'permet d\'indiquer le n° d\'agenda à utiliser pour la liste patients du jour pour cet utilisateur', '', '', 'number', '1', 'base', 64, 1, '2017-08-09 17:45:52', 3600, 1);
+('user', 'administratifPeutAvoirAgenda', '', 'administratifPeutAvoirAgenda', 'permet à l\'utilisateur sélectionné d\'avoir son agenda', '', '', 'text', 'false', 'base', 64, 1, '2018-01-01 00:00:00', 3600, 1),
+('user', 'agendaNumberForPatientsOfTheDay', '', 'agendaNumberForPatientsOfTheDay', 'permet d\'indiquer le n° d\'agenda à utiliser pour la liste patients du jour pour cet utilisateur', '', '', 'number', '1', 'base', 64, 1, '2018-01-01 00:00:00', 3600, 1);
