@@ -29,57 +29,57 @@
 
 
 
-<h2 style="text-align : center">Madame {{ tag.3 }}  {{ tag.2 }} ({{ tag.8 }})</h2>
+<h2 style="text-align : center">{{ tag.identiteUsuelleTitreCourtDdn }}</h2>
 
 <h2>Echographie obstétricale</h2>
-Réalisée sur échographe  mis en circulation le 
+Réalisée sur échographe  mis en circulation le
 <br><br>
 <p>
 <span style="font-weight : bold">Date d’examen :</span> {{ tag.date|date("d/m/Y") }}<br>
-<span style="font-weight : bold">Voie d’examen :</span> {{ tag.133 }}<br>
-<span style="font-weight : bold">Conditions d’examen :</span> {{ tag.132 }}<br>
-<span style="font-weight : bold">Indication :</span> {{ tag.130 }}<br>
+<span style="font-weight : bold">Voie d’examen :</span> {{ tag.e11voieExamen }}<br>
+<span style="font-weight : bold">Conditions d’examen :</span> {{ tag.e11conditionEcho }}<br>
+<span style="font-weight : bold">Indication :</span> {{ tag.e11indic }}<br>
 </p>
 
-{% if tag.45 %}
-<span style="font-weight : bold">DDR :</span> {{ tag.45 }} -	<span style="font-weight : bold">DDG théorique : </span>{{ tag.48 }}	- <span style="font-weight : bold">Terme théorique : </span>{{ tag.50 }}{% else %}<span style="font-weight : bold">DDR :</span> non précisée{% endif %}
+{% if tag.DDR %}
+<span style="font-weight : bold">DDR :</span> {{ tag.DDR }} -	<span style="font-weight : bold">DDG théorique : </span>{{ tag.ddg }}	- <span style="font-weight : bold">Terme théorique : </span>{{ tag.termeDuJour }}{% else %}<span style="font-weight : bold">DDR :</span> non précisée{% endif %}
 
 
-<p><span style="font-weight : bold">Nombre d'embryons : {{ tag.131 }}</span>
-{% if tag.131 > 1 %}
-<br><span style="font-weight : bold">Type de grossesse :</span> {{ tag.171 }}
-<br><span style="font-weight : bold">Membrane :</span> {{ tag.172 }}
+<p><span style="font-weight : bold">Nombre d'embryons : {{ tag.e11nbembryons }}</span>
+{% if tag.e11nbembryons > 1 %}
+<br><span style="font-weight : bold">Type de grossesse :</span> {{ tag.e11typeGro }}
+<br><span style="font-weight : bold">Membrane :</span> {{ tag.e11membrane }}
 {% endif %}
 </p>
 
 
 {# EMBRYON A #}
-  {% if tag.val173 == 'B' %} {# EMBRYON A NON VISIBLE #}
+  {% if tag.val_e11foetusvuFA == 'B' %} {# EMBRYON A NON VISIBLE #}
 
   <h3>Embryon</h3>
 
   <p>Embryon non visible</p>
 
-  {% elseif tag.val173 == 'A' %} {# EMBRYON A VISIBLE #}
+  {% elseif tag.val_e11foetusvuFA == 'A' %} {# EMBRYON A VISIBLE #}
 
-  <h3>{% if tag.131 == 1 %}Embryon unique{% else %}Embryon A{% endif %}</h3>
+  <h3>{% if tag.e11nbembryons == 1 %}Embryon unique{% else %}Embryon A{% endif %}</h3>
 
   <h4>Vitalité</h4>
   <ul>
-  <li>Activité cardiaque : {{ tag.127 }}</li>
-  {% if tag.142 %}<li>Fréquence cardiaque : {{ tag.142 }} bpm</li>{% endif %}
+  <li>Activité cardiaque : {{ tag.e11embryActiCardFA }}</li>
+  {% if tag.e11RCFFA %}<li>Fréquence cardiaque : {{ tag.e11RCFFA }} bpm</li>{% endif %}
   </ul>
 
   <h4>Biométries <small>(Robinson / Chitty)</small></h4>
   <ul>
-  <li>Longueur cranio-caudale : {{ tag.125 }} mm {% if tag.131 == 1 %}correspondant à un début de grossesse autour du {{ tag.49 }}{% endif %}</li>
-  {% if tag.126 %}<li>BIP : {{ tag.126 }} mm</li>{% endif %}
+  <li>Longueur cranio-caudale : {{ tag.e11embryLCCFA }} mm {% if tag.e11nbembryons == 1 %}correspondant à un début de grossesse autour du {{ tag.ddgReel }}{% endif %}</li>
+  {% if tag.e11EmbryBIPFA %}<li>BIP : {{ tag.e11EmbryBIPFA }} mm</li>{% endif %}
   </ul>
 
   <h4>Morphologie</h4>
   <ul>
-  <li>Pôle céphalique : {{ tag.128|nl2br }}</li>
-  <li>Membres : {{ tag.129|nl2br }}</li>
+  <li>Pôle céphalique : {{ tag.e11morphoCephaFA|nl2br }}</li>
+  <li>Membres : {{ tag.e11morphoMembresFA|nl2br }}</li>
   </ul>
 
 
@@ -87,43 +87,43 @@ Réalisée sur échographe  mis en circulation le
 
   <h4>Sac gestationnel</h4>
   <ul>
-  <li>Localisation : {{ tag.117 }}</li>
-  <li>Diamètre : {{ tag.123 }} mm</li>
-  <li>Tonicité : {{ tag.118 }}</li>
-  <li>Trophoblaste : {{ tag.119 }}</li>
-  <li>{{ tag.124|capitalize }}</li> {# décollement #}
+  <li>Localisation : {{ tag.e11SGlocaFA }}</li>
+  <li>Diamètre : {{ tag.e11sgdimdiametreFA }} mm</li>
+  <li>Tonicité : {{ tag.e11sgtoniciteFA }}</li>
+  <li>Trophoblaste : {{ tag.e11sgtrophoFA }}</li>
+  <li>{{ tag.e11sgdecoFA|capitalize }}</li> {# décollement #}
   </ul>
 
 
-{% if tag.131> 1 %}
+{% if tag.e11nbembryons> 1 %}
 
   {# EMBRYON B #}
-    {% if tag.val174 == 'B' %} {# EMBRYON B NON VISIBLE #}
+    {% if tag.val_e11foetusvuFB == 'B' %} {# EMBRYON B NON VISIBLE #}
 
     <h3>Embryon B</h3>
 
     <p>Embryon non visible</p>
 
-    {% elseif tag.val174 == 'A' %} {# EMBRYON B VISIBLE #}
+    {% elseif tag.val_e11foetusvuFB == 'A' %} {# EMBRYON B VISIBLE #}
 
     <h3>Embryon B</h3>
 
     <h4>Vitalité</h4>
     <ul>
-    <li>Activité cardiaque : {{ tag.153 }}</li>
-    {% if tag.156 %}<li>Fréquence cardiaque : {{ tag.156 }} bpm</li>{% endif %}
+    <li>Activité cardiaque : {{ tag.e11embryActiCardFB }}</li>
+    {% if tag.e11RCFFB %}<li>Fréquence cardiaque : {{ tag.e11RCFFB }} bpm</li>{% endif %}
     </ul>
 
     <h4>Biométries <small>(Robinson / Chitty)</small></h4>
     <ul>
-    <li>Longueur cranio-caudale : {{ tag.151 }} mm</li>
-    {% if tag.152 %}<li>BIP : {{ tag.152 }} mm</li>{% endif %}
+    <li>Longueur cranio-caudale : {{ tag.e11embryLCCFB }} mm</li>
+    {% if tag.e11EmbryBIPFB %}<li>BIP : {{ tag.e11EmbryBIPFB }} mm</li>{% endif %}
     </ul>
 
     <h4>Morphologie</h4>
     <ul>
-    <li>Pôle céphalique : {{ tag.154|nl2br }}</li>
-    <li>Membres : {{ tag.155|nl2br }}</li>
+    <li>Pôle céphalique : {{ tag.e11morphoCephaFB|nl2br }}</li>
+    <li>Membres : {{ tag.e11morphoMembresFB|nl2br }}</li>
     </ul>
 
 
@@ -131,42 +131,42 @@ Réalisée sur échographe  mis en circulation le
 
     <h4>Sac gestationnel</h4>
     <ul>
-    <li>Localisation : {{ tag.143 }}</li>
-    <li>Diamètre : {{ tag.149 }} mm</li>
-    <li>Tonicité : {{ tag.144 }}</li>
-    <li>Trophoblaste : {{ tag.145 }}</li>
-    <li>{{ tag.150|capitalize }}</li> {# décollement #}
+    <li>Localisation : {{ tag.e11SGlocaFB }}</li>
+    <li>Diamètre : {{ tag.e11sgdimdiametreFB }} mm</li>
+    <li>Tonicité : {{ tag.e11sgtoniciteFB }}</li>
+    <li>Trophoblaste : {{ tag.e11sgtrophoFB }}</li>
+    <li>{{ tag.e11sgdecoFB|capitalize }}</li> {# décollement #}
     </ul>
 
-{% endif %}{% if tag.131 > 2 %}
+{% endif %}{% if tag.e11nbembryons > 2 %}
 
 {# EMBRYON C #}
-  {% if tag.val175 == 'B' %} {# EMBRYON C NON VISIBLE #}
+  {% if tag.val_e11foetusvuFC == 'B' %} {# EMBRYON C NON VISIBLE #}
 
   <h3>Embryon C</h3>
 
   <p>Embryon non visible</p>
 
-  {% elseif tag.val175 == 'A' %} {# EMBRYON C VISIBLE #}
+  {% elseif tag.val_e11foetusvuFC == 'A' %} {# EMBRYON C VISIBLE #}
 
   <h3>Embryon B</h3>
 
   <h4>Vitalité</h4>
   <ul>
-  <li>Activité cardiaque : {{ tag.167 }}</li>
-  {% if tag.170 %}<li>Fréquence cardiaque : {{ tag.170 }} bpm</li>{% endif %}
+  <li>Activité cardiaque : {{ tag.e11embryActiCardFC }}</li>
+  {% if tag.e11RCFFC %}<li>Fréquence cardiaque : {{ tag.e11RCFFC }} bpm</li>{% endif %}
   </ul>
 
   <h4>Biométries <small>(Robinson / Chitty)</small></h4>
   <ul>
-  <li>Longueur cranio-caudale : {{ tag.165 }} mm</li>
-  {% if tag.152 %}<li>BIP : {{ tag.166 }} mm</li>{% endif %}
+  <li>Longueur cranio-caudale : {{ tag.e11embryLCCFC }} mm</li>
+  {% if tag.e11EmbryBIPFB %}<li>BIP : {{ tag.e11EmbryBIPFC }} mm</li>{% endif %}
   </ul>
 
   <h4>Morphologie</h4>
   <ul>
-  <li>Pôle céphalique : {{ tag.168|nl2br }}</li>
-  <li>Membres : {{ tag.169|nl2br }}</li>
+  <li>Pôle céphalique : {{ tag.e11morphoCephaFC|nl2br }}</li>
+  <li>Membres : {{ tag.e11morphoMembresFC|nl2br }}</li>
   </ul>
 
 
@@ -174,11 +174,11 @@ Réalisée sur échographe  mis en circulation le
 
   <h4>Sac gestationnel</h4>
   <ul>
-  <li>Localisation : {{ tag.157 }}</li>
-  <li>Diamètre : {{ tag.163 }} mm</li>
-  <li>Tonicité : {{ tag.158 }}</li>
-  <li>Trophoblaste : {{ tag.159 }}</li>
-  <li>{{ tag.164|capitalize }}</li> {# décollement #}
+  <li>Localisation : {{ tag.e11SGlocaFC }}</li>
+  <li>Diamètre : {{ tag.e11sgdimdiametreFC }} mm</li>
+  <li>Tonicité : {{ tag.e11sgtoniciteFC }}</li>
+  <li>Trophoblaste : {{ tag.e11sgtrophoFC }}</li>
+  <li>{{ tag.e11sgdecoFC|capitalize }}</li> {# décollement #}
   </ul>
 
 {% endif %}
@@ -187,21 +187,21 @@ Réalisée sur échographe  mis en circulation le
 <h3>Ovaires</h3>
 <h4>Ovaire droit</h4>
 <ul>
-  <li>{{ tag.139|nl2br }}</li>
-  {% if tag.138 %}<li>{{ tag.138 }} mm de grand axe</li>{% endif %}
+  <li>{{ tag.e11ovairedtaspect|nl2br }}</li>
+  {% if tag.e11ovaireDt %}<li>{{ tag.e11ovaireDt }} mm de grand axe</li>{% endif %}
 </ul>
 
 <h4>Ovaire gauche</h4>
 <ul>
-  <li>{{ tag.141|nl2br }}</li>
-  {% if tag.140 %}<li>{{ tag.140 }} mm de grand axe</li>{% endif %}
+  <li>{{ tag.e11ovairegaspect|nl2br }}</li>
+  {% if tag.e11ovaireG %}<li>{{ tag.e11ovaireG }} mm de grand axe</li>{% endif %}
 </ul>
 
 <br>
 <h3>Conclusion</h3>
 <p>
-Date de début de grossesse estimée au {{ tag.49 }} (à 5 jours près) soit un terme ce jour à {{ tag.termeReelJourExamen }}.<br>
-{{ tag.176|nl2br }}
+Date de début de grossesse estimée au {{ tag.ddgReel }} (à 5 jours près) soit un terme ce jour à {{ tag.termeReelJourExamen }}.<br>
+{{ tag.e11conclusion|nl2br }}
 </p>
 
 

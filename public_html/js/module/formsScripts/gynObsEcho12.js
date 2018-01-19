@@ -29,25 +29,25 @@
 $(document).ready(function() {
 
   //observation nombre foetus
-  $('body').on("keyup, change", '#p_70ID', function() {
+  $('body').on("keyup, change", '#id_nbFoetusEcho12_id', function() {
     afficherFxNbFoetus();
   });
 
   //calcul du terme en fonction lcc
-  $('body').on("change, keyup", "#p_31ID, #p_89ID, #p_99ID", function() {
-    if ($('#p_31ID').val() > 0) majLCC2Terme($('#p_31ID').val(), 113);
-    if ($('#p_89ID').val() > 0) majLCC2Terme($('#p_89ID').val(), 114);
-    if ($('#p_99ID').val() > 0) majLCC2Terme($('#p_99ID').val(), 115);
+  $('body').on("change, keyup", "#id_lccA_id, #id_lccB_id, #id_lccC_id", function() {
+    if ($('#id_lccA_id').val() > 0) majLCC2Terme($('#id_lccA_id').val(), '#id_termeLCCFA_id');
+    if ($('#id_lccB_id').val() > 0) majLCC2Terme($('#id_lccB_id').val(), '#id_termeLCCFB_id');
+    if ($('#id_lccC_id').val() > 0) majLCC2Terme($('#id_lccC_id').val(), '#id_termeLCCFC_id');
   });
-  if ($('#p_31ID').val() > 0) majLCC2Terme($('#p_31ID').val(), 113);
-  if ($('#p_89ID').val() > 0) majLCC2Terme($('#p_89ID').val(), 114);
-  if ($('#p_99ID').val() > 0) majLCC2Terme($('#p_99ID').val(), 115);
+  if ($('#id_lccA_id').val() > 0) majLCC2Terme($('#id_lccA_id').val(), '#id_termeLCCFA_id');
+  if ($('#id_lccB_id').val() > 0) majLCC2Terme($('#id_lccB_id').val(), '#id_termeLCCFB_id');
+  if ($('#id_lccC_id').val() > 0) majLCC2Terme($('#id_lccC_id').val(), '#id_termeLCCFC_id');
 
   //définir comme DGE
-  $('body').on("dblclick", "#p_113ID, #p_114ID, #p_115ID", function(event) {
+  $('body').on("dblclick", "#id_termeLCCFA_id, #id_termeLCCFB_id, #id_termeLCCFC_id", function(event) {
     setDGE(event);
   });
-  $('body').on("click", "#p_113Button, #p_114Button, #p_115Button", function(event) {
+  $('body').on("click", "#id_termeLCCFA_idButton, #id_termeLCCFB_idButton, #id_termeLCCFC_idButton", function(event) {
     event.preventDefault();
     setDGE(event);
   });

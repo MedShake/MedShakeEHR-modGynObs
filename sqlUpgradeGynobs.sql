@@ -1,5 +1,16 @@
 -- Modifications de structure de la bdd d'une version à la suivante
 
+-- 2.1.2 to 3.0.0
+
+INSERT INTO `system` (`module`,`version`) VALUES ('gynobs', 'v3.0.0');
+update `actes_cat` set module='gynobs';
+update forms set module='gynobs' where internalName like 'gynObs%';
+update `data_types` set module='gynobs' WHERE id not in ('0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','19','20','21','22','34','35','38','41','42','43','51','53','54','55','56','57','58','59','66','103','104','107','108','109','110','111','112','177','178','179','180','181','182','183','184','185','186','189','190','191','192','193','194','195','196','197','198','199','200','205','247','248','249','250','251','252','433','434','435','436','443','446','477','479','481','484','486','487','488','489','490','492','493','494','495','496','497','501','505');
+update `data_types` set module='base' WHERE id in ('0','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15','19','20','21','22','34','35','38','41','42','43','51','53','54','55','56','57','58','59','66','103','104','107','108','109','110','111','112','177','178','179','180','181','182','183','184','185','186','189','190','191','192','193','194','195','196','197','198','199','200','205','247','248','249','250','251','252','433','434','435','436','443','446','477','479','481','484','486','487','488','489','490','492','493','494','495','496','497','501','505');
+  update `data_types` set name='eGynCavite' WHERE name ='eGynCavite' limit 1;
+
+update people set module="gynobs" where pass !="";
+
 -- 1.1.3 to 2.0.0
 UPDATE data_types set formType='checkbox' where id in ('436','492','493','496');
 
@@ -50,7 +61,7 @@ update data_types set formValues='gynObsEcho12' where groupe='typecs' and formVa
 -- 1.1.2 to 1.1.3
 
 INSERT INTO `data_types` (`id`, `groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `type`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-(468, 'medical', 'fmT21NbFoetus', '', 'Nombre de foetus', 'nombre de foetus', '', '', 'number', '1', 'user', 60, 1, '2017-05-16 09:54:32', 3600, 1);
+(468, 'medical', 'fmT21NbFoetus', '', 'Nombre de foetus', 'nombre de foetus', '', '', 'number', '1', 'user', 60, 1, '2018-01-01 00:00:00', 3600, 1);
 
 -- 1.1.0 to 1.1.1
 
@@ -60,5 +71,5 @@ INSERT INTO `forms` (`id`, `name`, `description`, `dataset`, `groupe`, `formMeth
 
 -- 1.0.2 to 1.1.0
 INSERT INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `type`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('user', 'administratifPeutAvoirAgenda', '', 'administratifPeutAvoirAgenda', 'permet à l\'utilisateur sélectionné d\'avoir son agenda', '', '', 'text', 'false', 'base', 64, 1, '2017-08-09 15:00:18', 3600, 1),
-('user', 'agendaNumberForPatientsOfTheDay', '', 'agendaNumberForPatientsOfTheDay', 'permet d\'indiquer le n° d\'agenda à utiliser pour la liste patients du jour pour cet utilisateur', '', '', 'number', '1', 'base', 64, 1, '2017-08-09 17:45:52', 3600, 1);
+('user', 'administratifPeutAvoirAgenda', '', 'administratifPeutAvoirAgenda', 'permet à l\'utilisateur sélectionné d\'avoir son agenda', '', '', 'text', 'false', 'base', 64, 1, '2018-01-01 00:00:00', 3600, 1),
+('user', 'agendaNumberForPatientsOfTheDay', '', 'agendaNumberForPatientsOfTheDay', 'permet d\'indiquer le n° d\'agenda à utiliser pour la liste patients du jour pour cet utilisateur', '', '', 'number', '1', 'base', 64, 1, '2018-01-01 00:00:00', 3600, 1);

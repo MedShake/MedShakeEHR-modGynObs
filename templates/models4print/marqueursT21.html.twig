@@ -159,50 +159,50 @@
       <table class="tabPatiente" style="width : 100%; padding : 0; margin : 0;">
         <tr>
           <td>NOM</td>
-          <td>{{ tag.2 }}</td>
+          <td>{{ tag.nomsUsageNaissance }}</td>
         </tr>
         <tr>
           <td>Prénom</td>
-          <td>{{ tag.3 }}</td>
+          <td>{{ tag.firstname }}</td>
         </tr>
         <tr>
           <td>Adresse</td>
-          <td>{{ tag.9 }} {{ tag.11 }} {{ tag.13 }} {{ tag.12 }}</td>
+          <td>{{ tag.streetNumber }} {{ tag.street }} {{ tag.postalCodePerso }} {{ tag.city }}</td>
         </tr>
         <tr>
           <td>Date de naissance</td>
-          <td>{{ tag.8 }}</td>
+          <td>{{ tag.birthdate }}</td>
         </tr>
         <tr>
           <td>Date de début de grossesse</td>
-          <td>{{ tag.49 }}</td>
+          <td>{{ tag.ddgReel }}</td>
         </tr>
         <tr>
           <td>Poids de la patiente</td>
-          <td>{{ tag.34 }} kg</td>
+          <td>{{ tag.poids }} kg</td>
         </tr>
         <tr>
           <td colspan="2">Antécédents au cours d'une grossesse précédente pour la patiente :</td>
         </tr>
         <tr>
           <td>- Trisomie 21</td>
-          <td>{{ tag.469 }}</td>
+          <td>{{ tag.fmT21AtcdT21 }}</td>
         </tr>
         <tr>
           <td>- Non fermeture du tube neural</td>
-          <td>{{ tag.470 }}</td>
+          <td>{{ tag.fmT21AtcdTubeNeural }}</td>
         </tr>
         <tr>
           <td>Fumeuse</td>
-          <td>{{ tag.471 }}{% if tag.471 == 'oui' %} - nb. cig/j : {{ tag.472 }}{% endif %}</td>
+          <td>{{ tag.fmT21Fumeuse }}{% if tag.fmT21Fumeuse == 'oui' %} - nb. cig/j : {{ tag.fmT21nbCig }}{% endif %}</td>
         </tr>
         <tr>
           <td>Diabète insulino-dépendant</td>
-          <td>{{ tag.476 }}</td>
+          <td>{{ tag.fmT21Did }}</td>
         </tr>
         <tr>
           <td>Origine géographique</td>
-          <td>{{ tag.473 }}</td>
+          <td>{{ tag.fmT21OrigineGeo }}</td>
         </tr>
       </table>
 
@@ -217,37 +217,37 @@
         </tr>
         <tr>
           <td>Nombre de foetus</td>
-          <td>{{ tag.468 }}{% if tag.209 %} ({{ tag.209 }}){% endif %}</td>
+          <td>{{ tag.fmT21NbFoetus }}{% if tag.e12typeGro %} ({{ tag.e12typeGro }}){% endif %}</td>
         </tr>
-        {% if tag.468 > 1 %}<tr><td colspan="2">Foetus A :</td></tr>{% endif %}
+        {% if tag.fmT21NbFoetus > 1 %}<tr><td colspan="2">Foetus A :</td></tr>{% endif %}
         <tr>
           <td>Longueur cranio-caudale</td>
-          <td>{{ tag.31 }} mm</td>
+          <td>{{ tag.lccA }} mm</td>
         </tr>
         <tr>
           <td>Mesure clarté nucale</td>
-          <td>{{ tag.76 }} mm</td>
+          <td>{{ tag.cnFA }} mm</td>
         </tr>
-        {% if tag.468 > 1 %}
+        {% if tag.fmT21NbFoetus > 1 %}
           <tr><td colspan="2">Foetus B :</td></tr>
           <tr>
             <td>Longueur cranio-caudale</td>
-            <td>{{ tag.89 }} mm</td>
+            <td>{{ tag.lccB }} mm</td>
           </tr>
           <tr>
             <td>Mesure clarté nucale</td>
-            <td>{{ tag.85 }} mm</td>
+            <td>{{ tag.cnFB }} mm</td>
           </tr>
         {% endif %}
-        {% if tag.468 > 2 %}
+        {% if tag.fmT21NbFoetus > 2 %}
           <tr><td colspan="2">Foetus C :</td></tr>
           <tr>
             <td>Longueur cranio-caudale</td>
-            <td>{{ tag.99 }} mm</td>
+            <td>{{ tag.lccC }} mm</td>
           </tr>
           <tr>
             <td>Mesure clarté nucale</td>
-            <td>{{ tag.95 }} mm</td>
+            <td>{{ tag.cnFC }} mm</td>
           </tr>
         {% endif %}
       </table>
@@ -265,7 +265,7 @@
   </tr>
   <tr>
     <td class="vat" >
-      <span class="cbox">{% if tag.val474 == 'DC1' %}&#9745;{% else %}&#9744;{% endif %}</span>
+      <span class="cbox">{% if tag.val_fmT21StrategieDepis == 'DC1' %}&#9745;{% else %}&#9744;{% endif %}</span>
       Dépistage combiné au 1er trim.<br>
       Grossesse monofœtale UNIQUEMENT :<br>
       Prélèvement entre 11,0 et 13,6 S.A.<br>
@@ -273,7 +273,7 @@
       et le : {{ tag.dc1_e }}
     </td>
     <td class="vat" >
-      <span class="cbox">{% if tag.val474 == 'DS2' %}&#9745;{% else %}&#9744;{% endif %}</span>
+      <span class="cbox">{% if tag.val_fmT21StrategieDepis == 'DS2' %}&#9745;{% else %}&#9744;{% endif %}</span>
       Dépistage séquentiel intégré au 2nd trim.<br>
       Grossesse monofœtale UNIQUEMENT :<br>
       Prélèvement entre 14,0 et 17,6 S.A.<br>
@@ -281,7 +281,7 @@
       et le : {{ tag.ds2_e }}
     </td>
     <td class="vat" >
-      <span class="cbox">{% if tag.val474 == 'MS2' %}&#9745;{% else %}&#9744;{% endif %}</span>
+      <span class="cbox">{% if tag.val_fmT21StrategieDepis == 'MS2' %}&#9745;{% else %}&#9744;{% endif %}</span>
       Marqueurs sériques maternels au 2nd trim.<br>
       Prélèvement entre 14,0 et 17,6 S.A.<br>
       Soit entre le : {{ tag.ms2_s }}<br>
@@ -298,7 +298,7 @@
   </tr>
   <tr>
     <td colspan="2" class="t9">
-      Je soussignée Madame {{ tag.2 }} {{ tag.3 }} atteste avoir reçu du Dr Stephen STRANGE au cours d'une consultation médicale en date du {{ tag.date|date("d/m/Y") }}<br>
+      Je soussignée Madame {{ tag.lastname }} {{ tag.firstname }} atteste avoir reçu du Dr Stephen STRANGE au cours d'une consultation médicale en date du {{ tag.date|date("d/m/Y") }}<br>
       des informations sur l'examen des marqueurs sériques maternels dont je souhaite bénéficier :<br>
       - cet examen permet d'évaluer le risque que l'enfant à naître soit atteint d'une maladie d'une particulière gravité, notamment la trisomie 21;<br>
       - une prise de sang est réalisée au cours d'une période précise de la grossesse ;<br>
@@ -319,7 +319,7 @@
   </tr>
   <tr>
     <td class="vat" >Dr Stephen STRANGE<br><br><br><br></td>
-    <td class="vat" >Mme {{ tag.2 }} {{ tag.3 }}<br><br><br></td>
+    <td class="vat" >Mme {{ tag.lastname }} {{ tag.firstname }}<br><br><br></td>
   </tr>
 
 </table>

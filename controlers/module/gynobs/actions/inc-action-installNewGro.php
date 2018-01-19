@@ -21,7 +21,7 @@
  */
 
 /**
- * Patient > action : fermer un suivi de grossesse
+ * Patient > action : installer un nouveau suivi de grossesse
  * Module Gynéco Obstétrique
  *
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
@@ -30,7 +30,6 @@
 $patient = new msObjet();
 $patient->setFromID($p['user']['id']);
 $patient->setToID($match['params']['patientID']);
-$patient->createNewObjet('245', '', $match['params']['objetID']);
-
+$patient->createNewObjetByTypeName('nouvelleGrossesse', '');
 
 msTools::redirection('/patient/'.$match['params']['patientID'].'/');

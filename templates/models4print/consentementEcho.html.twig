@@ -30,7 +30,7 @@
 <h2>CONSENTEMENT À UNE ECHOGRAPHIE FŒTALE</h2>
 <div class="tailleFont">
 <p>
-Je soussignée <strong>Mme {{ tag.2 }} {{ tag.3 }}</strong>, résidant <strong>{{ tag.9 }} {{ tag.11 }} {{ tag.13 }} {{ tag.12 }}</strong>, atteste avoir reçu du Dr Stephen STRANGE au cours d'une consultation médicale en date du {{ "now"|date("d/m/Y") }} des informations sur l'examen échographique dont je souhaite bénéficier :
+Je soussignée <strong>{{ tag.identiteCompleteTitreLongDdn }}</strong>, résidant <strong>{{ tag.streetNumber }} {{ tag.street }} {{ tag.postalCodePerso }} {{ tag.city }}</strong>, atteste avoir reçu du Dr Stephen STRANGE au cours d'une consultation médicale en date du {{ "now"|date("d/m/Y") }} des informations sur l'examen échographique dont je souhaite bénéficier :
 </p>
 
 <ul>
@@ -76,7 +76,7 @@ Fait le {{ "now"|date("d/m/Y") }}
       Dr Stephen STRANGE
     </td>
     <td style="border: 0; width : 50%; vertical-align : top;">
-      Mme {{ tag.2 }} {{ tag.3 }}
+      {{ tag.identiteUsuelleTitreCourt }}
       <!-- signatureIMG -->
     </td>
   </tr>

@@ -29,7 +29,7 @@
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  */
 
-class msModuleDataSave
+class msModGynobsDataSave
 {
 
   /**
@@ -45,32 +45,32 @@ class msModuleDataSave
         }
         return $value;
       }
-      public function type45TreatBeforeSave($value)
+      public function tbs_DDR($value)
       {
           return $this->correctionDateBeforeSave($value);
       }
-      public function type49TreatBeforeSave($value)
+      public function tbs_ddgReel($value)
       {
           return $this->correctionDateBeforeSave($value);
       }
 
       // identité : nom en majuscule, prenom 1er lettre maj
-      public function type2TreatBeforeSave($value)
+      public function tbs_lastname($value)
       {
           return  mb_strtoupper($value);
       }
 
-      public function type1TreatBeforeSave($value)
+      public function tbs_birthname($value)
       {
           return  mb_strtoupper($value);
       }
 
-      public function type3TreatBeforeSave($value)
+      public function tbs_firstname($value)
       {
           return mb_convert_case($value, MB_CASE_TITLE, "UTF-8");
       }
 
-      public function type22TreatBeforeSave($value)
+      public function tbs_othersfirstname($value)
       {
           return mb_convert_case($value, MB_CASE_TITLE, "UTF-8");
       }
@@ -88,43 +88,43 @@ class msModuleDataSave
 
       }
 
-      public function type7TreatBeforeSave($value)
+      public function tbs_mobilePhone($value)
       {
           return $this->telephoneNumberTreatBeforeSave($value);
       }
 
-      public function type10TreatBeforeSave($value)
+      public function tbs_homePhone($value)
       {
           return $this->telephoneNumberTreatBeforeSave($value);
       }
 
-      public function type57TreatBeforeSave($value)
+      public function tbs_telPro($value)
       {
           return $this->telephoneNumberTreatBeforeSave($value);
       }
 
-      public function type58TreatBeforeSave($value)
+      public function tbs_faxPro($value)
       {
           return $this->telephoneNumberTreatBeforeSave($value);
       }
 
-      public function type247TreatBeforeSave($value)
+      public function tbs_mobilePhonePro($value)
       {
           return $this->telephoneNumberTreatBeforeSave($value);
       }
 
-      public function type248TreatBeforeSave($value)
+      public function tbs_telPro2($value)
       {
           return $this->telephoneNumberTreatBeforeSave($value);
       }
 
       //ville : en majuscule
-      public function type12TreatBeforeSave($value)
+      public function tbs_city($value)
       {
           return  mb_strtoupper($value);
       }
 
-      public function type56TreatBeforeSave($value)
+      public function tbs_villeAdressePro($value)
       {
           return  mb_strtoupper($value);
       }
@@ -134,234 +134,234 @@ class msModuleDataSave
       {
           return str_replace(',', '.', $value);
       }
-      public function type193TreatBeforeSave($value)
+      public function tbs_regleCheque($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type194TreatBeforeSave($value)
+      public function tbs_regleCB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type195TreatBeforeSave($value)
+      public function tbs_regleEspeces($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type196TreatBeforeSave($value)
+      public function tbs_regleFacture($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type198TreatBeforeSave($value)
+      public function tbs_regleTarifCejour($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type199TreatBeforeSave($value)
+      public function tbs_regleDepaCejour($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type200TreatBeforeSave($value)
+      public function tbs_regleTiersPayeur($value)
       {
           return $this->formatDecimalNumber($value);
       }
 
       //Biomètrie écho 22 et 32
-      public function type263TreatBeforeSave($value)
+      public function tbs_e22bipFA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type287TreatBeforeSave($value)
+      public function tbs_e22bipFB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type289TreatBeforeSave($value)
+      public function tbs_e22bipFC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type266TreatBeforeSave($value)
+      public function tbs_e22femurA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type304TreatBeforeSave($value)
+      public function tbs_e22femurB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type305TreatBeforeSave($value)
+      public function tbs_e22femurC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type265TreatBeforeSave($value)
+      public function tbs_e22paFA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type314TreatBeforeSave($value)
+      public function tbs_e22paFB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type315TreatBeforeSave($value)
+      public function tbs_e22paFC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type264TreatBeforeSave($value)
+      public function tbs_e22pcFA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type316TreatBeforeSave($value)
+      public function tbs_e22pcFB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type317TreatBeforeSave($value)
+      public function tbs_e22pcFC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type336TreatBeforeSave($value)
+      public function tbs_e32bipFA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type360TreatBeforeSave($value)
+      public function tbs_e32bipFB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type362TreatBeforeSave($value)
+      public function tbs_e32bipFC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type339TreatBeforeSave($value)
+      public function tbs_e32femurA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type377TreatBeforeSave($value)
+      public function tbs_e32femurB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type378TreatBeforeSave($value)
+      public function tbs_e32femurC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type338TreatBeforeSave($value)
+      public function tbs_e32paFA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type387TreatBeforeSave($value)
+      public function tbs_e32paFB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type388TreatBeforeSave($value)
+      public function tbs_e32paFC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type337TreatBeforeSave($value)
+      public function tbs_e32pcFA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type389TreatBeforeSave($value)
+      public function tbs_e32pcFB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type390TreatBeforeSave($value)
+      public function tbs_e32pcFC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type437TreatBeforeSave($value)
+      public function tbs_e22pgcfa($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type438TreatBeforeSave($value)
+      public function tbs_e22pgcfb($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type439TreatBeforeSave($value)
+      public function tbs_e22pgcfc($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type440TreatBeforeSave($value)
+      public function tbs_e32pgcfa($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type441TreatBeforeSave($value)
+      public function tbs_e32pgcfb($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type442TreatBeforeSave($value)
+      public function tbs_e32pgcfc($value)
       {
           return $this->formatDecimalNumber($value);
       }
 
 
       //biométrie écho 12
-      public function type74TreatBeforeSave($value)
+      public function tbs_bipFA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type83TreatBeforeSave($value)
+      public function tbs_bipFB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type93TreatBeforeSave($value)
+      public function tbs_bipFC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type76TreatBeforeSave($value)
+      public function tbs_cnFA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type85TreatBeforeSave($value)
+      public function tbs_cnFB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type95TreatBeforeSave($value)
+      public function tbs_cnFC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type206TreatBeforeSave($value)
+      public function tbs_e12femurA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type207TreatBeforeSave($value)
+      public function tbs_e12femurB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type208TreatBeforeSave($value)
+      public function tbs_e12femurC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type31TreatBeforeSave($value)
+      public function tbs_lccA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type89TreatBeforeSave($value)
+      public function tbs_lccB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type99TreatBeforeSave($value)
+      public function tbs_lccC($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type75TreatBeforeSave($value)
+      public function tbs_paFA($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type84TreatBeforeSave($value)
+      public function tbs_paFB($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type94TreatBeforeSave($value)
+      public function tbs_paFC($value)
       {
           return $this->formatDecimalNumber($value);
       }
 
       //biométrie écho gyn
-      public function type423TreatBeforeSave($value)
+      public function tbs_eGynEndomEpai($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type415TreatBeforeSave($value)
+      public function tbs_eGynUterusHauteur($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type414TreatBeforeSave($value)
+      public function tbs_eGynUterusLong($value)
       {
           return $this->formatDecimalNumber($value);
       }
-      public function type413TreatBeforeSave($value)
+      public function tbs_eGynUterusLarg($value)
       {
           return $this->formatDecimalNumber($value);
       }

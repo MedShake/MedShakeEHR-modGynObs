@@ -35,6 +35,16 @@
         {# provoquer envoie asynchrone du patient dans le DICOM si config ok #}
         <script>
           var dicomAutoSendPatient2Echo = {{ config.dicomAutoSendPatient2Echo }};
+
+          var scrollDestination = {
+            newDoc: 'body',
+            nouvelleCs: 'body',
+            newCourrier: 'body',
+            newOrdo: 'body',
+            newMail: 'body',
+            newReglement: 'body',
+            delai: 2
+          };
         </script>
 
         {{ parent() }}
@@ -45,7 +55,7 @@
         <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/patient.js"></script>
 
         {# JS commun au formulaire de consultation du module #}
-        <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/module/common.js"></script>
+        <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/module/commonGynobs.js"></script>
 
         {# JS spécifiques des formulaires présents à l'affichage initial de la page #}
         {% for i in page.listeForms %}

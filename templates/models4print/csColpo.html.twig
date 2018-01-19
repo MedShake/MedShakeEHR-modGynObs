@@ -20,7 +20,7 @@
  #/
 
 /##
- # Template > models4print : compte-rendu de colposcopie    
+ # Template > models4print : compte-rendu de colposcopie
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
  #}
@@ -30,8 +30,8 @@
 
 <p style="text-align : right;">New York, le {{ tag.date|date("d/m/Y") }}</p>
 
-<h2 style="text-align : center">Madame {{ tag.3 }}  {{ tag.2 }} ({{ tag.8 }})</h2>
+<h2 style="text-align : center">{{ tag.identiteCompleteTitreLongDdn }}</h2>
 
 <h3>Colposcopie réalisée ce jour</h3>
 
-{{ tag.223|nl2br }}
+{{ tag.examenColpoDuJour|nl2br }}
