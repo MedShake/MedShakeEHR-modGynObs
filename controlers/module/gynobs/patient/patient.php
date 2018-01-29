@@ -21,8 +21,8 @@
  */
 
 /**
- * Patient : la page du dossier patient
- * Module Gynéco Obstétrique
+ * Module > Patient : la page du dossier patient
+ * Complément Module Gynéco Obstétrique
  *
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  */
@@ -30,18 +30,40 @@
 // liste des formulaires fixes au 1er affichage dossier patient pour JS
 $p['page']['listeForms']=array('gynObsATCD','gynObsSyntheseGyn');
 
-
 // le formulaire latéral ATCD
 $formLat = new msForm();
 $p['page']['formNameGynObsATCD']=$formLat->setFormIDbyName('gynObsATCD');
 $formLat->getPrevaluesForPatient($match['params']['patient']);
 $p['page']['formLat']=$formLat->getForm();
 
+// gestion atcd structurés
+$listeChampsAtcd=array('atcdObs','atcdPersoGyneco','atcdMedicChir');
+$gethtml=new msGetHtml;
+$gethtml->set_template('inc-patientAtcdStruc');
+foreach($listeChampsAtcd as $v) {
+  $p['page']['beforeVar'][$v]=$patient->getAtcdStruc($v);
+  if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
+  $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+}
+unset($p['page']['beforeVar'], $listeChampsAtcd, $gethtml);
+
+// gestion allergies structurées
+$listeChampsAllergie=array('allergies');
+$gethtml=new msGetHtml;
+$gethtml->set_template('inc-patientAllergies');
+foreach($listeChampsAllergie as $v) {
+  $p['page']['beforeVar'][$v]=$patient->getAllergies($v);
+  if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
+  $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+}
+unset($p['page']['beforeVar'], $listeChampsAllergie, $gethtml);
+
 //formulaire synthèse de gynéco
 $formSynthese = new msForm();
 $p['page']['formNameGynObsSyntheseGyn']=$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
 $formSynthese->getPrevaluesForPatient($match['params']['patient']);
 $p['page']['formSynthese']=$formSynthese->getForm();
+
 
 //types de consultation liées à la gynéco classique.
 $typeCsCla=new msData;
