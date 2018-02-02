@@ -110,7 +110,7 @@ class msModGynobsDataCourrier
         $name2typeID = $name2typeID->getTypeIDsFromName(['echo12']);
 
         // echo 12 id + date
-        $e12=msSQL::sqlUnique("select id, creationDate from objets_data where toID='".$d['patientID']."' and instance='".$d['instance']."' and typeID='".$name2typeID['echo12']."' and deleted='' and outdated='' limit 1 ");
+        $e12=msSQL::sqlUnique("select id, creationDate from objets_data where toID='".$d['patientID']."' and instance='".$d['instance']."' and typeID='".$name2typeID['echo12']."' and deleted='' and outdated='' order by id desc limit 1 ");
           $d['dateEcho12'] = $e12['creationDate'];
 
         // data echo 12 de la même grossesse
