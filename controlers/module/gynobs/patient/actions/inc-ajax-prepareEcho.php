@@ -32,7 +32,7 @@
 
  //chercher une grossesse en cours (cad si pas de type 245 associé)
  $typeCsCla=new msData;
- $name2typeID = $typeCsCla->getTypeIDsFromName(['groFermetureSuivi', 'nouvelleGrossesse']);
+ $name2typeID = $typeCsCla->getTypeIDsFromName(['groFermetureSuivi', 'nouvelleGrossesse', 'ddgReel', 'DDR']);
 
  if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
    from objets_data as pd
@@ -48,10 +48,10 @@
          $formSyntheseGrossesse->setInstance($p['page']['grossesseEnCours']['id']);
          $p['page']['dataGrossesse']=$formSyntheseGrossesse->getPrevaluesForPatient($_POST['patientID']);
 
-         if (isset($p['page']['dataGrossesse'][49])) {
-             $p['page']['patient']['dicomDDR']=msTools::readableDate2Reverse(msModuleCalcMed::ddg2ddr($p['page']['dataGrossesse'][49]));
-         } elseif (isset($p['page']['dataGrossesse'][45])) {
-             $p['page']['patient']['dicomDDR']=msTools::readableDate2Reverse($p['page']['dataGrossesse'][45]);
+         if (isset($p['page']['dataGrossesse'][$name2typeID['ddgReel']])) {
+             $p['page']['patient']['dicomDDR']=msTools::readableDate2Reverse(msModGynobsCalcMed::ddg2ddr($p['page']['dataGrossesse'][$name2typeID['ddgReel']]));
+         } elseif (isset($p['page']['dataGrossesse'][$name2typeID['DDR']])) {
+             $p['page']['patient']['dicomDDR']=msTools::readableDate2Reverse($p['page']['dataGrossesse'][$name2typeID['DDR']]);
          }
      }
  }
