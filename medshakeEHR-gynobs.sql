@@ -1,8 +1,8 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
-INSERT INTO `system` (`module`, `version`) VALUES
-('gynobs', '3.0.0');
+INSERT INTO `system` (`module`, `groupe`, `version`) VALUES
+('gynobs','module','3.0.0');
 
 INSERT IGNORE INTO `actes_base` (`code`, `label`, `type`, `tarifs1`, `tarifs2`, `fromID`, `creationDate`) VALUES
 ('JKFD001', 'Exérèse de lésion pédiculée de l\'utérus accouchée par le col, par voie vaginale', 'CCAM', 62.7, 62.7, 1, '2018-01-01 00:00:00'),

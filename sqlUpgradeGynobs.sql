@@ -1,5 +1,7 @@
 -- Modifications de structure de la bdd d'une version à la suivante
 
+UPDATE `system` SET `groupe` = 'module' WHERE `name` = 'gynobs';
+
 -- 2.1.2 to 3.0.0
 
 INSERT INTO `system` (`module`,`version`) VALUES ('gynobs', 'v3.0.0');
