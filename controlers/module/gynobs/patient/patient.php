@@ -101,5 +101,5 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
 }
 
 //fixer les paramètres pour les formulaires d'ordonnance et de règlement du module
-$p['page']['formReglement']['reglePorteur']=array('module'=>'base', 'form'=>'baseReglement');
+$p['page']['formReglement']['reglePorteur']=array('module'=>'gynobs', 'form'=>'baseReglement');
 $p['page']['formOrdo']['ordoPorteur']=array('module'=>'base', 'form'=>'');
