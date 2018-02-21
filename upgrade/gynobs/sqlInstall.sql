@@ -36,13 +36,13 @@ INSERT IGNORE INTO `actes_base` (`code`, `label`, `type`, `tarifs1`, `tarifs2`, 
 
 
 INSERT IGNORE INTO `actes_cat` (`name`, `label`, `description`, `module`, `fromID`, `creationDate`, `displayOrder`) VALUES
-('catActesContra', 'DIU & implant', '', 'gynobs', 1, '2018-01-01 00:00:00', 3),
-('catEchoGro', 'Echo obstétricale', '', 'gynobs', 1, '2018-01-01 00:00:00', 4),
-('catEchoGyn', 'Echo gynéco', '', 'gynobs', 1, '2018-01-01 00:00:00', 5),
-('catConsult', 'Consultations', '', 'gynobs', 1, '2018-01-01 00:00:00', 1),
-('catActesTechGyn', 'Actes techniques gynéco', '', 'gynobs', 1, '2018-01-01 00:00:00', 8),
-('catInsemination', 'PMA', '', 'gynobs', 1, '2018-01-01 00:00:00', 10),
-('catExam', 'Examens', '', 'gynobs', 1, '2018-01-01 00:00:00', 2);
+('catGynobsActesContra', 'DIU & implant', '', 'gynobs', 1, '2018-01-01 00:00:00', 3),
+('catGynobsEchoGro', 'Echo obstétricale', '', 'gynobs', 1, '2018-01-01 00:00:00', 4),
+('catGynobsEchoGyn', 'Echo gynéco', '', 'gynobs', 1, '2018-01-01 00:00:00', 5),
+('catGynobsConsult', 'Consultations', '', 'gynobs', 1, '2018-01-01 00:00:00', 1),
+('catGynobsActesTechGyn', 'Actes techniques gynéco', '', 'gynobs', 1, '2018-01-01 00:00:00', 8),
+('catGynobsInsemination', 'PMA', '', 'gynobs', 1, '2018-01-01 00:00:00', 10),
+('catGynobsExam', 'Examens', '', 'gynobs', 1, '2018-01-01 00:00:00', 2);
 
 SET @catID = (SELECT actes_cat.id FROM actes_cat WHERE actes_cat.name='catConsult');
 INSERT IGNORE INTO `actes` (`cat`, `label`, `shortLabel`, `details`, `flagImportant`, `flagCmu`, `fromID`, `toID`, `creationDate`) VALUES
