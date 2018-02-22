@@ -47,7 +47,7 @@ $(document).ready(function() {
   $('body').on("dblclick", "#id_termeLCCFA_id, #id_termeLCCFB_id, #id_termeLCCFC_id", function(event) {
     setDGE(event);
   });
-  $('body').on("click", "#id_termeLCCFA_idButton, #id_termeLCCFB_idButton, #id_termeLCCFC_idButton", function(event) {
+  $('body').on("click", "#id_termeLCCFA_idAddOn, #id_termeLCCFB_idAddOn, #id_termeLCCFC_idAddOn", function(event) {
     event.preventDefault();
     setDGE(event);
   });
