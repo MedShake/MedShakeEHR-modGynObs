@@ -41,7 +41,7 @@ $(document).ready(function() {
       imc = imcCalc(poids, taille);
       $('#id_imc_id').val(imc);
       patientID = $('#identitePatient').attr("data-patientID");
-      setPeopleData(imc, patientID, '43', '#id_imc_id', '0');
+      setPeopleDataByTypeName(imc, patientID, 'imc', '#id_imc_id', '0');
 
     });
   }

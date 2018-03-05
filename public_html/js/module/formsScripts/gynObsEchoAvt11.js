@@ -48,7 +48,7 @@ $(document).ready(function() {
   $('body').on("dblclick", " #id_E11termeLCCFA_id, #id_E11termeLCCFB_id, #id_E11termeLCCFC_id", function(event) {
     setDGE(event);
   });
-  $('body').on("click", " #id_E11termeLCCFA_idButton, #id_E11termeLCCFB_idButton, #id_E11termeLCCFC_idButton", function(event) {
+  $('body').on("click", " #id_E11termeLCCFA_idAddOn, #id_E11termeLCCFB_idAddOn, #id_E11termeLCCFC_idAddOn", function(event) {
     event.preventDefault();
     setDGE(event);
   });

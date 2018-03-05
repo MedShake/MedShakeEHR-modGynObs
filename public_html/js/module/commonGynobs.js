@@ -111,7 +111,11 @@ function enabledForm(classToEnabled) {
 function setDGE(event) {
 
   //on calcule
-  jours = $(event.currentTarget).attr('data-joursa');
+  if ($(event.currentTarget).attr('data-joursa')) {
+    jours = $(event.currentTarget).attr('data-joursa');
+  } else {
+    jours = $(event.currentTarget).siblings('input[data-joursa]').attr('data-joursa');
+  }
   var today = moment();
   dge = today.subtract((jours - 14), 'days').format('DD/MM/YYYY');
 
@@ -125,10 +129,10 @@ function setDGE(event) {
 
     //on sauvegarde
     patientID = $('#identitePatient').attr("data-patientID");
-    typeID = 49;
+    typeName = 'ddgReel';
     source = $('#id_ddgReel_id');
     instance = $('#id_ddgReel_id').closest("form").attr("data-instance");
-    setPeopleData(dgevalid, patientID, typeID, source, instance);
+    setPeopleDataByTypeName(dgevalid, patientID, typeName, source, instance);
 
     //on met à jour le terme du jour
     calcAndDisplayTdj()

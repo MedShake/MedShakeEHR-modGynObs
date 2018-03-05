@@ -36,13 +36,13 @@ INSERT IGNORE INTO `actes_base` (`code`, `label`, `type`, `tarifs1`, `tarifs2`, 
 
 
 INSERT IGNORE INTO `actes_cat` (`name`, `label`, `description`, `module`, `fromID`, `creationDate`, `displayOrder`) VALUES
-('catActesContra', 'DIU & implant', '', 'gynobs', 1, '2018-01-01 00:00:00', 3),
-('catEchoGro', 'Echo obstétricale', '', 'gynobs', 1, '2018-01-01 00:00:00', 4),
-('catEchoGyn', 'Echo gynéco', '', 'gynobs', 1, '2018-01-01 00:00:00', 5),
-('catConsult', 'Consultations', '', 'gynobs', 1, '2018-01-01 00:00:00', 1),
-('catActesTechGyn', 'Actes techniques gynéco', '', 'gynobs', 1, '2018-01-01 00:00:00', 8),
-('catInsemination', 'PMA', '', 'gynobs', 1, '2018-01-01 00:00:00', 10),
-('catExam', 'Examens', '', 'gynobs', 1, '2018-01-01 00:00:00', 2);
+('catGynobsActesContra', 'DIU & implant', '', 'gynobs', 1, '2018-01-01 00:00:00', 3),
+('catGynobsEchoGro', 'Echo obstétricale', '', 'gynobs', 1, '2018-01-01 00:00:00', 4),
+('catGynobsEchoGyn', 'Echo gynéco', '', 'gynobs', 1, '2018-01-01 00:00:00', 5),
+('catGynobsConsult', 'Consultations', '', 'gynobs', 1, '2018-01-01 00:00:00', 1),
+('catGynobsActesTechGyn', 'Actes techniques gynéco', '', 'gynobs', 1, '2018-01-01 00:00:00', 8),
+('catGynobsInsemination', 'PMA', '', 'gynobs', 1, '2018-01-01 00:00:00', 10),
+('catGynobsExam', 'Examens', '', 'gynobs', 1, '2018-01-01 00:00:00', 2);
 
 SET @catID = (SELECT actes_cat.id FROM actes_cat WHERE actes_cat.name='catConsult');
 INSERT IGNORE INTO `actes` (`cat`, `label`, `shortLabel`, `details`, `flagImportant`, `flagCmu`, `fromID`, `toID`, `creationDate`) VALUES
@@ -111,9 +111,9 @@ INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `desc
 ('medical', 'membresFC', '', 'Aspect des membres - C', 'aspect des membres du foetus C', '', '', 'textarea', 'quatre membres vus avec chacun 3 segments.', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'lccC', '', 'LCC - C', 'LCC du foetus C', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'conclusionE12', 'conclusion', 'Conclusion', 'conclusion écho 12', '', '', 'textarea', 'Grossesse unique intra-utérine évolutive.\nAbsence d\'anomalie morphologique décelée au cours de cet examen.\nMarqueurs sériques pour le dépistage de la trisomie 21 prescrits.', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'termeLCCFA', '', 'Terme & DDG / LCC - A', 'terme estimé en fonction de la LCC - Foetus A', '', '', 'lcc', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'termeLCCFB', '', 'Terme & DDG / LCC - B', 'terme estimé en fonction de la LCC - Foetus B', '', '', 'lcc', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'termeLCCFC', '', 'Terme & DDG / LCC - C', 'terme estimé en fonction de la LCC - Foetus C', '', '', 'lcc', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
+('medical', 'termeLCCFA', '', 'Terme & DDG / LCC - A', 'terme estimé en fonction de la LCC - Foetus A', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
+('medical', 'termeLCCFB', '', 'Terme & DDG / LCC - B', 'terme estimé en fonction de la LCC - Foetus B', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
+('medical', 'termeLCCFC', '', 'Terme & DDG / LCC - C', 'terme estimé en fonction de la LCC - Foetus C', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'e12femurA', '', 'Fémur - A', 'longueur fémur', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'e12femurB', 'mm', 'Fémur - B', 'longueur fémur', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'e12femurC', '', 'Fémur - C', 'longueur fémur', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
@@ -259,9 +259,9 @@ INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `desc
 ('medical', 'e11foetusvuFB', '', 'Visibilité du foetus - B', 'visbilité du foetus B à l\'examen', '', '', 'select', '\'A\' : \'Vu\'\r\n\'B\' : \'Non vu\'', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'e11foetusvuFC', '', 'Visibilité du foetus - C', 'visbilité du foetus C à l\'examen', '', '', 'select', '\'A\' : \'Vu\'\r\n\'B\' : \'Non vu\'', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'e11conclusion', '', 'Conclusion générale', 'conclusion de l\'echo 11', '', '', 'textarea', 'Grossesse unique intra-utérine évolutive.\nAbsence d\'anomalie décelée au cours de cet examen.\nProchaine échographie autour de 12 SA.', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'E11termeLCCFA', '', 'Terme & DDG / LCC - A', 'terme estimé en fonction de la LCC - Foetus A', '', '', 'lcc', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'E11termeLCCFB', '', 'Terme & DDG / LCC - B', 'terme estimé en fonction de la LCC - Foetus B', '', '', 'lcc', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'E11termeLCCFC', '', 'Terme & DDG / LCC - C', 'terme estimé en fonction de la LCC - Foetus C', '', '', 'lcc', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1);
+('medical', 'E11termeLCCFA', '', 'Terme & DDG / LCC - A', 'terme estimé en fonction de la LCC - Foetus A', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
+('medical', 'E11termeLCCFB', '', 'Terme & DDG / LCC - B', 'terme estimé en fonction de la LCC - Foetus B', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
+('medical', 'E11termeLCCFC', '', 'Terme & DDG / LCC - C', 'terme estimé en fonction de la LCC - Foetus C', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1);
 
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='catColpo');
