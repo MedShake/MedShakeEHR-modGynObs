@@ -44,7 +44,7 @@ INSERT IGNORE INTO `actes_cat` (`name`, `label`, `description`, `module`, `fromI
 ('catGynobsInsemination', 'PMA', '', 'gynobs', 1, '2018-01-01 00:00:00', 10),
 ('catGynobsExam', 'Examens', '', 'gynobs', 1, '2018-01-01 00:00:00', 2);
 
-SET @catID = (SELECT actes_cat.id FROM actes_cat WHERE actes_cat.name='catConsult');
+SET @catID = (SELECT actes_cat.id FROM actes_cat WHERE actes_cat.name='catGynobsConsult');
 INSERT IGNORE INTO `actes` (`cat`, `label`, `shortLabel`, `details`, `flagImportant`, `flagCmu`, `fromID`, `toID`, `creationDate`) VALUES
 (@catID, 'Consultation gynécologique', 'Cs gynéco', 'CS:\n  pourcents: 100\n  depassement: 15 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0', 1, 0, 1, 0, '2018-01-01 00:00:00'),
 (@catID, 'Consultation gynécologique CMU', 'Cs gynéco CMU', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0', 0, 1, 1, 0, '2018-01-01 00:00:00'),
