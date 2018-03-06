@@ -54,8 +54,7 @@ INSERT IGNORE INTO `actes` (`cat`, `label`, `shortLabel`, `details`, `flagImport
 (@catID, 'Consultation suivi de grossesse + FCV', 'Cs grossesse + FCV', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0\nJKHD001:\n  pourcents: 100\n  depassement: 0', 0, 0, 1, 0, '2018-01-01 00:00:00'),
 (@catID, 'Consultation suivi de grossesse CMU', 'Cs grossesse CMU', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0', 0, 1, 1, 0, '2018-01-01 00:00:00'),
 (@catID, 'Consultation suivi de grossesse + FCV - CMU', 'Cs grossesse + FCV - CMU', 'CS:\n  pourcents: 100\n  depassement: 0 \nMCS:\n  pourcents: 100\n  depassement: 0\nMPC:\n  pourcents: 100\n  depassement: 0\nJKHD001:\n  pourcents: 100\n  depassement: 0', 0, 1, 1, 0, '2018-01-01 00:00:00'),
-(@catID, 'Consultation chiropratique', 'Cs', 'CS:\n  pourcents: 100\n  depassement: 0', 1, 0, 1, 0, '2018-01-01 00:00:00'),
-(@catID, 'Consultation + échographie', 'CS+ECHO', 'CS:\n  pourcents: 100\n  depassement: 0\nECHO:\n  pourcents: 100\n  depassement: 0', 0, 0, 1, 0, '2018-01-01 00:00:00');
+(@catID, 'Consultation chiropratique', 'Cs', 'CS:\n  pourcents: 100\n  depassement: 0', 1, 0, 1, 0, '2018-01-01 00:00:00');
 
 
 INSERT IGNORE INTO `data_cat` (`groupe`, `name`, `label`, `description`, `type`, `fromID`, `creationDate`) VALUES
