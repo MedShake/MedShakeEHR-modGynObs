@@ -54,6 +54,7 @@
   {{ parent() }}
   <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/thirdparty/tinymce/tinymce/tinymce.min.js"></script>
   <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/thirdparty/tinymce/tinymce/jquery.tinymce.min.js"></script>
+  <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/thirdparty/dimsemenov/magnific-popup/dist/jquery.magnific-popup.min.js"></script>
 
   {# JS général du dossier patient #}
   <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/patient.js"></script>
@@ -66,6 +67,8 @@
     <script defer="defer" src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/module/formsScripts/{{ i }}.js"></script>
   {% endfor %}
 
+  {# CSS spécifique #}
+  <link type="text/css" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/thirdparty/dimsemenov/magnific-popup/dist/magnific-popup.css" rel="stylesheet"/>
   <style>
 
     .foetusB,
@@ -76,216 +79,79 @@
     #newDoc {
       display: none;
     }
+
+    .imageDc {
+        display: inline-block;
+        width: 330px;
+        margin: 5px;
+    }
+
+    .imageDc img {
+        display: inline-block;
+        width: 330px;
+        vertical-align: top;
+        border: 10px solid #EEE;
+    }
+
+    .voirframes {
+      cursor: pointer;
+    }
+
   </style>
 
 {% endblock %}
 
 {% block body %}
 
-  <div class="container-fluid">
+    {# alerte dossier supprimé #}
     {% if page.patient.dossierType == "deleted" %}
       <div class="row alert alert-danger" role="alert">Ce dossier est marqué comme supprimé !</div>
     {% endif %}
-    <div class="row" id="identitePatient" data-genre="{{ page.patient.administrativeDatas.14 }}" data-patientid="{{ page.patient.id }}">
 
+    {# identité patient #}
+    <div class="row" id="identitePatient" data-genre="{{ page.patient.administrativeDatas.administrativeGenderCode.value }}" data-patientid="{{ page.patient.id }}">
       {% include('inc-ajax-patientAdminData.html.twig') %}
-
     </div>
 
-    <div class="row">
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Ordonnance
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          {% for k, v in page.formOrdo %}
-            <li>
-              <a id="linkAddNewOrdo" data-porteur="{{ k }}" data-module="{{ v.module }}" data-ordoform="{{ v.form }}" href="#">
-                {% if page.formOrdo | length > 1 %}
-                  {{ v.module }}
-                  :
-                {% endif %}Nouvelle prescription</a>
-            </li>
-          {% endfor %}
-          {% if page.grossesseEnCours > 0 %}
-            <li>
-              <a class="newCS" href="#" data-parentid="{{ page.grossesseEnCours.id }}" data-formtocall="gynObsMarqueursSeriques" data-csid="475" data-mode="create">Marqueurs sériques</a>
-            </li>
-          {% endif %}
-        </ul>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Courriers &amp; Certificats
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li class="dropdown-header">Certificats</li>
-          {% for v in page.modelesCertif %}
-            <li>
-              <a class="newCourrier" data-modeleid="{{ v.id }}" href="#">{{ v.label }}</a>
-            </li>
-          {% endfor %}
-          <li role="separator" class="divider"></li>
-          <li class="dropdown-header">Courriers</li>
-          {% for v in page.modelesCourrier %}
-            <li>
-              <a class="newCourrier" data-modeleid="{{ v.id }}" href="#">{{ v.label }}</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Document
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li>
-            <a id="linkAddNewDoc" href="#">Ajouter un document au dossier</a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {% if config.administratifPeutAvoirRecettes != 'true' %} disabled="disabled" {% endif %}>
-          Règlement
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          {% for k, v in page.formReglement %}
-            <li>
-              <a id="linkAddNewReglement" data-porteur="{{ k }}" data-module="{{ v.module }}" data-reglementform="{{ v.form }}" href="#">
-                {% if page.formReglement | length > 1 %}
-                  {{ v.module }}
-                  :
-                {% endif %}Nouveau règlement</a>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-
-      <div class="btn-group">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          DICOM
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li>
-            <a href="#" class="catchLastDicomSrData">Récupérer dernières mesures</a>
-          </li>
-          <li>
-            <a href="#" class="catchOthersDicomSrData">Récupérer mesures antérieures</a>
-          </li>
-          <li role="separator" class="divider"></li>
-          <li>
-            <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/dicom/{{ page.patient.id }}/" target="_blank">Voir tous les examens du patient</a>
-          </li>
-          <li role="separator" class="divider"></li>
-          <li>
-            <a href="#" class="prepareEcho">Envoyer patiente à échographe</a>
-          </li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="row" style="margin-top : 40px;">
-      <div class="col-md-3">
-        {# Onglets colonne latérale #}
-        <ul class="nav nav-tabs" style="margin-bottom : 12px;">
-          <li role="presentation" class="active" data-toggle="tab" title="Panneau principal">
-            <a href="#panelATCD" data-toggle="tab">
-              <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span></a>
-          </li>
-          <li role="presentation" title="Liens familiaux">
-            <a href="#panelLiensFamiliaux" data-toggle="tab">
-              <span class="glyphicon glyphicon glyphicon-link" aria-hidden="true"></span></a>
-          </a>
-        </li>
-        {% if config.LapOnOff == 'on' %}
-          <li role="presentation" title="Autres actions">
-            <a href="#panelOptions" data-toggle="tab">
-              <span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></a>
-          </a>
-        </li>
-      {% endif %}
+    {# Onglets #}
+    <ul class="nav nav-tabs gras" role="tablist" style="margin-top : 15px;">
+      <li class="active" role="presentation">
+        <a id="ongletDossierMedical" href="#tabDossierMedical" aria-controls="profile" role="tab" data-toggle="tab">Dossier médical</a>
+      </li>
+      <li role="presentation">
+        <a id="ongletLAP" href="#tabLAP" aria-controls="messages" role="tab" data-toggle="tab">LAP</a>
+      </li>
+      <li role="presentation">
+        <a id="ongletDicom" href="#tabDicom" aria-controls="messages" role="tab" data-toggle="tab">DICOM</a>
+      </li>
+      <li role="presentation">
+        <a id="ongletLiensPatient" href="#tabLiensPatient" aria-controls="messages" role="tab" data-toggle="tab">Liens du patient</a>
+      </li>
     </ul>
 
-    <div class="tab-content">
+    {# tabs  #}
+    <div class="tab-content" style="padding-top :15px; padding-bottom: 15px;">
 
-      {# Formulaire ajout ALD #}
-      {% if config.LapOnOff == 'on' %}
-        <div role="tabpanel" class="tab-pane" id="panelOptions">
-          <button class="btn btn-info btn-block newCS" type="submit" data-parentid="0" data-formtocall="aldDeclaration" data-mode="create">Ajouter une ALD</button>
-        </div>
-      {% endif %}
-
-      {# Formulaire latéral des ATCD #}
-      <div role="tabpanel" class="tab-pane active" id="panelATCD">
-        {% if page.patient.ALD %}
-          {% include 'inc-patientAldStruc.html.twig' %}
-        {% endif %}
-        <div id="latForm" class="changeObserv">
-          {{ f.formbuilder(page.formLat , 'gynObsATCD' , valFormLat ) }}
-        </div>
+      {# tab dossier médical #}
+      <div role="tabpanel" class="tab-pane active" id="tabDossierMedical">
+        {% include('inc-patientTabDossierMedical.html.twig') %}
       </div>
 
-      {# Liens familiaux #}
-      <div role="tabpanel" class="tab-pane" id="panelLiensFamiliaux">
-        {% if page.liensFamiliaux %}
-          {% include 'inc-patientLiensFamiliaux.html.twig' %}
-        {% endif %}
-      </div>
-    </div>
-  </div>
+      {# tab lap #}
+      <div role="tabpanel" class="tab-pane" id="tabLAP" data-rootUrl="/patient/{{ page.patient.id }}/tab/tabLAP/"></div>
 
-  {# colonne principale #}
-  <div class="col-md-9" style="padding-left : 35px">
+      {# tab dicom #}
+      <div role="tabpanel" class="tab-pane" id="tabDicom" data-rootUrl="/patient/{{ page.patient.id }}/tab/tabDicomStudiesList/"></div>
 
-    {# Div d'import de nouveau doc #}
-    <div id="newDoc" class="row toclear">{% include 'importDocForm.html.twig' %}</div>
+      {# tab liens patient #}
+      <div role="tabpanel" class="tab-pane" id="tabLiensPatient" data-rootUrl="/patient/{{ page.patient.id }}/tab/tabLiensPatient/"></div>
 
-    {# historique du jour #}
-    <div id="historiqueToday">
-      {% include 'patientHistoriqueToday.html.twig' %}
     </div>
 
-    {# Div d'insertion de nouveau reglement #}
-    <div id="newReglement" class="row toclear"></div>
 
-    {# Div d'insertion de nouveau courrier #}
-    <div id="newCourrier" class="row toclear"></div>
+{% endblock %}
 
-    {# Div d'insertion de nouvelle ordonance #}
-    <div id="newOrdo" class="row toclear"></div>
-
-    {# Div d'insertion de nouvelle consultation #}
-    <div id="nouvelleCs" class="row toclear checkboxFixValue"></div>
-
-    {# Div d'insertion de nouveau mail  #}
-    <div id="newMail" class="row toclear"></div>
-
-    {# Synthèse obstétrique #}
-    {% if page.grossesseEnCours.id > 0 %}
-      {% include 'synthesGrossesseEnCours.html.twig' %}
-    {% endif %}
-    {# Synthèse gynéco #}
-    {% include 'synthesGyneco.html.twig' %}
-
-    {# Historique complet #}
-    <div id="historique">
-      {% include 'patientHistoriqueMedical.html.twig' %}
-    </div>
-  </div>
-</div>
-
-</div>
-
+{% block modals %}
 {# modal courbes de poids/taille/IMC #}
 {% include 'inc-patientModal-GraphsIMC.html.twig' %}
 
@@ -298,13 +164,25 @@
 {# modal éditer infos adminsitratives du patient #}
 {% include 'inc-patientModal-editAdminData.html.twig' %}
 
-{# recherche CIM10 #}
-{% include 'inc-patientModal-searchCIM10.html.twig' %}
-
-{# recherche Allergie #}
-{% include 'inc-patientModal-searchAllergie.html.twig' %}
-
 {# modal changer la date d'une ligne d'historique #}
 {% include 'inc-patientModal-changerDateEffet.html.twig' %}
+
+{# modals spécifiques LAP ON #}
+{% if config.lapOnOff == 'on' %}
+  {# recherche CIM10 #}
+  {% include 'inc-patientModal-searchCIM10.html.twig' %}
+
+  {# recherche Allergie #}
+  {% include 'inc-patientModal-searchAllergie.html.twig' %}
+
+  {# modal recherche de médicament #}
+  {% include 'inc-lapModalRechercher.html.twig' %}
+
+  {# modal voir ordonnance #}
+  {% include 'inc-lapModalVoirOrdonnance.html.twig' %}
+
+  {# modal spécifier date d'arrêt effective #}
+  {% include 'inc-lapModalMedicDateArretEffective.html.twig' %}
+{% endif %}
 
 {% endblock %}

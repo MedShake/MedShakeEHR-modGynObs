@@ -37,29 +37,31 @@ $formLat->getPrevaluesForPatient($match['params']['patient']);
 $p['page']['formLat']=$formLat->getForm();
 
 // si LAP activé : allergie et atcd structurés
-if($p['config']['LapOnOff'] == 'on') {
+if($p['config']['lapOnOff'] == 'on') {
 
     // gestion atcd structurés
-    $listeChampsAtcd=array('atcdObs','atcdPersoGyneco','atcdMedicChir');
-    $gethtml=new msGetHtml;
-    $gethtml->set_template('inc-patientAtcdStruc');
-    foreach($listeChampsAtcd as $v) {
-      $p['page']['beforeVar'][$v]=$patient->getAtcdStruc($v);
-      if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
-      $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+    if(!empty(trim($p['config']['lapActiverAtcdStrucSur']))) {
+      $gethtml=new msGetHtml;
+      $gethtml->set_template('inc-patientAtcdStruc');
+      foreach(explode(',', $p['config']['lapActiverAtcdStrucSur']) as $v) {
+        $p['page']['beforeVar'][$v]=$patient->getAtcdStruc($v);
+        if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
+        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+      }
+      unset($p['page']['beforeVar'], $gethtml);
     }
-    unset($p['page']['beforeVar'], $listeChampsAtcd, $gethtml);
 
     // gestion allergies structurées
-    $listeChampsAllergie=array('allergies');
-    $gethtml=new msGetHtml;
-    $gethtml->set_template('inc-patientAllergies');
-    foreach($listeChampsAllergie as $v) {
-      $p['page']['beforeVar'][$v]=$patient->getAllergies($v);
-      if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
-      $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+    if(!empty(trim($p['config']['lapActiverAllergiesStrucSur']))) {
+      $gethtml=new msGetHtml;
+      $gethtml->set_template('inc-patientAllergies');
+      foreach(explode(',', $p['config']['lapActiverAllergiesStrucSur']) as $v) {
+        $p['page']['beforeVar'][$v]=$patient->getAllergies($v);
+        if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
+        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+      }
+      unset($p['page']['beforeVar'], $gethtml);
     }
-    unset($p['page']['beforeVar'], $listeChampsAllergie, $gethtml);
 }
 
 //formulaire synthèse de gynéco
@@ -101,5 +103,5 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
 }
 
 //fixer les paramètres pour les formulaires d'ordonnance et de règlement du module
-$p['page']['formReglement']['reglePorteur']=array('module'=>'gynobs', 'form'=>'baseReglement');
+$p['page']['formReglement']['reglePorteur']=array('module'=>'base', 'form'=>'baseReglement');
 $p['page']['formOrdo']['ordoPorteur']=array('module'=>'base', 'form'=>'');
