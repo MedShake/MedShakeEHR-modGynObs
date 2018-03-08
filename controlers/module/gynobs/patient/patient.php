@@ -33,7 +33,7 @@ $p['page']['listeForms']=array('gynObsATCD','gynObsSyntheseGyn');
 // le formulaire latéral ATCD
 $formLat = new msForm();
 $p['page']['formNameGynObsATCD']=$formLat->setFormIDbyName('gynObsATCD');
-$formLat->getPrevaluesForPatient($match['params']['patient']);
+$formLat->getPrevaluesForPatient($p['page']['patient']['id']);
 $p['page']['formLat']=$formLat->getForm();
 
 // si LAP activé : allergie et atcd structurés
@@ -67,7 +67,7 @@ if($p['config']['lapOnOff'] == 'on') {
 //formulaire synthèse de gynéco
 $formSynthese = new msForm();
 $p['page']['formNameGynObsSyntheseGyn']=$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
-$formSynthese->getPrevaluesForPatient($match['params']['patient']);
+$formSynthese->getPrevaluesForPatient($p['page']['patient']['id']);
 $p['page']['formSynthese']=$formSynthese->getForm();
 
 
@@ -90,7 +90,7 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
         $formSyntheseGrossesse = new msForm();
         $p['page']['formNameGynObsSyntheseObs']=$formSyntheseGrossesse->setFormIDbyName('gynObsSyntheseObs');
         $formSyntheseGrossesse->setInstance($p['page']['grossesseEnCours']['id']);
-        $formSyntheseGrossesse->getPrevaluesForPatient($match['params']['patient']);
+        $formSyntheseGrossesse->getPrevaluesForPatient($p['page']['patient']['id']);
         $p['page']['formSyntheseGrossesse']=$formSyntheseGrossesse->getForm();
 
         // complément à la liste des formulaires fixes au 1er affichage dossier patient pour JS
