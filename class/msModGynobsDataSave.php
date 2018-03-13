@@ -163,6 +163,12 @@ class msModGynobsDataSave
           return $this->formatDecimalNumber($value);
       }
 
+      // clairance créatinine
+      public function tbs_clairanceCreatinine($value)
+      {
+          return $this->formatDecimalNumber($value);
+      }
+
       //Biomètrie écho 22 et 32
       public function tbs_e22bipFA($value)
       {
