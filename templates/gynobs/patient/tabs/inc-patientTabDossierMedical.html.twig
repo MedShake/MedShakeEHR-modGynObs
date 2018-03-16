@@ -31,16 +31,8 @@
 {% include('inc-patientMenuSup.html.twig') %}
 
 {# colonne latérale #}
-<div class="col-md-3" style="padding-left: 0">
-
-  {# Formulaire latéral des ATCD #}
-  {% if page.patient.ALD %}
-    {% include 'inc-patientAldStruc.html.twig' %}
-  {% endif %}
-  <div id="latForm" class="changeObserv">
-    {{ f.formbuilder(page.formLat , 'gynObsATCD' , valFormLat ) }}
-  </div>
-
+<div id="patientLatCol" class="col-md-3" style="padding-left: 0">
+{% include('inc-patientLatCol.html.twig') %}
 </div>
 
 {# colonne principale #}

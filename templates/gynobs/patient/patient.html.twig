@@ -59,6 +59,16 @@
   {# JS général du dossier patient #}
   <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/patient.js"></script>
 
+  {# JS LAP #}
+  {% if config.lapOnOff == 'on' %}
+  <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/lap.js"></script>
+  <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/lapOrdonnance.js"></script>
+  <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/lapTTenCours.js"></script>
+  <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/lapHistoriqueOrdos.js"></script>
+  <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/lapHistoriqueTT.js"></script>
+  <script defer src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/lapPrescription.js"></script>
+  {% endif %}
+
   {# JS commun au formulaire de consultation du module #}
   <script defer="defer" src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/js/module/commonGynobs.js"></script>
 
@@ -138,7 +148,11 @@
       </div>
 
       {# tab lap #}
-      <div role="tabpanel" class="tab-pane" id="tabLAP" data-rootUrl="/patient/{{ page.patient.id }}/tab/tabLAP/"></div>
+      {% if config.lapOnOff == 'on' %}
+      <div role="tabpanel" class="tab-pane" id="tabLAP">
+        {% include('inc-tabLAP.html.twig') %}
+      </div>
+      {% endif %}
 
       {# tab dicom #}
       <div role="tabpanel" class="tab-pane" id="tabDicom" data-rootUrl="/patient/{{ page.patient.id }}/tab/tabDicomStudiesList/"></div>
