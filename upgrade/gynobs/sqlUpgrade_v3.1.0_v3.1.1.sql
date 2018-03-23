@@ -2,7 +2,7 @@
 
 -- 3.1.0 to 3.1.1
 
-UPDATE `system` SET `value`='3.1.1' WHERE `groupe`='module' and `name`='gynobs';
+UPDATE `system` SET `value`='v3.1.1' WHERE `groupe`='module' and `name`='gynobs';
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='porteursOrdo');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
