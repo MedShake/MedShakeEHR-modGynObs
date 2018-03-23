@@ -44,6 +44,9 @@ $p['page']['formNameGynObsSyntheseGyn']=$formSynthese->setFormIDbyName('gynObsSy
 $formSynthese->getPrevaluesForPatient($p['page']['patient']['id']);
 $p['page']['formSynthese']=$formSynthese->getForm();
 
+$p['page']['csMarqueursSeriques']['csID']=msData::getTypeIDFromName('csMarqueursSerT21');
+$p['page']['csMarqueursSeriques']['form']='gynObsMarqueursSeriques';
+
 //types de consultation liées à la gynéco classique.
 $typeCsCla=new msData;
 $p['page']['typeCsCla']=$typeCsCla->getDataTypesFromCatName('csGyneco', array('id','label', 'formValues'));
@@ -76,5 +79,17 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
 }
 
 //fixer les paramètres pour les formulaires d'ordonnance et de règlement du module
-$p['page']['formReglement']['reglePorteur']=array('module'=>'base', 'form'=>'baseReglement');
-$p['page']['formOrdo']['ordoPorteur']=array('module'=>'base', 'form'=>'');
+$data=new msData;
+$reglements=$data->getDataTypesFromCatName('porteursReglement', array('id', 'module', 'label', 'description', 'formValues'));
+foreach ($reglements as $v) {
+    if ($v['module']=='gynobs') {
+        $p['page']['formReglement'][]=$v;
+    }
+}
+$ordos=$data->getDataTypesFromCatName('porteursOrdo', array('id', 'module', 'label', 'description', 'formValues'));
+foreach ($ordos as $v) {
+    if ($v['module']=='gynobs') {
+      $p['page']['formOrdo'][]=$v;
+    }
+}
+

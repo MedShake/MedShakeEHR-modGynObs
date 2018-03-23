@@ -2,7 +2,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 INSERT IGNORE INTO `system` (`name`, `groupe`,`value`) VALUES
-('gynobs', 'module', 'v3.1.0');
+('gynobs', 'module', 'v3.1.1');
 
 INSERT IGNORE INTO `actes_base` (`code`, `label`, `type`, `tarifs1`, `tarifs2`, `fromID`, `creationDate`) VALUES
 ('JKFD001', 'Exérèse de lésion pédiculée de l\'utérus accouchée par le col, par voie vaginale', 'CCAM', 62.7, 62.7, 1, '2018-01-01 00:00:00'),
@@ -129,6 +129,14 @@ INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `desc
 ('medical', 'e12decoFA', '', 'Décollement - A', 'Décollement - A', '', '', 'text', 'absence d\'image de décollement', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'e12decoFB', '', 'Décollement - B', 'Décollement - B', '', '', 'text', 'absence d\'image de décollement', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'e12decoFC', '', 'Décollement - C', 'Décollement - C', '', '', 'text', 'absence d\'image de décollement', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1);
+
+SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='porteursOrdo');
+INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
+('ordo', 'gynobsOrdoPorteur', '', 'Ordonnance', 'Ordonnance simple', '', '', '', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 1576800000, 1);
+
+SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='porteursReglement');
+INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
+('reglement', 'gynobsReglePorteur', '', 'Règlement', 'Règlement secteurs 1 et 2', '', '', '', 'baseReglement', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 1576800000, 1);
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='atcd');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
