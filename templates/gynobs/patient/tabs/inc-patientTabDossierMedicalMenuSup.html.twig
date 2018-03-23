@@ -20,7 +20,7 @@
  #/
 
 /##
- # Template > patient : menu supérieur du dossier patient
+ # Template gynobs > patient : menu supérieur du dossier patient
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
  # @contrib fr33z00 <https://github.com/fr33z00>
@@ -69,14 +69,14 @@
         <li class="dropdown-header">Certificats</li>
         {% for v in page.modelesCertif %}
           <li>
-            <a class="newCourrier" data-modeleid="{{ v.id }}" href="#">{{ v.label }}</a>
+            <a class="newCourrier" data-modele="{{ v.name }}" href="#">{{ v.label }}</a>
           </li>
         {% endfor %}
         <li role="separator" class="divider"></li>
         <li class="dropdown-header">Courriers</li>
         {% for v in page.modelesCourrier %}
           <li>
-            <a class="newCourrier" data-modeleid="{{ v.id }}" href="#">{{ v.label }}</a>
+            <a class="newCourrier" data-modele="{{ v.name }}" href="#">{{ v.label }}</a>
           </li>
         {% endfor %}
       </ul>

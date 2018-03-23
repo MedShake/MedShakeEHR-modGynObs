@@ -20,7 +20,7 @@
  #/
 
 /##
- # Template > patient : tab dossier médical
+ # Template gynobs > patient : tab dossier médical
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
  # @contrib fr33z00 <https://github.com/fr33z00>
@@ -28,11 +28,11 @@
 {% import "macroForm.html.twig" as f %}
 
 {# menu supérieur #}
-{% include('inc-patientMenuSup.html.twig') %}
+{% include('inc-patientTabDossierMedicalMenuSup.html.twig') %}
 
 {# colonne latérale #}
 <div id="patientLatCol" class="col-md-3" style="padding-left: 0">
-{% include('inc-patientLatCol.html.twig') %}
+  {% include('inc-patientLatCol.html.twig') %}
 </div>
 
 {# colonne principale #}
