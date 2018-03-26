@@ -25,6 +25,7 @@
  * Module Gynéco Obstétrique
  *
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
+ * @contrib fr33z00 <https://github.com/fr33z00>
  */
 
 // liste des formulaires fixes au 1er affichage dossier patient pour JS
@@ -42,6 +43,9 @@ $formSynthese = new msForm();
 $p['page']['formNameGynObsSyntheseGyn']=$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
 $formSynthese->getPrevaluesForPatient($p['page']['patient']['id']);
 $p['page']['formSynthese']=$formSynthese->getForm();
+
+$p['page']['csMarqueursSeriques']['csID']=msData::getTypeIDFromName('csMarqueursSerT21');
+$p['page']['csMarqueursSeriques']['form']='gynObsMarqueursSeriques';
 
 //types de consultation liées à la gynéco classique.
 $typeCsCla=new msData;
@@ -75,5 +79,17 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
 }
 
 //fixer les paramètres pour les formulaires d'ordonnance et de règlement du module
-$p['page']['formReglement']['reglePorteur']=array('module'=>'base', 'form'=>'baseReglement');
-$p['page']['formOrdo']['ordoPorteur']=array('module'=>'base', 'form'=>'');
+$data=new msData;
+$reglements=$data->getDataTypesFromCatName('porteursReglement', array('id', 'module', 'label', 'description', 'formValues'));
+foreach ($reglements as $v) {
+    if ($v['module']=='gynobs') {
+        $p['page']['formReglement'][]=$v;
+    }
+}
+$ordos=$data->getDataTypesFromCatName('porteursOrdo', array('id', 'module', 'label', 'description', 'formValues'));
+foreach ($ordos as $v) {
+    if ($v['module']=='gynobs') {
+      $p['page']['formOrdo'][]=$v;
+    }
+}
+
