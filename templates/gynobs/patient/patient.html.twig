@@ -28,9 +28,8 @@
 
 {% extends "page.html.twig" %}
 {% import "macroForm.html.twig" as f %}
-{% block title %}{{ page['patient']['administrativeDatas']['3']['value']|e }}
-    {% if page['patient']['administrativeDatas']['2']['value'] %}{{ page['patient']['administrativeDatas']['2']['value']|e }}
-    {% else %}{{ page['patient']['administrativeDatas']['1']['value']|e }}{% endif %}
+{% block title %}{{ page.patient.administrativeDatas.firstname.value|e }}
+    {{ (page.patient.administrativeDatas.lastname.value|default(page.patient.administrativeDatas.birthname.value))|e }}
     : dossier patient - MedShakeEHR
 {% endblock %}
 
@@ -68,14 +67,6 @@
 
         <style>
 
-            @media (max-width:992px) {
-              .atcd {padding-left:0 !important; padding-right: 0 !important;margin-bottom:10px}
-              .dossier {padding-left:15px !important; padding-right: 15px !important} 
-            }
-            .foetusB,
-            .foetusC {
-                display: none;
-            }
 
             #newDoc{
               display: none;
@@ -99,8 +90,8 @@
 
       <div class="row">
 
-          <div class="btn-group">
-              <button type="button" class="btn btn-primary dropdown-toggle m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="btn-group m-1">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Ordonnances
               </button>
               <ul class="dropdown-menu">
@@ -117,8 +108,8 @@
               </ul>
           </div>
 
-          <div class="btn-group">
-              <button type="button" class="btn btn-primary dropdown-toggle m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="btn-group m-1">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Courriers &amp; Certificats
               </button>
               <ul class="dropdown-menu">
@@ -128,7 +119,7 @@
                           <a class="dropdown-item newCourrier" data-modeleID="{{ v.id }}" href="#">{{ v.label }}</a>
                       </li>
                   {% endfor %}
-                  <li role="separator" class="dropdown-divider"></li>
+                  <li role="separator" class="divider"></li>
                   <li class="dropdown-header">Courriers</li>
                   {% for v in page.modelesCourrier %}
                       <li>
@@ -138,61 +129,70 @@
               </ul>
           </div>
 
-          <div class="btn-group">
-              <button type="button" class="btn btn-primary dropdown-toggle m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <div class="btn-group m-1">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Document
               </button>
               <ul class="dropdown-menu">
                   <li>
                       <a class="dropdown-item" id="linkAddNewDoc" href="#">Ajouter un document au dossier</a>
                   </li>
+                  {% if config.dicomHost=='' %}
+                    <li>
+                        <a class="dropdown-item prepareReceptionDoc" href="#">Ajouter des documents au dossier via phonecapture</a>
+                    </li>
+                  {% endif %}
               </ul>
           </div>
 
           {% if page.formReglement|length > 1 %}
-            <div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {% if config.administratifPeutAvoirRecettes != 'true' %}disabled="disabled"{% endif %}>
-                    Règlements
-                </button>
-                <ul class="dropdown-menu">
-                  {% for v in page.formReglement %}
-                    <li>
-                      <a class="dropdown-item addNewReglement" title="{{ v.description }}" data-porteur="{{ v.id }}" data-module="{{ v.module }}" data-reglementForm="{{ v.formValues }}" href="#">{{ v.label }}</a>
-                    </li>
-                  {% endfor %}
-                </ul>
-            </div>
-          {% else %}
-            <button class="addNewReglement btn btn-primary m-1" type="button" {% if config.administratifPeutAvoirRecettes != 'true' %}disabled{% endif %} title="{{ page.formReglement[0]['description'] }}" data-porteur="{{ page.formReglement[0]['id'] }}" data-module="{{ page.formReglement[0]['module'] }}" data-reglementForm="{{ page.formReglement[0]['formValues'] }}">{{ page.formReglement[0]['label'] }}</button>
-          {% endif %}
-
-          <div class="btn-group">
-              <button type="button" class="btn btn-primary dropdown-toggle m-1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  DICOM
+            <div class="btn-group m-1">
+              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {% if config.administratifPeutAvoirRecettes != 'true' %}disabled{% endif %}>
+                  Règlements
               </button>
               <ul class="dropdown-menu">
-                <li>
-                    <a href="#" class="dropdown-item catchLastDicomSrData">Récupérer dernières mesures</a>
-                </li>
-                <li>
-                    <a href="#" class="dropdown-item catchOthersDicomSrData">Récupérer mesures antérieures</a>
-                </li>
-                <li role="separator" class="dropdown-divider"></li>
-                <li>
-                    <a class="dropdown-item" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/dicom/{{ page.patient.id }}/" target="_blank">Voir tous les examens du patient</a>
-                </li>
-                <li role="separator" class="dropdown-divider"></li>
-                <li>
-                    <a href="#" class="dropdown-item prepareEcho">Envoyer patiente à échographe</a>
-                </li>
+                {% for v in page.formReglement %}
+                  <li>
+                    <a class="dropdown-item addNewReglement" title="{{ v.description }}" data-porteur="{{ v.id }}" data-module="{{ v.module }}" data-reglementForm="{{ v.formValues }}" href="#">{{ v.label }}</a>
+                  </li>
+                {% endfor %}
               </ul>
-          </div>
+            </div>
+          {% else %}
+            <a class="addNewReglement btn btn-primary m-1" type="button" {% if config.administratifPeutAvoirRecettes != 'true' %}disabled{% endif %} title="{{ page.formReglement[0]['description'] }}" data-porteur="{{ page.formReglement[0]['id'] }}" data-module="{{ page.formReglement[0]['module'] }}" data-reglementForm="{{ page.formReglement[0]['formValues'] }}" href="#">{{ page.formReglement[0]['label'] }}</a>
+          {% endif %}
 
+          {% if config.dicomHost!='' %}
+            <div class="btn-group m-1">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    DICOM
+                </button>
+                <ul class="dropdown-menu">
+                  <li>
+                      <a href="#" class="catchLastDicomSrData dropdown-item">Récupérer dernières mesures</a>
+                  </li>
+                  <li>
+                      <a href="#" class="catchOthersDicomSrData dropdown-item">Récupérer mesures antérieures</a>
+                  </li>
+                  <div role="separator" class="dropdown-divider"></div>
+                  <li>
+                      <a class="dropdown-item" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/dicom/{{ page.patient.id }}/" target="_blank">Voir tous les examens du patient</a>
+                  </li>
+                  <div role="separator" class="dropdown-divider"></div>
+                  <li>
+                      <a href="#" class="dropdown-item prepareEcho">Envoyer patient à échographe</a>
+                  </li>
+                  <li>
+                      <a href="#" class="dropdown-item prepareReceptionDoc dicom">Envoyer patient à phonecapture</a>
+                  </li>
+                </ul>
+            </div>
+          {% endif %}
 
       </div>
 
       <div class="row swipable" style="margin-top : 40px;">
-          <div  class="col-lg-3 atcd">
+          <div class="col-md-5 col-xl-4 px-0 pl-md-0 pr-md-3 atcd">
             {# Formulaire dlatéral des ATCD #}
             <div id="latForm" class=" changeObserv">
                 {{ f.formbuilder(page.formLat , 'gynObsATCD' , valFormLat ) }}
@@ -200,14 +200,16 @@
             {# Liens familiaux #}
             {% if page.liensFamiliaux %}
             <div class="col-md-12 p-0">
-              <div class="card">
-                <div class="card-header py-0 gras">Liens familiaux
-                  <a class="btn btn-default btn-sm float-right m-1" role="button" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/relations/{{ page.patient.id }}/" title="Édition des relations">
-                  <span class="fa fa-link" aria-hidden="true"></span>
+              <div class="card mb-3">
+                <div class="card-header py-0 gras">
+                  Liens familiaux
+                  <a class="btn btn-default btn-sm float-right m-1" role="button" title="Édition des relations"
+                    href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/patient/relations/{{ page.patient.id }}/">
+                    <span class="fa fa-link" aria-hidden="true"></span>
                   </a>
                 </div>
 
-                <table class="table table-sm table-striped table-condensed table-hover small m-0">
+                <table class="table table-sm mb-0 table-striped table-condensed table-hover small mb-0">
                   <thead>
                     <tr>
                       <th></th>
@@ -238,7 +240,7 @@
           </div>
 
           {# colonne principale #}
-          <div class="col-lg-9 dossier" style="padding-left : 35px">
+          <div class="col-md-7 col-xl-8 dossier">
 
             {# Div d'import de nouveau doc #}
             <div id="newDoc" class="row toclear">{% include 'importDocForm.html.twig' %}</div>
@@ -275,7 +277,7 @@
           </div>
         </div>
     </div>
- 
+
     {# modal courbes de poids/taille/IMC #}
     {% include 'inc-patientModal-GraphsIMC.html.twig' %}
 
@@ -291,5 +293,7 @@
     {# modal changer la date d'une ligne d'historique #}
     {% include 'inc-patientModal-changerDateEffet.html.twig' %}
 
+    {# modal phonecapture #}
+    {% include 'inc-patientModal-phonecapture.html.twig' %}
 
 {% endblock %}
