@@ -71,6 +71,7 @@ $p['page']['formNameGynObsSyntheseGyn']=$formSynthese->setFormIDbyName('gynObsSy
 $formSynthese->getPrevaluesForPatient($p['page']['patient']['id']);
 $p['page']['formSynthese']=$formSynthese->getForm();
 
+//données pour formulaire marqueurs sériques
 $p['page']['csMarqueursSeriques']['csID']=msData::getTypeIDFromName('csMarqueursSerT21');
 $p['page']['csMarqueursSeriques']['form']='gynObsMarqueursSeriques';
 
