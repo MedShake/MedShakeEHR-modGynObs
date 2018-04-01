@@ -136,7 +136,7 @@ INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `desc
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='porteursReglement');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('reglement', 'gynobsReglePorteur', '', 'Règlement', 'Règlement secteurs 1 et 2', '', '', '', 'baseReglement', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 1576800000, 1);
+('reglement', 'gynobsReglePorteur', '', 'Règlement', 'Règlement conventionné', '', '', '', 'baseReglementSS', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 1576800000, 1);
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='atcd');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES

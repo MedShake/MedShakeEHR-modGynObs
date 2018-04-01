@@ -90,23 +90,29 @@
 
       <div class="row">
 
-          <div class="btn-group m-1">
-              <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Ordonnances
-              </button>
-              <ul class="dropdown-menu">
-                {% for v in page.formOrdo %}
-                  <li>
-                      <a class="dropdown-item addNewOrdo" title="{{ v.description }}" data-porteur="{{ v.id }}" data-module="{{ v.module }}" data-ordoForm="{{ v.formValues }}" href="#">{{ v.label }}</a>
-                  </li>
-                {% endfor %}
-                {% if page.grossesseEnCours %}
-                  <li>
-                    <a class="dropdown-item newCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ page.csMarqueursSeriques.form }}" data-csID="{{ page.csMarqueursSeriques.csID }}" data-mode="create">Marqueurs sériques</a>
-                  </li>
-                {% endif %}
-              </ul>
-          </div>
+          {% if page.formOrdo|length > 1 or (page.formOrdo|length == 1 and page.grossesseEnCours) %}
+            <div class="btn-group m-1">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Ordonnances
+                </button>
+                <ul class="dropdown-menu">
+                  {% for v in page.formOrdo %}
+                    <li>
+                        <a class="dropdown-item addNewOrdo" title="{{ v.description }}" data-porteur="{{ v.id }}" data-module="{{ v.module }}" data-ordoForm="{{ v.formValues }}" href="#">{{ v.label }}</a>
+                    </li>
+                  {% endfor %}
+                  {% if page.grossesseEnCours %}
+                    <li>
+                      <a class="dropdown-item newCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ page.csMarqueursSeriques.form }}" data-csID="{{ page.csMarqueursSeriques.csID }}" data-mode="create">Marqueurs sériques</a>
+                    </li>
+                  {% endif %}
+                </ul>
+            </div>
+          {% elseif page.formOrdo|length == 1 %}
+            <button class="btn btn-primary m-1 addNewOrdo" type="button" title="{{ page.formOrdo[0].description }}" data-porteur="{{ page.formOrdo[0].id }}" data-module="{{ page.formOrdo[0].module }}" data-ordoForm="{{ page.formOrdo[0].formValues }}">{{ page.formOrdo[0].label }}</button>
+          {% elseif page.grossesseEnCours %}
+            <button class="btn btn-primary m-1 newCS" type="button" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ page.csMarqueursSeriques.form }}" data-csID="{{ page.csMarqueursSeriques.csID }}" data-mode="create">Marqueurs sériques</button>
+          {% endif %}
 
           <div class="btn-group m-1">
               <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
