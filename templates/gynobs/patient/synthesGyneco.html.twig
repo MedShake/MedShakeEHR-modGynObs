@@ -32,7 +32,7 @@
     <div class="jumbotron col-md-12">
         {{ f.formbuilder(page.formSynthese , 'gynObsSyntheseGyn' ) }}
         {% for v in page.typeCsCla %}
-            <button type="button" class="btn btn-success btn-sm newCS" style="margin-bottom : 3px;" data-parentID='0' data-instanceMere="0" data-formtocall="{{ v.formValues }}" data-csID="{{ v.id }}" data-mode="create">{{ v.label|e }}</button>
+            <button type="button" class="btn btn-success btn-sm addNewCS" style="margin-bottom : 3px;" data-parentID='0' data-instanceMere="0" data-formtocall="{{ v.formValues }}" data-csID="{{ v.id }}" data-mode="create">{{ v.label|e }}</button>
         {% endfor %}
 
         {% if page.grossesseEnCours.id == '' and page.patient.administrativeDatas.8.age|number_format < 60 %}

@@ -82,7 +82,9 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
 $data=new msData;
 $reglements=$data->getDataTypesFromCatName('porteursReglement', array('id', 'module', 'label', 'description', 'formValues'));
 foreach ($reglements as $v) {
-    if ($v['module']=='gynobs') {
+    if ($v['module']=='gynobs' and (
+       ($v['formValues']=='baseReglementS1' and $p['config']['administratifSecteurHonoraires']=='1') or
+       ($v['formValues']=='baseReglementS2' and $p['config']['administratifSecteurHonoraires']=='2'))) {
         $p['page']['formReglement'][]=$v;
     }
 }
