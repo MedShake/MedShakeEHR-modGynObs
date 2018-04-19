@@ -40,7 +40,7 @@
         {% endfor %}
         {% if page.grossesseEnCours > 0 %}
           <li>
-              <a class="addNewCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ page.csMarqueursSeriques.form }}" data-csID="{{ page.csMarqueursSeriques.csID }}" data-mode="create">Marqueurs sériques</a>
+              <a class="dropdown-item addNewCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ page.csMarqueursSeriques.form }}" data-csID="{{ page.csMarqueursSeriques.csID }}" data-mode="create">Marqueurs sériques</a>
           </li>
         {% endif %}
       </ul>

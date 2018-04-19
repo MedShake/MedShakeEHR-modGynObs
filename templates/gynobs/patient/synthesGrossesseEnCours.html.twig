@@ -28,20 +28,29 @@
 
 {% import "macroForm.html.twig" as f %}
 <div class="row changeObserv" id="syntheseGrossesseEnCours">
-    <div class="jumbotron col-md-12">
+  <div class="jumbotron col-md-12">
 
-        <div class="row">
-            <a id="closeGro" class="close" aria-label="Close" title="Fermer définitivement cette grossesse" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/module/actions/closeGro/{{ page.patient.id }}/{{ page.grossesseEnCours.id }}/">
-                <span aria-hidden="true">&times;</span>
-            </a>
-        </div>
-        {# Formulaire de synthèse grossesse #}
-        {{ f.formbuilder(page.formSyntheseGrossesse ,'gynObsSyntheseObs' ) }}
-
-        {# Bouton type consultation #}
-        {% for v in page.typeCsGro %}
-            <button type="button" class="btn btn-info btn-sm addNewCS" style="margin-bottom : 3px;" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ v.formValues }}" data-csID="{{ v.id }}" data-mode="create">{{ v.label|e }}</button>
-        {% endfor %}
-
+    <div class="row">
+      <div class="col">
+        <a
+          id="closeGro"
+          class="close"
+          aria-label="Close"
+          title="Fermer définitivement cette grossesse"
+          href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/module/actions/closeGro/{{ page.patient.id }}/{{ page.grossesseEnCours.id }}/"
+          style="z-index : 10000">
+          <span aria-hidden="true">&times;</span>
+        </a>
+      </div>
     </div>
+
+    {# Formulaire de synthèse grossesse #}
+    {{ f.formbuilder(page.formSyntheseGrossesse ,'gynObsSyntheseObs' ) }}
+
+    {# Bouton type consultation #}
+    {% for v in page.typeCsGro %}
+      <button type="button" class="btn btn-info btn-sm addNewCS" style="margin-bottom : 3px;" data-parentid="{{ page.grossesseEnCours.id }}" data-formtocall="{{ v.formValues }}" data-csid="{{ v.id }}" data-mode="create">{{ v.label|e }}</button>
+    {% endfor %}
+
+  </div>
 </div>

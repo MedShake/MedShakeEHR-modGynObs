@@ -35,6 +35,6 @@ $acceptedModes=array(
 );
 
 //inclusion
-if(is_file($p['config']['homeDirectory'].'controlers/module/gynobs/patient/actions/inc-ajax-'.$m.'.php')) {
+if(is_file($p['homepath'].'controlers/module/gynobs/patient/actions/inc-ajax-'.$m.'.php')) {
    include('inc-ajax-'.$m.'.php');
 }
