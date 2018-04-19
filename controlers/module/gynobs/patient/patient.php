@@ -21,8 +21,8 @@
  */
 
 /**
- * Patient : la page du dossier patient
- * Module Gynéco Obstétrique
+ * Module > Patient : la page du dossier patient
+ * Complément Module Gynéco Obstétrique
  *
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  * @contrib fr33z00 <https://github.com/fr33z00>
@@ -31,12 +31,39 @@
 // liste des formulaires fixes au 1er affichage dossier patient pour JS
 $p['page']['listeForms']=array('gynObsATCD','gynObsSyntheseGyn');
 
-
 // le formulaire latéral ATCD
 $formLat = new msForm();
 $p['page']['formNameGynObsATCD']=$formLat->setFormIDbyName('gynObsATCD');
 $formLat->getPrevaluesForPatient($p['page']['patient']['id']);
 $p['page']['formLat']=$formLat->getForm();
+
+// si LAP activé : allergie et atcd structurés
+if($p['config']['utiliserLap'] == 'true') {
+
+    // gestion atcd structurés
+    if(!empty(trim($p['config']['lapActiverAtcdStrucSur']))) {
+      $gethtml=new msGetHtml;
+      $gethtml->set_template('inc-patientAtcdStruc');
+      foreach(explode(',', $p['config']['lapActiverAtcdStrucSur']) as $v) {
+        $p['page']['beforeVar'][$v]=$patient->getAtcdStruc($v);
+        if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
+        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+      }
+      unset($p['page']['beforeVar'], $gethtml);
+    }
+
+    // gestion allergies structurées
+    if(!empty(trim($p['config']['lapActiverAllergiesStrucSur']))) {
+      $gethtml=new msGetHtml;
+      $gethtml->set_template('inc-patientAllergies');
+      foreach(explode(',', $p['config']['lapActiverAllergiesStrucSur']) as $v) {
+        $p['page']['beforeVar'][$v]=$patient->getAllergies($v);
+        if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
+        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+      }
+      unset($p['page']['beforeVar'], $gethtml);
+    }
+}
 
 //formulaire synthèse de gynéco
 $formSynthese = new msForm();
@@ -44,6 +71,7 @@ $p['page']['formNameGynObsSyntheseGyn']=$formSynthese->setFormIDbyName('gynObsSy
 $formSynthese->getPrevaluesForPatient($p['page']['patient']['id']);
 $p['page']['formSynthese']=$formSynthese->getForm();
 
+//données pour formulaire marqueurs sériques
 $p['page']['csMarqueursSeriques']['csID']=msData::getTypeIDFromName('csMarqueursSerT21');
 $p['page']['csMarqueursSeriques']['form']='gynObsMarqueursSeriques';
 
@@ -94,4 +122,3 @@ foreach ($ordos as $v) {
       $p['page']['formOrdo'][]=$v;
     }
 }
-
