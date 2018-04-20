@@ -29,7 +29,7 @@
 <div class="row">
 
     <div class="btn-group m-1">
-      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Ordonnances
       </button>
       <ul class="dropdown-menu">
@@ -48,7 +48,7 @@
 
 
     <div class="btn-group m-1">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Courriers &amp; Certificats
         </button>
         <ul class="dropdown-menu">
@@ -70,7 +70,7 @@
 
     {% if page.formReglement|length > 1 %}
       <div class="btn-group m-1">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {% if config.administratifPeutAvoirRecettes != 'true' %}disabled{% endif %}>
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" {% if config.administratifPeutAvoirRecettes != 'true' %}disabled{% endif %}>
             Règlements
         </button>
         <ul class="dropdown-menu">
@@ -82,11 +82,11 @@
         </ul>
       </div>
     {% else %}
-      <a class="addNewReglement btn btn-primary m-1" type="button" {% if config.administratifPeutAvoirRecettes != 'true' %}disabled{% endif %} title="{{ page.formReglement[0]['description'] }}" data-porteur="{{ page.formReglement[0]['id'] }}" data-module="{{ page.formReglement[0]['module'] }}" data-reglementForm="{{ page.formReglement[0]['formValues'] }}" href="#">{{ page.formReglement[0]['label'] }}</a>
+      <a class="addNewReglement btn btn-secondary m-1" type="button" {% if config.administratifPeutAvoirRecettes != 'true' %}disabled{% endif %} title="{{ page.formReglement[0]['description'] }}" data-porteur="{{ page.formReglement[0]['id'] }}" data-module="{{ page.formReglement[0]['module'] }}" data-reglementForm="{{ page.formReglement[0]['formValues'] }}" href="#">{{ page.formReglement[0]['label'] }}</a>
     {% endif %}
 
     <div class="btn-group m-1">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Document
         </button>
         <ul class="dropdown-menu">
@@ -103,7 +103,7 @@
 
     {% if config.dicomHost!='' %}
       <div class="btn-group m-1">
-          <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               DICOM
           </button>
           <ul class="dropdown-menu">
@@ -112,10 +112,6 @@
             </li>
             <li>
                 <a href="#" class="catchOthersDicomSrData dropdown-item">Récupérer mesures antérieures</a>
-            </li>
-            <div role="separator" class="dropdown-divider"></div>
-            <li>
-                <a class="dropdown-item" href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/dicom/{{ page.patient.id }}/" target="_blank">Voir tous les examens du patient</a>
             </li>
             <div role="separator" class="dropdown-divider"></div>
             <li>
@@ -129,7 +125,7 @@
     {% endif %}
 
     {% if page.patient.ALD is empty %}
-      <button class="btn btn-primary m-1 addNewCS" type="button" data-parentid="0" data-formtocall="aldDeclaration" data-mode="create">Saisir une ALD</button>
+      <button class="btn btn-secondary m-1 addNewCS" type="button" data-parentid="0" data-formtocall="aldDeclaration" data-mode="create">Saisir une ALD</button>
     {% endif %}
 
 </div>
