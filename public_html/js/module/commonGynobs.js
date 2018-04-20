@@ -114,7 +114,7 @@ function setDGE(event) {
   if ($(event.currentTarget).attr('data-joursa')) {
     jours = $(event.currentTarget).attr('data-joursa');
   } else {
-    jours = $(event.currentTarget).siblings('input[data-joursa]').attr('data-joursa');
+    jours = $(event.currentTarget).parents('div.form-group').find('input[data-joursa]').attr('data-joursa');
   }
   var today = moment();
   dge = today.subtract((jours - 14), 'days').format('DD/MM/YYYY');
