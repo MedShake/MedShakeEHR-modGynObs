@@ -34,9 +34,15 @@
 {% endblock %}
 
 {% block head %}
+  {# variables JS embarquées #}
   {# provoquer envoie asynchrone du patient dans le DICOM si config ok #}
   <script>
     var dicomAutoSendPatient2Echo = {{ config.dicomAutoSendPatient2Echo }};
+
+    {% if config.utiliserLap == 'true' %}
+      lapAlertPatientTermeGrossesseSup46 = {{ config.lapAlertPatientTermeGrossesseSup46 }};
+      lapAlertPatientAllaitementSup3Ans = {{ config.lapAlertPatientAllaitementSup3Ans }};
+    {% endif %}
 
     var scrollDestination = {
       newDoc: 'body',
