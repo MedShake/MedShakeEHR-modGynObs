@@ -20,3 +20,5 @@ update `forms` set yamlStructure = REPLACE(yamlStructure, 'E11termeLCCFB,disable
 update `forms` set yamlStructure = REPLACE(yamlStructure, 'E11termeLCCFC,disabled,readonly ','E11termeLCCFC,disabled,readonly,plus={<i class="fa fa-save"></i>} ');
 
 update `forms` set yamlStructure = REPLACE(yamlStructure, 'glyphicon glyphicon-save','fa fa-save');
+
+update `forms` set yamlStructure = REPLACE(yamlStructure, 'imc,readonly,plus={<i class="fa fa-chart-line graph"></i>}','imc,readonly') where internalName = 'gynObsATCD';
