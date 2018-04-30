@@ -33,9 +33,12 @@
           Ordonnances
       </button>
       <ul class="dropdown-menu">
+        {% if config.utiliserLap == 'true' %}
+            <a class="dropdown-item openLAP"  href="#">Ordonnance médicamenteuse</a>
+        {% endif %}
         {% for v in page.formOrdo %}
           <li>
-              <a class="dropdown-item addNewOrdo" title="{{ v.description }}" data-porteur="{{ v.id }}" data-module="{{ v.module }}" data-ordoForm="{{ v.formValues }}" href="#">{{ v.label }}</a>
+              <a class="dropdown-item addNewOrdo" title="{{ v.description }}" data-porteur="{{ v.id }}" data-module="{{ v.module }}" data-ordoForm="{{ v.formValues }}" href="#">{% if config.utiliserLap == 'true' %}Autre prescription{% else %}{{ v.label }}{% endif %}</a>
           </li>
         {% endfor %}
         {% if page.grossesseEnCours > 0 %}
