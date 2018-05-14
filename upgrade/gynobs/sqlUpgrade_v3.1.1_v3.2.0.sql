@@ -22,3 +22,6 @@ update `forms` set yamlStructure = REPLACE(yamlStructure, 'E11termeLCCFC,disable
 update `forms` set yamlStructure = REPLACE(yamlStructure, 'glyphicon glyphicon-save','fa fa-save');
 
 update `forms` set yamlStructure = REPLACE(yamlStructure, 'imc,readonly,plus={<i class="fa fa-chart-line graph"></i>}','imc,readonly') where internalName = 'gynObsATCD';
+
+-- Passage des datas grossesse dans base
+update `data_types` set module='base' where name in ('nouvelleGrossesse', 'groFermetureSuivi', 'ddgReel', 'ddg', 'DDR', 'terme9mois','termeDuJour' );

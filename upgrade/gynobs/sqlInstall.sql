@@ -59,7 +59,6 @@ INSERT IGNORE INTO `actes` (`cat`, `label`, `shortLabel`, `details`, `flagImport
 INSERT IGNORE INTO `data_cat` (`groupe`, `name`, `label`, `description`, `type`, `fromID`, `creationDate`) VALUES
 ('medical', 'dataEcho12', 'Données formulaire Echo 12', 'Données pour échographie 12 SA', 'base', 1, '2018-01-01 00:00:00'),
 ('typecs', 'csObs', 'Consultations obstétricales', 'consultations pendant grossesse', 'base', 1, '2018-01-01 00:00:00'),
-('medical', 'grossesse', 'Grossesse', 'Données liées à la grossesse', 'base', 1, '2018-01-01 00:00:00'),
 ('typecs', 'csGyneco', 'Consultations gynécologiques', 'consultations possibles (hors grossesse)', 'base', 1, '2018-01-01 00:00:00'),
 ('medical', 'dataCsGyneco', 'Données formulaire Cs gynéco', '', 'base', 1, '2018-01-01 00:00:00'),
 ('medical', 'echoInf11', 'Données formulaire Echo inf 11SA', 'données pour l\'écho inf à 11SA', 'base', 1, '2018-01-01 00:00:00'),
@@ -166,14 +165,7 @@ INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `desc
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='grossesse');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('medical', 'DDR', 'ddr', 'DDR', 'date des dernières règles', '', 'validedate,\'d/m/Y\'', 'date', '00/00/0000', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'syntheseGrossesse', 'synthèse grossesse', 'Synthèse grossesse', 'Synthèse sur la grossesse', '', '', 'textarea', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'ddg', 'ddg', 'DDG (théorique)', 'date de début de grossesse', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'ddgReel', '', 'DDG (retenue)', 'date de début de grossesse corrigé', '', '', 'date', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'termeDuJour', '', 'Terme du jour', 'terme du jour', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'groFermetureSuivi', '', 'Fermeture de la grossesse', 'date de fermeture de la grossesse (porteur)', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
-('medical', 'terme9mois', '', 'Terme (9 mois)', 'terme', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1);
-
+('medical', 'syntheseGrossesse', 'synthèse grossesse', 'Synthèse grossesse', 'Synthèse sur la grossesse', '', '', 'textarea', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1);
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='csGyneco');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
@@ -506,12 +498,6 @@ INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `desc
 ('medical', 'eGynDDR', '', 'DDR', 'date des dernières règles', '', '', 'date', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'eGynOvaireDtGdAxe', '', 'Ovaire droit : grand axe', '', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('medical', 'eGynOvaireGGdAxe', '', 'Ovaire gauche : grand axe', '', '', '', 'text', '', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1);
-
-
-SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='declencheur');
-INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('typecs', 'nouvelleGrossesse', '', 'Nouvelle grossesse', 'support parent pour nouvelle grossesse', '', '', '', 'gynObsSyntheseObs', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 86400, 1);
-
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='dataMarqueursT21');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
