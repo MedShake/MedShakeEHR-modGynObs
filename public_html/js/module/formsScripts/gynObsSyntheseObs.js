@@ -43,7 +43,7 @@ $(document).ready(function() {
     calcAndDisplayT9m();
     if (typeof(dicomAutoSendPatient2Echo) != "undefined") {
       if (dicomAutoSendPatient2Echo == true) {
-        prepareEcho();
+        prepareEcho('nopopup');
       }
     }
   });
@@ -55,7 +55,7 @@ $(document).ready(function() {
     calcAndDisplayT9m();
     if (typeof(dicomAutoSendPatient2Echo) != "undefined") {
       if (dicomAutoSendPatient2Echo == true) {
-        prepareEcho();
+        prepareEcho('nopopup');
       }
     }
   });

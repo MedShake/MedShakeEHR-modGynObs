@@ -91,10 +91,10 @@ class msModGynobsDataCourrier
 
     // extraction des ATCD
     $atcd = new msCourrier();
-      $atcd = $atcd->getExamenData($d['patientID'], 'gynObsATCD', 0);
-      if (is_array($atcd)) {
-          $d=$d+$atcd;
-      }
+    $atcd = $atcd->getExamenData($d['patientID'], 'gynObsATCD', 0);
+    if (is_array($atcd)) {
+        $d=$d+$atcd;
+    }
   }
 
 
