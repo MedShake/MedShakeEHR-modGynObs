@@ -28,6 +28,7 @@ update `data_types` set module='base' where name in ('nouvelleGrossesse', 'groFe
 
 -- Petite correction
 UPDATE `data_types` SET `formValues` = '' WHERE name = 'DDR';
+DELETE from `data_types` where name in ('porteurCatPres1', 'porteurPresNonMedic');
 
 -- Configuration propre au module
 INSERT IGNORE INTO `configuration` (`name`, `level`, `toID`, `module`, `cat`, `type`, `description`, `value`) VALUES
