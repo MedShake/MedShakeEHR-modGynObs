@@ -26,6 +26,10 @@ update `forms` set yamlStructure = REPLACE(yamlStructure, 'imc,readonly,plus={<i
 -- Passage des datas grossesse dans base
 update `data_types` set module='base' where name in ('nouvelleGrossesse', 'groFermetureSuivi', 'ddgReel', 'ddg', 'DDR', 'terme9mois','termeDuJour' );
 
+-- Petite correction
+UPDATE `data_types` SET `formValues` = '' WHERE name = 'DDR';
+DELETE from `data_types` where name in ('porteurCatPres1', 'porteurPresNonMedic');
+
 -- Configuration propre au module
 INSERT IGNORE INTO `configuration` (`name`, `level`, `toID`, `module`, `cat`, `type`, `description`, `value`) VALUES
 ('lapActiverAtcdStrucSur', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'atcdObs,atcdPersoGyneco,atcdMedicChir'),
