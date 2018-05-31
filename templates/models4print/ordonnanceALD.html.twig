@@ -31,7 +31,7 @@
 {% set ms = page.courrier.medoc.standard %}
 {% set ma = page.courrier.medoc.ald %}
 
-<head>
+
     <html>
         <head>
             <style>
@@ -102,9 +102,7 @@
                 <div id="header">
                     <div class="centrer t8" style="display : inline-block; width : 45%;vertical-align : top; border : 1px solid #000;height : 110pt">
                         <span class="gras t10">Docteur Stephen STRANGE</span><br>
-                        Gynécologue-Obstétricien<br>
                         Conventionnée secteur 2<br>
-                        Échographie gynécologique et obstétricale - Colposcopie<br>
                         N°ADELI : <br>
                         RPPS : <br>
                         Stephen.STANGE@medical.apicrypt.org<br>
@@ -115,9 +113,8 @@
 
                     <div class="centrer t10" style=" display : inline-block; float : right; width : 45%; vertical-align : top; border : 1px solid #000; height : 110pt">
                         <br><br><br>
-                        <span class="gras t10">{% if tag.administrativeGenderCode == 'Femme' %}Mme{% elseif tag.administrativeGenderCode == 'Homme' %}M.{% endif %}
-                            {{ tag.firstname }}
-                            {{ tag.nomsUsageNaissance }}</span><br>({{ tag.birthdate }})
+                        <span class="gras t10">{{ tag.identiteCompleteTitreCourt }}
+                        </span><br>{{ tag.birthdate }} - {{ tag.age }}
                     </div>
                 </div>
 
@@ -132,11 +129,12 @@
                     <p style="text-align : right;">New York, le
                         {{ tag.date|date("d/m/Y") }}</p>
 
-                    <div style="height : 200pt;">
+                    <div>
                         <div class="centrer" style="width: 100%; border: 1px solid #000;">
                             <strong>Prescriptions relatives au traitement de l'affection de longue durée reconnue (liste ou hors liste)</strong><br>
                             (AFFECTION EXONERANTE)
                         </div>
+                        <p class="t8" style="text-align : right;">{{ ma|length }} ligne{% if ma|length > 1 %}s{% endif %} de prescriptions</p>
 
                         {% for v in ma %}
                             <p class="t8" style="margin-bottom: 8pt;">{{ v|nl2br }}</p>
@@ -148,6 +146,7 @@
                         <strong>Prescriptions SANS RAPPORTS avec l'affection de longue durée</strong><br>
                         (MALADIES INTERCURRENTES)
                     </div>
+                    <p class="t8" style="text-align : right;">{{ ms|length }} ligne{% if ms|length > 1 %}s{% endif %} de prescriptions</p>
 
                     {% for v in ms %}
                         <p class="t8" style="margin-bottom: 8pt;">{{ v|nl2br }}</p>
