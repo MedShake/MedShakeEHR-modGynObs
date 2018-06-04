@@ -31,6 +31,15 @@
   *
   */
 
+$(document).ready(function() {
+  //observer #nouvelleCs et ajuster le nombre de foetus quand cela est nécessaire
+  var observer = new MutationObserver(function() {
+    afficherFxNbFoetus();
+  });
+  observer.observe(document.getElementById('nouvelleCs'), { childList: true });
+
+});
+
 //function afficher masque en fonction nombre foetus
 function afficherFxNbFoetus() {
   if ($('#id_nbFoetusEcho12_id').val()) nombreFoetus = $('#id_nbFoetusEcho12_id').val();
@@ -41,21 +50,17 @@ function afficherFxNbFoetus() {
   else return true;
 
   if (nombreFoetus == 1) {
-    $('.foetusA').show();
-    $('.foetusB').hide();
-    $('.foetusC').hide();
+    $('.foetusA').removeClass('d-none').addClass('d-flex');
+    $('.foetusB, .foetusC').removeClass('d-flex').addClass('d-none');
     disabledForm('.foetusB');
     disabledForm('.foetusC');
   } else if (nombreFoetus == 2) {
-    $('.foetusA').show();
-    $('.foetusB').show();
-    $('.foetusC').hide();
+    $('.foetusA, .foetusB').removeClass('d-none').addClass('d-flex');
+    $('.foetusC').removeClass('d-flex').addClass('d-none');
     enabledForm('.foetusB');
     disabledForm('.foetusC');
   } else if (nombreFoetus == 3) {
-    $('.foetusA').show();
-    $('.foetusB').show();
-    $('.foetusC').show();
+    $('.foetusA, .foetusB, .foetusC').removeClass('d-none').addClass('d-flex');
     enabledForm('.foetusB');
     enabledForm('.foetusC');
   }
@@ -107,7 +112,7 @@ function enabledForm(classToEnabled) {
   $(classToEnabled + ' textarea').removeAttr('disabled', 'disabled');
 }
 
-//insatller un DGE à partir du LCC echo
+//installer un DGE à partir du LCC echo
 function setDGE(event) {
 
   //on calcule
