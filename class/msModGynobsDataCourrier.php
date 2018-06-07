@@ -88,13 +88,28 @@ class msModGynobsDataCourrier
  */
   public static function getCourrierDataCompleteModuleModele_modeleCourrierResumeDossier(&$d)
   {
+    global $p;
 
-    // extraction des ATCD
+    // extraction des ATCD du formulaire lateral
     $atcd = new msCourrier();
     $atcd = $atcd->getExamenData($d['patientID'], 'gynObsATCD', 0);
     if (is_array($atcd)) {
         $d=$d+$atcd;
     }
+
+    // si LAP, extraction des donnéés structurées
+    if($p['config']['utiliserLap'] == 'true') {
+      $patient = new msPeople;
+      $patient->setToID($d['patientID']);
+      foreach(explode(',', $p['config']['lapActiverAtcdStrucSur']) as $v) {
+        $d['atcdStruc'][$v]=$patient->getAtcdStruc($v);
+      }
+      foreach(explode(',', $p['config']['lapActiverAllergiesStrucSur']) as $v) {
+        $d['allergiesStruc'][$v]=$patient->getAllergies($v);
+      }
+      $d['ALD']=$patient->getALD();
+    }
+
   }
 
 
