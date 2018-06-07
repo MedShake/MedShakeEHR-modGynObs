@@ -48,23 +48,97 @@
   <li>Sérologie toxoplasmose : {{ tag.toxoStatut }}</li>
   <li>Sérologie rubéole : {{ tag.rubStatut }}</li>
   <li>Tabac et toxiques : {{ tag.toxiques }}</li>
-  <li>Allergies : {{ tag.allergies|nl2br }}</li>
 </ul>
 
+<h3>Allergies</h3>
+{% if tag.allergiesStruc.allergies.allergiesData %}
+  <ul>
+  {% for all in tag.allergiesStruc.allergies.allergiesData %}
+    <li>
+    {{ all.libelle }}
+    </li>
+  {% endfor %}
+  </ul>
+{% endif %}
 
+{{ tag.allergies|nl2br }}
+
+{% if tag.ALD is not empty %}
+<h3>ALD</h3>
+<ul>
+  {% for ald in tag.ALD %}
+  <li>{{ ald.aldLabel }}
+    {% if ald.aldDateDebutPriseEnCharge.value %}(pris en charge au {{ ald.aldDateDebutPriseEnCharge.value }}){% endif %}
+  </li>
+  {% endfor %}
+
+</ul>
+{% endif %}
 
 <h3>Antécédents obstétricaux</h3>
+{% if tag.atcdStruc.atcdObs.atcd %}
+  <ul>
+  {% for atc in tag.atcdStruc.atcdObs.atcd %}
+    <li>
+    {{ atc.atcdStrucCIM10Label.value }}
+    {% if atc.atcdStrucDateDebutAnnee.value > 0 or atc.atcdStrucDateFinAnnee.value > 0 %} : {% endif %}
+    {% if atc.atcdStrucDateDebutJour.value > 0%}{% if atc.atcdStrucDateDebutJour.value < 10 %}0{% endif %}{{ atc.atcdStrucDateDebutJour.value }}/{% endif %}{% if atc.atcdStrucDateDebutMois.value > 0 %}{% if atc.atcdStrucDateDebutMois.value < 10 %}0{% endif %}{{ atc.atcdStrucDateDebutMois.value }}/{% endif %}{{ atc.atcdStrucDateDebutAnnee.value }}
+    {% if atc.atcdStrucDateDebutAnnee.value > 0 and atc.atcdStrucDateFinAnnee.value > 0 %} - {% endif %}
+    {% if atc.atcdStrucDateFinJour.value > 0%}{% if atc.atcdStrucDateFinJour.value < 10 %}0{% endif %}{{ atc.atcdStrucDateFinJour.value }}/{% endif %}{% if atc.atcdStrucDateFinMois.value > 0 %}{% if atc.atcdStrucDateFinMois.value < 10 %}0{% endif %}{{ atc.atcdStrucDateFinMois.value }}/{% endif %}{{ atc.atcdStrucDateFinAnnee.value }}
+    </li>
+  {% endfor %}
+  </ul>
+{% endif %}
 
 {{ tag.atcdObs|nl2br }}
 
 <h3>Antécédents gynécologiques</h3>
+{% if tag.atcdStruc.atcdPersoGyneco.atcd %}
+  <ul>
+  {% for atc in tag.atcdStruc.atcdPersoGyneco.atcd %}
+    <li>
+    {{ atc.atcdStrucCIM10Label.value }}
+    {% if atc.atcdStrucDateDebutAnnee.value > 0 or atc.atcdStrucDateFinAnnee.value > 0 %} : {% endif %}
+    {% if atc.atcdStrucDateDebutJour.value > 0%}{% if atc.atcdStrucDateDebutJour.value < 10 %}0{% endif %}{{ atc.atcdStrucDateDebutJour.value }}/{% endif %}{% if atc.atcdStrucDateDebutMois.value > 0 %}{% if atc.atcdStrucDateDebutMois.value < 10 %}0{% endif %}{{ atc.atcdStrucDateDebutMois.value }}/{% endif %}{{ atc.atcdStrucDateDebutAnnee.value }}
+    {% if atc.atcdStrucDateDebutAnnee.value > 0 and atc.atcdStrucDateFinAnnee.value > 0 %} - {% endif %}
+    {% if atc.atcdStrucDateFinJour.value > 0%}{% if atc.atcdStrucDateFinJour.value < 10 %}0{% endif %}{{ atc.atcdStrucDateFinJour.value }}/{% endif %}{% if atc.atcdStrucDateFinMois.value > 0 %}{% if atc.atcdStrucDateFinMois.value < 10 %}0{% endif %}{{ atc.atcdStrucDateFinMois.value }}/{% endif %}{{ atc.atcdStrucDateFinAnnee.value }}
+    </li>
+  {% endfor %}
+  </ul>
+{% endif %}
 
 {{ tag.atcdPersoGyneco|nl2br }}
 
 <h3>Antécédents médico-chirurgicaux</h3>
+{% if tag.atcdStruc.atcdMedicChir.atcd %}
+  <ul>
+  {% for atc in tag.atcdStruc.atcdMedicChir.atcd %}
+    <li>
+    {{ atc.atcdStrucCIM10Label.value }}
+    {% if atc.atcdStrucDateDebutAnnee.value > 0 or atc.atcdStrucDateFinAnnee.value > 0 %} : {% endif %}
+    {% if atc.atcdStrucDateDebutJour.value > 0%}{% if atc.atcdStrucDateDebutJour.value < 10 %}0{% endif %}{{ atc.atcdStrucDateDebutJour.value }}/{% endif %}{% if atc.atcdStrucDateDebutMois.value > 0 %}{% if atc.atcdStrucDateDebutMois.value < 10 %}0{% endif %}{{ atc.atcdStrucDateDebutMois.value }}/{% endif %}{{ atc.atcdStrucDateDebutAnnee.value }}
+    {% if atc.atcdStrucDateDebutAnnee.value > 0 and atc.atcdStrucDateFinAnnee.value > 0 %} - {% endif %}
+    {% if atc.atcdStrucDateFinJour.value > 0%}{% if atc.atcdStrucDateFinJour.value < 10 %}0{% endif %}{{ atc.atcdStrucDateFinJour.value }}/{% endif %}{% if atc.atcdStrucDateFinMois.value > 0 %}{% if atc.atcdStrucDateFinMois.value < 10 %}0{% endif %}{{ atc.atcdStrucDateFinMois.value }}/{% endif %}{{ atc.atcdStrucDateFinAnnee.value }}
+    </li>
+  {% endfor %}
+  </ul>
+{% endif %}
 
 {{ tag.atcdMedicChir|nl2br }}
 
 <h3>Antécédents familiaux</h3>
+{% if tag.atcdStruc.atcdFamiliaux.atcd %}
+  <ul>
+  {% for atc in tag.atcdStruc.atcdFamiliaux.atcd %}
+    <li>
+    {{ atc.atcdStrucCIM10Label.value }}
+    {% if atc.atcdStrucDateDebutAnnee.value > 0 or atc.atcdStrucDateFinAnnee.value > 0 %} : {% endif %}
+    {% if atc.atcdStrucDateDebutJour.value > 0%}{% if atc.atcdStrucDateDebutJour.value < 10 %}0{% endif %}{{ atc.atcdStrucDateDebutJour.value }}/{% endif %}{% if atc.atcdStrucDateDebutMois.value > 0 %}{% if atc.atcdStrucDateDebutMois.value < 10 %}0{% endif %}{{ atc.atcdStrucDateDebutMois.value }}/{% endif %}{{ atc.atcdStrucDateDebutAnnee.value }}
+    {% if atc.atcdStrucDateDebutAnnee.value > 0 and atc.atcdStrucDateFinAnnee.value > 0 %} - {% endif %}
+    {% if atc.atcdStrucDateFinJour.value > 0%}{% if atc.atcdStrucDateFinJour.value < 10 %}0{% endif %}{{ atc.atcdStrucDateFinJour.value }}/{% endif %}{% if atc.atcdStrucDateFinMois.value > 0 %}{% if atc.atcdStrucDateFinMois.value < 10 %}0{% endif %}{{ atc.atcdStrucDateFinMois.value }}/{% endif %}{{ atc.atcdStrucDateFinAnnee.value }}
+    </li>
+  {% endfor %}
+  </ul>
+{% endif %}
 
 {{ tag.atcdFamiliaux|nl2br }}
