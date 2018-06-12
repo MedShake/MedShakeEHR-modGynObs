@@ -1,0 +1,12 @@
+# Extends the DB Image from MedShake EHR Base
+FROM medshake-ehr-web:latest
+LABEL description="MedShake EHR dockerized"
+LABEL maintainer="bugeaud@gmail.com"
+
+# Set some environement variables required
+ENV APP_PATH /app
+ENV MEDSHAKEEHRPATH $APP_PATH/MedShakeEHR-base/
+ENV MEDSHAKEEHRPUBLICPATH $APP_PATH/MedShakeEHR-base/public_html/
+
+# Copy the module's sources to the app image root
+COPY . $MEDSHAKEEHRPATH
