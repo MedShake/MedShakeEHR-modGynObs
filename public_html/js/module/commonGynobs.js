@@ -172,7 +172,7 @@ function majLCC2Terme(lcc, cible) {
 //affichage percentiles
 function displayPercentiles(inputSource, type) {
 
-  SA = arrondir10(parseFloat($('#id_termeDuJour_id').attr('data-tdj4math')));
+  SA = parseFloat($('#id_termeDuJour_id').attr('data-tdj4math'));
   mesure = $(inputSource).val();
 
   if (type == 'bip') {
