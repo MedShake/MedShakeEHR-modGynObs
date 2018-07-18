@@ -2,7 +2,7 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 INSERT IGNORE INTO `system` (`name`, `groupe`,`value`) VALUES
-('gynobs', 'module', 'v3.2.2');
+('gynobs', 'module', 'v3.3.0');
 
 -- Configuration propre au module
 INSERT IGNORE INTO `configuration` (`name`, `level`, `toID`, `module`, `cat`, `type`, `description`, `value`) VALUES
