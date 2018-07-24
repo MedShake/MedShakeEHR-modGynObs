@@ -19,6 +19,9 @@ Le fichier SQL présent ici comporte uniquement le contenu à insérer pour l'ut
 1- Follow the procedure to install MedShakeEHR-base but stop after step calling "docker-ehr-build.sh" to create the EHR base images
 1- Suivre la procédure d'installation de MedShakeEHR-base mais arrêtez aprés l'étape "docker-ehr-build.sh" qui crée les images EHR base
 
+WARNING : make sure that the correct environment variables was set on this first step. They will be used in the rest of the process.
+ATTENTION : assurez-vous que les variables d'environements ont été positionées lors de cette première étape. Elles seront utilisées dans le reste du processus.
+
 WARNING: the default configuration reuse the host ~ehr folder for data and log. If you had a previous EHR container running, please backup & remove ~ehr beforehand.
 ATTENTION: la configuration par défaut réutilise le ~ehr de l'hôte. Si vous avez déjà lancé un conteneur EHR,veuillez sauvegarder puis supprimer ~ehr au préalable.
 
@@ -30,43 +33,30 @@ ATTENTION: la configuration par défaut réutilise le ~ehr de l'hôte. Si vous a
 3- Enter the folder
 3- Entrer dans le répertoire
 
->cd MedShakeEHR-base
+>cd MedShakeEHR-modGynObs
 
-4- Alter the following file to change password (MANDATORY), hostname or anything needed. Make sure that changes made are consistent accross the various files including files from EHR base.
-4- Modifier le fichiers suivant pour changer les mots de passe (OBLIGATOIRE), les noms de machines ou tout autre chose requise. Vérifiez que les changements effectués sont cohérents d'un fichier à l'autre y comprit avec les fichier de EHR base.
-
-- docker-compose.yml : MYSQL_ROOT_PASSWORD, MYSQL_USER, MYSQL_PASSWORD
-
-5- Build the required EHR images
-5- Construire les images de EHR
+4- Build the required EHR module images
+4- Construire les images de EHR
 
 > docker-ehr-build.sh
 
-6- Launch the application (create + start)
-6- Lancer l'application (create + start)
+5- Launch the application (create + start)
+5- Lancer l'application (create + start)
 
 > docker-compose up
 
-7- First time there will be an error trying to start the web container.
-7- La première fois, une erreur va bloquer le lancement du conteneur web.
-7- As a workaround for this issue launch :
-7- Pour contourner cette difficulté, lancer :
-
-> mkdir ~ehr/log/apache2
-
-8- And restart compose :
-8- Puis, relancer compose :
+6- And restart compose :
+6- Puis, relancer compose :
 
 > docker-compose up
 
-9- An EHR instance is ready :
-9- Vous avez une instance de EHR de disponible :
+7- An EHR instance is ready :
+7- Vous avez une instance de EHR de disponible :
 
 >http://host/
 
-10- Follow the instructions there ...
-10- Y suivre les instructions ...
-
+8- Follow the instructions there ...
+8- Y suivre les instructions ...
 
 
 To start the containers
