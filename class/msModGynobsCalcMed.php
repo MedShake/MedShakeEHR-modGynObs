@@ -23,56 +23,20 @@
 /**
  * Calculs médicaux
  * Module gynéco obstétrique
+ * Le calculs basique sont dans base,
+ * accessibles par extension de class
  *
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  */
 
-class msModGynobsCalcMed
+class msModGynobsCalcMed extends msModBaseCalcMed
 {
 
-
 /**
- * Calcule de l'IMC
- * @param  float $poidskg  poids en kg
- * @param  float $taillecm taille en cm
- * @return float           IMC
- */
-      public static function imc($poidskg, $taillecm) {
-        if(is_numeric($poidskg) and is_numeric($taillecm)) {
-          return number_format(round($poidskg / ($taillecm/100 * $taillecm/100), 1), 1, '.', '');
-        }
-      }
-
-/**
- * DDR vers DDG
- * @param  string $ddr DDR au format d/m/Y
- * @return string      DDG au format d/m/Y
- */
-    public static function ddr2ddg($ddr)
-    {
-        $date = DateTime::createFromFormat('d/m/Y', $ddr);
-        $date->add(new DateInterval('P14D'));
-        return $date->format('d/m/Y');
-    }
-
-
-/**
- * DDG vers DDR
+ * DDG vers Dates marqueurs T1
  * @param  string $ddg DDG au format d/m/Y
- * @return string      DDR au format d/m/Y
+ * @return array      array
  */
-    public static function ddg2ddr($ddg)
-    {
-        $date = DateTime::createFromFormat('d/m/Y', $ddg);
-        $date->sub(new DateInterval('P14D'));
-        return $date->format('d/m/Y');
-    }
-
-  /**
-   * DDG vers Dates marqueurs T1
-   * @param  string $ddg DDG au format d/m/Y
-   * @return array      array
-   */
     public static function ddg2datesMST21($ddg)
     {
         #dc1 start
@@ -105,67 +69,7 @@ class msModGynobsCalcMed
         return $tab;
     }
 
-/**
- * DDR vers terme au jour
- * @param  string $ddr  DDR au format d/m/Y
- * @param  string $jour Jour au format d/m/Y
- * @return string       terme au format xSA + xJ
- */
-    public static function ddr2terme($ddr, $jour)
-    {
-        $ddr = DateTime::createFromFormat('d/m/Y', $ddr);
-        $jour = DateTime::createFromFormat('d/m/Y', $jour);
-        $interval = date_diff($ddr, $jour);
-        $nbjours=$interval->format('%a');
 
-        $nbsemaines = floor($nbjours/7);
-        $plus = $nbjours-($nbsemaines *7);
-        $chaine =  $nbsemaines.'SA';
-        if ($plus > 0) {
-            $chaine.=' + '.$plus.'J';
-        }
-        return $chaine;
-    }
-
-
-/**
- * DDG vers terme au jour
- * @param  string $ddg  DDG au format d/m/Y
- * @param  string $jour Jour au format d/m/Y
- * @return string       terme au format xSA + xJ
- */
-    public static function ddg2terme($ddg, $jour)
-    {
-        $ddg = DateTime::createFromFormat('d/m/Y', $ddg);
-        $jour = DateTime::createFromFormat('d/m/Y', $jour);
-        $interval = date_diff($ddg, $jour);
-        $nbjours=$interval->format('%a') + 14; #on corrige pour sortir en SA
-
-        $nbsemaines = floor($nbjours/7);
-        $plus = $nbjours-($nbsemaines *7);
-        $chaine =  $nbsemaines.'SA';
-        if ($plus > 0) {
-            $chaine.=' + '.$plus.'J';
-        }
-        return $chaine;
-    }
-
-// DDG vers terme du jour en SA avec 1 decimale
-/**
- * DDG vers le terme exprimé en SA avec 1 décimale
- * @param  string $ddg  DDG au format d/m/Y
- * @param  string $jour Jour au format d/m/Y
- * @return float       Nb de SA avec 1 décimale
- */
-    public static function ddg2termeMath($ddg, $jour)
-    {
-        $ddg = DateTime::createFromFormat('d/m/Y', $ddg);
-        $jour = DateTime::createFromFormat('d/m/Y', $jour);
-        $interval = date_diff($ddg, $jour);
-        $nbjours=$interval->format('%a') + 14; #on corrige pour sortir en SA
-
-        return round(($nbjours/7), 1);
-    }
 
 /**
  * Calculer percentile PC
@@ -175,8 +79,14 @@ class msModGynobsCalcMed
  */
     public static function pc100($PCm, $SA)
     {
-        $PC = round((44.4924 * 1 - (2.7182 * ($SA)) * 1 + (0.6673 * pow(($SA), 2)) * 1 - (0.0107 * pow(($SA), 3))), 2);
-        $PCds = round((2.7945 * 1 + (0.345 * ($SA))), 2);
+        // Hadlock 1985
+        //$PC = round((44.4924 * 1 - (2.7182 * ($SA)) * 1 + (0.6673 * pow(($SA), 2)) * 1 - (0.0107 * pow(($SA), 3))), 2);
+        //$PCds = round((2.7945 * 1 + (0.345 * ($SA))), 2);
+
+        // Intergrowth
+        $PC = -28.2849 + 1.69267 * pow(($SA), 2) - 0.397485 * pow(($SA), 2) * log(($SA));
+        $PCds = 1.98735 + 0.0136772 * pow(($SA), 3) - 0.00726264 * pow(($SA), 3) * log(($SA)) + 0.000976253 * pow(($SA), 3) * pow(log(($SA)), 2);
+
         $PCzs = round(($PCm - $PC) / $PCds, 2);
         $PC100 = round(((1 / (1 + exp(-1.5976 * ($PCzs) - 0.0706 * pow(($PCzs), 3)))) * 100), 2);
         return round($PC100);
@@ -190,8 +100,13 @@ class msModGynobsCalcMed
  */
     public static function bip100($BIPm, $SA)
     {
-        $BIP = round((31.2452 * 1 - (2.8466 * ($SA)) * 1 + (0.2577 * pow(($SA), 2)) * 1 - (0.0037 * pow(($SA), 3))), 2);
-        $BIPds = round((1.5022 * 1 + (0.0636 * ($SA))), 2);
+        // Hadlock 1985
+        //$BIP = round((31.2452 * 1 - (2.8466 * ($SA)) * 1 + (0.2577 * pow(($SA), 2)) * 1 - (0.0037 * pow(($SA), 3))), 2);
+        //$BIPds = round((1.5022 * 1 + (0.0636 * ($SA))), 2);
+
+        // Intergrowth
+        $BIP = 5.60878 + 0.158369 * pow(($SA), 2) - 0.00256379 * pow(($SA), 3);
+        $BIPds = exp(0.101242 + 0.00150557 * pow(($SA), 3) - 0.000771535 * pow(($SA), 3) * log($SA) + 0.0000999638 * pow(($SA), 3) * pow(log($SA), 2));
         $BIPzs = round((($BIPm - $BIP) / $BIPds), 2);
         $BIP100 = round(((1 / (1 + exp(-1.5976 * ($BIPzs) - 0.0706 * pow(($BIPzs), 3)))) * 100), 2);
         return round($BIP100);
@@ -205,8 +120,13 @@ class msModGynobsCalcMed
  */
     public static function pa100($PAm, $SA)
     {
-        $PA = round((42.7794 * 1 - (2.7882 * ($SA)) * 1 + (0.5715 * pow(($SA), 2)) * 1 - (0.008 * pow(($SA), 3))), 2);
-        $PAds = round((-2.3658 * 1 + (0.6459 * ($SA))), 2);
+        // Hadlock 1985
+        //$PA = round((42.7794 * 1 - (2.7882 * ($SA)) * 1 + (0.5715 * pow(($SA), 2)) * 1 - (0.008 * pow(($SA), 3))), 2);
+        //$PAds = round((-2.3658 * 1 + (0.6459 * ($SA))), 2);
+
+        // Intergrowth
+        $PA = -81.3243 + 11.6772 * $SA - 0.000561865 * pow(($SA), 3);
+        $PAds = -4.36302 + 0.121445 * pow(($SA), 2) - 0.0130256 * pow(($SA), 3) + 0.00282143 * pow(($SA), 3) * log($SA);
         $PAzs = round((($PAm - $PA) / $PAds), 2);
         $PA100 = round(((1 / (1 + exp(-1.5976 * ($PAzs) - 0.0706 * pow(($PAzs), 3)))) * 100), 2);
         return round($PA100);
@@ -220,8 +140,13 @@ class msModGynobsCalcMed
  */
     public static function lf100($LFm, $SA)
     {
-        $LF = round((-27.085 * 1 + (2.9223 * ($SA)) * 1 + (0.0148 * pow(($SA), 2)) * 1 - (0.0006 * pow(($SA), 3))), 2);
-        $LFds = round((1.0809 * 1 + (0.0609 * ($SA))), 2);
+        // Hadlock 1985
+        //$LF = round((-27.085 * 1 + (2.9223 * ($SA)) * 1 + (0.0148 * pow(($SA), 2)) * 1 - (0.0006 * pow(($SA), 3))), 2);
+        //$LFds = round((1.0809 * 1 + (0.0609 * ($SA))), 2);
+
+        // Intergrowth
+        $LF = -39.9616 + 4.32298 * $SA - 0.0380156 * pow(($SA), 2);
+        $LFds = exp(0.605843 - 42.0014 * pow(($SA), -2) + 0.00000917972 * pow(($SA), 3));
         $LFzs = round((($LFm - $LF) / $LFds), 2);
         $LF100 = round(((1 / (1 + exp(-1.5976 * ($LFzs) - 0.0706 * pow(($LFzs), 3)))) * 100), 2);
         return round($LF100);
@@ -235,10 +160,23 @@ class msModGynobsCalcMed
  */
     public function poids100($EPFcalc, $SA)
     {
-        $EPFatt = round((pow(2.71828182845904, (0.578 + (0.332*($SA)) * 1 - (0.00354 * pow(($SA), 2))))), 2);
-        $EPFds = round((0.127 * ($EPFatt)), 2);
-        $EPFzs = round((($EPFcalc - $EPFatt)/$EPFds), 2);
-        $EPF100 = round(((1/(1 + exp(-1.5976 * ($EPFzs) - 0.0706 * pow(($EPFzs), 3)))) * 100), 2);
+        // Hadlock 1985
+        // $EPFatt = round((pow(2.71828182845904, (0.578 + (0.332*($SA)) * 1 - (0.00354 * pow(($SA), 2))))), 2);
+        // $EPFds = round((0.127 * ($EPFatt)), 2);
+        // $EPFzs = round((($EPFcalc - $EPFatt)/$EPFds), 2);
+        // $EPF100 = round(((1/(1 + exp(-1.5976 * ($EPFzs) - 0.0706 * pow(($EPFzs), 3)))) * 100), 2);
+
+        // Intergrowth
+        $meanExpected = 4.956737 + 0.0005019687 * pow($SA, 3) - 0.0001227065 * pow($SA, 3) * log($SA);
+        $cv = 0.0001 * (-6.997171 + 0.057559 * pow($SA, 3) - 0.01493946 * pow($SA, 3) * log($SA));
+        $skewness = -4.57629 - 2162.234 * pow($SA, -2) + 0.0002301829 * pow($SA, 3);
+        $lnEFW = log($EPFcalc);
+        if ($skewness == 0) {
+          $zscore = pow($cv, -1) * log($EPFcalc / $meanExpected);
+        } else {
+          $zscore = pow(($cv*$skewness),-1)*(-1+pow(($lnEFW/$meanExpected),$skewness));
+        }
+        $EPF100 = round((1 / (1 + exp(-1.5976 * ($zscore) - 0.0706 * pow(($zscore), 3)))) * 100);
         return round($EPF100);
     }
 
