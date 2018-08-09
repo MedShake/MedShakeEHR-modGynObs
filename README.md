@@ -47,23 +47,24 @@ ATTENTION: la configuration par défaut réutilise le ~ehr de l'hôte. Si vous a
 
 > ./docker-ehr-build.sh
 
-6- Launch the application (create + start)
-6- Lancer l'application (create + start)
+6- Launch the application
+6- Lancer l'application
 
 > docker-compose up
 
-7- And restart compose :
-7- Puis, relancer compose :
+7- An EHR instance is ready :
+7- Vous avez une instance de EHR de disponible :
 
-> docker-compose up
-
-8- An EHR instance is ready :
-8- Vous avez une instance de EHR de disponible :
+Web front / Frontal web :
 
 >http://host/
 
-9- Follow the instructions there ...
-9- Y suivre les instructions ...
+DICOM front / Frontal DICOM :
+
+>http://host:8080/
+
+8- Follow the instructions there ...
+8- Y suivre les instructions ...
 
 ## Docker Compose
 
