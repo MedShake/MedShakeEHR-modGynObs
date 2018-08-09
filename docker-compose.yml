@@ -5,6 +5,7 @@ services:
         image: medshake-ehr-gynobs-web:latest
         ports:
             - "80:80"
+            - "443:443"
         volumes:
             - ~/ehr/log:/var/log
         links:
@@ -19,6 +20,14 @@ services:
             - EHR_DBMS_USER_PASSWORD=${EHR_DBMS_USER_PASSWORD}
             - EHR_DBMS_VAR=${EHR_DBMS_VAR}
             - EHR_FINGERPRINT=${EHR_FINGERPRINT}
+    orthanc:
+        image: jodogne/orthanc-plugins
+        volumes:
+            - ~/ehr/dicom/:/var/lib/orthanc/db/
+            - ~/ehr/orthanc.json:/etc/orthanc/orthanc.json:ro
+        ports:
+            - "4242:4242"
+            - "8042:8042"
     db:
         image: medshake-ehr-gynobs-db:latest
         volumes:
@@ -36,9 +45,9 @@ services:
             - MYSQL_USER=${EHR_DBMS_USER_NAME}
             - MYSQL_PASSWORD=${EHR_DBMS_USER_PASSWORD}
 
-    myadmin:
-        image: phpmyadmin/phpmyadmin
-        ports:
-            - "8080:80"
-        links:
-            - db:db
+#    myadmin:
+#        image: phpmyadmin/phpmyadmin
+#        ports:
+#            - "8080:80"
+#        links:
+#            - db:db

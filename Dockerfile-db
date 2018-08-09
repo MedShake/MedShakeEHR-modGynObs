@@ -20,3 +20,8 @@ ENV MEDSHAKEEHRPATH $APP_PATH/MedShakeEHR-base/
 # Alter the schema for the module
 ADD --chown=mysql:mysql upgrade/gynobs/sqlInstall.sql /docker-entrypoint-initdb.d/10-gynobst.sql
 
+## Set the default orthanc database name
+#ARG ORTHANC_DATABASE=orthanc
+## Create the orthanc database
+#RUN echo "CREATE DATABASE IF NOT EXISTS $ORTHANC_DATABASE CHARACTER SET utf8 COLLATE utf8_bin" > /docker-entrypoint-initdb.d/50-create-orthanc.sql
+
