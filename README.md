@@ -61,7 +61,7 @@ Web front / Frontal web :
 
 DICOM front / Frontal DICOM :
 
->http://host:8080/
+>http://host:8042/
 
 8- Follow the instructions there ...
 8- Y suivre les instructions ...
