@@ -1,0 +1,3 @@
+/app/MedShakeEHR-base/utils/docker-ehr-certbot-only.sh
+/app/MedShakeEHR-base/utils/docker-ehr-config.sh
+/app/MedShakeEHR-base/docker-ehr-prepare.sh

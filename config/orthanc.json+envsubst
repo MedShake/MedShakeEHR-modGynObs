@@ -41,6 +41,10 @@
   // find shared libraries. Backslashes must be either escaped by
   // doubling them, or replaced by forward slashes "/".
   "Plugins" : [
+    "/usr/local/share/orthanc/plugins/libModalityWorklists.so",
+    "/usr/local/share/orthanc/plugins/libOrthancDicomWeb.so",
+    "/usr/local/share/orthanc/plugins/libOrthancWebViewer.so",
+    "/usr/local/share/orthanc/plugins/libServeFolders.so"
   ],
 
   // Maximum number of processing jobs that are simultaneously running
@@ -127,7 +131,7 @@
    **/
 
   // Whether remote hosts can connect to the HTTP server
-  "RemoteAccessAllowed" : false,
+  "RemoteAccessAllowed" : true,
 
   // Whether or not SSL is enabled
   "SslEnabled" : false,
@@ -137,15 +141,14 @@
   "SslCertificate" : "certificate.pem",
 
   // Whether or not the password protection is enabled
-  "AuthenticationEnabled" : false,
+  "AuthenticationEnabled" : true,
 
   // The list of the registered users. Because Orthanc uses HTTP
   // Basic Authentication, the passwords are stored as plain text.
   "RegisteredUsers" : {
+    "$EHR_DICOM_USER":"$EHR_DICOM_PASSWORD"
     // "alice" : "alicePassword"
   },
-
-
 
   /**
    * Network topology
