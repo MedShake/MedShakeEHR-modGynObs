@@ -10,12 +10,12 @@
   // Path to the directory that holds the heavyweight files (i.e. the
   // raw DICOM instances). Backslashes must be either escaped by
   // doubling them, or replaced by forward slashes "/".
-  "StorageDirectory" : "OrthancStorage",
+  "StorageDirectory" : "/root/storage",
 
   // Path to the directory that holds the SQLite index (if unset, the
   // value of StorageDirectory is used). This index could be stored on
   // a RAM-drive or a SSD device for performance reasons.
-  "IndexDirectory" : "OrthancStorage",
+  "IndexDirectory" : "/root/storage",
 
   // Enable the transparent compression of the DICOM instances
   "StorageCompression" : false,
@@ -46,6 +46,13 @@
     "/usr/local/share/orthanc/plugins/libOrthancWebViewer.so",
     "/usr/local/share/orthanc/plugins/libServeFolders.so"
   ],
+
+  // Enable the DICOM worklist for Modality
+  "Worklists" : {
+    "Enable": true,
+    "Database": "/root/worklist",
+    "FilterIssuerAet": false 
+  },
 
   // Maximum number of processing jobs that are simultaneously running
   // at any given time. A value of "0" indicates to use all the

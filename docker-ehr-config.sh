@@ -30,6 +30,13 @@ init(){
  copyGeneratedOrthancConfig
 }
 
+#Overriden update function
+overrideFunctionName update parentUpdate
+update(){
+ parentUpdate
+ copyGeneratedOrthancConfig
+}
+
 copyGeneratedOrthancConfig(){
  if [ -e  ~/ehr/orthanc.json ]; then
   echo "$(tput setaf 11)WARN$(tput sgr0) File ~/ehr/orthanc.json is already existing. We will not overwrite it to keep this existing configuration safe. To get a new configuration beeing generated, you will need to empty all ~/ehr first."
