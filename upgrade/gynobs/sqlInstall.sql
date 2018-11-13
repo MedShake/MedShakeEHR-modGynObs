@@ -190,7 +190,6 @@ INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `desc
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='catModelesCertificats');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('courrier', 'consentementEcho', '', 'Consentement échographie foetale', 'Consentement échographie foetale', '', '', '', 'consentementEcho', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('courrier', 'pratiqueSportive', '', 'Certificat de pratique sportive', 'autorisation pratique sportive', '', '', '', 'certif-pratiqueSportive', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('courrier', 'certifPresenceConsultation', '', 'Certificat présence à la consultation', 'certificat présence à la consultation', '', '', '', 'certif-presence', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
 ('courrier', 'certifDemandeIVG', '', 'Certificat de demande d\'IVG', 'certificat demande IVG', '', '', '', 'certif-demandeIVG', 'gynobs', @catID, 1, '2018-01-01 00:00:00', 3600, 1),
