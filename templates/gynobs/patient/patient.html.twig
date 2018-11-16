@@ -161,6 +161,9 @@
       </li>
       {% endif %}
       <li class="nav-item">
+        <a id="ongletBio" class="nav-link" href="#tabBio"data-toggle="tab"><i class="fas fa-vial mr-2"></i>Biologie</a>
+      </li>
+      <li class="nav-item">
         <a id="ongletGraph" class="nav-link" href="#tabGraph" aria-controls="tabGraph" aria-selected="true" role="tab" data-toggle="tab"><i class="fas fa-chart-line mr-2"></i>Biométrie</a>
       </li>
       {% if config.dicomHost != '' %}
@@ -185,6 +188,9 @@
       <div id="tabGraph" class="tab-pane" role="tabpanel">
         {% include('inc-patientTabGraphsIMC.html.twig') %}
       </div>
+
+      {# tab Bio #}
+      <div id="tabBio" class="tab-pane" role="tabpanel" data-rootUrl="/patient/{{ page.patient.id }}/tab/tabBio/"></div>
 
       {# tab lap #}
       {% if config.utiliserLap == 'true' %}
