@@ -79,6 +79,7 @@ class msModGynobsCalcMed extends msModBaseCalcMed
  */
     public static function pc100($PCm, $SA)
     {
+        if(!is_numeric($PCm) or !is_numeric($SA)) return;
         // Hadlock 1985
         //$PC = round((44.4924 * 1 - (2.7182 * ($SA)) * 1 + (0.6673 * pow(($SA), 2)) * 1 - (0.0107 * pow(($SA), 3))), 2);
         //$PCds = round((2.7945 * 1 + (0.345 * ($SA))), 2);
@@ -100,6 +101,7 @@ class msModGynobsCalcMed extends msModBaseCalcMed
  */
     public static function bip100($BIPm, $SA)
     {
+        if(!is_numeric($BIPm) or !is_numeric($SA)) return;
         // Hadlock 1985
         //$BIP = round((31.2452 * 1 - (2.8466 * ($SA)) * 1 + (0.2577 * pow(($SA), 2)) * 1 - (0.0037 * pow(($SA), 3))), 2);
         //$BIPds = round((1.5022 * 1 + (0.0636 * ($SA))), 2);
@@ -120,6 +122,7 @@ class msModGynobsCalcMed extends msModBaseCalcMed
  */
     public static function pa100($PAm, $SA)
     {
+        if(!is_numeric($PAm) or !is_numeric($SA)) return;
         // Hadlock 1985
         //$PA = round((42.7794 * 1 - (2.7882 * ($SA)) * 1 + (0.5715 * pow(($SA), 2)) * 1 - (0.008 * pow(($SA), 3))), 2);
         //$PAds = round((-2.3658 * 1 + (0.6459 * ($SA))), 2);
@@ -140,6 +143,7 @@ class msModGynobsCalcMed extends msModBaseCalcMed
  */
     public static function lf100($LFm, $SA)
     {
+        if(!is_numeric($LFm) or !is_numeric($SA)) return;
         // Hadlock 1985
         //$LF = round((-27.085 * 1 + (2.9223 * ($SA)) * 1 + (0.0148 * pow(($SA), 2)) * 1 - (0.0006 * pow(($SA), 3))), 2);
         //$LFds = round((1.0809 * 1 + (0.0609 * ($SA))), 2);
@@ -160,6 +164,7 @@ class msModGynobsCalcMed extends msModBaseCalcMed
  */
     public function poids100($EPFcalc, $SA)
     {
+        if(!is_numeric($EPFcalc) or !is_numeric($SA)) return;
         // Hadlock 1985
         // $EPFatt = round((pow(2.71828182845904, (0.578 + (0.332*($SA)) * 1 - (0.00354 * pow(($SA), 2))))), 2);
         // $EPFds = round((0.127 * ($EPFatt)), 2);
