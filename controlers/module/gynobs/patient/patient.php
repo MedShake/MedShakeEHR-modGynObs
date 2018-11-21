@@ -47,7 +47,7 @@ if($p['config']['utiliserLap'] == 'true') {
       foreach(explode(',', $p['config']['lapActiverAtcdStrucSur']) as $v) {
         $p['page']['beforeVar'][$v]=$patient->getAtcdStruc($v);
         if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
-        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlVar($p['page']['beforeVar'][$v]);
       }
       unset($p['page']['beforeVar'], $gethtml);
     }
@@ -59,7 +59,7 @@ if($p['config']['utiliserLap'] == 'true') {
       foreach(explode(',', $p['config']['lapActiverAllergiesStrucSur']) as $v) {
         $p['page']['beforeVar'][$v]=$patient->getAllergies($v);
         if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
-        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlVar($p['page']['beforeVar'][$v]);
       }
       unset($p['page']['beforeVar'], $gethtml);
     }
