@@ -70,7 +70,7 @@ Réalisée sur échographe  mis en circulation le
   {% if tag.e11RCFFA %}<li>Fréquence cardiaque : {{ tag.e11RCFFA }} bpm</li>{% endif %}
   </ul>
 
-  <h4>Biométries <small>(INTERGROWTH-21st)</small></h4>
+  <h4>Biométries <small>({{ config.calcMedGynobsLcc2Terme }})</small></h4>
   <ul>
   <li>Longueur cranio-caudale : {{ tag.e11embryLCCFA }} mm {% if tag.e11nbembryons == 1 %}correspondant à un début de grossesse autour du {{ tag.ddgReel }}{% endif %}</li>
   {% if tag.e11EmbryBIPFA %}<li>BIP : {{ tag.e11EmbryBIPFA }} mm</li>{% endif %}
@@ -114,7 +114,7 @@ Réalisée sur échographe  mis en circulation le
     {% if tag.e11RCFFB %}<li>Fréquence cardiaque : {{ tag.e11RCFFB }} bpm</li>{% endif %}
     </ul>
 
-    <h4>Biométries <small>(INTERGROWTH-21st)</small></h4>
+    <h4>Biométries <small>({{ config.calcMedGynobsLcc2Terme }})</small></h4>
     <ul>
     <li>Longueur cranio-caudale : {{ tag.e11embryLCCFB }} mm</li>
     {% if tag.e11EmbryBIPFB %}<li>BIP : {{ tag.e11EmbryBIPFB }} mm</li>{% endif %}
@@ -157,7 +157,7 @@ Réalisée sur échographe  mis en circulation le
   {% if tag.e11RCFFC %}<li>Fréquence cardiaque : {{ tag.e11RCFFC }} bpm</li>{% endif %}
   </ul>
 
-  <h4>Biométries <small>(INTERGROWTH-21st)</small></h4>
+  <h4>Biométries <small>({{ config.calcMedGynobsLcc2Terme }})</small></h4>
   <ul>
   <li>Longueur cranio-caudale : {{ tag.e11embryLCCFC }} mm</li>
   {% if tag.e11EmbryBIPFB %}<li>BIP : {{ tag.e11EmbryBIPFC }} mm</li>{% endif %}

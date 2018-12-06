@@ -2,14 +2,20 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 INSERT IGNORE INTO `system` (`name`, `groupe`,`value`) VALUES
-('gynobs', 'module', 'v3.4.0');
+('gynobs', 'module', 'v3.4.1');
 
 -- Configuration propre au module
 INSERT IGNORE INTO `configuration` (`name`, `level`, `toID`, `module`, `cat`, `type`, `description`, `value`) VALUES
 ('lapActiverAtcdStrucSur', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'atcdObs,atcdPersoGyneco,atcdMedicChir'),
 ('lapActiverAllergiesStrucSur', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'allergies'),
 ('lapAtcdStrucPersoPourAnalyse', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'atcdObs,atcdPersoGyneco,atcdMedicChir'),
-('lapAllergiesStrucPersoPourAnalyse', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'allergies');
+('lapAllergiesStrucPersoPourAnalyse', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'allergies'),
+('calcMedGynobsLcc2Terme', 'module', '0', 'gynobs', 'Calculs médicaux', 'texte', '', 'Intergrowth'),
+('calcMedGynobsEPF', 'module', '0', 'gynobs', 'Calculs médicaux', 'texte', '', 'Intergrowth');
+
+-- Insertion de paramètres de config généraux nécessaires
+INSERT IGNORE INTO `configuration` (`name`, `level`, `toID`, `module`, `cat`, `type`, `description`, `value`) VALUES ('calcMedGynobsLcc2Terme', 'default', '0', '', 'Calculs médicaux', 'texte', 'Méthode de calcul du terme en fonction de la LCC (Intergrowth / Robinson)', 'Intergrowth');
+INSERT IGNORE INTO `configuration` (`name`, `level`, `toID`, `module`, `cat`, `type`, `description`, `value`) VALUES ('calcMedGynobsEPF', 'default', '0', '', 'Calculs médicaux', 'texte', 'Méthode de calcul de l\'EPF (Intergrowth / CFEF)', 'Intergrowth');
 
 INSERT IGNORE INTO `actes_base` (`code`, `label`, `type`, `tarifs1`, `tarifs2`, `fromID`, `creationDate`) VALUES
 ('JKFD001', 'Exérèse de lésion pédiculée de l\'utérus accouchée par le col, par voie vaginale', 'CCAM', 62.7, 62.7, 1, '2018-01-01 00:00:00'),
