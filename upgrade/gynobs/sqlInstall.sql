@@ -9,9 +9,7 @@ INSERT IGNORE INTO `configuration` (`name`, `level`, `toID`, `module`, `cat`, `t
 ('lapActiverAtcdStrucSur', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'atcdObs,atcdPersoGyneco,atcdMedicChir'),
 ('lapActiverAllergiesStrucSur', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'allergies'),
 ('lapAtcdStrucPersoPourAnalyse', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'atcdObs,atcdPersoGyneco,atcdMedicChir'),
-('lapAllergiesStrucPersoPourAnalyse', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'allergies'),
-('calcMedGynobsLcc2Terme', 'module', '0', 'gynobs', 'Calculs médicaux', 'texte', '', 'Intergrowth'),
-('calcMedGynobsEPF', 'module', '0', 'gynobs', 'Calculs médicaux', 'texte', '', 'Intergrowth');
+('lapAllergiesStrucPersoPourAnalyse', 'module', 0, 'gynobs', 'LAP', 'texte', '', 'allergies');
 
 -- Insertion de paramètres de config généraux nécessaires
 INSERT IGNORE INTO `configuration` (`name`, `level`, `toID`, `module`, `cat`, `type`, `description`, `value`) VALUES ('calcMedGynobsLcc2Terme', 'default', '0', '', 'Calculs médicaux', 'texte', 'Méthode de calcul du terme en fonction de la LCC (Intergrowth / Robinson)', 'Intergrowth');
