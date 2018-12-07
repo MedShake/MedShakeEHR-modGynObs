@@ -82,12 +82,10 @@ class msModGynobsCalcMed extends msModBaseCalcMed
         global $p;
         if(!is_numeric($PCm) or !is_numeric($SA)) return;
 
-        if($p['config']['calcMedGynobsEPF'] == "CFEF") {
-          // Hadlock 1985
+        if($p['config']['calcMedGynobsBipPcPaFemPercentiles'] == "CFEF 2006") {
           $PC = round((44.4924 * 1 - (2.7182 * ($SA)) * 1 + (0.6673 * pow(($SA), 2)) * 1 - (0.0107 * pow(($SA), 3))), 2);
           $PCds = round((2.7945 * 1 + (0.345 * ($SA))), 2);
-        } elseif($p['config']['calcMedGynobsEPF'] == "Intergrowth") {
-          // Intergrowth
+        } elseif($p['config']['calcMedGynobsBipPcPaFemPercentiles'] == "Intergrowth-21st") {
           $PC = -28.2849 + 1.69267 * pow(($SA), 2) - 0.397485 * pow(($SA), 2) * log(($SA));
           $PCds = 1.98735 + 0.0136772 * pow(($SA), 3) - 0.00726264 * pow(($SA), 3) * log(($SA)) + 0.000976253 * pow(($SA), 3) * pow(log(($SA)), 2);
         }
@@ -108,12 +106,10 @@ class msModGynobsCalcMed extends msModBaseCalcMed
         global $p;
         if(!is_numeric($BIPm) or !is_numeric($SA)) return;
 
-        if($p['config']['calcMedGynobsEPF'] == "CFEF") {
-          // Hadlock 1985
+        if($p['config']['calcMedGynobsBipPcPaFemPercentiles'] == "CFEF 2006") {
           $BIP = round((31.2452 * 1 - (2.8466 * ($SA)) * 1 + (0.2577 * pow(($SA), 2)) * 1 - (0.0037 * pow(($SA), 3))), 2);
           $BIPds = round((1.5022 * 1 + (0.0636 * ($SA))), 2);
-        } elseif($p['config']['calcMedGynobsEPF'] == "Intergrowth") {
-          // Intergrowth
+        } elseif($p['config']['calcMedGynobsBipPcPaFemPercentiles'] == "Intergrowth-21st") {
           $BIP = 5.60878 + 0.158369 * pow(($SA), 2) - 0.00256379 * pow(($SA), 3);
           $BIPds = exp(0.101242 + 0.00150557 * pow(($SA), 3) - 0.000771535 * pow(($SA), 3) * log($SA) + 0.0000999638 * pow(($SA), 3) * pow(log($SA), 2));
         }
@@ -132,12 +128,10 @@ class msModGynobsCalcMed extends msModBaseCalcMed
     {
         global $p;
         if(!is_numeric($PAm) or !is_numeric($SA)) return;
-        if($p['config']['calcMedGynobsEPF'] == "CFEF") {
-          // Hadlock 1985
+        if($p['config']['calcMedGynobsBipPcPaFemPercentiles'] == "CFEF 2006") {
           $PA = round((42.7794 * 1 - (2.7882 * ($SA)) * 1 + (0.5715 * pow(($SA), 2)) * 1 - (0.008 * pow(($SA), 3))), 2);
           $PAds = round((-2.3658 * 1 + (0.6459 * ($SA))), 2);
-        } elseif($p['config']['calcMedGynobsEPF'] == "Intergrowth") {
-          // Intergrowth
+        } elseif($p['config']['calcMedGynobsBipPcPaFemPercentiles'] == "Intergrowth-21st") {
           $PA = -81.3243 + 11.6772 * $SA - 0.000561865 * pow(($SA), 3);
           $PAds = -4.36302 + 0.121445 * pow(($SA), 2) - 0.0130256 * pow(($SA), 3) + 0.00282143 * pow(($SA), 3) * log($SA);
         }
@@ -156,12 +150,10 @@ class msModGynobsCalcMed extends msModBaseCalcMed
     {
       global $p;
         if(!is_numeric($LFm) or !is_numeric($SA)) return;
-        if($p['config']['calcMedGynobsEPF'] == "CFEF") {
-          // Hadlock 1985
+        if($p['config']['calcMedGynobsBipPcPaFemPercentiles'] == "CFEF 2006") {
           $LF = round((-27.085 * 1 + (2.9223 * ($SA)) * 1 + (0.0148 * pow(($SA), 2)) * 1 - (0.0006 * pow(($SA), 3))), 2);
           $LFds = round((1.0809 * 1 + (0.0609 * ($SA))), 2);
-        } elseif($p['config']['calcMedGynobsEPF'] == "Intergrowth") {
-          // Intergrowth
+        } elseif($p['config']['calcMedGynobsBipPcPaFemPercentiles'] == "Intergrowth-21st") {
           $LF = -39.9616 + 4.32298 * $SA - 0.0380156 * pow(($SA), 2);
           $LFds = exp(0.605843 - 42.0014 * pow(($SA), -2) + 0.00000917972 * pow(($SA), 3));
         }
@@ -180,13 +172,14 @@ class msModGynobsCalcMed extends msModBaseCalcMed
     {
         global $p;
         if(!is_numeric($EPFcalc) or !is_numeric($SA)) return;
-        if($p['config']['calcMedGynobsEPF'] == "CFEF") {
+        if($p['config']['calcMedGynobsEPF'] == "Hadlock 1985") {
           // Hadlock 1985
           $EPFatt = round((pow(2.71828182845904, (0.578 + (0.332*($SA)) * 1 - (0.00354 * pow(($SA), 2))))), 2);
           $EPFds = round((0.127 * ($EPFatt)), 2);
           $EPFzs = round((($EPFcalc - $EPFatt)/$EPFds), 2);
           $EPF100 = round(((1/(1 + exp(-1.5976 * ($EPFzs) - 0.0706 * pow(($EPFzs), 3)))) * 100), 2);
-        } elseif($p['config']['calcMedGynobsEPF'] == "Intergrowth") {
+
+        } elseif($p['config']['calcMedGynobsEPF'] == "Intergrowth-21st") {
           // Intergrowth
           $meanExpected = 4.956737 + 0.0005019687 * pow($SA, 3) - 0.0001227065 * pow($SA, 3) * log($SA);
           $cv = 0.0001 * (-6.997171 + 0.057559 * pow($SA, 3) - 0.01493946 * pow($SA, 3) * log($SA));

@@ -212,13 +212,13 @@ function arrondir100(nombre) {
 
 //percentiles
 function pc100(PCm, SA) {
-  if (calcMedGynobsEPF == 'Intergrowth') {
+  if (calcMedGynobsBipPcPaFemPercentiles == 'Intergrowth-21st') {
     PC = -28.2849 + 1.69267 * Math.pow((SA), 2) - 0.397485 * Math.pow((SA), 2) * Math.log((SA));
     PCds = 1.98735 + 0.0136772 * Math.pow((SA), 3) - 0.00726264 * Math.pow((SA), 3) * Math.log((SA)) + 0.000976253 * Math.pow((SA), 3) * Math.pow(Math.log((SA)), 2);
     PCzs = arrondir100((PCm - PC) / PCds);
     PC100 = arrondir100((1 / (1 + Math.exp(-1.5976 * (PCzs) - 0.0706 * Math.pow((PCzs), 3)))) * 100);
     return arrondir(PC100);
-  } else if (calcMedGynobsEPF == 'CFEF') {
+  } else if (calcMedGynobsBipPcPaFemPercentiles == 'CFEF 2006') {
     PC = arrondir100(44.4924 * 1 - (2.7182 * (SA)) * 1 + (0.6673 * Math.pow((SA), 2)) * 1 - (0.0107 * Math.pow((SA), 3)));
     PCds = arrondir100(2.7945 * 1 + (0.345 * (SA)));
     PCzs = arrondir100((PCm - PC) / PCds);
@@ -228,13 +228,13 @@ function pc100(PCm, SA) {
 }
 
 function bip100(BIPm, SA) {
-  if (calcMedGynobsEPF == 'Intergrowth') {
+  if (calcMedGynobsBipPcPaFemPercentiles == 'Intergrowth-21st') {
     BIP = 5.60878 + 0.158369 * Math.pow((SA), 2) - 0.00256379 * Math.pow((SA), 3);
     BIPds = Math.exp(0.101242 + 0.00150557 * Math.pow((SA), 3) - 0.000771535 * Math.pow((SA), 3) * Math.log(SA) + 0.0000999638 * Math.pow((SA), 3) * Math.pow(Math.log(SA), 2));
     BIPzs = arrondir100((BIPm - BIP) / BIPds);
     BIP100 = arrondir100((1 / (1 + Math.exp(-1.5976 * (BIPzs) - 0.0706 * Math.pow((BIPzs), 3)))) * 100);
     return arrondir(BIP100);
-  } else if (calcMedGynobsEPF == 'CFEF') {
+  } else if (calcMedGynobsBipPcPaFemPercentiles == 'CFEF 2006') {
     BIP = arrondir100(31.2452 * 1 - (2.8466 * (SA)) * 1 + (0.2577 * Math.pow((SA), 2)) * 1 - (0.0037 * Math.pow((SA), 3)));
     BIPds = arrondir100(1.5022 * 1 + (0.0636 * (SA)));
     BIPzs = arrondir100((BIPm - BIP) / BIPds);
@@ -244,13 +244,13 @@ function bip100(BIPm, SA) {
 }
 
 function pa100(PAm, SA) {
-  if (calcMedGynobsEPF == 'Intergrowth') {
+  if (calcMedGynobsBipPcPaFemPercentiles == 'Intergrowth-21st') {
     PA = -81.3243 + 11.6772 * SA - 0.000561865 * Math.pow((SA), 3);
     PAds = -4.36302 + 0.121445 * Math.pow((SA), 2) - 0.0130256 * Math.pow((SA), 3) + 0.00282143 * Math.pow((SA), 3) * Math.log(SA);
     PAzs = arrondir100((PAm - PA) / PAds);
     PA100 = arrondir100((1 / (1 + Math.exp(-1.5976 * (PAzs) - 0.0706 * Math.pow((PAzs), 3)))) * 100);
     return arrondir(PA100);
-  } else if (calcMedGynobsEPF == 'CFEF') {
+  } else if (calcMedGynobsBipPcPaFemPercentiles == 'CFEF 2006') {
     PA = arrondir100(42.7794 * 1 - (2.7882 * (SA)) * 1 + (0.5715 * Math.pow((SA), 2)) * 1 - (0.008 * Math.pow((SA), 3)));
     PAds = arrondir100(-2.3658 * 1 + (0.6459 * (SA)));
     PAzs = arrondir100((PAm - PA) / PAds);
@@ -260,13 +260,13 @@ function pa100(PAm, SA) {
 }
 
 function lf100(LFm, SA) {
-  if (calcMedGynobsEPF == 'Intergrowth') {
+  if (calcMedGynobsBipPcPaFemPercentiles == 'Intergrowth-21st') {
     LF = -39.9616 + 4.32298 * SA - 0.0380156 * Math.pow((SA), 2);
     LFds = Math.exp(0.605843 - 42.0014 * Math.pow((SA), -2) + 0.00000917972 * Math.pow((SA), 3));
     LFzs = arrondir100((LFm - LF) / LFds);
     LF100 = arrondir100((1 / (1 + Math.exp(-1.5976 * (LFzs) - 0.0706 * Math.pow((LFzs), 3)))) * 100);
     return arrondir(LF100);
-  } else if (calcMedGynobsEPF == 'CFEF') {
+  } else if (calcMedGynobsBipPcPaFemPercentiles == 'CFEF 2006') {
     LF = arrondir100(-27.085 * 1 + (2.9223 * (SA)) * 1 + (0.0148 * Math.pow((SA), 2)) * 1 - (0.0006 * Math.pow((SA), 3)));
     LFds = arrondir100(1.0809 * 1 + (0.0609 * (SA)));
     LFzs = arrondir100((LFm - LF) / LFds);
@@ -276,7 +276,7 @@ function lf100(LFm, SA) {
 }
 
 function poids100(EPFcalc, SA) {
-  if (calcMedGynobsEPF == 'Intergrowth') {
+  if (calcMedGynobsEPF == 'Intergrowth-21st') {
     meanExpected = 4.956737 + 0.0005019687 * Math.pow(SA, 3) - 0.0001227065 * Math.pow(SA, 3) * Math.log(SA);
     cv = 0.0001 * (-6.997171 + 0.057559 * Math.pow(SA, 3) - 0.01493946 * Math.pow(SA, 3) * Math.log(SA));
     skewness = -4.57629 - 2162.234 * Math.pow(SA, -2) + 0.0002301829 * Math.pow(SA, 3);
@@ -288,7 +288,7 @@ function poids100(EPFcalc, SA) {
     }
     EPF100 = arrondir100((1 / (1 + Math.exp(-1.5976 * (zscore) - 0.0706 * Math.pow((zscore), 3)))) * 100);
     return arrondir(EPF100);
-  } else if (calcMedGynobsEPF == 'CFEF') {
+  } else if (calcMedGynobsEPF == 'Hadlock 1985') {
     EPFatt = arrondir100(Math.pow(2.71828182845904, (0.578 + (0.332 * (SA)) * 1 - (0.00354 * Math.pow((SA), 2)))));
     EPFds = arrondir100(0.127 * (EPFatt));
     EPFzs = arrondir100((EPFcalc - EPFatt) / EPFds);
@@ -299,7 +299,7 @@ function poids100(EPFcalc, SA) {
 
 // estimation de poids foetal
 function poidsFoetal(pc, pa, lf, cible) {
-  if (calcMedGynobsEPF == 'Intergrowth') {
+  if (calcMedGynobsEPF == 'Intergrowth-21st') {
     pc = parseFloat($(pc).val());
     pa = parseFloat($(pa).val());
     lf = parseFloat($(lf).val());
@@ -312,7 +312,7 @@ function poidsFoetal(pc, pa, lf, cible) {
     } else {
       $(cible).val('');
     }
-  } else if (calcMedGynobsEPF == 'CFEF') {
+  } else if (calcMedGynobsEPF == 'Hadlock 1985') {
     pc = parseFloat($(pc).val());
     pa = parseFloat($(pa).val());
     lf = parseFloat($(lf).val());
@@ -335,7 +335,7 @@ function momCalc(v, terme) {
 
 // terme en fonction de la LCC
 function lcc2terme(lcc) {
-  if (calcMedGynobsLcc2Terme == 'Intergrowth') {
+  if (calcMedGynobsLcc2Terme == 'Intergrowth-21st') {
     return Math.round(40.9041 + (3.21585 * Math.pow(lcc, 0.5)) + (0.348956 * lcc));
   } else if (calcMedGynobsLcc2Terme == 'Robinson') {
     return Math.floor(8.052 * Math.pow(lcc, 0.5) + 23.73);
