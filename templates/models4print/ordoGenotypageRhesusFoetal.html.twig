@@ -1,0 +1,255 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2018
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > models4print :  génotypage rhésus D foetal à partir de sans maternel
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+      @page {
+        margin: 40pt 40pt 30pt;
+        font-family: Helvetica;
+      }
+
+      .cbox {
+        font-family: DejaVu Sans, sans-serif;
+        font-size: 10pt;
+      }
+
+      h2 {
+        margin-top: 4pt;
+      }
+
+      h3 {
+        margin: 12pt 0 5pt;
+        padding: 0;
+      }
+
+      h4 {
+        margin: 10pt 0 3pt;
+        padding: 0;
+      }
+
+      ul {
+        margin: 0 0 0 10pt;
+        padding: 0;
+      }
+
+      .gras {
+        font-weight: bold;
+      }
+      .centrer {
+        text-align: center;
+      }
+      .t6 {
+        font-size: 6pt;
+      }
+      .t8 {
+        font-size: 8pt;
+      }
+      .t9 {
+        font-size: 9pt;
+      }
+      .t10 {
+        font-size: 10pt;
+      }
+      .t12 {
+        font-size: 12pt;
+      }
+      .t14 {
+        font-size: 14pt;
+      }
+      .vat {
+        vertical-align: top;
+      }
+
+      th {
+        background: #000;
+        color: #FFF;
+        text-align: center;
+        font-size: 10pt;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- stop head -->
+    <div class="t8">
+
+      {% set tag = page.courrier %}
+
+      <h2 class="centrer gras t14">Demande de génotypage Rhésus D fœtal à partir du sang maternel</h2>
+
+      <table style="width : 100%" class="t10">
+        <tr>
+          <th colspan="2">
+            RENSEIGNEMENTS ADMINISTRATIFS ET CLINIQUES
+          </th>
+        </tr>
+        <tr>
+          <td style="width : 40%" class="vat">
+            <h4>Patiente</h4>
+            Nom :
+            {{ tag.lastname }}<br>
+            Nom de naissance :
+            {{ tag.birthname }}<br>
+            Prénom :
+            {{ tag.firstname }}<br>
+            Date de naissance :
+            {{ tag.birthdate }}
+          </td>
+          <td style="width : 60%" class="vat">
+            <h4>&nbsp;</h4>
+            Date des dernières règles :
+            {{ tag.DDR }}<br>
+            Date de début de grossesse :
+            {{ tag.ddgReel }}<br>
+            Grossesse
+            <span class="cbox">
+              {% if tag.val_fGenRhFoePatienteTypeGro == 'u' %}&#9745;{% else %}&#9744;{% endif %}
+            </span>
+            mono-fœtale
+            <span class="cbox">
+              {% if tag.val_fGenRhFoePatienteTypeGro == 'g' %}&#9745;{% else %}&#9744;{% endif %}
+            </span>
+            gémellaire<br>
+            Patiente avec une allo-immunisation anti-D connue
+            <span class="cbox">
+              {% if tag.val_fGenRhFoePatienteAlloImmAntiDConnue == 'n' %}&#9745;{% else %}&#9744;{% endif %}
+            </span>
+            non
+            <span class="cbox">
+              {% if tag.val_fGenRhFoePatienteAlloImmAntiDConnue == 'o' %}&#9745;{% else %}&#9744;{% endif %}
+            </span>
+            oui<br>
+            Patiente suivie au CNRHP*
+            <span class="cbox">
+              {% if tag.val_fGenRhFoePatienteSuivieCNRHP == 'n' %}&#9745;{% else %}&#9744;{% endif %}
+            </span>
+            non
+            <span class="cbox">
+              {% if tag.val_fGenRhFoePatienteSuivieCNRHP == 'o' %}&#9745;{% else %}&#9744;{% endif %}
+            </span>
+            oui<br>
+            <span class="t6">* Centre National de Référence et Hémobiologie Périnatale</span>
+          </td>
+        </tr>
+
+        <tr>
+          <td class="vat">
+            <h4>Origine géographique familiale</h4>
+            Patiente :
+            {% if tag.val_fGenRhFoePatienteOrigineGeo == 'Autre' %}{{ tag.fGenRhFoePatienteOrigineGeoAutre }}
+            {% else %}{{ tag.fGenRhFoePatienteOrigineGeo }}
+            {% endif %}<br>
+            Procréateur :
+            {% if tag.val_fGenRhFoeProcreateurOrigineGeo == 'Autre' %}{{ tag.fGenRhFoeProcreateurOrigineGeoAutre }}
+            {% else %}{{ tag.fGenRhFoeProcreateurOrigineGeo }}
+            {% endif %}
+          </td>
+        </tr>
+      </table>
+
+      <table style="width : 100%; margin-top: 20pt; text-align: justify" class="t9">
+        <tr>
+          <th colspan="2">
+            ATTESTATION DE CONSULTATION ET CONSENTEMENT ÉCLAIRÉ
+          </th>
+        </tr>
+        <tr>
+          <td style="width : 50%; padding-right: 8pt" class="vat">
+            <p>Je soussignée
+              {{ tag.identiteCompleteTitreLongDdn }}
+              atteste avoir reçu du
+              {{ tag.AuteurInitial_identiteUsuelleTitre }}
+              des informations sur les caractéristiques du test de dépistage du Rhésus D fœtal à partir de l’ADN fœtal libre circulant dans le sang maternel, conformément à l’article L.2131-1 du Code de la santé Publique et au cours d’une consultation médicale en
+              date du
+              {{ tag.date|date('d/m/Y') }}
+              , en particulier sur les points suivants :</p>
+            <ul>
+              <li>Une situation d’incompatibilité fœto-maternelle du Rhésus D pour la grossesse en cours peut entrainer un risque d’anémie fœtale et/ou néonatale sévère en l’absence de suivi et/ou de traitement adéquat ;</li>
+
+              <li>Cet examen permet de diagnostiquer une éventuelle situation d’incompatibilité fœto-maternelle pour la grossesse en cours et d'enclencher la prise en charge adaptée, le cas échéant ; Dans l’hypothèse où la patiente est Rh D Négatif non immunisée,
+                cet examen permet de juger s’il y a lieu de recourir à une immuno- prophylaxie Rh anténatale ;</li>
+
+              <li>Une prise de sang est réalisée au cours de la grossesse à partir de 11 SA. Cette dernière ne présente aucun risque pour la grossesse ou le fœtus ;</li>
+
+              <li>La technique d’examen utilisée ne recherche que la présence du génotype RHD fœtal</li>
+
+              <li>Cette technique peut parfois donner un résultat positif en excès (ou faux positif) ;</li>
+
+              <li>Le résultat de l’examen me sera rendu et expliqué par le prescrip- teur ou un autre praticien ayant l’expérience du dépistage prénatal ;</li>
+
+              <li>Lorsque le résultat est négatif ou indéterminé, il est nécessaire de réaliser 15 jours après (ou avant ce délai de 15 jours en cas de terme avancé) un second examen à partir d'un second prélèvement de sang maternel pour confirmation.</li>
+            </ul>
+          </td>
+          <td style="width : 50%" class="vat">
+            <p class="gras">Je consens à la réalisation de l’examen de génétique relatif au Rhésus D fœtal à partir de l’ADN fœtal libre circulant dans le sang maternel.</p>
+
+            <p>Cet examen à partir de l’ADN du fœtus sera effectué dans un laboratoire de biologie médicale autorisé par l’Agence Régionale de Santé à pratiquer le diagnostic prénatal.</p>
+
+            <p>L’original du présent document est conservé dans mon dossier médical par le prescripteur. Une copie de ce document m’est remise. La deuxième copie est remise au laboratoire de biologie médicale qui effectuera le test. Il conservera ce document
+              dans les mêmes conditions que le compte rendu de l’examen.</p>
+
+            <p>Fait à
+              {{ tag.UtilisateurActif_villeAdressePro }}
+              le
+              {{ tag.date|date('d/m/Y') }}</p>
+
+            <div style="border: 1pt solid black; width: 100%; height: 60pt; margin-top: 10pt; color: #888" class="t8">
+              Signature du prescripteur et cachet (obligatoire)
+            </div>
+
+            <div style="border: 1pt solid black; width: 100%; height: 60pt; margin-top: 5pt; color: #888" class="t8">
+              Signature de la patiente (obligatoire)
+              <!-- signatureIMG -->
+            </div>
+
+            <p class="t6">Conformément aux textes en vigueur (décret 2007-1220 du 10 août 2007), mon prélèvement sera éliminé à l’issue du délai légal de conservation ou utilisé par le laboratoire, de manière anonyme et respectant le secret médical, à des fins
+              scientifiques ou de contrôle qualité. Je peux m’opposer à cette utilisation par simple courrier adressé au Laboratoire à l’attention du secrétariat médical.</p>
+          </td>
+        </tr>
+      </table>
+
+      <table style="width : 100%; margin-top: 20pt;">
+        <tr>
+          <th>
+            DOCUMENTS A FOURNIR OBLIGATOIREMENT
+          </th>
+        </tr>
+        <tr>
+          <td class="vat">
+            <ul>
+              <li>Photocopie de la carte de groupe de la patiente (celle du conjoint est facultative)</li>
+              <li>Prescription médicale "Génotypage Rhésus D fœtal à partir du sang maternel"</li>
+              <li>Joindre la copie de résultat RAI et titrage / pondéral si patiente allo-immunisée anti-RH1 (anti-D).</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <!-- stop body -->
+  </body>
+</html>

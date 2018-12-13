@@ -125,23 +125,33 @@ class msModGynobsDataCourrier
         $name2typeID = $name2typeID->getTypeIDsFromName(['echo12']);
 
         // echo 12 id + date
-        $e12=msSQL::sqlUnique("select id, creationDate from objets_data where toID='".$d['patientID']."' and instance='".$d['instance']."' and typeID='".$name2typeID['echo12']."' and deleted='' and outdated='' order by id desc limit 1 ");
+        if($e12=msSQL::sqlUnique("select id, creationDate from objets_data where toID='".$d['patientID']."' and instance='".$d['instance']."' and typeID='".$name2typeID['echo12']."' and deleted='' and outdated='' order by id desc limit 1 ")) {
           $d['dateEcho12'] = $e12['creationDate'];
-
-        // data echo 12 de la même grossesse
-        $dataE12 = new msCourrier();
-        $d=$d+$dataE12->getExamenData($d['patientID'], 'gynObsEcho12', $e12['id']);
+          // data echo 12 de la même grossesse
+          $dataE12 = new msCourrier();
+          $d=$d+$dataE12->getExamenData($d['patientID'], 'gynObsEcho12', $e12['id']);
+        }
 
         //Définition du modèle de page d'impression
         $d['templateCrHeadAndFoot']='empty.html.twig';
 
         //calcul limite dépistage
         $dates=msModGynobsCalcMed::ddg2datesMST21($d['ddgReel']);
-          if (is_array($dates)) {
-              $d=$d+$dates;
-          }
+        if (is_array($dates)) {
+            $d=$d+$dates;
+        }
       }
 
+/**
+ * Calcule tout le nécessaire à l'établissement du form gynobsGenotypageRhesusFoetalSangMaternel
+ * @param  array $d array des types
+ * @return void
+ */
+      public static function getCrDataCompleteModuleForm_gynobsGenotypageRhesusFoetalSangMaternel(&$d)
+      {
+        //Définition du modèle de page d'impression
+        $d['templateCrHeadAndFoot']='empty.html.twig';
+      }
 
 
   /**

@@ -75,6 +75,9 @@ $p['page']['formSynthese']=$formSynthese->getForm();
 $p['page']['csMarqueursSeriques']['csID']=msData::getTypeIDFromName('csMarqueursSerT21');
 $p['page']['csMarqueursSeriques']['form']='gynObsMarqueursSeriques';
 
+// données pour génotypage rhésus D foetal
+$p['page']['csGenotypageRhesusFoetalSangMaternel']['form']='gynobsGenotypageRhesusFoetalSangMaternel';
+
 //types de consultation liées à la gynéco classique.
 $typeCsCla=new msData;
 $p['page']['typeCsCla']=$typeCsCla->getDataTypesFromCatName('csGyneco', array('id','label', 'formValues'));

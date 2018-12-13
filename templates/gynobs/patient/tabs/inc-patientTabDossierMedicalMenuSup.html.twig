@@ -42,8 +42,13 @@
           </li>
         {% endfor %}
         {% if page.grossesseEnCours > 0 %}
+          <li class="dropdown-divider"></li>
+          <li class="dropdown-header">Ordonnances spécifiques</li>
           <li>
               <a class="dropdown-item addNewCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ page.csMarqueursSeriques.form }}" data-csID="{{ page.csMarqueursSeriques.csID }}" data-mode="create">Marqueurs sériques</a>
+          </li>
+          <li>
+              <a class="dropdown-item addNewCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ page.csGenotypageRhesusFoetalSangMaternel.form }}" data-mode="create">Génotypage rhésus D fœtal</a>
           </li>
         {% endif %}
       </ul>
