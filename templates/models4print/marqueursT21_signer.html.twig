@@ -1,0 +1,51 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2017
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > models4print : page SANS header et SANS footer
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+<!-- stop head -->
+<h2 class="centrer">DÉCLARATION DE CONSENTEMENT À LA PRESCRIPTION MÉDICALE DES MARQUEURS SERIQUES MATERNELS</h2>
+<div>
+  {% set tag = page.courrier %}
+  <p>Je soussignée {{ tag.identiteCompleteTitreLongDdn }} atteste avoir reçu du {{ tag.AuteurInitial_identiteUsuelleTitre }} au cours d'une consultation médicale en date du {{ tag.date|date("d/m/Y") }} des informations sur l'examen des marqueurs sériques maternels dont je souhaite bénéficier :
+  </p>
+  <ul>
+    <li>cet examen permet d'évaluer le risque que l'enfant à naître soit atteint d'une maladie d'une particulière gravité, notamment la trisomie 21;</li>
+    <li>une prise de sang est réalisée au cours d'une période précise de la grossesse ;</li>
+    <li>un calcul de risque de trisomie 21 est effectué ; il prend notamment en compte les données de l'échographie prénatale du premier trimestre, lorsque ces résultats sont disponibles et que les mesures échographiques sont estimées fiables ;</li>
+    <li>le résultat est toujours exprimé en risque pour l'enfant à naître d'être atteint de la maladie. Ce risque ne permet pas à lui seul d'en établir le diagnostic ;</li>
+    <li>le résultat du calcul de risque me sera rendu et expliqué par le médecin prescripteur ou un autre praticien ayant l'expérience du dépistage prénatal :</li>
+    <li>si le risque est faible, il n'écarte pas complètement la possibilité pour le fœtus d'être atteint de trisomie 21 ou d'une autre affection ;</li>
+    <li>si le risque est élevé, un prélèvement (de liquide amniotique, de villosités choriales ou de sang fœtal) me sera proposé. Seul le résultat du caryotype fœtal permettra de confirmer ou non l'existence de l'affection. Les risques, les contraintes
+      et les éventuelles conséquences de chaque technique de prélèvement me seront expliqués.</li>
+  </ul>
+  <p>Je consens à la réalisation du dosage des marqueurs sériques maternels.<br>
+    Le dosage des marqueurs sériques maternels sera effectué dans un laboratoire de biologie médicale autorisé par l'agence régionale de santé à les pratiquer. L'original du présent document est conservé dans mon dossier médical.<br>
+    Une copie de ce document m'est remise ainsi qu'au praticien devant effectuer les dosages biologiques et, le cas échéant, le calcul de risque.<br>
+    Le laboratoire de biologie médicale dans lequel exerce le praticien ayant effectué les dosages et, le cas échéant, le calcul de risque conserve ce document dans les mêmes conditions que le compte rendu de l'examen.
+  </p>
+
+  <p>Date :
+  {{ tag.date|date("d/m/Y") }}</p>
+</div>

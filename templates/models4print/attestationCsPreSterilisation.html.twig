@@ -1,0 +1,75 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2018
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > Attestation de consultation médicale préalable  à une stérilisation à visée contraceptive
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+
+{% set tag = page.courrier %}
+<!-- stop head -->
+<h2>Attestation de consultation médicale préalable
+à une stérilisation à visée contraceptive</h2>
+<div class="tailleFont">
+
+  <p>Je soussigné(e) {{ tag.identiteCompleteTitreLongDdn }} certifie :</p>
+
+  <ul>
+  <li>avoir sollicité le {{ tag.UtilisateurActif_identiteUsuelleTitre }}, afin qu’il réalise
+  sur moi une stérilisation à visée contraceptive pour les raisons dont nous avons
+  discuté, ce jour ;</li>
+
+  <li>avoir reçu de sa part une information sur :
+  <br>- les différents moyens contraceptifs adaptés à ma situation,
+  <br>- la stérilisation : les techniques proposées, les contre-indications éventuelles,
+  les risques d’échecs et d’effets indésirables, les conséquences de l’intervention
+  et notamment son caractère à priori irréversible ;</li>
+
+<li>avoir reçu un dossier d’information ;</li>
+
+<li>avoir été informé(e) de la nécessité de respecter un délai de 4 mois entre
+la présente consultation et la signature du consentement préalable à l’intervention.</li>
+</ul>
+
+<p>Le {{ tag.date|date('d/m/Y') }}<br>
+{{ tag.identiteUsuelleTitreCourt }}</p>
+<!-- signatureIMG -->
+
+
+
+<br><br><br>
+<hr>
+<br><br><br>
+<p>Je soussigné(e), {{ tag.UtilisateurActif_identiteUsuelleTitre }} certifie
+avoir été saisi(e) par {{ tag.identiteCompleteTitreLongDdn }} d’une demande
+de stérilisation à visée contraceptive, avoir été informé(e) des motifs de sa
+demande, lui avoir délivré une information complète sur cette intervention
+dans les conditions prévues par l’article 26 de la loi n°2001-588 4 juillet 2001,
+lui avoir remis un dossier d’information écrit.</p>
+
+<p>Le {{ tag.date|date('d/m/Y') }}<br>
+{{ tag.UtilisateurActif_identiteUsuelleTitre }}</p>
+
+
+
+</div>
+<!-- stop body -->
