@@ -8,10 +8,8 @@ INSERT INTO `configuration` (`name`, `level`, `toID`, `module`, `cat`, `type`, `
 update `data_types` set label='Règlement', description='Règlement conventionné S1' WHERE `name` = 'gynobsReglePorteurS1';
 update `data_types` set label='Règlement', description='Règlement conventionné S2' WHERE `name` = 'gynobsReglePorteurS2';
 
-
-
-
-
+-- indiquer le formulaire marqueurs T21 comme pouvant être signé
+update `data_types` set placeholder='o' where `name`='csMarqueursSerT21';
 
 
 
@@ -19,27 +17,27 @@ update `data_types` set label='Règlement', description='Règlement conventionn�
 
 -- data_cat
 INSERT IGNORE INTO `data_cat` (`groupe`, `name`, `label`, `description`, `type`, `fromID`, `creationDate`) VALUES
-('typecs', 'csAutres', 'Autres', 'autres', 'user', '1', '2018-12-13 13:16:52'),
-('medical', 'catDataGenotypageRhesusFoetal', 'Données formulaire génotypage rhesus D foetal', 'données pour le formulaire génotypage rhésus D foetal sur sang maternel', 'base', '1', '2018-12-13 13:16:52');
+('typecs', 'csAutres', 'Autres', 'autres', 'user', '1', '2018-12-17 15:38:03'),
+('medical', 'catDataGenotypageRhesusFoetal', 'Données formulaire génotypage rhesus D foetal', 'données pour le formulaire génotypage rhésus D foetal sur sang maternel', 'base', '1', '2018-12-17 15:38:03');
 
 -- data_types
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='catDataGenotypageRhesusFoetal');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('medical', 'fGenRhFoePatienteOrigineGeo', NULL, 'Origine géographique de la patiente', 'origine géographique de la patiente', NULL, NULL, 'select', '\' \' : \' \' \n\'E\' : \'Europe\'\n\'AN\' : \'Afrique du nord\'\n\'AoC\' : \'Afrique / Caraïbes\'\n\'MO\' : \'Moyen-Orient\'\n\'As\' : \'Asie\'\n\'Autre\' : \'Autre\'', 'gynobs', @catID, '1', '2018-12-13 13:16:52', '3600', '1'),
-('medical', 'fGenRhFoeProcreateurOrigineGeo', NULL, 'Origine géographique du procréateur', 'origine géographique du procréateur', NULL, NULL, 'select', '\' \' : \' \' \n\'E\' : \'Europe\'\n\'AN\' : \'Afrique du nord\'\n\'AoC\' : \'Afrique / Caraïbes\'\n\'MO\' : \'Moyen-Orient\'\n\'As\' : \'Asie\'\n\'Autre\' : \'Autre\'', 'gynobs', @catID, '1', '2018-12-13 13:16:52', '3600', '1'),
-('medical', 'fGenRhFoePatienteOrigineGeoAutre', 'Précisez ici l\'origine géographique', 'Autre origine géographique de la patiente', 'Autre origine géographique de la patiente', NULL, NULL, 'text', NULL, 'gynobs', @catID, '1', '2018-12-13 13:16:52', '3600', '1'),
-('medical', 'fGenRhFoeProcreateurOrigineGeoAutre', 'Précisez ici l\'origine géographique', 'Autre origine géographique du procreateur', 'Autre origine géographique du procreateur', NULL, NULL, 'text', NULL, 'gynobs', @catID, '1', '2018-12-13 13:16:52', '3600', '1'),
-('medical', 'fGenRhFoePatienteTypeGro', NULL, 'Type de grossesse', 'type de grossesse', NULL, NULL, 'select', '\'u\' : \'mono-foetal\'\n\'g\' : \'gémellaire\'', 'gynobs', @catID, '1', '2018-12-13 13:16:52', '3600', '1'),
-('medical', 'fGenRhFoePatienteSuivieCNRHP', NULL, 'Patiente suivie au CNRHP', 'patiente suivie au CNRHP', NULL, NULL, 'select', '\'n\' : \'non\'\n\'o\' : \'oui\'', 'gynobs', @catID, '1', '2018-12-13 13:16:52', '3600', '1'),
-('medical', 'fGenRhFoePatienteAlloImmAntiDConnue', NULL, 'Patiente avec allo-immunisation anti-D connue', 'patiente avec allo-immunisation anti-D connue', NULL, NULL, 'select', '\'n\' : \'non\'\n\'o\' : \'oui\'', 'gynobs', @catID, '1', '2018-12-13 13:16:52', '3600', '1');
+('medical', 'fGenRhFoePatienteOrigineGeo', NULL, 'Origine géographique de la patiente', 'origine géographique de la patiente', NULL, NULL, 'select', '\' \' : \' \' \n\'E\' : \'Europe\'\n\'AN\' : \'Afrique du nord\'\n\'AoC\' : \'Afrique / Caraïbes\'\n\'MO\' : \'Moyen-Orient\'\n\'As\' : \'Asie\'\n\'Autre\' : \'Autre\'', 'gynobs', @catID, '1', '2018-12-17 15:38:03', '3600', '1'),
+('medical', 'fGenRhFoeProcreateurOrigineGeo', NULL, 'Origine géographique du procréateur', 'origine géographique du procréateur', NULL, NULL, 'select', '\' \' : \' \' \n\'E\' : \'Europe\'\n\'AN\' : \'Afrique du nord\'\n\'AoC\' : \'Afrique / Caraïbes\'\n\'MO\' : \'Moyen-Orient\'\n\'As\' : \'Asie\'\n\'Autre\' : \'Autre\'', 'gynobs', @catID, '1', '2018-12-17 15:38:03', '3600', '1'),
+('medical', 'fGenRhFoePatienteOrigineGeoAutre', 'Précisez ici l\'origine géographique', 'Autre origine géographique de la patiente', 'Autre origine géographique de la patiente', NULL, NULL, 'text', NULL, 'gynobs', @catID, '1', '2018-12-17 15:38:03', '3600', '1'),
+('medical', 'fGenRhFoeProcreateurOrigineGeoAutre', 'Précisez ici l\'origine géographique', 'Autre origine géographique du procreateur', 'Autre origine géographique du procreateur', NULL, NULL, 'text', NULL, 'gynobs', @catID, '1', '2018-12-17 15:38:03', '3600', '1'),
+('medical', 'fGenRhFoePatienteTypeGro', NULL, 'Type de grossesse', 'type de grossesse', NULL, NULL, 'select', '\'u\' : \'mono-foetal\'\n\'g\' : \'gémellaire\'', 'gynobs', @catID, '1', '2018-12-17 15:38:03', '3600', '1'),
+('medical', 'fGenRhFoePatienteSuivieCNRHP', NULL, 'Patiente suivie au CNRHP', 'patiente suivie au CNRHP', NULL, NULL, 'select', '\'n\' : \'non\'\n\'o\' : \'oui\'', 'gynobs', @catID, '1', '2018-12-17 15:38:03', '3600', '1'),
+('medical', 'fGenRhFoePatienteAlloImmAntiDConnue', NULL, 'Patiente avec allo-immunisation anti-D connue', 'patiente avec allo-immunisation anti-D connue', NULL, NULL, 'select', '\'n\' : \'non\'\n\'o\' : \'oui\'', 'gynobs', @catID, '1', '2018-12-17 15:38:03', '3600', '1');
 
 SET @catID = (SELECT data_cat.id FROM data_cat WHERE data_cat.name='csAutres');
 INSERT IGNORE INTO `data_types` (`groupe`, `name`, `placeholder`, `label`, `description`, `validationRules`, `validationErrorMsg`, `formType`, `formValues`, `module`, `cat`, `fromID`, `creationDate`, `durationLife`, `displayOrder`) VALUES
-('typecs', 'csGenotypageRhesusFoetalSangMaternel', NULL, 'Génotypage Rhésus D fœtal', 'support parent pour génotypage rhésus D fœtal', NULL, NULL, NULL, 'gynobsGenotypageRhesusFoetalSangMaternel', 'gynobs', @catID, '1', '2018-12-13 13:16:52', '84600', '1');
+('typecs', 'csGenotypageRhesusFoetalSangMaternel', 'o', 'Génotypage Rhésus D fœtal', 'support parent pour génotypage rhésus D fœtal', NULL, NULL, NULL, 'gynobsGenotypageRhesusFoetalSangMaternel', 'gynobs', @catID, '1', '2018-12-17 15:38:03', '84600', '1');
 
 -- forms_cat
 INSERT IGNORE INTO `forms_cat` (`name`, `label`, `description`, `type`, `fromID`, `creationDate`) VALUES
-('formCS', 'Formulaires de consultation', 'Formulaires pour construire les consultations', 'user', '1', '2018-12-13 13:16:52');
+('formCS', 'Formulaires de consultation', 'Formulaires pour construire les consultations', 'user', '1', '2018-12-17 15:38:03');
 
 -- forms
 SET @catID = (SELECT forms_cat.id FROM forms_cat WHERE forms_cat.name='formCS');
