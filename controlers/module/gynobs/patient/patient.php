@@ -78,6 +78,11 @@ $p['page']['csMarqueursSeriques']['form']='gynObsMarqueursSeriques';
 // données pour génotypage rhésus D foetal
 $p['page']['csGenotypageRhesusFoetalSangMaternel']['form']='gynobsGenotypageRhesusFoetalSangMaternel';
 
+// liste des typecs qui produisent des docs à signer si grossesse active
+$typeCsSignerSiGro=new msData;
+$typeCsSignerSiGro->setModules(['gynobs']);
+$p['page']['gynobsDocumentsSignerObs']=$typeCsSignerSiGro->getDataTypesFromCatName('gynobsCatSupportDocumentsSignerObs', array('id','label', 'formValues'));
+
 //types de consultation liées à la gynéco classique.
 $typeCsCla=new msData;
 $p['page']['typeCsCla']=$typeCsCla->getDataTypesFromCatName('csGyneco', array('id','label', 'formValues'));
