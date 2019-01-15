@@ -20,6 +20,9 @@ update `data_types` set placeholder='o', cat=@catID where `name`='csMarqueursSer
 SET @catID = (SELECT forms_cat.id FROM forms_cat WHERE forms_cat.name='formsProdOrdoEtDoc');
 update forms set cat=@catID where internalName in ('gynObsMarqueursSeriques', 'gynobsGenotypageRhesusFoetalSangMaternel');
 
+-- Utilisation de toute la largeur pour la row1 du form de synthèse obs (gynObsSyntheseObs)
+UPDATE `forms` SET `yamlStructure` = replace(yamlStructure, "size: 2", "size: 'col'"), `yamlStructureDefaut` = replace(yamlStructureDefaut, "size: 2", "size: 'col'") where internalName='gynObsSyntheseObs'
+
 -- nouveau formulaire génotypage Rhésus foetal D sur sang maternel
 
 -- data_cat
