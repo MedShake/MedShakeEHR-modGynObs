@@ -549,4 +549,4 @@ INSERT IGNORE INTO `forms` (`module`, `internalName`, `name`, `description`, `da
 
 -- system
 INSERT IGNORE INTO `system` (`name`, `groupe`, `value`) VALUES
-('gynobs', 'module', 'v3.2.0');
+('gynobs', 'module', 'v3.5.0');
