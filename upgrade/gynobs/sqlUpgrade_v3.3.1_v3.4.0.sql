@@ -2,7 +2,6 @@
 
 -- mise à jour pour un autocomplete correct formulaire fin de grossesse
 UPDATE `forms` SET `yamlStructure` = replace(yamlStructure, '3:22:230:235:241', 'firstname:othersfirstname:igPrenomFA:igPrenomFB:igPrenomFC');
-UPDATE `forms` SET `yamlStructureDefaut` = replace(yamlStructureDefaut, '3:22:230:235:241', 'firstname:othersfirstname:igPrenomFA:igPrenomFB:igPrenomFC');
 
 -- upgrade n° de version
 UPDATE `system` SET `value`='v3.4.0' WHERE `name`='gynobs';
