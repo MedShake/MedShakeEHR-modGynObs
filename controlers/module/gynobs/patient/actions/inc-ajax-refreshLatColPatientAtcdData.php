@@ -29,7 +29,7 @@
 
  // le formulaire latéral ATCD
  $formLat = new msForm();
- $p['page']['formNameGynObsATCD']=$formLat->setFormIDbyName('gynObsATCD');
+ $formLat->setFormIDbyName('gynObsATCD');
  $formLat->getPrevaluesForPatient($p['page']['patient']['id']);
  $p['page']['formLat']=$formLat->getForm();
 
