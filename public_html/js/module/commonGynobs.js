@@ -98,6 +98,8 @@ function afficherFxNbFoetus() {
   } else {
     $('#id_e32typeGro_id').attr('disabled', 'disabled');
   }
+
+  autosize.update($('#nouvelleCs textarea'));
 }
 
 //disable
