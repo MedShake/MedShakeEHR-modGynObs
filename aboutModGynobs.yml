@@ -1,0 +1,7 @@
+nom: 'Gynécologie obstétrique'
+auteurs:
+  'Bertrand Boutillier': 'https://www.medshake.net/membre/1/'
+licence: 'GPL v3'
+description: 'Module MedShakeEHR pour la pratique de le gynécologie obstétrique libérale'
+documentation: 'https://www.logiciel-cabinet-medical.fr/discipline/gynecologie-obstetrique/'
+sources: 'https://github.com/MedShake/MedShakeEHR-modGynObs'
