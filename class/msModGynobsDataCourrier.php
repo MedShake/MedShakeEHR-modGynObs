@@ -72,7 +72,8 @@ class msModGynobsDataCourrier
       where pd.toID='".$d['patientID']."' and pd.typeID='".$name2typeID['nouvelleGrossesse']."' and pd.outdated='' and pd.deleted='' order by pd.creationDate desc
       limit 1")) {
         $grossesseData = new msObjet();
-        if ($grossesseData = $grossesseData->getObjetAndSons($findGro['idGro'])) {
+        $grossesseData->setObjetID($findGro['idGro']);
+        if ($grossesseData = $grossesseData->getObjetAndSons()) {
             foreach ($grossesseData as $k=>$v) {
                 $d[$k]=$v['value'];
                 $d[$v['name']]=$v['value'];
