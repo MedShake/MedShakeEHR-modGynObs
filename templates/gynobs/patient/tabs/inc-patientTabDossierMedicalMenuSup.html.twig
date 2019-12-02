@@ -28,44 +28,48 @@
 
 <div class="row">
   <div class="col pl-0">
-    {% if config.utiliserLap == 'true' %}
-    <div class="btn-group mr-2">
-      <button type="button" class="btn btn-primary openLAP" title="Ordonnance médicamenteuse via LAP"><i class="fas fa-pills fa-lg fa-fw"></i></button>
-      <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Autres prescriptions">
-        <i class="fas fa-file-medical fa-lg fa-fw"></i>
-      </button>
-      <div class="dropdown-menu">
-        {% for v in page.formOrdo %}
-            <a class="dropdown-item addNewOrdo" title="{{ v.description }}" data-porteur="{{ v.id }}" data-module="{{ v.module }}" data-ordoForm="{{ v.formValues }}" href="#">Prescriptions non médicamenteuses</a>
-        {% endfor %}
-        {% if page.grossesseEnCours > 0 %}
-          {% if page.gynobsDocumentsSignerObs is not empty %}
-            <div class="dropdown-divider"></div>
-            <div class="dropdown-header">Ordonnances spécifiques</div>
-          {% endif %}
-          {% for docSigner in page.gynobsDocumentsSignerObs %}
-            <a class="dropdown-item addNewCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ docSigner.formValues }}" data-mode="create">{{ docSigner.label }}</a>
-          {% endfor %}
+    {% if config.utiliserLapExterne == 'true' or config.utiliserLap == 'true' %}
+      <div class="btn-group mr-2">
+        {% if config.utiliserLapExterne == 'true' %}
+          <button type="button" class="btn btn-primary openLapExterne" title="Ordonnance médicamenteuse via LAP externe"><i class="fas fa-pills fa-lg fa-fw"></i></button>
+        {% elseif config.utiliserLap == 'true' %}
+          <button type="button" class="btn btn-primary openLAP" title="Ordonnance médicamenteuse via LAP"><i class="fas fa-pills fa-lg fa-fw"></i></button>
         {% endif %}
-      </div>
-    </div>
-    {% else %}
-    <div class="btn-group mr-2">
-      <button type="button" class="btn btn-primary addNewOrdo" data-porteur="{{ page.formOrdo.0.id }}" data-module="{{ page.formOrdo.0.module }}" data-ordoForm="{{ page.formOrdo.0.formValues }}" title="Ordonnance"><i class="fas fa-pills fa-lg fa-fw"></i></button>
-      {% if page.grossesseEnCours > 0 and page.gynobsDocumentsSignerObs is not empty %}
-        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Ordonnances spécifiques">
+        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Autres prescriptions">
           <i class="fas fa-file-medical fa-lg fa-fw"></i>
         </button>
         <div class="dropdown-menu">
+          {% for v in page.formOrdo %}
+              <a class="dropdown-item addNewOrdo" title="{{ v.description }}" data-porteur="{{ v.id }}" data-module="{{ v.module }}" data-ordoForm="{{ v.formValues }}" href="#">Prescriptions non médicamenteuses</a>
+          {% endfor %}
+          {% if page.grossesseEnCours > 0 %}
             {% if page.gynobsDocumentsSignerObs is not empty %}
+              <div class="dropdown-divider"></div>
               <div class="dropdown-header">Ordonnances spécifiques</div>
             {% endif %}
             {% for docSigner in page.gynobsDocumentsSignerObs %}
               <a class="dropdown-item addNewCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ docSigner.formValues }}" data-mode="create">{{ docSigner.label }}</a>
             {% endfor %}
+          {% endif %}
         </div>
-      {% endif %}
-    </div>
+      </div>
+    {% else %}
+      <div class="btn-group mr-2">
+        <button type="button" class="btn btn-primary addNewOrdo" data-porteur="{{ page.formOrdo.0.id }}" data-module="{{ page.formOrdo.0.module }}" data-ordoForm="{{ page.formOrdo.0.formValues }}" title="Ordonnance"><i class="fas fa-pills fa-lg fa-fw"></i></button>
+        {% if page.grossesseEnCours > 0 and page.gynobsDocumentsSignerObs is not empty %}
+          <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Ordonnances spécifiques">
+            <i class="fas fa-file-medical fa-lg fa-fw"></i>
+          </button>
+          <div class="dropdown-menu">
+              {% if page.gynobsDocumentsSignerObs is not empty %}
+                <div class="dropdown-header">Ordonnances spécifiques</div>
+              {% endif %}
+              {% for docSigner in page.gynobsDocumentsSignerObs %}
+                <a class="dropdown-item addNewCS" href="#" data-parentID="{{ page.grossesseEnCours.id }}" data-formtocall="{{ docSigner.formValues }}" data-mode="create">{{ docSigner.label }}</a>
+              {% endfor %}
+          </div>
+        {% endif %}
+      </div>
     {% endif %}
 
     <div class="btn-group mr-2">
