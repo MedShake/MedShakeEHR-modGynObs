@@ -36,7 +36,7 @@ $p['page']['formLat']=$formLat->getForm();
 $p['page']['formJavascript']['gynObsATCD']=$formLat->getFormJavascript();
 
 // si LAP activé : allergie et atcd structurés
-if($p['config']['utiliserLap'] == 'true') {
+if($p['config']['optionGeActiverLapInterne'] == 'true') {
 
     // gestion atcd structurés
     if(!empty(trim($p['config']['lapActiverAtcdStrucSur']))) {

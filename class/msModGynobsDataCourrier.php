@@ -99,7 +99,7 @@ class msModGynobsDataCourrier
     }
 
     // si LAP, extraction des donnéés structurées
-    if($p['config']['utiliserLap'] == 'true') {
+    if($p['config']['optionGeActiverLapInterne'] == 'true') {
       $patient = new msPeople;
       $patient->setToID($d['patientID']);
       foreach(explode(',', $p['config']['lapActiverAtcdStrucSur']) as $v) {
