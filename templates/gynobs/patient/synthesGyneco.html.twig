@@ -38,6 +38,12 @@
         {% if page.grossesseEnCours.id == '' and page.patient.administrativeDatas.birthdate.ageFormats.ageTotalYears < 60 %}
             <a href="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/module/actions/installNewGro/{{ page.patient.id }}/" role="button" class="btn btn-info btn-sm float-right m-1 newGro">Nouvelle grossesse</a>
         {% endif %}
+
+        {% if page.formJavascript.gynObsSyntheseGyn is not empty %}
+          <script>
+            {{ page.formJavascript.gynObsSyntheseGyn }}
+          </script>
+        {% endif %}
     </div>
 
 </div>

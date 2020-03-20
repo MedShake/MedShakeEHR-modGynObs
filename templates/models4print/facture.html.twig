@@ -1,7 +1,7 @@
 {#
  # This file is part of MedShakeEHR.
  #
- # Copyright (c) 2017
+ # Copyright (c) 2019
  # Bertrand Boutillier <b.boutillier@gmail.com>
  # http://www.medshake.net
  #
@@ -20,24 +20,23 @@
  #/
 
 /##
- # Template > patient :  colonne latérale du Dossier médical
+ # Template > models4print : facture
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
- # @contrib fr33z00 <https://github.com/fr33z00>
  #}
 
-{% import "macroForm.html.twig" as f %}
+ {% set tag = page.courrier %}
 
- {# Formulaire latéral des ATCD #}
- {% if page.patient.ALD %}
-   {% include 'inc-patientAldStruc.html.twig' %}
- {% endif %}
- <div id="latForm" class="changeObserv">
-   {{ f.formbuilder(page.formLat , 'gynObsATCD' , valFormLat ) }}
+ <p style="text-align : right;">New-York, le {{ tag.date|date("d/m/Y") }}</p>
 
-   {% if page.formJavascript.gynObsATCD is not empty %}
-     <script>
-       {{ page.formJavascript.gynObsATCD }}
-     </script>
-   {% endif %}
- </div>
+ <h2 style="text-align : center">{{ tag.identiteCompleteTitreLongDdn }}</h2>
+ <br><br><br>
+ <p>Je soussigné Docteur Stephen STRANGE certifie avoir reçu ce jour de {{ tag.identiteCompleteTitreLongDdn }} la somme de {{ tag.regleFacture }}€ en règlement des honoraires de consultation.<br><br>
+
+ </p>
+
+ <p>Certificat remis en mains propre pour faire valoir ce que de droit.</p>
+
+ <br><br><br><br><br><br>
+
+ <p style="text-align:right">Docteur Stephen STRANGE</p>

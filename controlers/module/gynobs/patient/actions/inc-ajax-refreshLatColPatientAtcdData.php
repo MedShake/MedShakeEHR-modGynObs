@@ -29,9 +29,10 @@
 
  // le formulaire latéral ATCD
  $formLat = new msForm();
- $p['page']['formNameGynObsATCD']=$formLat->setFormIDbyName('gynObsATCD');
+ $formLat->setFormIDbyName('gynObsATCD');
  $formLat->getPrevaluesForPatient($p['page']['patient']['id']);
  $p['page']['formLat']=$formLat->getForm();
+ $p['page']['formJavascript']['gynObsATCD']=$formLat->getFormJavascript();
 
  // si LAP activé : allergie et atcd structurés
  if($p['config']['utiliserLap'] == 'true') {
@@ -43,7 +44,7 @@
        foreach(explode(',', $p['config']['lapActiverAtcdStrucSur']) as $v) {
          $p['page']['beforeVar'][$v]=$patient->getAtcdStruc($v);
          if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
-         $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+         $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlVar($p['page']['beforeVar'][$v]);
        }
        unset($p['page']['beforeVar'], $gethtml);
      }
@@ -55,7 +56,7 @@
        foreach(explode(',', $p['config']['lapActiverAllergiesStrucSur']) as $v) {
          $p['page']['beforeVar'][$v]=$patient->getAllergies($v);
          if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
-         $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+         $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlVar($p['page']['beforeVar'][$v]);
        }
        unset($p['page']['beforeVar'], $gethtml);
      }

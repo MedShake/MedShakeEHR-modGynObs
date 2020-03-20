@@ -1,0 +1,70 @@
+{#
+ # This file is part of MedShakeEHR.
+ #
+ # Copyright (c) 2018
+ # Bertrand Boutillier <b.boutillier@gmail.com>
+ # http://www.medshake.net
+ #
+ # MedShakeEHR is free software: you can redistribute it and/or modify
+ # it under the terms of the GNU General Public License as published by
+ # the Free Software Foundation, either version 3 of the License, or
+ # any later version.
+ #
+ # MedShakeEHR is distributed in the hope that it will be useful,
+ # but WITHOUT ANY WARRANTY; without even the implied warranty of
+ # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ # GNU General Public License for more details.
+ #
+ # You should have received a copy of the GNU General Public License
+ # along with MedShakeEHR.  If not, see <http://www.gnu.org/licenses/>.
+ #/
+
+/##
+ # Template > models4print :  génotypage rhésus D foetal à partir de sans maternel
+ #
+ # @author Bertrand Boutillier <b.boutillier@gmail.com>
+ #}
+<!-- stop head -->
+<h2 class="">DEMANDE DE GÉNOTYPAGE RHÉSUS D FŒTAL À PARTIR DU SANG MATERNEL</h2>
+<div>
+
+  {% set tag = page.courrier %}
+
+  <p>Je soussignée
+    {{ tag.identiteCompleteTitreLongDdn }}
+    atteste avoir reçu du
+    {{ tag.AuteurInitial_identiteUsuelleTitre }}
+    des informations sur les caractéristiques du test de dépistage du Rhésus D fœtal à partir de l’ADN fœtal libre circulant dans le sang maternel, conformément à l’article L.2131-1 du Code de la santé Publique et au cours d’une consultation médicale en
+    date du
+    {{ tag.date|date('d/m/Y') }}
+    , en particulier sur les points suivants :</p>
+  <ul>
+    <li>Une situation d’incompatibilité fœto-maternelle du Rhésus D pour la grossesse en cours peut entrainer un risque d’anémie fœtale et/ou néonatale sévère en l’absence de suivi et/ou de traitement adéquat ;</li>
+
+    <li>Cet examen permet de diagnostiquer une éventuelle situation d’incompatibilité fœto-maternelle pour la grossesse en cours et d'enclencher la prise en charge adaptée, le cas échéant ; Dans l’hypothèse où la patiente est Rh D Négatif non immunisée,
+      cet examen permet de juger s’il y a lieu de recourir à une immuno- prophylaxie Rh anténatale ;</li>
+
+    <li>Une prise de sang est réalisée au cours de la grossesse à partir de 11 SA. Cette dernière ne présente aucun risque pour la grossesse ou le fœtus ;</li>
+
+    <li>La technique d’examen utilisée ne recherche que la présence du génotype RHD fœtal</li>
+
+    <li>Cette technique peut parfois donner un résultat positif en excès (ou faux positif) ;</li>
+
+    <li>Le résultat de l’examen me sera rendu et expliqué par le prescripteur ou un autre praticien ayant l’expérience du dépistage prénatal ;</li>
+
+    <li>Lorsque le résultat est négatif ou indéterminé, il est nécessaire de réaliser 15 jours après (ou avant ce délai de 15 jours en cas de terme avancé) un second examen à partir d'un second prélèvement de sang maternel pour confirmation.</li>
+  </ul>
+
+  <p class="gras">Je consens à la réalisation de l’examen de génétique relatif au Rhésus D fœtal à partir de l’ADN fœtal libre circulant dans le sang maternel.</p>
+
+  <p>Cet examen à partir de l’ADN du fœtus sera effectué dans un laboratoire de biologie médicale autorisé par l’Agence Régionale de Santé à pratiquer le diagnostic prénatal.</p>
+
+  <p>L’original du présent document est conservé dans mon dossier médical par le prescripteur. Une copie de ce document m’est remise. La deuxième copie est remise au laboratoire de biologie médicale qui effectuera le test. Il conservera ce document
+    dans les mêmes conditions que le compte rendu de l’examen.</p>
+
+  <p>Fait à
+    {{ tag.AuteurInitial_villeAdressePro }}
+    le
+    {{ tag.date|date('d/m/Y') }}</p>
+</div>
+<!-- stop body -->

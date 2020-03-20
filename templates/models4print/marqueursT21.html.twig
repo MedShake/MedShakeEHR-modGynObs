@@ -125,20 +125,20 @@
 
   <tr>
     <td class="vat" >
-      Dr Stephen STRANGE<br>
-      177 A, Bleecker Street New York<br>
-      Stephen.STANGE@medical.apicrypt.org / 02 00 00 00 00<br>
+      {{ tag.AuteurInitial_identiteUsuelleTitre }}<br>
+      {{ tag.AuteurInitial_numAdressePro }} {{ tag.AuteurInitial_rueAdressePro }} {{ tag.AuteurInitial_codePostalPro }} {{ tag.AuteurInitial_villeAdressePro }}<br>
+      {{ tag.AuteurInitial_emailApicrypt }} / {{ tag.AuteurInitial_telPro }}<br>
 
-      N° d'identification :<br>
-      N° de réseau :<br>
+      N° d'identification : {{ tag.AuteurInitial_rpps }}<br>
+      N° de réseau : {{ tag.AuteurInitial_nReseau }}<br>
 
     </td>
     <td class="vat" >
-      Dr Stephen STRANGE<br>
-      177 A, Bleecker Street New York<br>
-      Stephen.STANGE@medical.apicrypt.org / 02 00 00 00 00<br>
+      {{ tag.AuteurInitial_identiteUsuelleTitre }}<br>
+      {{ tag.AuteurInitial_numAdressePro }} {{ tag.AuteurInitial_rueAdressePro }} {{ tag.AuteurInitial_codePostalPro }} {{ tag.AuteurInitial_villeAdressePro }}<br>
+      {{ tag.AuteurInitial_emailApicrypt }} / {{ tag.AuteurInitial_telPro }}<br>
 
-      N° identification :<br>
+      N° d'identification : {{ tag.AuteurInitial_rpps }}<br>
 
     </td>
   </tr>
@@ -297,7 +297,7 @@
   </tr>
   <tr>
     <td colspan="2" class="t9">
-      Je soussignée Madame {{ tag.lastname }} {{ tag.firstname }} atteste avoir reçu du Dr Stephen STRANGE au cours d'une consultation médicale en date du {{ tag.date|date("d/m/Y") }}<br>
+      Je soussignée {{ tag.identiteCompleteTitreLongDdn }} atteste avoir reçu du {{ tag.AuteurInitial_identiteUsuelleTitre }} au cours d'une consultation médicale en date du {{ tag.date|date("d/m/Y") }}<br>
       des informations sur l'examen des marqueurs sériques maternels dont je souhaite bénéficier :<br>
       - cet examen permet d'évaluer le risque que l'enfant à naître soit atteint d'une maladie d'une particulière gravité, notamment la trisomie 21;<br>
       - une prise de sang est réalisée au cours d'une période précise de la grossesse ;<br>
@@ -317,8 +317,8 @@
     </td>
   </tr>
   <tr>
-    <td class="vat" >Dr Stephen STRANGE<br><br><br><br></td>
-    <td class="vat" >Mme {{ tag.lastname }} {{ tag.firstname }}<br><br><br></td>
+    <td class="vat" >{{ tag.AuteurInitial_identiteUsuelleTitre }}<br><br><br><br></td>
+    <td class="vat" >{{ tag.identiteUsuelleTitreCourt }}<br><!-- signatureIMG --></td>
   </tr>
 
 </table>

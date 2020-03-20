@@ -1,7 +1,8 @@
+<?php
 /*
  * This file is part of MedShakeEHR.
  *
- * Copyright (c) 2017
+ * Copyright (c) 2018
  * Bertrand Boutillier <b.boutillier@gmail.com>
  * http://www.medshake.net
  *
@@ -20,24 +21,27 @@
  */
 
 /**
- * Js pour le formulaire 21 issue de grossesse
+ * Générer le SQL pour export du module Gynobs
  *
  * @author Bertrand Boutillier <b.boutillier@gmail.com>
  */
 
-$(document).ready(function() {
 
-  //echos IG : observation nombre foetus
-  $('body').on("keyup, change", '#id_igNbFoetus_id', function() {
-    afficherFxNbFoetus();
-  });
+class msModGynobsSqlGenerate extends msSqlGenerate
+{
 
-  //issue grossesse : calcul terme à l'acc
-  $('body').on("focusout", '#id_igDate_id', function() {
-    terme = termeAccCalc($('#id_igDate_id').val(), $('#id_DDR_id').val(), $('#id_ddgReel_id').val());
-    if (terme != null) {
-      $('#id_igTermeFA_id, #id_igTermeFB_id, #id_igTermeFC_id').val(terme);
+  protected function _getSpecifSql() {
+
+    //configuration : ajout des paramètres de niveau default
+    $names=['calcMedGynobsEPF', 'calcMedGynobsLcc2Terme', 'calcMedGynobsBipPcPaFemPercentiles'];
+
+    if($configurations=msSQL::sql2tab("select * from $this->_bdd.configuration where name in ('".implode("', '",$names)."') and level='default'")) {
+      foreach($configurations as $configuration) {
+        unset($configuration['id']);
+        if(!isset($this->_configuration_fields)) $this->_configuration_fields=$this->_getSqlFieldsPart($configuration);
+        $this->_configuration_values[]=$this->_getSqlValuesPart($configuration);
+      }
     }
-  });
 
-});
+  }
+}

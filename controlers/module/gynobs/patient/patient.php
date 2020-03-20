@@ -28,14 +28,12 @@
  * @contrib fr33z00 <https://github.com/fr33z00>
  */
 
-// liste des formulaires fixes au 1er affichage dossier patient pour JS
-$p['page']['listeForms']=array('gynObsATCD','gynObsSyntheseGyn');
-
 // le formulaire latéral ATCD
 $formLat = new msForm();
-$p['page']['formNameGynObsATCD']=$formLat->setFormIDbyName('gynObsATCD');
+$formLat->setFormIDbyName('gynObsATCD');
 $formLat->getPrevaluesForPatient($p['page']['patient']['id']);
 $p['page']['formLat']=$formLat->getForm();
+$p['page']['formJavascript']['gynObsATCD']=$formLat->getFormJavascript();
 
 // si LAP activé : allergie et atcd structurés
 if($p['config']['utiliserLap'] == 'true') {
@@ -47,7 +45,7 @@ if($p['config']['utiliserLap'] == 'true') {
       foreach(explode(',', $p['config']['lapActiverAtcdStrucSur']) as $v) {
         $p['page']['beforeVar'][$v]=$patient->getAtcdStruc($v);
         if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
-        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlVar($p['page']['beforeVar'][$v]);
       }
       unset($p['page']['beforeVar'], $gethtml);
     }
@@ -59,7 +57,7 @@ if($p['config']['utiliserLap'] == 'true') {
       foreach(explode(',', $p['config']['lapActiverAllergiesStrucSur']) as $v) {
         $p['page']['beforeVar'][$v]=$patient->getAllergies($v);
         if(empty($p['page']['beforeVar'][$v])) $p['page']['beforeVar'][$v]=array('fake');
-        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlString($p['page']['beforeVar'][$v]);
+        $p['page']['formLat']['before'][$v]=$gethtml->genererHtmlVar($p['page']['beforeVar'][$v]);
       }
       unset($p['page']['beforeVar'], $gethtml);
     }
@@ -67,13 +65,22 @@ if($p['config']['utiliserLap'] == 'true') {
 
 //formulaire synthèse de gynéco
 $formSynthese = new msForm();
-$p['page']['formNameGynObsSyntheseGyn']=$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
+$formSynthese->setFormIDbyName('gynObsSyntheseGyn');
 $formSynthese->getPrevaluesForPatient($p['page']['patient']['id']);
 $p['page']['formSynthese']=$formSynthese->getForm();
+$p['page']['formJavascript']['gynObsSyntheseGyn']=$formSynthese->getFormJavascript();
 
 //données pour formulaire marqueurs sériques
 $p['page']['csMarqueursSeriques']['csID']=msData::getTypeIDFromName('csMarqueursSerT21');
 $p['page']['csMarqueursSeriques']['form']='gynObsMarqueursSeriques';
+
+// données pour génotypage rhésus D foetal
+$p['page']['csGenotypageRhesusFoetalSangMaternel']['form']='gynobsGenotypageRhesusFoetalSangMaternel';
+
+// liste des typecs qui produisent des docs à signer si grossesse active
+$typeCsSignerSiGro=new msData;
+$typeCsSignerSiGro->setModules(['gynobs']);
+$p['page']['gynobsDocumentsSignerObs']=$typeCsSignerSiGro->getDataTypesFromCatName('gynobsCatSupportDocumentsSignerObs', array('id','label', 'formValues'));
 
 //types de consultation liées à la gynéco classique.
 $typeCsCla=new msData;
@@ -92,13 +99,11 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
 
         // générer le formulaire grossesse tête de page.
         $formSyntheseGrossesse = new msForm();
-        $p['page']['formNameGynObsSyntheseObs']=$formSyntheseGrossesse->setFormIDbyName('gynObsSyntheseObs');
+        $formSyntheseGrossesse->setFormIDbyName('gynObsSyntheseObs');
         $formSyntheseGrossesse->setInstance($p['page']['grossesseEnCours']['id']);
         $formSyntheseGrossesse->getPrevaluesForPatient($p['page']['patient']['id']);
         $p['page']['formSyntheseGrossesse']=$formSyntheseGrossesse->getForm();
-
-        // complément à la liste des formulaires fixes au 1er affichage dossier patient pour JS
-        $p['page']['listeForms'][]='gynObsSyntheseObs';
+        $p['page']['formJavascript']['gynObsSyntheseObs']=$formSyntheseGrossesse->getFormJavascript();
 
         //types de consultation liées à la grossesse.
         $typeCsGro=new msData;
@@ -106,16 +111,8 @@ if ($findGro=msSQL::sqlUnique("select pd.id as idGro, eg.id as idFin
     }
 }
 
-//fixer les paramètres pour les formulaires d'ordonnance et de règlement du module
+//fixer les paramètres pour les formulaires d'ordonnance
 $data=new msData;
-$reglements=$data->getDataTypesFromCatName('porteursReglement', array('id', 'module', 'label', 'description', 'formValues'));
-foreach ($reglements as $v) {
-    if ($v['module']=='gynobs' and (
-       ($v['formValues']=='baseReglementS1' and $p['config']['administratifSecteurHonoraires']=='1') or
-       ($v['formValues']=='baseReglementS2' and $p['config']['administratifSecteurHonoraires']=='2'))) {
-        $p['page']['formReglement'][]=$v;
-    }
-}
 $ordos=$data->getDataTypesFromCatName('porteursOrdo', array('id', 'module', 'label', 'description', 'formValues'));
 foreach ($ordos as $v) {
     if ($v['module']=='gynobs') {
