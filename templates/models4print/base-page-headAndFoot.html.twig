@@ -24,13 +24,13 @@
  #
  # @author Bertrand Boutillier <b.boutillier@gmail.com>
  #}
-
+{% set tag = page.courrier %}
 
     <html>
         <head>
             <style>
                 @page {
-                    margin: 190pt 50pt 100pt;
+                    margin: 190pt 50pt 40pt;
                     font-family: Helvetica;
                 }
                 #header {
@@ -43,21 +43,20 @@
                     border-bottom: 1pt solid #777;
                 }
                 #footer {
-                    position: fixed;
-                    left: 0;
-                    bottom: -110pt;
-                    right: 0;
-                    height: 100pt;
-                    font-size: 8pt;
-                    padding-top: 10pt;
-                    border-top: 1pt solid #777;
+                  position: fixed;
+                  left: 0;
+                  bottom: -60pt;
+                  right: 0;
+                  height: 100pt;
+                  font-size: 8pt;
+                  padding-top: 10pt;
+                  border-top: 1pt solid #777;
                 }
 
                 #footer p {
-                    display: inline-block;
-                    width: 30%;
-                    text-align: center;
-                    vertical-align: top;
+                  position: fixed;
+                      width : 200pt;
+                      text-align: center;
                 }
 
                 .gras {
@@ -86,7 +85,7 @@
             <body>
 
               <div id="header">
-                  <div class="t8" style="display : inline-block; width : 65%;vertical-align : bottom;">
+                  <div class="t8" style="display : inline-block; width : 64%;vertical-align : bottom;">
                       <span class="gras" style="font-size : 16pt;">Docteur Stephen STRANGE</span><br>
                       <span class="gras t12">Gynécologue-Obstétricien</span><br>
                       Conventionnée secteur 2<br><br>
@@ -104,11 +103,10 @@
                       En cas d’urgence, composez le 15
                   </div>
               </div>
-                <div id="footer">
-                    <p>RPPS<br><img src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/img/rpps.jpg" style="width : 130px; height : 40px"></p>
-                    <p>ADELI<br><img src="{{ config.protocol }}{{ config.host }}{{ config.urlHostSuffixe }}/img/adeli.jpg" style="width : 130px; height : 40px"></p>
-                    <p><br>Membre d’une AGA, règlement par chèque accepté.</p>
-                </div>
+              <div id="footer">
+                    <p class="barrecode" style="left : 0">RPPS<br><img src="/{{ config.urlHostSuffixe }}/{{ config.stockageLocation }}barecode/barecode-rpps-{{ tag.AuteurInitial_rpps  }}.svg" style="width : 130px; height : 40px"><br>{{ tag.AuteurInitial_rpps  }}</p>
+                    <p class="barrecode" style="right : 0">ADELI<br><img src="/{{ config.urlHostSuffixe }}/{{ config.stockageLocation }}barecode/barecode-adeli-{{ tag.AuteurInitial_adeli  }}.svg" style="width : 130px; height : 40px"><br>{{ tag.AuteurInitial_adeli  }}</p>
+              </div>
 
                 <!-- stop head -->
                 <div class="t9">
