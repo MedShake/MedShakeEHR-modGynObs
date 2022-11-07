@@ -1,0 +1,27 @@
+# Extends the DB Image from MedShake EHR Base
+FROM medshake-ehr-db:latest
+
+ARG MYSQL_DATABASE=medshakeehr
+
+LABEL description="MedShake EHR dockerized with modGynObs DB image"
+LABEL maintainer="bugeaud@gmail.com"
+
+# Set some environement variables required
+ENV APP_PATH /app
+ENV MEDSHAKEEHRPATH $APP_PATH/MedShakeEHR-base/
+
+# Create the APP directory and move to it
+#ADD --chown=mysql:mysql . $MEDSHAKEEHRPATH
+#WORKDIR $MEDSHAKEEHRPATH
+
+# Add any .cnf file to MariaDB configuration
+#ADD --chown=mysql:mysql config/*.cnf /etc/mysql/mariadb.conf.d/
+
+# Alter the schema for the module
+ADD --chown=mysql:mysql upgrade/gynobs/sqlInstall.sql /docker-entrypoint-initdb.d/10-gynobst.sql
+
+## Set the default orthanc database name
+#ARG ORTHANC_DATABASE=orthanc
+## Create the orthanc database
+#RUN echo "CREATE DATABASE IF NOT EXISTS $ORTHANC_DATABASE CHARACTER SET utf8 COLLATE utf8_bin" > /docker-entrypoint-initdb.d/50-create-orthanc.sql
+

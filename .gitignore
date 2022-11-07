@@ -1,0 +1,4 @@
+# Parent folder is generated during prepare. It must not be git'ed
+parent/
+# Orthanc configuration is dynamically created and contains environment specific & sensible values
+config/orthanc.json
