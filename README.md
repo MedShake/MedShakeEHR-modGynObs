@@ -40,7 +40,7 @@ ATTENTION: la configuration par défaut réutilise le ~ehr de l'hôte. Si vous a
 4- Prepare EHR's home
 4- Préparer le répertoire de EHR
 
-> ./docker-ehr-update.sh
+> ./docker-ehr-prepare.sh
 
 5- Build the required EHR module images
 5- Construire les images de EHR
