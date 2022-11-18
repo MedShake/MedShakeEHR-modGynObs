@@ -1,6 +1,6 @@
 # Extends the DB Image from MedShake EHR Base
 FROM medshake-ehr-web:latest
-LABEL description="MedShake EHR dockerized"
+LABEL description="MedShake EHR dockerized with modGynObs"
 LABEL maintainer="bugeaud@gmail.com"
 
 # Set some environement variables required
