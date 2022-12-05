@@ -168,7 +168,7 @@ class msModGynobsCalcMed extends msModBaseCalcMed
  * @param  float $SA  SA
  * @return int      percentile
  */
-    public function poids100($EPFcalc, $SA)
+    public static function poids100($EPFcalc, $SA)
     {
         global $p;
         if(!is_numeric($EPFcalc) or !is_numeric($SA)) return;
