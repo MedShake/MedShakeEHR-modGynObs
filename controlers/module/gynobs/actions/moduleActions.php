@@ -29,9 +29,9 @@
 
 
 //$debug='';
-$m=$match['params']['m'];
+$m = $match['params']['m'];
 
-$acceptedModes=array(
+$acceptedModes = array(
     'installNewGro', // déclencher un nouveau suivi de grossesse
     'closeGro' //fermer suivi de grossesse
 );
@@ -42,10 +42,10 @@ if (!in_array($m, $acceptedModes)) {
 
 
 // Installer une nnouvelle grossesse
-if ($m=='installNewGro' and $match['params']['patientID']>0) {
+if ($m == 'installNewGro' and $match['params']['patientID'] > 0) {
     include('inc-action-installNewGro.php');
 }
 // Fermer un suivi de grossesse
-elseif ($m=='closeGro') {
+elseif ($m == 'closeGro') {
     include('inc-action-closeGro.php');
 }

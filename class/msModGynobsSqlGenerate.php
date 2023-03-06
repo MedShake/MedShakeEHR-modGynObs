@@ -30,18 +30,17 @@
 class msModGynobsSqlGenerate extends msSqlGenerate
 {
 
-  protected function _getSpecifSql() {
+  protected function _getSpecifSql()
+  {
 
     //configuration : ajout des paramètres de niveau default
-    $names=['calcMedGynobsEPF', 'calcMedGynobsLcc2Terme', 'calcMedGynobsBipPcPaFemPercentiles'];
 
-    if($configurations=msSQL::sql2tab("select * from $this->_bdd.configuration where name in ('".implode("', '",$names)."') and level='default'")) {
-      foreach($configurations as $configuration) {
+    if ($configurations = msSQL::sql2tab("SELECT * from $this->_bdd.configuration where name in ('calcMedGynobsEPF', 'calcMedGynobsLcc2Terme', 'calcMedGynobsBipPcPaFemPercentiles') and level='default'")) {
+      foreach ($configurations as $configuration) {
         unset($configuration['id']);
-        if(!isset($this->_configuration_fields)) $this->_configuration_fields=$this->_getSqlFieldsPart($configuration);
-        $this->_configuration_values[]=$this->_getSqlValuesPart($configuration);
+        if (!isset($this->_configuration_fields)) $this->_configuration_fields = $this->_getSqlFieldsPart($configuration);
+        $this->_configuration_values[] = $this->_getSqlValuesPart($configuration);
       }
     }
-
   }
 }
